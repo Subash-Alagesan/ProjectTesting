@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import SideNavbar from './SideNavbar';
+import MainContent from './MainContent';
+import RightNavbar from './RightNavbar';
 import reportWebVitals from './reportWebVitals';
+import Grid from '@mui/material/Grid';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
+  <React.StrictMode >
+    <Grid container className='grid-index' spacing={2}>
+      <Grid item sm={2}>
+        <SideNavbar />
+      </Grid>
+      <Grid item sm={8}>
+        <MainContent />
+      </Grid>
+      <Grid item sm={2}>
+        <RightNavbar />
+      </Grid>
+    </Grid>
+
+
+
   </React.StrictMode>
 );
 
