@@ -86,11 +86,11 @@
     line-height: 2px;
     color: var(--Gray, #84828A);
   }
-  
+/*   
   @font-face {
     font-family: "";
     src: url(Roboto/Roboto-Regular.ttf);
-  }
+  } */
   
   .email,
   .Password {

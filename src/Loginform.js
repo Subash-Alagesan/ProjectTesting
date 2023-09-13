@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-
-import logo from './Component/Images/logo.png';
+import logo from './images/logo.png';
 import './Loginform.css';
-import settings from './Component/Images/settings.png';
-import add_alert from './Component/Images/add_alert.png';
-import account from './Component/Images/account.png';
-import incan from './Component/Images/incan.png';
+import settings from './images/settings.png';
+import add_alert from './images/add_alert.png';
+import account_circle from './images/account_circle.png';
+import incan from './images/incan.png';
 import Grid from '@mui/material/Grid';
 import Registerform from './Registerform';
 import Register from './Register'
@@ -26,9 +25,11 @@ function Loginform() {
                         <img src={incan} alt='incan.png' className='incan-img' />
                     </Grid>
                     <Grid xs={9} className='setting'>
-                        <img src={settings} alt='settings.png' className='settings-img' />
-                        <img src={add_alert} alt='add_alert.png' className='add_alert-img' />
-                        <img src={account} alt='account.png' className='account-img' />
+                        <img src={settings} alt="settings.png" className='settings-img' />
+                        <img src={add_alert} alt="add_alert.png" className='add_alert-img' />
+                        <img
+            src={account_circle}
+            alt="account_circle.png" className='account-img' />
                         <div className='plus'>
 
                             <Button variant="contained" href="#contained-buttons" className='plus-img' onClick={() => setOpenPopup(true)} >

@@ -6,11 +6,12 @@ import MainContent from './MainContent';
 import RightNavbar from './RightNavbar';
 import reportWebVitals from './reportWebVitals';
 import Grid from '@mui/material/Grid';
+import Loginform from './Loginform';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode >
-    <Grid container className='grid-index' spacing={2}>
+    {/* <Grid container className='grid-index' spacing={2}>
       <Grid item sm={2}>
         <SideNavbar />
       </Grid>
@@ -20,10 +21,8 @@ root.render(
       <Grid item sm={2}>
         <RightNavbar />
       </Grid>
-    </Grid>
-
-
-
+    </Grid> */}
+    <Loginform/>
   </React.StrictMode>
 );
 
