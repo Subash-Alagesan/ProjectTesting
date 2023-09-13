@@ -1,0 +1,165 @@
+.login {
+    background-color: #F7F6F9;
+    height: 100vh;
+  }
+  
+  .form_container {
+    height: 58vh;
+  
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+    position: absolute;
+    top: 136px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* Adjust the width for desktop */
+    max-width: 330px;
+    /* Set a maximum width for larger screens */
+    box-shadow: 8px 8px 8px 8px rgba(0.2, 0.2, 0.2, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.23);
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .form_container {
+      width: 78%;
+      /* Adjust the width for desktop */
+      height: 40vh;
+  
+    }
+  }
+  
+  .incan-img {
+    width: 180px;
+    height: 87px;
+    padding-left: 50px;
+    /* Adjust the padding for smaller screens */
+    padding-top: 30px;
+    background-color: lightgray 50% / cover no-repeat;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .incan-img {
+      width: 100%;
+      /* Adjust the width for desktop */
+      height: 50px;
+  
+    }
+  }
+  .logo-img{
+    padding-top: 1px;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  .settings-img,
+  .add_alert-img,
+  .account-img
+   {
+    height: 22px;
+    width: 22px;
+    padding-top: 50px;
+    padding-left: 10px;
+  
+    /* Adjust the padding for smaller screens */
+  }
+  .plus{
+    margin: 40px;
+   
+  }
+  
+  .setting {
+    display: flex;
+    justify-content: end;
+  }
+  
+  
+  .text-center {
+    text-align: center;
+    font-family: "Roboto";
+    font-size: 16px;
+    padding-top: 18px;
+    font-weight: 100;
+    line-height: 2px;
+    color: var(--Gray, #84828A);
+  }
+  
+  @font-face {
+    font-family: "";
+    src: url(Roboto/Roboto-Regular.ttf);
+  }
+  
+  .email,
+  .Password {
+    color: var(--Gray, #84828A);
+    font-family: "Roboto1";
+    font-size: 16px;
+  
+    font-weight: 400;
+    line-height: 8px;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 18px;
+    /* Adjust the padding for smaller screens */
+  }
+  
+  
+  .form-control {
+    width: 220px;
+    /* Make the input full width on smaller screens */
+    height: 40px;
+    border-radius: 5px;
+    background-color: #F7F6F9;
+  
+    border: none;
+  }
+  
+  .forgot-password {
+    display: flex;
+    justify-content: flex-start;
+    /* Adjust the padding for smaller screens */
+    color: var(--Blue, #6425FE);
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+    padding-top: 18px;
+  }
+  
+  .d-grid {
+    width: 70px;
+    height: 33px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--Blue, #2f07a7f8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    padding-top: 6px;
+  }
+  
+  .d-grid:hover {
+    background: var(--Blue, #0D72D1);
+  }
+  
+  .login-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    /* Adjust the padding for smaller screens */
+  }
+  
+  .login-form {
+    padding: 15px;
+  }

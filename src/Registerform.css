@@ -1,0 +1,44 @@
+ /* .dialog {
+    height: 50%;
+    width: 50%;
+}  */
+.register{
+   
+    width:100%;
+}
+
+.Registration-Form {
+    text-align: center;
+
+
+}
+
+.input {
+    width: 90%;
+    text-align: left;
+}
+
+.form-input {
+    padding-top: 0px;
+    text-align: center;
+
+}
+
+.register-btn {
+    height: 38px;
+background-color:  #2f07a7f8;
+    width: 100px;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+}
+.upload-file{
+    text-align: left;
+    width: 90%;
+}
+.bms-img{
+    padding-top: 10px;
+}
+.Registration{
+    padding-top: 10px;
+}
