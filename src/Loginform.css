@@ -4,7 +4,7 @@
   }
   
   .form_container {
-    height: 58vh;
+    height: 65vh;
   
     border-radius: 12px;
     display: flex;
@@ -15,7 +15,7 @@
     top: 136px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
+    
     /* Adjust the width for desktop */
     max-width: 330px;
     /* Set a maximum width for larger screens */
@@ -24,16 +24,16 @@
   
   @media only screen and (max-width: 1000px) {
     .form_container {
-      width: 78%;
+      width: 100%;
       /* Adjust the width for desktop */
-      height: 40vh;
+      height:70vh;
   
     }
   }
   
   .incan-img {
-    width: 180px;
-    height: 87px;
+    width: 150px;
+    height: 70px;
     padding-left: 50px;
     /* Adjust the padding for smaller screens */
     padding-top: 30px;
@@ -135,7 +135,7 @@
     height: 33px;
     flex-shrink: 0;
     border-radius: 8px;
-    background: var(--Blue, #2f07a7f8);
+    background: #6425FE;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,9 +149,7 @@
     padding-top: 6px;
   }
   
-  .d-grid:hover {
-    background: var(--Blue, #0D72D1);
-  }
+  
   
   .login-btn {
     display: flex;
@@ -162,4 +160,8 @@
   
   .login-form {
     padding: 15px;
+  }
+
+  .error-message {
+    color: red;
   }

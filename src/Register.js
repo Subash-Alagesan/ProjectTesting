@@ -3,46 +3,117 @@ import {
     MDBBtn,
     MDBContainer,
     MDBCard,
-    MDBCardBody,
+    MDBCardBody, 
     MDBInput,
     MDBCheckbox
 }
     from 'mdb-react-ui-kit';
 import './Registerform.css'
 import { MDBFile } from 'mdb-react-ui-kit';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 
 function Register() {
 
-    return (
+    const validationSchema = Yup.object({
+        username: Yup.string().required('User Name is required'),
+        email: Yup.string().email('Invalid email address').required('Email is required'),
+        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+        phoneNumber: Yup.string().required('Phone Number is required'),
+        termsAndConditions: Yup.boolean().oneOf([true], 'You must agree to the Terms and Conditions'),
+      });
 
-        <MDBContainer className='register'>
+      const initialValues = {
+        username: '',
+        email: '',
+        password: '',
+        phoneNumber: '',
+        termsAndConditions: false,
+      };
 
-            <MDBCard className='m-4 ' style={{position:"sticky"}}>
-                <MDBCardBody className='px-4 form-input'>
+      const handleSubmit = (values, { resetForm }) => {
+        // Handle your registration logic here
+        // After successful registration, you can set a success message
+        // and reset the form using resetForm()
+        // For example:
+        console.log('Form submitted with values:', values);
+        // Set a success message
+        // Show a success message here
+        // Reset the form
+        resetForm(initialValues);
+      };
+      
 
-                    <MDBInput className='input' placeholder='User Name' size='md' id='form1' type='text' />
-                    <br></br>
-                    <MDBInput wrapperClass='mb-1' className='input' placeholder='Enter your Email' size='md' id='form2' type='email' />
-                    <br></br>
-                    <MDBInput wrapperClass='mb-1' className='input' placeholder='Enter Your Password' size='md' id='form3' type='password' />
-                    <br></br>
-                    <MDBInput wrapperClass='mb-1' className='input' placeholder='Phone Number' size='md' id='form4' type='password' />
-                    <br></br>
-                   <div className='upload-file ' size='md'>
-                   <MDBFile  id='formFileDisabled'  />
-                   </div>
-                    <br></br>
-                    <div className='d-flex  justify-content-left '>
-                        <MDBCheckbox name='flexCheck' id='flexCheckDefault' size='md' label='I agree to these Terms and Conditions.' />
-                    </div>
-                    <br></br>
-                    <MDBBtn className='register-btn' >Register</MDBBtn>
-                </MDBCardBody>
-            </MDBCard>
-        </MDBContainer>
-
-    );
-}
-
-export default Register;
+      return (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form>
+            <Field
+            className='input'
+              type="text"
+              name="username"
+              placeholder="User Name"
+              component={MDBInput}
+            />
+            <ErrorMessage name="username" component="div" className="error-message" />
+            <br></br>
+    
+            <Field
+            className='input'
+              type="email"
+              name="email"
+              placeholder="Enter your Email"
+              component={MDBInput}
+            />
+            <ErrorMessage name="email" component="div" className="error-message" />
+            <br></br>
+            <Field
+            className='input'
+              type="password"
+              name="password"
+              placeholder="Enter Your Password"
+              component={MDBInput}
+            />
+            <ErrorMessage name="password" component="div" className="error-message" />
+            <br></br>
+            <Field
+            className='input'
+              type="text"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              component={MDBInput}
+            />
+            <ErrorMessage name="phoneNumber" component="div" className="error-message" />
+            <br></br>
+            <div className="upload-file">
+              <MDBFile id="formFileDisabled" />
+            </div>
+            <br></br>
+            <div className="d-flex justify-content-left">
+              <Field
+                type="checkbox"
+                name="termsAndConditions"
+                id="flexCheckDefault"
+                component={MDBCheckbox}
+                label="I agree to these Terms and Conditions."
+              />
+            </div>
+            <ErrorMessage name="termsAndConditions" component="div" className="error-message" />
+            <br></br>
+            <MDBBtn className="register-btn" type="submit" style={{ backgroundColor: '#6425FE', color: 'white' }}>
+              Register
+            </MDBBtn>
+          </Form>
+        </Formik>
+      );
+    }
+    
+    export default Register;
+    
+    
+    
+    
