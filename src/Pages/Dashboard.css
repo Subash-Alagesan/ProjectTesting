@@ -1,0 +1,306 @@
+/* Default styles for larger screens */
+.grid-container {
+    padding: 0%;
+    background-color: #F7F6F9;
+    padding-right: 25px;
+}
+
+.good-mrng-content,
+.today-top,
+.order-list,
+.list {
+    font-size: 13px;
+    text-align: left;
+    color: #2C2C2C;
+}
+
+.order-list {
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 13px;
+}
+
+.good-mrng-content {
+    color: #2C2C2C;
+    font-size: 16px;
+}
+
+.good-mrng-content,
+.today-top {
+    padding-left: 20px;
+
+}
+
+.today-top {
+    color: #6425FE;
+}
+
+.todaytop-content1 {
+    text-align: left;
+    padding-top: 30px;
+    padding-left: 20px;
+    color: #6425FE;
+    font-size: 13px;
+}
+
+#tactic-content {
+    width: 100%;
+    background-color: #EDE6FF;
+}
+
+
+
+#business-content {
+    width: 100%;
+    background-color: #FFF8E7;
+}
+
+#customer-content {
+    width: 100%;
+    background-color: #EFFFE6;
+}
+
+.customer-content1 {
+    padding: 0%;
+}
+
+@media only screen and (max-width: 500px) {
+
+    #customer-content,
+    #business-content,
+    #tactic-content {
+
+        margin-right: 20px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    #customer-content,
+    #business-content,
+    #tactic-content {
+        padding-left: 25px;
+
+    }
+}
+
+
+.tactic1 {
+    font-size: 14px;
+    padding-left: 20px;
+    padding-top: 22px;
+    color: #2C2C2C;
+    font-family: "Roboto-Medium", Helvetica;
+
+}
+
+.tactic2 {
+    font-size: 14px;
+    padding-left: 22px;
+    padding-top: 30px;
+    color: #2C2C2C;
+    font-family: "Roboto-Medium", Helvetica;
+
+}
+
+.project-count {
+    text-align: left;
+    padding-left: 37px;
+}
+
+.project-count {
+    font-size: 18px;
+    color: #2C2C2C;
+}
+
+.tactic-img {
+    height: 40px;
+    padding-top: 12px;
+    padding-left: 25px;
+}
+
+.progress-icon {
+
+    padding-top: 20px;
+    padding-left: 45px;
+
+}
+
+.emp-data {
+    width: 100%;
+
+
+}
+
+.Customer-db1 {
+    color: #2C2C2C;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    font-family: "Roboto-Medium", Helvetica;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .Customer-db1 {
+        font-size: 13px;
+        padding-right: 40px;
+    }
+}
+
+.Customer-db2 {
+    font-size: 15px;
+
+    color: #84828A;
+    padding-top: 10px;
+    padding-left: 220px;
+    font-family: "Roboto-Regular", Helvetica;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .Customer-db2 {
+        font-size: 13px;
+        padding-right: 5px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .Customer-db2 {
+        padding-left: 95px;
+
+    }
+}
+
+
+
+.Customer-db3 {
+    color: #84828A;
+
+    font-size: 15px;
+    padding-top: 10px;
+    padding-left: 220px;
+
+    font-family: "Roboto-Regular", Helvetica;
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .Customer-db3 {
+        font-size: 13px;
+        padding-right: 15px;
+
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .Customer-db3 {
+        padding-left: 95px;
+
+    }
+}
+
+.Customer-db {
+    display: flex;
+
+}
+
+.CircularProgress {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.total-content,
+.ourcustomer-content,
+.others-content {
+    font-size: 13px;
+    padding-top: 10px;
+    font-family: "Roboto-Regular", Helvetica;
+
+}
+
+.moniter-content {
+    display: flex;
+}
+
+.footer-monitor {
+    text-align: left;
+    padding-left: 20px;
+    color: #2C2C2C;
+    font-size: 15px;
+    padding-top: 10px;
+    font-family: "Roboto-Medium", Helvetica;
+
+}
+
+.see-more {
+    text-align: right;
+    padding-right: 20px;
+    font-size: 14px;
+    padding-top: 10px;
+    color: #84828A;
+}
+
+.IBMS-project {
+    text-align: left;
+    padding-left: 20px;
+    color: #6425FE;
+    font-size: 14px;
+    padding-top: 10px;
+    font-family: "Roboto-Regular", Helvetica;
+}
+
+.saloon-project {
+    text-align: left;
+    padding-left: 20px;
+    color: #6425FE;
+    font-size: 14px;
+    padding-top: 10px;
+    font-family: "Roboto-Regular", Helvetica;
+
+}
+
+.team-project {
+    padding-left: 30px;
+}
+
+.LinearProgress {
+    height: 20px;
+    width: 200px;
+
+}
+
+.project-progress h4 {
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 13px;
+
+}
+
+.progress-bar {
+    width: 60%;
+
+}
+
+.progress {
+    color: rgb(64, 173, 64);
+}
+
+.project-progress1 {
+    padding-top: 10px;
+    padding-left: 50px;
+    width: 350px;
+
+}
+
+.lead-name {
+
+    font-size: 13px;
+    text-align: left;
+}

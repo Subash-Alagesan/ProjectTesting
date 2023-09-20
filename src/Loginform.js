@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup'; // Import Yup for validation
+import * as Yup from 'yup'; 
 import logo from './images/logo.png';
 import './Loginform.css';
 import incan from './images/incan.png';
@@ -9,9 +9,9 @@ import Grid from '@mui/material/Grid';
 import Registerform from './Registerform';
 import Register from './Register';
 import { Button } from '@mui/material';
+import axios from 'axios'; // Import axios
 
 function Loginform() {
-
     const [openPopup, setOpenPopup] = useState(false);
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required!'),
@@ -25,15 +25,38 @@ function Loginform() {
           username: '',
           password: '',
         },
-        validationSchema,
-        onSubmit: (values) => {
-          // Handle the login logic here
-          // For demonstration purposes, we'll just log the values
-          console.log('Login Successful:', values);
-          alert('Login Successful'); // Display a success message
+        validationSchema,onSubmit: async (values) => {
+          try {
+            const response = await axios.post('http://localhost:3000/login', values);
+            const token = response.data.token;
+            localStorage.setItem('authToken', token);
+            console.log('Login Successful:', token);
+            alert('Login Successful');
+          } catch (error) {
+            console.error('Login failed:', error);
+            alert('Login Failed'); 
+          }
+        },
+      });
+      const getToken = () => {
+        return localStorage.getItem('authToken');
+      };
+
+      const axiosInstance = axios.create({
+        baseURL: 'http://localhost:3000', 
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`, 
         },
       });
 
+      axiosInstance.get('/authenticated-endpoint')
+  .then(response => {
+    // Handle the response
+  })
+  .catch(error => {
+    // Handle errors
+  });
     return (
 
         <>
@@ -44,11 +67,7 @@ function Loginform() {
                         <img src={incan} alt='incan.png' className='incan-img' />
                     </Grid>
                     <Grid xs={9} className='setting'>
-                        {/* <img src={settings} alt="settings.png" className='settings-img' />
-                        <img src={add_alert} alt="add_alert.png" className='add_alert-img' />
-                        <img
-            src={account_circle}
-            alt="account_circle.png" className='account-img' /> */}
+                       
                         <div className='plus'>
 
                             <Button variant="contained" href="#contained-buttons" className='plus-img' onClick={() => setOpenPopup(true)} style={{ backgroundColor: '#6425FE', color: 'white' }} >

@@ -22,10 +22,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import WorkIcon from '@mui/icons-material/Work';
 import DeviceHubIcon from '@mui/icons-material/DeviceHub';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import Dashboard from './Pages/Dashboard';
-import Customer from './Pages/Customer';
-import Employee from './Pages/Employee';
-import Projectmonitor from './Pages/Projectmonitor';
+import Employeedetails from './Employeedetails';
 import Createadmin from './Pages/Createadmin';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -182,7 +179,7 @@ export default function SideNavbar() {
 
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Customer")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Employee")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -269,8 +266,9 @@ export default function SideNavbar() {
       <Box>
       
       <div className="title">
-        <Typography className="subtitle">Subash</Typography>
-        <Typography className="body2">Admin</Typography>
+        <h1 className="subtitle">Subash</h1> 
+        <p className="body2">Admin</p> 
+      
         </div>
       </Box>
       <MoreVertIcon className="icon1" />
@@ -284,7 +282,7 @@ export default function SideNavbar() {
         alignItems: 'center',
         justifyContent: 'space-between',
         marginLeft: '30px',
-            }}
+            }}er
     >
        <StyledBadge
         overlap="circular"
@@ -295,8 +293,8 @@ export default function SideNavbar() {
       <Box>
       
       <div className="title">
-        <Typography className="subtitle">Subash</Typography>
-        <Typography className="body2">Admin</Typography>
+      <h1 className="subtitle">Subash</h1> 
+        <p className="body2">Admin</p> 
         </div>
       </Box>
       <MoreVertIcon className="icon1" />
@@ -323,8 +321,8 @@ export default function SideNavbar() {
       <Box>
       
       <div className="title">
-        <Typography className="subtitle">Subash</Typography>
-        <Typography className="body2">Admin</Typography>
+      <h1 className="subtitle">Subash</h1> 
+        <p className="body2">Admin</p> 
         </div>
       </Box>
       <MoreVertIcon className="icon1" />
@@ -355,12 +353,9 @@ export default function SideNavbar() {
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                {menudata == "Dashboard" && <Dashboard />}
-                {menudata == "Customer" && <Customer />}
-                {menudata == "Employee" && <Employee />}
-                {menudata == "Projectmonitor" && <Projectmonitor />}
-                {menudata == "Createadmin" && <Createadmin />}
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}> 
+                
+                {menudata == "Employee" && <Employeedetails />}
             </Box>
         </Box>
     );

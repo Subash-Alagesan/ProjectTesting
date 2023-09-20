@@ -14,9 +14,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import './Layout.css';
-import settings from './images/settings.png';
-import add_alert from './images/add_alert.png';
+ import add_alert from './images/add_alert.png';
 import account_circle from './images/account_circle.png';
+import settings from './images/settings.png';
 import super_admin from './images/super_admin.png';
 
 
@@ -102,19 +102,30 @@ export default function RightNavbar() {
       >
         <DrawerHeader>
         <div className="logo">
+        
         <a href="/#">
-          <img src={settings} alt="settings.png" className="settings-img" />
+          <img
+            src={settings}
+            alt="settings.png"
+            className="settings1-img"
+          />
         </a>
+
         <a href="/#">
-          <img src={add_alert} alt="add_alert.png" className="add_alert-img" />
+          <img
+            src={add_alert}
+            alt="add_alert.png"
+            className="add_alert1-img"
+          />
         </a>
         <a href="/#">
           <img
             src={account_circle}
-            alt="account_circle.png"
-            className="account_circle-img"
+            alt="account_circlet.png"
+            className="account_circle1-img"
           />
         </a>
+        
       </div>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}

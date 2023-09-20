@@ -84,13 +84,13 @@
   }
   .subtitle{
     padding-right: 80px;
+    color: var(--Gray, #84828A);
     font-family: Roboto;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
-    line-height: 18.75px;
-    color: #84828A;
-    text-transform: lowercase;
+    line-height: normal;
+    margin-top: 20px;
   }
   .body2{
     padding-right: 90px;
@@ -101,6 +101,7 @@
     line-height: 18.75px;
     color:#84828A;
     text-transform: lowercase;
+    margin-top:-10px;
   }
   .adm-btn{
     padding-top: 20px;

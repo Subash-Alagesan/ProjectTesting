@@ -12,33 +12,30 @@
 }
 .logo img {
   margin-right: 10px; 
-
-  
 }
 
-.settings-img{
+.settings1-img{
   width: 25px;
   height: 25px;
   flex-shrink: 0;
 
 }
 
-.add_alert-img{
+.add_alert1-img{
   width: 25px;
   height: 25px;
   flex-shrink: 0;
 }
-.account_circle-img{
+.account_circle1-img{
   width: 25px;
   height: 25px;
   flex-shrink: 0;
 }
-
 
 
 .super_admin {
   
-  margin-top: 50px;
+  margin-top: 20px;
   margin-right: 10px; 
   
 }

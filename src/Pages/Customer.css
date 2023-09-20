@@ -1,0 +1,128 @@
+.customerdb-fullcontainer{
+    height: 150vh;
+    background-color: #F7F6F9;
+    padding-top: 20px;
+}
+@media only screen and (max-width: 600px) {
+    .customerdb-fullcontainer {
+        
+        /* Adjust the width for desktop */
+        height: 140vh;
+
+    }
+}
+.Customerdb-heading {
+    padding-left: 15px;
+    padding-top: 6px;
+    font-size: 16px;
+    color: #2C2C2C;
+    font-family: "customerdb-container";
+}
+
+@font-face {
+    font-family: "customerdb-container";
+    src: url(/src/Roboto/Roboto-Bold.ttf);
+}
+
+
+.Customerdb-totalCustomer,
+.Customerdb-ourCustomer,
+.Customerdb-otherCustomer,
+.Customerdb-newlyadded {
+    padding-left: 10px;
+    padding-top: 6px;
+    font-size: 15px;
+}
+
+.customerdb-container-group-img,
+.customerdb-container-contact-img,
+.customerdb-container-assignment-img,
+.customerdb-container-badge-img,
+.customerdb-container-personadd-img {
+    height: 26px;
+    width: 26px;
+}
+
+
+
+.customerdb-topsection {
+    height: 30vh;
+ 
+    background-color: #ffffff;
+}
+
+@media only screen and (max-width: 600px) {
+    .customerdb-topsection {
+        width: 100%;
+        /* Adjust the width for desktop */
+        height: 55vh;
+
+    }
+}
+.total-item1{
+    display: flex;
+    padding-left: 10px;
+}
+
+.Total-content {
+
+    padding-right: 90px;
+    font-size: 15px;
+    font-family: "total";
+
+}
+
+@font-face {
+    font-family: "total";
+    src: url(/src/Roboto/Roboto-Bold.ttf);
+}
+.table-fullcontainer{
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .table-fullcontainer {
+        width: 100%;
+        /* Adjust the width for desktop */
+        height: 90vh;
+
+    }
+}
+
+
+.Datagrid-table {
+    padding-top: 10px;
+    background-color: #ffffff;
+}
+
+
+.All-Customers {
+    font-size: 17px;
+    padding-top: 10px;
+    padding-left: 20px;
+    color: #2C2C2C;
+    font-family: "All-Customers";
+}
+
+@font-face {
+    font-family: "All-Customers";
+    src: url(/src/Roboto/Roboto-Bold.ttf);
+}
+
+
+.Search-content {
+    padding-top: 10px;
+    padding-left: 350px;
+}
+
+.Search-bar {
+
+    background-color: #F7F6F9;
+}
+
+
+.pagination-content {
+    display: flex;
+    justify-content: center;
+}
