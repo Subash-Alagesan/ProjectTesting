@@ -2,11 +2,11 @@
 import React from 'react';
 import './Customer.css';
 import { Grid } from '@mui/material';
-import assignment from '../images/assignment_ind.png'
-import group from '../images/group.png';
-import contact from '../images/contact_page.png'
-import badge from '../images/badge.png'
-import personaddd from '../images/person_add.png'
+import assignment from '../Assets/images/assignment_ind.png'
+import group from '../Assets/images/group.png';
+import contact from '../Assets/images/contact_page.png'
+import badge from '../Assets/images/badge.png'
+import personaddd from '../Assets/images/person_add.png'
 import { DataGrid, GridColDef} from '@mui/x-data-grid';
 import Avatar from '@mui/material/Avatar';
 import Pagination from '@mui/material/Pagination';

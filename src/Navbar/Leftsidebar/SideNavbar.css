@@ -22,9 +22,7 @@
     font-weight: 400;
     line-height: normal;
 }
-@font-face {
-    font-family:Roboto ;
-}
+
 .divider{
     padding-top: 15px;
 }
@@ -47,7 +45,7 @@
 
 }
 .Name{
-    font-color:#F7F6F9;
+    color:#F7F6F9;
 
 }
 

@@ -18,10 +18,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import add_alert from './images/add_alert.png';
-import account_circle from './images/account_circle.png';
-import settings from './images/settings.png';
-import super_admin from './images/super_admin.png';
+import add_alert from '../../Assets/images/add_alert.png';
+import account_circle from '../../Assets/images/account_circle.png';
+import settings from '../../Assets/images/settings.png';
+import super_admin from '../../Assets/images/super_admin.png';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './Rightnavbar.css';
@@ -37,14 +37,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 
-export default function PersistentDrawerRight() {
+export default function RightNavbar() {
 
   const handleLogout = () => {
     // Implement your logout logic here
   };
 
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);

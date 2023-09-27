@@ -1,32 +1,56 @@
-import React, { useState } from 'react';
-import SideNavbar from './SideNavbar';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SideNavbar from '../src/Navbar/Leftsidebar/SideNavbar';
 import Grid from '@mui/material/Grid';
-import MainContent from './MainContent';
-import RightNavbar from './RightNavbar';
-import Customer from './Pages/Customer'; 
-import Employee from './Pages/Employee';
+import MainContent from '../src/MainDashboard/MainContent.js';
+import RightNavbar from '../src/Navbar/Rightsidebar/RightNavbar';
+import Customer from '../src/Customer/Customer'; 
+import Employee from '../src/Employee/Employee';
+
 
 function App() {
-    const [renderedComponents, setRenderedComponents] = useState([]);
+  const [renderedComponents, setRenderedComponents] = useState([]);
 
   const handleRenderComponents = (componentNames) => {
     setRenderedComponents(componentNames);
-};
+  };
+
   return (
-    <div>
-    <SideNavbar onRenderComponents={handleRenderComponents} />
-    <Grid container>
-      <Grid item sm={8}>
-        {renderedComponents.includes('MainContent') && <MainContent />}
-        {renderedComponents.includes('Customer') && <Customer />}
-        {renderedComponents.includes('Employee') && <Employee />}
+    <Router>
+     
+      <Grid item sm={2}>
+      <SideNavbar  onRenderComponents={handleRenderComponents} />
       </Grid>
+        
       
-    </Grid>
-    <Grid item sm={2}>
-         <RightNavbar />
-       </Grid>
-  </div>
+          <Grid item sm={8}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  renderedComponents.includes("MainContent") && <MainContent />
+                }
+              />
+              <Route
+                path="/customer"
+                element={
+                  renderedComponents.includes("Customer") && <Customer />
+                }
+              />
+              <Route
+                path="/employee"
+                element={
+                  renderedComponents.includes("Employee") && <Employee />
+                }
+              />
+            </Routes>
+          </Grid>
+          <Grid item sm={2}>
+            <RightNavbar />
+          </Grid>
+        
+    
+    </Router>
   );
 }
 

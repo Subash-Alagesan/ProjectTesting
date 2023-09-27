@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: "Employeedb-container";
-    src: url(../Component/Roboto-Bold.ttf);
+    src: url(../Component/Font/Roboto-Bold.ttf);
 }
 
 .Employeedb-totalCustomer,
@@ -69,7 +69,7 @@
 }
 @font-face {
     font-family: "total";
-    src: url(../Component/Roboto-Bold.ttf);
+    src: url(../Component/Font/Roboto-Bold.ttf);
 }
 
 .allEmployee-header{
@@ -86,7 +86,7 @@
 
 @font-face {
     font-family: "All-Employee";
-    src: url(../Component/Roboto-Bold.ttf);
+    src: url(../Component/Font/Roboto-Bold.ttf);
 }
 
 .Search-content {

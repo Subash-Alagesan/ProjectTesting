@@ -6,8 +6,8 @@ import logo from './images/logo.png';
 import './Loginform.css';
 import incan from './images/incan.png';
 import Grid from '@mui/material/Grid';
-import Registerform from './Registerform';
-import Register from './Register';
+import Registerform from '../Registerform';
+import Register from '../Register';
 import { Button } from '@mui/material';
 import axios from 'axios'; // Import axios
 

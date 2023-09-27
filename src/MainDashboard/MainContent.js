@@ -5,9 +5,9 @@ import Grid from '@mui/material/Grid';
 // import Stack from '@mui/material/Stack';
 // import CircularProgress from '@mui/material/CircularProgress';
 import './maincontent.css'
-import tactic from './images/tactic.png'
-import Business from './images/business_center.png'
-import group from './images/group.png'
+import tactic from '../Assets/images/tactic.png'
+import Business from '../Assets/images/business_center.png'
+import group from '../Assets/images/group.png'
 import "bootstrap/dist/css/bootstrap.min.css";
 import CircularProgress from '@mui/joy/CircularProgress';
 const Item = styled(Paper)(({ theme }) => ({
