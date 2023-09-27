@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -6,7 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -23,14 +22,17 @@ import WorkIcon from '@mui/icons-material/Work';
 import DeviceHubIcon from '@mui/icons-material/DeviceHub';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Employeedetails from './Employeedetails';
-import Createadmin from './Pages/Createadmin';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import profile from './images/Profile.png';
 import { Button } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Badge from '@mui/material/Badge';
+import Customer from './Pages/Customer';
+import Employee from './Pages/Employee';
+import Projectmonitor from './Pages/Projectmonitor';
+import Createadmin from './Pages/Createadmin';
+import MainContent from './MainContent';
+import Grid from '@mui/material/Grid';
 
 
 
@@ -59,7 +61,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
         transform: 'scale(.8)',
         opacity: 1,
       },
-      '100%': {
+      '100%': {                     
         transform: 'scale(2.4)',
         opacity: 0,
       },
@@ -108,16 +110,30 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
 }));
-export default function SideNavbar() {
+
+
+export default function SideNavbar({ onRenderComponents }) {
+  
     const theme = useTheme();
     const [open, setOpen] = useState(true);
-    const [menudata, setmenudata] = useState("Dashboard");
+    const [menudata, setmenudata] = useState("MainContent");
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const menuComponents = {
+        MainContent: <MainContent />,
+        Customer: <Customer />,
+        Employee: <Employee />,
+      };
+    
+      const handleComponentChange = (componentName) => {
+        setmenudata(componentName);
+      };
+    
+      
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -158,7 +174,7 @@ export default function SideNavbar() {
                 <h4 className='admin'>User Panel</h4>
                
                 <List style={{ paddingTop: "20px" }}>
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Dashboard")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => onRenderComponents(['Maincontent'])}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -179,7 +195,7 @@ export default function SideNavbar() {
 
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Employee")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => onRenderComponents(['Customer'])}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -199,7 +215,7 @@ export default function SideNavbar() {
                             <ListItemText primary="Customer Database" className='side-content' />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Employee")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => handleComponentChange ("Employee")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -219,7 +235,7 @@ export default function SideNavbar() {
                             <ListItemText primary="Employee Database" className='side-content'/>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => setmenudata("Projectmonitor")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section' onClick={() => handleComponentChange ("Projectmonitor")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -331,7 +347,7 @@ export default function SideNavbar() {
     </div>
                     
                     
-                    <ListItem disablePadding sx={{ display: 'block' }} className='section1' onClick={() => setmenudata("Createadmin")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} className='section1' onClick={() => handleComponentChange ("Createadmin")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 20,
@@ -353,10 +369,14 @@ export default function SideNavbar() {
                     </ListItem>
                 </List>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}> 
-                
-                {menudata == "Employee" && <Employeedetails />}
-            </Box>
+            <Grid item sm={8}>
+        <Box component="main" sx={{ flexGrow: 1 }}>
+          {menuComponents[menudata]}
+        </Box>
+      </Grid>
+
+
+   
         </Box>
     );
 }

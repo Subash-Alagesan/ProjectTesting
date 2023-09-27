@@ -2,61 +2,49 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-// import MuiAppBar from '@mui/material/AppBar';
-// import Toolbar from '@mui/material/Toolbar';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
-// import List from '@mui/material/List';
+import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import './Layout.css';
- import add_alert from './images/add_alert.png';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import add_alert from './images/add_alert.png';
 import account_circle from './images/account_circle.png';
 import settings from './images/settings.png';
 import super_admin from './images/super_admin.png';
-
-
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import './Rightnavbar.css';
 
 const drawerWidth = 240;
 
-// const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-//   ({ theme, open }) => ({
-//     flexGrow: 1,
-//     padding: theme.spacing(3),
-//     transition: theme.transitions.create("margin", {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.leavingScreen
-//     }),
-//     marginRight: -drawerWidth,
-//     ...(open && {
-//       transition: theme.transitions.create("margin", {
-//         easing: theme.transitions.easing.easeOut,
-//         duration: theme.transitions.duration.enteringScreen
-//       }),
-//       marginRight: 0
-//     })
-//   })
-// );
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 2),
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 0),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: "flex-start"
+  justifyContent: 'flex-start',
 }));
 
-export default function RightNavbar() {
+export default function PersistentDrawerRight() {
+
   const handleLogout = () => {
     // Implement your logout logic here
   };
+
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -67,41 +55,47 @@ export default function RightNavbar() {
   };
 
   return (
-    <Box sx={{ display: "flex" , border: "none"}}>
+    <Box >
       <CssBaseline />
-      <Typography variant="h6" noWrap sx={{ flexGrow: 20 }} component="div">
-           
-           </Typography>
-
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="end"
-        onClick={handleDrawerOpen}
-        sx={{ ...(open && { display: "none" }) }}
-      >
-        <MenuIcon />
-      </IconButton>
-
-      {/* <Main open={open}>
       
-       
-       
-      </Main> */}
+        <Toolbar>
+        
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerOpen}
+            sx={{
+              ...(open && { display: 'none' }),
+              position: 'fixed',
+              top: '10px', 
+              right: '10px',
+            }}
+          >
+            <MenuIcon    />
+          </IconButton>
+        </Toolbar>
+    
+    
+        <DrawerHeader />
+    
       <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth
-          }
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+          },
         }}
         variant="persistent"
         anchor="right"
         open={open}
       >
         <DrawerHeader>
-        <div className="logo">
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+          <div className="logo">
         
         <a href="/#">
           <img
@@ -127,12 +121,10 @@ export default function RightNavbar() {
         </a>
         
       </div>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
+
         </DrawerHeader>
-        
-       
+        <Divider />
+        <List>
         <div className="right-navbar-container">
       
       <div className="super_admin">
@@ -169,13 +161,17 @@ export default function RightNavbar() {
       </button>
       </div>
 
+      <div className='logout-button1'>
       <button className="logout-button" onClick={handleLogout}>
         <ExitToAppIcon className="logout-icon" />
         Logout
       </button>
+</div>
+      
      </div>
 
-       
+        </List>
+        
       </Drawer>
     </Box>
   );

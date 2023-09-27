@@ -1,93 +1,521 @@
+.grid-container-2 {
+    height: 125vh;
+
+}
 
 
-.header-img{
-    display: flex;
-  align-items: center;
-}
-.img{
-    width: 20px;
-    height: 20px;
+.Business-grid1 {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
 }
 
-    .name-container {
-        margin-left: 10px;
-      }
-.profile{
-padding-top: 10px;
-    color: var(--Dark-Gray, #2C2C2C);
-    font-family: Roboto;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+.Business-grid2 {
+    height: 128vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 15px;
 }
-.pname{
-    color: #5E5E5E;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-display: flex;
-padding-left: 390px;
+
+@media only screen and (max-width: 500px) {
+    .Business-grid2 {
+        height: 410vh;
+    }
 }
+
+.Business_Information {
+    padding: 0%;
+}
+
+
+
+.Businessdb-profile-contact-img {
+    height: 30px;
+}
+
+
+
+.Businessdb-title {
+    padding-top: 8px;
+    font-size: 15px;
+    font-family: "Info-field";
+
+}
+
+@font-face {
+    font-family: "Info-field";
+    src: url(Component/Roboto-Bold.ttf);
+}
+
+@media only screen and (max-width: 600px) {
+    .Businessdb-title {
+
+        font-size: 15px;
+    }
+}
+
 .Edit-btn {
-    padding-left:140px;
+    position: absolute;
+    right: 275px;
+
 }
 
-.btn1{
-    width: 80px;
-    height: 33px;
+@media only screen and (max-width: 600px) {
+    .Edit-btn {
+
+        position: absolute;
+        right: 50px;
+    }
 }
 
-/* Header End */
-
-/* Body start */
-.body{
-    padding-top: 30px;
-    display: flex;
+.Business-name-content {
+    padding-top: 18px;
+    padding-left: 50px;
 }
 
-.super_admi1 img{
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    flex-shrink: 0;
+@media only screen and (max-width: 600px) {
+    .Business-name-content {
+        text-align: left;
+        padding-left: 20px;
+    }
 }
-.ename{
-    color: #5E5E5E;
-font-family: Inter;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-padding-left: 20px;
-padding-top: 40px;
+
+.img-display-after {
+    border-radius: 100%;
 }
-.bname{
-    color: var(--Gray, #84828A);
-font-family: Inter;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-padding-left: 20px;
+
+
+
+Input {
+    width: 50%;
+
 }
-.dname{
-    color: var(--Gray, #84828A);
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-padding-left: 20px;
+
+@media only screen and (max-width: 500px) {
+    Input {
+        width: 35%;
+
+    }
 }
-.btype{
-    padding-left: 250px;
+
+.Business-name-content1 {
+    text-align: left;
+    padding-top: 60px;
+    padding-left: 40px;
 }
-.divider{
+
+
+
+.Businessprofile-entername {
+    font-size: 14px;
+}
+
+
+.profile-BusinessType {
+    font-size: 14px;
+
+}
+
+.name {
+    font-size: 14px;
+    padding-left: 40px;
+}
+
+.Website {
+    font-size: 14px;
+
+}
+
+.BusinessType {
+    font-size: 14px;
+    padding-top: 25px;
+    text-align: left;
+}
+
+.Businessprofile-Name {
+    padding-top: 15px;
+}
+
+
+.Businessprofile-Name,
+.Businessprofile-Place,
+.Businessprofile-District,
+.Businessprofile-Language {
+
+    text-align: left;
+    padding-left: 30px;
+}
+
+
+
+
+.SocialMedia-field {
+    text-align: left;
+    padding-left: 30px;
+    font-size: 15px;
+    color: #3B3B3B;
+
+    font-family: "Info-field";
+    padding-top: 25px;
+}
+
+.Media1 {
+    padding-top: 15px;
+
+
+}
+
+.Media1,
+.Media2,
+.Media3,
+.Media4 {
+    text-align: left;
+    padding-left: 30px;
+
+}
+
+
+.Upload-field {
+    text-align: left;
+    padding-left: 20px;
+    font-size: 15px;
+    color: #3B3B3B;
+
+    font-family: "Info-field";
+    padding-top: 25px;
+}
+@media only screen and (max-width: 600px) {
+    .Upload-field {
+       padding-left: 30px;
+
+    }
+}
+
+
+.Upload-field1 {
+    padding-left: 20px;
+    color: #3B3B3B;
+
+    text-align: left;
+    font-size: 15px;
+    font-family: "Info-field";
+}
+@media only screen and (max-width: 600px) {
+    .Upload-field1 {
+       padding-left: 30px;
+
+    }
+}
+
+
+.Publish-Icon {
+    border: none;
+    background-color: #F7F6F9;
+}
+
+.box-decoration {
+    padding-left: 50px;
+
+}
+
+.Upload1 {
     padding-top: 20px;
+    text-align: left;
+    padding-left: 20px;
+    border: none;
+
+}
+@media only screen and (max-width: 600px) {
+    .Upload1 {
+       padding-left: 30px;
+
+    }
 }
 
 
+.image-upload-button {
+    display: none;
+
+}
+
+.AddBoxIcon {
+    color: #6425FE;
+    position: absolute;
+    top: 100px;
+    right: 280px;
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBoxIcon {
+        position: absolute;
+        top: 520px;
+        right: 60px;
+
+    }
+}
+
+.AddBox-Icon1 {
+    color: #6425FE;
+    position: absolute;
+    top: 295px;
+    right: 550px;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBox-Icon1  {
+        position: absolute;
+        top: 680px;
+        right: 60px;
+
+    }
+}
+
+.AddBox-Icon2 {
+    color:  #6425FE;
+    position: absolute;
+    top: 295px;
+    right: 850px;
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBox-Icon2 {
+        position: absolute;
+        top: 930px;
+        right: 60px;
+
+    }
+}
+
+
+.AddBox-Icon3 {
+    color: #6425FE;
+    position: absolute;
+    top: 580px;
+    right: 550px;
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBox-Icon3 {
+        position: absolute;
+        top: 1455px;
+        right: 60px;
+
+    }
+}
+
+
+.AddBox-Icon4 {
+    color: #6425FE;
+    position: absolute;
+    top: 580px;
+    right: 850px;
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBox-Icon4 {
+        position: absolute;
+        top: 1640px;
+        right: 60px;
+
+    }
+}
+
+
+.AddBox-Icon5 {
+    color: #6425FE;
+    position: absolute;
+    top: 735px;
+    right: 850px;
+}
+
+@media only screen and (max-width: 600px) {
+    .AddBox-Icon5 {
+        position: absolute;
+        top: 1745px;
+        right: 60px;
+
+    }
+}
+
+.Businessinfo-field {
+    font-size: 16px;
+    color: #3B3B3B;
+    font-family: "Info-field";
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+
+/* @font-face {
+    font-family: "Info-field";
+    src: url(Component/Roboto-Bold.ttf);
+} */
+
+.BusinessContact-field {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 45px;
+    font-size: 16px;
+    font-family: "Info-field";
+    color: #3B3B3B;
+
+}
+
+/* 
+@font-face {
+    font-family: "Info-field";
+    src: url(/src/Component/Roboto/Roboto-Bold.ttf);
+} */
+
+.Website-field {
+    text-align: left;
+    color: #3B3B3B;
+
+    padding-top: 45px;
+    font-size: 16px;
+    font-family: "Info-field";
+}
+
+@media only screen and (max-width: 600px) {
+    .Website-field {
+      padding-left: 30px;
+    }
+}
+
+.Website1 {
+    text-align: left;
+    padding-top: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .Website1 {
+        padding-left: 30px;
+    }
+}
+
+
+
+.Businessprofile-input {
+    padding-right: 90px;
+}
+
+.Business-Mobileno {
+    padding-top: 15px;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.Businessprofile-EmailId {
+    padding-left: 30px;
+    text-align: left;
+}
+
+.Owner-field {
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 10px;
+    color: #3B3B3B;
+    font-size: 16px;
+    font-family: "Info-field";
+}
+
+.Owner1 {
+    padding-top: 15px;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.Owner2 {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.Projects-field {
+    text-align: left;
+    padding-left: 70px;
+    padding-top: 10px;
+    font-size: 17px;
+    font-family: "Info-field";
+}
+
+.Projects1,
+.Projects2 {
+    text-align: left;
+    padding-left: 70px;
+}
+
+.Projects1 {
+    padding-top: 15px;
+
+}
+
+.SaveAltIcon1 {
+    position: absolute;
+    right: 280px;
+    top: 810px;
+    color: #6425FE;
+
+}
+
+@media only screen and (max-width: 500px) {
+    .SaveAltIcon1 {
+
+        position: absolute;
+        right: 60px;
+        top: 1890px;
+    }
+}
+.Folder-Icon{
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 20px;
+   
+}
+
+@media only screen and (max-width: 500px) {
+    .Folder-Icon {
+
+        padding-left: 30px;
+}
+}
+
+.Folder-Icon1{
+    padding-top: 15px;
+    text-align: left;
+    padding-left: 20px;
+    
+   
+}
+
+@media only screen and (max-width: 500px) {
+    .Folder-Icon1 {
+
+        padding-left: 30px;
+}
+}
+
+.FolderIcon-logo{
+    border: none;
+    background-color: #F7F6F9;
+}
+.FolderIcon-analy{
+    border: none;
+    background-color: #F7F6F9;
+}
+h6{
+    font-size: 14px;
+    padding-top: 8px;
+    color: #84828A;
+    font-family: "Info-field1";
+    text-transform: capitalize;
+
+}
+@font-face {
+    font-family: "Info-field1";
+    src: url(Component/Roboto-Regular.ttf);
+}
+.icons{
+    color: #84828A;
+}
 

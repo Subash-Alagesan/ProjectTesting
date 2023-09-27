@@ -3,12 +3,24 @@ padding-top: 30px;
 padding-left: 25px;
 padding-right: 25px;
 }
+
 @media only screen and (max-width: 500px ) {
     .grid-container {
-       width: 100%;
+       width: 80%;
+       padding-left: 80px;
+       height:400vh;
     }
 }
+.grid-main{
+    padding: 0px;
+}
 
+
+@media only screen and (max-width: 500px ) {
+    .grid-main {
+       margin-left: 20px;
+    }
+}
 .good-mrng-content,
 .today-top,
 .order-list,
@@ -108,7 +120,7 @@ padding-right: 25px;
 }
 @media only screen and (max-width: 600px ) {
     .Customer-db1{
-       padding-right: 75px;
+       padding-right: 25px;
     }
 }
 .Customer-db2 {
