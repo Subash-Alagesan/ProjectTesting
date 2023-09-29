@@ -1,6 +1,6 @@
 
 import React from 'react';
-import './Customer.css';
+import '../Customer/Customer.css';
 import { Grid } from '@mui/material';
 import assignment from '../Assets/images/assignment_ind.png'
 import group from '../Assets/images/group.png';
@@ -18,7 +18,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 
@@ -133,7 +132,7 @@ export default function Customer() {
 
             </div>
             <Grid container spacing={1} className='customerdb-details'>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
            
                   <div className='total-item1'>
                     <div><img src={contact} alt='contact-img' className='customerdb-container-contact-img' /></div>
@@ -143,7 +142,7 @@ export default function Customer() {
                   </div>
               
               </Grid>
-              <Grid item xs={9} md={8} lg={3} s>
+              <Grid item xs={12} md={12} lg={3} s>
            
                   <div className='total-item1'>
                     <div><img src={assignment} alt='assignment-img' className='customerdb-container-assignment-img' /></div>
@@ -154,7 +153,7 @@ export default function Customer() {
                   </div>
                 
               </Grid>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
              
                   <div className='total-item1'>
                     <div><img src={badge} alt='' className='customerdb-container-badge-img' /></div>
@@ -164,7 +163,7 @@ export default function Customer() {
                   </div>
             
               </Grid>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
                      <div className='total-item1'>
                     <div><img src={personaddd} alt='' className='customerdb-container-personadd-img' /></div>
                     <div> <h5 className='Customerdb-newlyadded'>Newly Added</h5>
@@ -193,10 +192,11 @@ export default function Customer() {
                 </Search>
               </div>
 
-              <FormControl sx={{ m: 1, minWidth: 120 }} size="small" style={{
+            <div  className="Form-Control">
+            <FormControl sx={{ m: 1.5, minWidth: 120 }} size="small" style={{
                 background: "#F7F6F9", borderRadius: "8px"
               }}>
-                <InputLabel id="demo-select-small-label" style={{
+                <InputLabel  style={{
                   fontSize: "15px"
 
                 }}>Short By:</InputLabel>
@@ -214,6 +214,7 @@ export default function Customer() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
+            </div>
 
             </div>
 

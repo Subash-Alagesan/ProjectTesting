@@ -1,123 +1,172 @@
+
 .logo-img {
-    height: 40px;
-    width: 75px;
-    margin-left: auto;
-    margin-right: auto;
+  height: 35px;
+  width: 65px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .section{
-    padding: 1px;
-    color: var(--Gray, #84828A);
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  padding: 1px;
+  color: var(--Gray, #84828A);
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 .section1{
-    padding: 15px;
-    background: var(--Light-Gray, #F7F6F9);
-    color: var(--Gray, #84828A);
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  padding: 15px;
+  background: var(--Light-Gray, #F7F6F9);
+  color: var(--Gray, #84828A);
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .divider{
-    padding-top: 15px;
+  padding-top: 15px;
 }
 .Menu1{
-    color: Gray;
+  color: Gray;
 }
-.dashboard-content{
-      
-      color:#84828A;
+.dashboard-content {
+  font-size: 5px; 
 }
+
 .admin{
-    padding-top: 40px;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16.75px;
-    color: #84828A;
-    padding-left: 20px;
+  padding-top: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.75px;
+  color: #84828A;
+  padding-left: 20px;
 
 }
+.admin1{
+  padding-top: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16.75px;
+  color: #84828A;
+  padding-left: 20px;
+}
 .Name{
-    color:#F7F6F9;
+  color:#F7F6F9;
 
 }
 
 /* EmployeeButton.css */
 .employee-button {
-   
-    align-items: center;
-    background-color: #FFFFFF;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 20px;
-    height:41px;
+ 
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 20px;
+  height:41px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.role {
+  color: #666;
+}
+.subtitle{
+  padding-right: 80px;
+  color: var(--Gray, #84828A);
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 20px;
+}
+.body2{
+  padding-right: 90px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18.75px;
+  color:#84828A;
+  text-transform: lowercase;
+  margin-top:-10px;
+}
+.adm-btn{
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: -7px;
+}
+.adm-btn > button {
+  margin-bottom: 5px; 
+}
+.icon1{
+ 
+  margin-left:-50px;
+}
+.button {
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #ffffff;
+}
+
+.add-customer-button1 {
+  display: flex;
+  align-items: center; 
+  color:#84828A;
+  font-size: 16px;
+  font-family: Roboto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 20px;
+  width:85%;
+  line-height: 2;
+ 
+  &:hover {
+    background-color:#EFE9FF;
+    color: #6425FE;
+    
   }
-  
-  .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .info {
-    flex-grow: 1;
-  }
-  
-  .name {
-    font-weight: bold;
-  }
-  
-  .role {
-    color: #666;
-  }
-  .subtitle{
-    padding-right: 80px;
-    color: var(--Gray, #84828A);
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-top: 20px;
-  }
-  .body2{
-    padding-right: 90px;
-    font-family: Roboto;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18.75px;
-    color:#84828A;
-    text-transform: lowercase;
-    margin-top:-10px;
-  }
-  .adm-btn{
-    padding-top: 20px;
+}
+  .button-content1 {
     display: flex;
-    flex-direction: column;
-    margin-left: -7px;
-  }
-  .adm-btn > button {
-    margin-bottom: 5px; 
-  }
-  .icon1{
-   
-    margin-left:-50px;
-  }
+    align-items: center; 
+    }
+    .button-text1 {
+      margin-left: 15px;
+      }
 
-
-
-
-
-
-
+  

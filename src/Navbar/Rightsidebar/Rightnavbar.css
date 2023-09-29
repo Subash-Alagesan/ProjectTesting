@@ -7,7 +7,7 @@
     max-width: 30px; 
     margin-top: 10px ; 
     padding-right:60px ;
-    margin-left: 125px;
+    margin-left: 90px;
   
   }
   .logo img {
@@ -102,18 +102,23 @@
   .add-customer-button {
   display: flex;
   align-items: center; 
-  background-color: #F7F6F9;
   color:#84828A;
   font-size: 16px;
   font-family: Roboto;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   margin-left: 25px;
   margin-top: 20px;
   width:75%;
   line-height: 2;
+  
+  &:hover {
+    background-color:#EFE9FF;
+    color: #6425FE;
+    
+  }
+
   }
   
   .button-text {
@@ -154,12 +159,8 @@
     cursor: pointer;
     align-items: center;
     margin-left: 50%;
-    /* font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    width:40%;
-    margin-top: auto; 
-    margin-bottom: 10px; */
+    width: 100px;
+    height: 40px;
   }
   
   .logout-button1{
@@ -173,7 +174,7 @@
   }
   
   .logout-button:hover {
-    background-color: #6425FE;
+    background-color: #2583fe;
   }
   .customGreenProgress {
     color: #fea725;

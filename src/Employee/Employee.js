@@ -18,7 +18,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 
@@ -135,7 +134,7 @@ export default function Employee() {
 
             </div>
             <Grid container spacing={1} className='Employeedb-details'>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
              
                   <div className='total-item1'>
                     <div><img src={contact} alt='contact-img' className='Employeedb-container-contact-img' /></div>
@@ -145,7 +144,7 @@ export default function Employee() {
                   </div>
               
               </Grid>
-              <Grid item xs={9} md={8} lg={3} s>
+              <Grid item xs={12} md={12} lg={3} s>
                         <div className='total-item1'>
                     <div><img src={assignment} alt='assignment-img' className='Employeedb-container-assignment-img' /></div>
                     <div> <h5 className='Employeedb-ourCustomer'>Our Customers</h5>
@@ -155,7 +154,7 @@ export default function Employee() {
                   </div>
                
               </Grid>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
              
                   <div className='total-item1'>
                     <div><img src={badge} alt='' className='Employeedb-container-badge-img' /></div>
@@ -165,7 +164,7 @@ export default function Employee() {
                   </div>
            
               </Grid>
-              <Grid item xs={9} md={8} lg={3}>
+              <Grid item xs={12} md={12} lg={3}>
          
                   <div className='total-item1'>
                     <div><img src={personaddd} alt='' className='Employeedb-container-personadd-img' /></div>
@@ -195,7 +194,8 @@ export default function Employee() {
                 </Search>
               </div>
 
-              <FormControl sx={{ m: 1, minWidth: 120 }} size="small" style={{
+             <div className='Form-Control'>
+             <FormControl sx={{ m: 1, minWidth: 120 }} size="small" style={{
                 background: "#F7F6F9", borderRadius: "8px"
               }}>
                 <InputLabel id="demo-select-small-label" style={{
@@ -216,6 +216,7 @@ export default function Employee() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
+             </div>
 
             </div>
 

@@ -1,13 +1,13 @@
 .grid-container{
-padding-top: 30px;
-padding-left: 2px;
+padding-top: 15px;
+padding-left: 30px;
 padding-right: 25px;
 }
 
 @media only screen and (max-width: 500px ) {
     .grid-container {
      
-       padding-left: 80px;
+       padding-left: 35px;
        height:400vh;
     }
 }
@@ -15,12 +15,6 @@ padding-right: 25px;
     padding: 0px;
 }
 
-
-@media only screen and (max-width: 500px ) {
-    .grid-main {
-       margin-left: 20px;
-    }
-}
 .good-mrng-content,
 .today-top,
 .order-list,
@@ -34,7 +28,8 @@ padding-right: 25px;
 }
 .good-mrng-content {
     color: #000000;
-    font-size: 18px;
+    font-size: 15px;
+    padding-top: 4px;
 }
 .good-mrng-content,
 .today-top {
@@ -64,23 +59,17 @@ padding-right: 25px;
 .customer-content1 {
     padding: 0%;
 }
-@media only screen and (max-width: 500px ) {
-    #customer-content,
-    #business-content,
-    #tactic-content {
-       margin-right: 20px;
-    }
-}
+
 @media only screen and (max-width: 850px ) {
     #customer-content,
     #business-content,
     #tactic-content {
-        padding-left: 45px;
+        padding-left: 35px;
     }
 }
 .tactic1 {
-    font-size: 16px;
-    padding-left: 20px;
+    font-size: 15px;
+    padding-left: 15px;
     padding-top: 22px;
     color: #2C2C2C;
     font-family: "Roboto-Medium", Helvetica;
@@ -95,18 +84,19 @@ padding-right: 25px;
 .project-count {
     text-align: left;
     padding-left: 37px;
-}
-.project-count {
     font-size: 18px;
     color: #2C2C2C;
 }
+
 .tactic-img {
     padding-top: 12px;
-    padding-left: 25px;
+    padding-left: 15px;
+    height: 45px;
+    width: 45px;
 }
 .progress-icon {
     padding-top: 20px;
-    padding-left: 45px;
+    padding-left: 35px;
 }
 .emp-data {
     width: 100%;
@@ -114,17 +104,13 @@ padding-right: 25px;
 .Customer-db1 {
     color: #2C2C2C;
     font-size: 14px;
-    padding-left: 10px;
+    padding-left: 5px;
     padding-top: 15px;
     font-family: "Roboto-Medium", Helvetica;
 }
-@media only screen and (max-width: 600px ) {
-    .Customer-db1{
-       padding-right: 25px;
-    }
-}
+
 .Customer-db2 {
-    font-size: 15px;
+    font-size: 13px;
     color: #84828A;
     padding-top: 15px;
     padding-left: 180px;
@@ -142,7 +128,7 @@ padding-right: 25px;
 }
 .Customer-db3 {
     color: #84828A;
-    font-size: 15px;
+    font-size: 13px;
     padding-top: 15px;
     padding-left: 180px;
     font-family: "Roboto-Regular", Helvetica;
@@ -168,7 +154,7 @@ padding-right: 25px;
 .total-content,
 .ourcustomer-content,
 .others-content {
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 10px;
     font-family: "Roboto-Regular", Helvetica;
 }
@@ -179,14 +165,14 @@ padding-right: 25px;
     text-align: left;
     padding-left: 20px;
     color: #2C2C2C;
-    font-size: 17px;
+    font-size: 15px;
     padding-top: 10px;
     font-family: "Roboto-Medium", Helvetica;
 }
 .see-more {
     text-align: right;
     padding-right: 20px;
-    font-size: 16px;
+    font-size: 13px;
     padding-top: 10px;
     color: #84828A;
 }
@@ -194,7 +180,7 @@ padding-right: 25px;
     text-align: left;
     padding-left: 20px;
     color: #6425FE;
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 10px;
     font-family: "Roboto-Regular", Helvetica;
 }
@@ -202,7 +188,7 @@ padding-right: 25px;
     text-align: left;
     padding-left: 20px;
     color: #6425FE;
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 10px;
     font-family: "Roboto-Regular", Helvetica;
 }
@@ -217,7 +203,7 @@ padding-right: 25px;
     text-align: left;
     padding-left: 20px;
     padding-top: 10px;
-    font-size: 14px;
+    font-size: 13px;
 }
 .progress-bar {
     width: 60%;
@@ -231,6 +217,6 @@ padding-right: 25px;
     width: 350px;
 }
 .lead-name {
-    font-size: 14px;
+    font-size: 13px;
     text-align: left;
 }

@@ -1,6 +1,6 @@
 .Employeedb-container{
     background-color: #F7F6F9;
-  padding: 15px 25px 0px 23px;
+  padding: 15px 25px 0px 29px;
  
 }
  
@@ -17,8 +17,8 @@
   
 }
 .Employeedb-container-group-img{
-    height:28px;
-    width: 28px;
+    height:26px;
+    width: 26px;
 }
 
 .Employeedb-container-contact-img,
@@ -33,7 +33,7 @@
 .Employeedb-heading {
     padding-left: 8px;
     padding-top: 5px;
-    font-size: 16px;
+    font-size: 15px;
     color: #2C2C2C;
     font-family: "Employeedb-container";
 }
@@ -49,7 +49,7 @@
 .Employeedb-newlyadded {
     padding-left: 10px;
     padding-top: 6px;
-    font-size: 15px;
+    font-size: 14px;
 }
 .Employeedb-details{
     padding: 10px 15px 5px 15px;
@@ -59,11 +59,11 @@
 
 @media only screen and (max-width: 600px) {
     .Employeedb-details {
-     padding-left: 170px;
+     padding-left:50px;
     }
 }
 .Total-content {
-    font-size: 17px;
+    font-size: 15px;
     font-family: "total";
     padding-right: 80px;
 }
@@ -77,13 +77,17 @@
     padding-top: 10px;
 }
 .All-Employee {
-    font-size: 16px;
+    font-size: 15px;
     padding-top: 10px;
     padding-left: 20px;
     color: #2C2C2C;
     font-family: "All-Employee";
 }
-
+@media only screen and (max-width: 600px) {
+    .All-Employee {
+     padding-left: 0px;
+    }
+}
 @font-face {
     font-family: "All-Employee";
     src: url(../Component/Font/Roboto-Bold.ttf);
@@ -107,10 +111,20 @@
 
 .Search-bar {
      padding-left: 20px;
+     height: 40px;
     background-color: #F7F6F9;
 }
 .pagination-content {
     display: flex;
     justify-content: center;
     padding-top: 5px;
+}
+.Form-Control{
+    padding: 0;
+}
+@media only screen and (max-width: 600px) {
+    .Form-Control {
+    display: none;
+
+    }
 }

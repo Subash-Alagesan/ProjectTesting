@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function MainContent() {
   return (
     <Grid container spacing={2} style={{ backgroundColor: " #F7F6F9" }} className='grid-container'>
-      <Grid item xs={10} sm={10} md={6} lg={6} className='grid-main'>
+      <Grid item xs={12} sm={12} md={6} lg={6} className='grid-main'>
         <Item className='grid-content'>
           <h4 className='good-mrng-content'>
             <b>Hi Sir, Good Morning.</b>
@@ -41,7 +41,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={6} lg={6}  className='grid-main' >
+      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main' >
         <Item className='grid-content'>
           <p className='todaytop-content1'>
             Today’s other priorities
@@ -59,7 +59,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={4} lg={4}  className='grid-main'>
+      <Grid item xs={12} sm={12} md={4} lg={4}  className='grid-main'>
         <Item id='tactic-content' >
           <div style={{ display: "flex" }}>
             <div><img src={tactic} alt='tactic-img' className='tactic-img' /></div>
@@ -77,7 +77,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={4} lg={4}  className='grid-main'>
+      <Grid item xs={12} sm={12} md={4} lg={4}  className='grid-main'>
         <Item id='business-content' >
           <div style={{ display: "flex" }}>
             <div><img src={Business} alt='tactic-img' className='tactic-img' /></div>
@@ -95,7 +95,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={4} lg={4}  className='grid-main'>
+      <Grid item xs={12} sm={12} md={4} lg={4}  className='grid-main'>
         <Item id='customer-content'>
           <div style={{ display: "flex" }} className='customer-content1'>
             <div><img src={group} alt='tactic-img' className='tactic-img' /></div>
@@ -113,7 +113,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={6} lg={6}  className='grid-main'>
+      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main'>
         <Item className='emp-data'>
           <div className='customer-leftside'>
             <div className='Customer-db'>
@@ -140,7 +140,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={6} lg={6}  className='grid-main'>
+      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main'>
         <Item className='emp-data'>
           <div>
             <div className='Customer-db'>
@@ -167,7 +167,7 @@ export default function MainContent() {
             </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={6} lg={6}   className='grid-main'>
+      <Grid item xs={12} sm={12} md={6} lg={6}   className='grid-main'>
         <Item>
           <h4 className='footer-monitor'><b>Project Monitoring</b></h4>
           <h4 className='IBMS-project'>IBMS Project</h4>
@@ -199,7 +199,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={10} sm={10} md={6} lg={6}  className='grid-main' >
+      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main' >
         <Item>
           <h4 className='see-more'>See More</h4>
           <h4 className='saloon-project'>Salon Management System Project</h4>
