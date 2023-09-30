@@ -2,16 +2,23 @@ import React from 'react';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; 
-import logo from './images/logo.png';
-import './Loginform.css';
-import incan from './images/incan.png';
+import logo from '../Assets/images/logo.png';
+import '../Loginform/Loginform.css';
+import incan from '../Assets/images/incan.png';
 import Grid from '@mui/material/Grid';
-import Registerform from '../Registerform';
-import Register from '../Register';
+import Registerform from '../Registrationform/Registerform';
+import Register from '../Registrationform/Register';
 import { Button } from '@mui/material';
-import axios from 'axios'; // Import axios
+import axios from 'axios'; 
+import {useNavigate} from 'react-router-dom';
+
+
 
 function Loginform() {
+
+  const navigate   = useNavigate();
+
+
     const [openPopup, setOpenPopup] = useState(false);
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required!'),
@@ -32,34 +39,19 @@ function Loginform() {
             localStorage.setItem('authToken', token);
             console.log('Login Successful:', token);
             alert('Login Successful');
+            
           } catch (error) {
             console.error('Login failed:', error);
             alert('Login Failed'); 
+            
           }
         },
       });
-      const getToken = () => {
-        return localStorage.getItem('authToken');
-      };
-
-      const axiosInstance = axios.create({
-        baseURL: 'http://localhost:3000', 
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`, 
-        },
-      });
-
-      axiosInstance.get('/authenticated-endpoint')
-  .then(response => {
-    // Handle the response
-  })
-  .catch(error => {
-    // Handle errors
-  });
+     
     return (
 
         <>
+        
             <div className='login'>
 
                 <Grid container spacing={2}>
@@ -126,7 +118,9 @@ function Loginform() {
               <a href='/'>Forgot Password?</a>
             </div>
             <div className='login-btn'>
-              <button className='d-grid' type='submit'>
+              <button className='d-grid' type='submit' onclick={()=>{
+                navigate.push("/dashboard");
+              }}>
                 <h6 className='log'>Login</h6>
               </button>
             </div>
@@ -137,6 +131,7 @@ function Loginform() {
       <Registerform openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <Register />
       </Registerform>
+     
     </>
   );
 }

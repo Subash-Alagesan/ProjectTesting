@@ -1,9 +1,17 @@
 import React from 'react'
-import SideNavbar from '../src/Navbar/Leftsidebar/SideNavbar'
+// import SideNavbar from '../src/Navbar/Leftsidebar/SideNavbar'
+import Loginform from './Loginform/Loginform'
+import {Route, Routes } from 'react-router-dom';
+import SideNavbar from './Navbar/Leftsidebar/SideNavbar';
 
 function App() {
   return (
-    <SideNavbar />
+  
+      <Routes>
+        <Route path="/dashboard" element={<SideNavbar />} />
+        <Route path="/" element={<Loginform />} />
+      </Routes>
+   
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import logo from './images/logo.png';
+import logo from '../Assets/images/logo.png';
 
 
 

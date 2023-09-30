@@ -150,9 +150,9 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 15px;
+  margin-left: 20px;
   margin-top: 20px;
-  width:85%;
+  width:83%;
   line-height: 2;
  
   &:hover {
