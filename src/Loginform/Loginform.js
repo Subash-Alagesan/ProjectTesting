@@ -3,12 +3,17 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; 
 import logo from '../Assets/images/logo.png';
+<<<<<<< HEAD
 import '../Loginform/Loginform.css';
+=======
+import './Loginform.css';
+>>>>>>> 54398f7fb536a699e3b6d5ac51b076f77d658250
 import incan from '../Assets/images/incan.png';
 import Grid from '@mui/material/Grid';
 import Registerform from '../Registrationform/Registerform';
 import Register from '../Registrationform/Register';
 import { Button } from '@mui/material';
+<<<<<<< HEAD
 import axios from 'axios'; 
 import {useNavigate} from 'react-router-dom';
 
@@ -19,6 +24,13 @@ function Loginform() {
   const navigate   = useNavigate();
 
 
+=======
+import axios from 'axios'; // Import axios
+import { useNavigate } from 'react-router-dom';
+
+function Loginform() {
+  const navigate = useNavigate();
+>>>>>>> 54398f7fb536a699e3b6d5ac51b076f77d658250
     const [openPopup, setOpenPopup] = useState(false);
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required!'),
@@ -33,6 +45,7 @@ function Loginform() {
           password: '',
         },
         validationSchema,onSubmit: async (values) => {
+<<<<<<< HEAD
           try {
             const response = await axios.post('http://localhost:3000/login', values);
             const token = response.data.token;
@@ -44,7 +57,25 @@ function Loginform() {
             console.error('Login failed:', error);
             alert('Login Failed'); 
             
+=======
+          // try {
+          //   const response = await axios.post('http://localhost:3000/login', values);
+          //   const token = response.data.token;
+          //   localStorage.setItem('authToken', token);
+          //   console.log('Login Successful:', token);
+          //   alert('Login Successful');
+          // } catch (error) {
+          //   console.error('Login failed:', error);
+          //   alert('Login Failed'); 
+          // }
+          if (formik.values.username === "ibms@gmail.com" && formik.values.password === "ibms@1234") {
+            alert("Login Successful!!!!");
+            navigate("/dashboard")
+          } else {
+            alert("Login Failed!!!");
+>>>>>>> 54398f7fb536a699e3b6d5ac51b076f77d658250
           }
+          
         },
       });
      
