@@ -1,10 +1,22 @@
-import React from 'react'
-import SideNavbar from '../src/Navbar/Leftsidebar/SideNavbar'
+import React from "react";
+import SideNavbar from "../src/Navbar/Leftsidebar/SideNavbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "../src/Loginform/Loginform";
+import MainContent from "./MainDashboard/MainContent";
+import ProtectedRoutes from "./Component/ProductedRoutes";
 
 function App() {
   return (
-    <SideNavbar />
-  )
+    <>
+      
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboard" element={<MainContent />} />
+        </Routes>
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;

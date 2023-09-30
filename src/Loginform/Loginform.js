@@ -2,16 +2,18 @@ import React from 'react';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'; 
-import logo from './images/logo.png';
+import logo from '../Assets/images/logo.png';
 import './Loginform.css';
-import incan from './images/incan.png';
+import incan from '../Assets/images/incan.png';
 import Grid from '@mui/material/Grid';
-import Registerform from '../Registerform';
-import Register from '../Register';
+import Registerform from '../Registrationform/Registerform';
+import Register from '../Registrationform/Register';
 import { Button } from '@mui/material';
 import axios from 'axios'; // Import axios
+import { useNavigate } from 'react-router-dom';
 
 function Loginform() {
+  const navigate = useNavigate();
     const [openPopup, setOpenPopup] = useState(false);
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required!'),
@@ -26,16 +28,23 @@ function Loginform() {
           password: '',
         },
         validationSchema,onSubmit: async (values) => {
-          try {
-            const response = await axios.post('http://localhost:3000/login', values);
-            const token = response.data.token;
-            localStorage.setItem('authToken', token);
-            console.log('Login Successful:', token);
-            alert('Login Successful');
-          } catch (error) {
-            console.error('Login failed:', error);
-            alert('Login Failed'); 
+          // try {
+          //   const response = await axios.post('http://localhost:3000/login', values);
+          //   const token = response.data.token;
+          //   localStorage.setItem('authToken', token);
+          //   console.log('Login Successful:', token);
+          //   alert('Login Successful');
+          // } catch (error) {
+          //   console.error('Login failed:', error);
+          //   alert('Login Failed'); 
+          // }
+          if (formik.values.username === "ibms@gmail.com" && formik.values.password === "ibms@1234") {
+            alert("Login Successful!!!!");
+            navigate("/dashboard")
+          } else {
+            alert("Login Failed!!!");
           }
+          
         },
       });
       const getToken = () => {
