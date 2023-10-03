@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import SideNavbar from "../src/Navbar/Leftsidebar/SideNavbar";
-import {Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "../src/Loginform/Loginform";
-import './index.css';
-
+import ProtectedRoutes from "./Component/ProductedRoutes/index";
+import "./index.css";
 
 function App() {
   return (
     <>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<SideNavbar />} />
-        </Routes>
-     
-      
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoutes>
+              <SideNavbar />
+            </ProtectedRoutes>
+          }
+        />
+      </Routes>
     </>
   );
 }

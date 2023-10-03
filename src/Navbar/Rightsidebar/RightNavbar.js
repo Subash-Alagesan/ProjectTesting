@@ -1,4 +1,5 @@
 import * as React from 'react';
+import SetAuthToken from '../../Component/Helper/SetAuthToken';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -18,13 +19,6 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './Rightnavbar.css';
 import { useNavigate } from 'react-router-dom';
-
-
-
-
-
-
-
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -40,6 +34,8 @@ export default function RightNavbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem("ibms"); // Remove the token from localStorage
+    SetAuthToken(null);
     navigate("/")
   };
 
