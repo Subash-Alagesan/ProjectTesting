@@ -5,9 +5,7 @@
   
   .form_container {
     height: 65vh;
-  
-    border-radius: 12px;
-    display: flex;
+    border-radius: 5px;
     justify-content: center;
     text-align: center;
     background-color: #fff;
@@ -15,42 +13,37 @@
     top: 136px;
     left: 50%;
     transform: translateX(-50%);
-    
-    /* Adjust the width for desktop */
+    display: flex;
+    width:50%;
     max-width: 330px;
-    /* Set a maximum width for larger screens */
     box-shadow: 8px 8px 8px 8px rgba(0.2, 0.2, 0.2, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.23);
   }
   
   @media only screen and (max-width: 1000px) {
     .form_container {
       width: 100%;
-      /* Adjust the width for desktop */
       height:70vh;
   
     }
   }
   
   .incan-img {
-    width: 150px;
-    height: 70px;
+    width: 180px;
     padding-left: 50px;
-    /* Adjust the padding for smaller screens */
     padding-top: 30px;
     background-color: lightgray 50% / cover no-repeat;
+flex-shrink: 0;
   }
   
   @media only screen and (max-width: 600px) {
     .incan-img {
       width: 100%;
-      /* Adjust the width for desktop */
       height: 50px;
   
     }
   }
   .logo-img{
     padding-top: 1px;
-    
     margin-left: auto;
     margin-right: auto;
     
@@ -64,7 +57,7 @@
     padding-top: 50px;
     padding-left: 10px;
   
-    /* Adjust the padding for smaller screens */
+    
   }
   .plus{
     margin: 40px;
@@ -103,13 +96,11 @@
     display: flex;
     justify-content: flex-start;
     padding-top: 18px;
-    /* Adjust the padding for smaller screens */
   }
   
   
   .form-control {
     width: 220px;
-    /* Make the input full width on smaller screens */
     height: 40px;
     border-radius: 5px;
     background-color: #F7F6F9;
@@ -120,7 +111,6 @@
   .forgot-password {
     display: flex;
     justify-content: flex-start;
-    /* Adjust the padding for smaller screens */
     color: var(--Blue, #6425FE);
     font-family: Roboto;
     font-size: 12px;
@@ -149,13 +139,10 @@
     padding-top: 6px;
   }
   
-  
-  
   .login-btn {
     display: flex;
     justify-content: flex-end;
-    padding-top: 10px;
-    /* Adjust the padding for smaller screens */
+    padding-top: 23px;
   }
   
   .login-form {
@@ -165,3 +152,7 @@
   .error-message {
     color: red;
   }
+  .mb-2{
+    padding-top: 10px;
+  }
+  

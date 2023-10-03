@@ -1,7 +1,8 @@
- /* .dialog {
-    height: 50%;
-    width: 50%;
-}  */
+.close-icon{
+    position: absolute;
+    right:0;
+    top:0;
+}
 .register{
    
     width:100%;

@@ -1,19 +1,20 @@
-import React from 'react'
+import React from "react";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import logo from '../Assets/images/logo.png';
-
-
+import './Registerform.css'
 
 export default function Registerform(props) {
-    const { title, children, openPopup, setopenPopup } = props;
+    
+    const { children, openPopup } = props;
     return (
-        <Dialog open={openPopup} >
+        <Dialog open={openPopup}>
             <DialogTitle>
 
 
                 <div className='Registration-Form'>
+                    
                     <div className='bms-img'>
                         <img src={logo} alt='logo.png' style={{ height: "30px", width: "55px" }} />
                     </div>

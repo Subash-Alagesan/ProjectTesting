@@ -17,6 +17,13 @@ import super_admin from '../../Assets/images/super_admin.png';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './Rightnavbar.css';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -30,9 +37,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function RightNavbar() {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Implement your logout logic here
+    navigate("/")
   };
 
   const theme = useTheme();
@@ -67,7 +75,6 @@ export default function RightNavbar() {
             <MenuIcon    />
           </IconButton>
         </Toolbar>
-    
     
         <DrawerHeader />
     
@@ -115,7 +122,7 @@ export default function RightNavbar() {
       </div>
 
         </DrawerHeader>
-        <Divider />
+        {/* <Divider /> */}
         <List>
         <div className="right-navbar-container">
       

@@ -29,6 +29,8 @@ import RightNavbar from '../Rightsidebar/RightNavbar';
 import Employee from '../../Employee/Employee';
 import Customer from '../../Customer/Customer';
 import MainContent from '../../MainDashboard/MainContent';
+import CustomerNavbar from '../../Customer/CustomerNavbar';
+import EmployeeNavbar from '../../Employee/EmployeeNavbar';
 
 
 const drawerWidth = 240;
@@ -71,18 +73,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 const SideNavbar = () => {
-  const [clickedButton, setClickedButton] = useState(<MainContent />); // Set the initial value
+  const [clickedButton, setClickedButton] = useState(<MainContent />);
+  
+  const [grid3Component, setGrid3Component] = useState(<RightNavbar />);
+
 
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
+    setGrid3Component(<RightNavbar />);
   };
 
   const handleContactClick = () => {
     setClickedButton(<Customer />);
+    setGrid3Component(<CustomerNavbar />);
+    
   };
 
   const handleAboutClick = () => {
     setClickedButton(<Employee />);
+    setGrid3Component(<EmployeeNavbar />);
   };
 
   const handleProjectClick = () => {
@@ -174,7 +183,6 @@ const SideNavbar = () => {
                     <span className="button-text1">Project Monitoring</span>
                   </div>
                 </button>
-
               </div>
 
               <List >
@@ -259,16 +267,16 @@ const SideNavbar = () => {
 
         </Grid>
         <Grid item xs={12} sm={12} md={8} lg={8}>
-          {/* Content for the second grid */}
+          
 
 
           {clickedButton}
 
         </Grid>
         <Grid item xs={2}>
-          {/* Content for the third grid */}
+          
           <div >
-            <RightNavbar />
+          {grid3Component}
           </div>
         </Grid>
       </Grid>

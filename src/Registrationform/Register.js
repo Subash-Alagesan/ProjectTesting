@@ -11,7 +11,12 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 
+
+
+
 function Register() {
+
+ 
 
     const validationSchema = Yup.object({
         username: Yup.string().required('User Name is required'),
@@ -30,16 +35,12 @@ function Register() {
       };
 
       const handleSubmit = (values, { resetForm }) => {
-        // Handle your registration logic here
-        // After successful registration, you can set a success message
-        // and reset the form using resetForm()
-        // For example:
+       
         console.log('Form submitted with values:', values);
-        // Set a success message
-        // Show a success message here
-        // Reset the form
+        
         resetForm(initialValues);
       };
+      
       
 
       return (
@@ -49,6 +50,7 @@ function Register() {
           onSubmit={handleSubmit}
         >
           <Form>
+       
             <Field
             className='input'
               type="text"
