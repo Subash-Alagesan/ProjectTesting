@@ -1,23 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-
-let currentTime;
-let decoded;
-
-if (localStorage.ibms) {
-  const token = localStorage.getItem("ibms");
-  decoded = jwt_decode(token);
-  console.log("Decoded Data",decoded);
-  currentTime = Date.now() / 1000;
-  console.log(new Date(currentTime), new Date(decoded.exp * 1000));
-  console.log(currentTime / 1000);
-}
+import { useAuth } from "../Helper/Context/AuthContext"; // Import your authentication context
 
 const ProtectedRoutes = ({ children }) => {
-  if (!localStorage.ibms || decoded?.exp < currentTime) {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
     return <Navigate to="/" />;
   }
+
   return children;
 };
 

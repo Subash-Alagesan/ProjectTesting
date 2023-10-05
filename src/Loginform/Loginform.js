@@ -1,10 +1,8 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useAuth } from "../Component/Helper/Context/AuthContext";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "../Component/Axios Base URL/axios";
-import SetAuthToken from "../Component/Helper/SetAuthToken";
-import { Navigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import logo from "../Assets/images/logo.png";
 import "./Loginform.css";
@@ -18,7 +16,9 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 function Loginform() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [openPopup, setOpenPopup] = useState(false);
+  const [error, setError] = useState(null);
   const handleClose = () => {
     setOpenPopup(false);
   };
@@ -28,19 +28,26 @@ function Loginform() {
       .required("Password is required!")
       .min(4, "Password must be more than 4 characters"),
   });
+  const showErrorMessage = (message) => {
+    setError(message);
+    setTimeout(() => {
+      setError(null);
+    }, 5000); // Adjust the time (in milliseconds) as needed
+  };
   useEffect(() => {
     let currentTime;
     let decoded;
-  if (localStorage.ibms) {
-    const token = localStorage.getItem("ibms");
-    decoded = jwt_decode(token);
-    currentTime = Date.now() / 1000;
-    if (!localStorage.ibms || decoded?.exp < currentTime) {
-    } else {
-      navigate("/dashboard");
+
+    if (localStorage.ibms) {
+      const token = localStorage.getItem("ibms");
+      decoded = jwt_decode(token);
+      currentTime = Date.now() / 1000;
+      if (!localStorage.ibms || decoded?.exp < currentTime) {
+      } else {
+        navigate("/dashboard");
+      }
     }
-  }
-}, [navigate]);
+  }, [navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -49,27 +56,21 @@ function Loginform() {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log("Submitting form with values:", values);
       try {
-        const response = await axios.post("/api/auth/loginSuperAdmin", {
-          email: values.email,
-          password: values.password,
-        });
-        if (response.status === 200) {
-          // Login Successful
-          alert("Login Successful!!!!");          
-          const token = response?.data?.token;          
-          SetAuthToken(token);
-          localStorage.setItem("ibms", token);
-          navigate("/dashboard");
-        } else {
-          // Login Failed
-          alert("Login Failed!!!");
-        }
+        await login(values.email, values.password);
+        alert("Login successfull!!!");
+        navigate("/dashboard");
+        setError(null);
       } catch (error) {
-        // Handle errors (e.g., network issues, server errors)
-        console.error("Login error:", error);
-        alert("Login Failed!!!");
+        console.error("Login failed:", error);
+        if (error.response && error.response.status === 400) {
+          showErrorMessage("Invalid login credentials. Please try again.");
+        } else {
+          showErrorMessage(
+            "An error occurred while logging in. Please try again later."
+          );
+        }
+        console.log("Error message:", error.message);
       }
     },
   });
