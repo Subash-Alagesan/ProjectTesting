@@ -1,35 +1,29 @@
 import React from "react";
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import logo from '../Assets/images/logo.png';
-import './Registerform.css'
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import logo from "../Assets/images/logo.png";
+import "./Registerform.css";
 
 export default function Registerform(props) {
-    
-    const { children, openPopup } = props;
-    return (
-        <Dialog open={openPopup}>
-            <DialogTitle>
-
-
-                <div className='Registration-Form'>
-                    
-                    <div className='bms-img'>
-                        <img src={logo} alt='logo.png' style={{ height: "30px", width: "55px" }} />
-                    </div>
-                    <div className='Registration' >
-                   <strong>Registration Form</strong>
-                   </div>
-
-                </div>
-
-            </DialogTitle>
-            <DialogContent>
-                {children}
-            </DialogContent>
-
-        </Dialog>
-
-    )
+  const { children, openPopup } = props;
+  return (
+    <Dialog open={openPopup}>
+      <DialogTitle>
+        <div className="Registration-Form">
+          <div className="bms-img">
+            <img
+              src={logo}
+              alt="logo.png"
+              style={{ height: "30px", width: "55px" }}
+            />
+          </div>
+          <div className="Registration">
+            <strong>Registration Form</strong>
+          </div>
+        </div>
+      </DialogTitle>
+      <DialogContent>{children}</DialogContent>
+    </Dialog>
+  );
 }
