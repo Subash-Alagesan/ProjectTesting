@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../Component/Axios Base URL/axios";
 import { MDBBtn, MDBInput, MDBCheckbox } from "mdb-react-ui-kit";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 
 function Register() {
   const navigate = useNavigate();
+  
 
   const validationSchema = Yup.object({
     name: Yup.string().required("User Name is required"),
