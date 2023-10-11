@@ -32,7 +32,7 @@
   
 
   .emp-subtitle{
-    padding-right: 80px;
+    padding-right: 50px;
     color: var(--Gray, #84828A);
     font-family: Roboto;
     font-size: 12px;
@@ -42,7 +42,7 @@
     margin-top: 20px;
   }
   .emp-body2{
-    padding-right: 90px;
+    padding-right: 60px;
     font-family: Roboto;
     font-size: 14px;
     font-style: normal;

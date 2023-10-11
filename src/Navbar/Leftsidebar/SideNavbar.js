@@ -17,10 +17,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Drawer from '@mui/material/Drawer';
 import logo from '../../Assets/images/logo.png';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import WorkIcon from '@mui/icons-material/Work';
@@ -31,6 +27,8 @@ import Customer from '../../Customer/Customer';
 import MainContent from '../../MainDashboard/MainContent';
 import CustomerNavbar from '../../Customer/CustomerNavbar';
 import EmployeeNavbar from '../../Employee/EmployeeNavbar';
+import santhosh from '../../Assets/images/santhosh.jpeg';
+
 
 
 const drawerWidth = 240;
@@ -72,7 +70,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
+
+
 const SideNavbar = () => {
+ 
+  
+
+
   const [clickedButton, setClickedButton] = useState(<MainContent />);
   
   const [grid3Component, setGrid3Component] = useState(<RightNavbar />);
@@ -106,14 +110,16 @@ const SideNavbar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
 
   return (
+
     <div>
       <Grid container spacing={2}>
         <Grid item xs={2}>
           {/* Content for the first grid */}
 
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex" }} >
             <CssBaseline />
             <div>
               <Toolbar>
@@ -141,7 +147,9 @@ const SideNavbar = () => {
               anchor="left"
               open={open}
             >
+              
               <DrawerHeader>
+              
                 <div className="logo-img">
                   <img src={logo} alt="logo.png" className="logo-img" />
                 </div>
@@ -153,7 +161,9 @@ const SideNavbar = () => {
                   )}
                 </IconButton>
               </DrawerHeader>
+              
               <h4 className="admin">User Panel</h4>
+             
 
               <div className="dashboard-btn">
                 <button className="add-customer-button1" onClick={handleHomeClick}>
@@ -200,13 +210,13 @@ const SideNavbar = () => {
                     }}
                   >
                     <StyledBadge overlap="circular">
-                      <Avatar img src={profile} alt="Profile.png" />
+                      <Avatar img src={santhosh} alt="santhosh.jpg" />
                     </StyledBadge>
 
                     <Box>
                       <div className="title">
-                        <h1 className="subtitle">Subash</h1>
-                        <p className="body2">Admin</p>
+                        <h1 className="subtitle">Santhosh</h1>
+                        <p className="body2">Front-end</p>
                       </div>
                     </Box>
                     <MoreVertIcon className="icon1" />
@@ -268,10 +278,8 @@ const SideNavbar = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={8} lg={8}>
           
-
-
           {clickedButton}
-
+         
         </Grid>
         <Grid item xs={2}>
           
@@ -281,6 +289,7 @@ const SideNavbar = () => {
         </Grid>
       </Grid>
     </div>
+   
   );
 };
 

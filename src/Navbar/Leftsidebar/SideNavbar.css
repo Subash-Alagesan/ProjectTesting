@@ -155,11 +155,16 @@
   width:83%;
   line-height: 2;
  
-  &:hover {
+  /* &:hover {
     background-color:#EFE9FF;
     color: #6425FE;
     
-  }
+  } */
+  &.add-customer-button1:focus{
+    background-color:#EFE9FF;
+    color:#6425FE;
+}
+
 }
   .button-content1 {
     display: flex;
