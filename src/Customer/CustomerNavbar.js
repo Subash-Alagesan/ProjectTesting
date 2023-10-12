@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useAuth} from "../Component/Helper/Context/AuthContext"
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -61,9 +62,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function CustomerNavbar() {
+  const {logout}= useAuth
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    logout();
     navigate("/")
   };
 

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import '../Customer/Customer.css';
+import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import assignment from '../Assets/images/assignment_ind.png'
 import group from '../Assets/images/group.png';
@@ -22,7 +23,7 @@ import Paper from '@mui/material/Paper';
 
 
 
-const columns: GridColDef[] = [
+const columns = [
 
   {
     field: 'Name',
@@ -48,15 +49,28 @@ const columns: GridColDef[] = [
     width: 180,
   },
   { field: 'Place', headerName: 'Place', width: 160 },
-  {
-    field: 'View Details', headerName: 'View Details', width: 160,
-    renderCell: (params) => (
+  // {
+  //   field: 'View Details', headerName: 'View Details', width: 160,
+  //   renderCell: (params) => (
 
-      <Button variant="contained" href="#contained-buttons" size='small' style={{background:"#6425FE"}}>
-        view
-      </Button>
+  //     <Button variant="contained" href="#contained-buttons" size='small' style={{background:"#6425FE"}}>
+  //       view
+  //     </Button>
+  //   ),
+  // },
+  {
+    field: 'View Details',
+    headerName: 'View Details',
+    width: 160,
+    renderCell: (params) => (
+      <Link to="/business_profile"> {/* Replace with the path to your target component */}
+        <Button variant="contained" size='small' style={{ background: "#6425FE" }}>
+          View
+        </Button>
+      </Link>
     ),
-  },
+  }
+  
 ];
 
 const rows = [
