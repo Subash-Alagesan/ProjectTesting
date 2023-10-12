@@ -13,12 +13,17 @@ import Register from "../Registrationform/Register";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import ErrorDialog from "../Component/ErrorDialog"; 
+
 
 function Loginform() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [openPopup, setOpenPopup] = useState(false);
   const [error, setError] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
+
   const handleClose = () => {
     setOpenPopup(false);
   };
@@ -65,10 +70,12 @@ function Loginform() {
         console.error("Login failed:", error);
         if (error.response && error.response.status === 400) {
           showErrorMessage("Invalid login credentials. Please try again.");
+          setOpenDialog(true);
         } else {
           showErrorMessage(
             "An error occurred while logging in. Please try again later."
           );
+          setOpenDialog(true);
         }
         console.log("Error message:", error.message);
       }
@@ -154,10 +161,17 @@ function Loginform() {
         </div>
         <Registerform />
       </div>
+      
       <Registerform openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <Register />
         <HighlightOffIcon className="close-icon" onClick={handleClose} />
       </Registerform>
+      <ErrorDialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        message={dialogMessage}
+      />
+
     </>
   );
 }

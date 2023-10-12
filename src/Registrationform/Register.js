@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../Component/Axios Base URL/axios";
 import { MDBBtn, MDBInput, MDBCheckbox } from "mdb-react-ui-kit";
