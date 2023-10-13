@@ -27,7 +27,7 @@ const columns: GridColDef[] = [
   {
     field: 'Name',
     headerName: 'Name',
-    width: 200,
+    width: 180,
     renderCell: (params) => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Avatar src={params.row.PhotoURL} style={{ marginRight: '8px' }} />
@@ -39,13 +39,13 @@ const columns: GridColDef[] = [
     field: 'contact',
     headerName: 'Contact Number',
     type: 'contact number',
-    width: 180,
+    width: 150,
   },
   {
     field: 'Email',
     headerName: 'Email',
     sortable: true,
-    width: 200,
+    width: 150,
   },
   { field: 'Experience', headerName: 'Experience', width: 160 },
   {

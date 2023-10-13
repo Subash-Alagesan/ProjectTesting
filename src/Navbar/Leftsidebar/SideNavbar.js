@@ -28,8 +28,7 @@ import MainContent from '../../MainDashboard/MainContent';
 import CustomerNavbar from '../../Customer/CustomerNavbar';
 import EmployeeNavbar from '../../Employee/EmployeeNavbar';
 import santhosh from '../../Assets/images/santhosh.jpeg';
-
-
+import Businessprofile from '../../Customer/BusinessProfile';
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -69,29 +68,29 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-
-
-
 const SideNavbar = () => {
  
-  
-
-
   const [clickedButton, setClickedButton] = useState(<MainContent />);
   
   const [grid3Component, setGrid3Component] = useState(<RightNavbar />);
 
+  const [isViewButtonClicked, setIsViewButtonClicked] = useState(false);
 
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
     setGrid3Component(<RightNavbar />);
   };
 
-  const handleContactClick = () => {
-    setClickedButton(<Customer />);
-    setGrid3Component(<CustomerNavbar />);
-    
+  const handleViewButtonClick = () => {
+    setIsViewButtonClicked(true);
   };
+
+  // const handleContactClick = () => {
+  //   setClickedButton(<Customer />);
+
+  //   setGrid3Component(<CustomerNavbar />);
+    
+  // };
 
   const handleAboutClick = () => {
     setClickedButton(<Employee />);
@@ -110,7 +109,7 @@ const SideNavbar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+
 
   return (
 
@@ -173,7 +172,7 @@ const SideNavbar = () => {
                   </div>
                 </button>
 
-                <button className="add-customer-button1" onClick={handleContactClick}>
+                <button className="add-customer-button1" onClick={{handleViewButtonClick}}>
                   <div className="button-content1">
                     <PeopleAltIcon />
                     <span className="button-text1">Customer Database</span>
@@ -194,6 +193,18 @@ const SideNavbar = () => {
                   </div>
                 </button>
               </div>
+              <div>
+      <button onClick={handleViewButtonClick}>View</button>
+
+      {isViewButtonClicked ? (
+        <Businessprofile />
+      ) : (
+        <>
+          <Customer />
+          <CustomerNavbar />
+        </>
+      )}
+    </div>
 
               <List >
                 <h4 className="admin1">No Admin created</h4>
@@ -268,11 +279,11 @@ const SideNavbar = () => {
                   </Button>
                 </div>
 
-
               </List>
             </Drawer>
 
           </Box>
+         
 
 
         </Grid>
@@ -281,6 +292,7 @@ const SideNavbar = () => {
           {clickedButton}
          
         </Grid>
+       
         <Grid item xs={2}>
           
           <div >
@@ -288,6 +300,7 @@ const SideNavbar = () => {
           </div>
         </Grid>
       </Grid>
+      
     </div>
    
   );

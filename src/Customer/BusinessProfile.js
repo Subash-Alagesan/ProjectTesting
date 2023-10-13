@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import './Businessprofile.css'
-import contact_page from './images/contact_page.png';
+import contact_page from '../Assets/images/contact_page.png';
 import Button from '@mui/material/Button';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';

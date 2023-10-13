@@ -1,4 +1,3 @@
-
 import React from 'react';
 import '../Customer/Customer.css';
 import { Link } from 'react-router-dom';
@@ -28,7 +27,7 @@ const columns = [
   {
     field: 'Name',
     headerName: 'Name',
-    width: 220,
+    width: 180,
     renderCell: (params) => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Avatar src={params.row.PhotoURL} style={{ marginRight: '8px' }} />
@@ -40,13 +39,13 @@ const columns = [
     field: 'contact',
     headerName: 'Contact Number',
     type: 'contact number',
-    width: 180,
+    width: 150,
   },
   {
     field: 'Business',
     headerName: 'Business',
     sortable: true,
-    width: 180,
+    width: 150,
   },
   { field: 'Place', headerName: 'Place', width: 160 },
   // {
@@ -61,13 +60,13 @@ const columns = [
   {
     field: 'View Details',
     headerName: 'View Details',
-    width: 160,
+    width: 120,
     renderCell: (params) => (
-      <Link to="/business_profile"> {/* Replace with the path to your target component */}
+      
         <Button variant="contained" size='small' style={{ background: "#6425FE" }}>
           View
         </Button>
-      </Link>
+     
     ),
   }
   
@@ -233,7 +232,7 @@ export default function Customer() {
             </div>
 
 
-             <div className='Datagrid-table'>
+             <div className='Datagrid-table' >
              <DataGrid
                 rows={rows}
                 columns={columns}
