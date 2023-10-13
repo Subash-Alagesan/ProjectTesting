@@ -311,7 +311,7 @@ function Businessprofile() {
 
 
                     <Grid container spacing={2} id="business-grid">
-                        <Grid item xs={12} sm={12} md={4.5} lg={4.5} >
+                        <Grid item xs={12} sm={12} md={4} lg={4} >
                             <div className="Business_Information">
                                 <h4 className="Businessinfo-field">Business Information</h4>
                                 <div className="Businessprofile-Name">
@@ -377,7 +377,7 @@ function Businessprofile() {
                                 <span></span>
                             )}
                         </Grid>
-                        <Grid item xs={12} sm={12} md={4.5} lg={4.5}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
                             <div className="Social Media">
                                 <h4 className="SocialMedia-field">Social Media Links</h4>
                                 <div className="Media1">
@@ -444,7 +444,7 @@ function Businessprofile() {
                             )}
                         </Grid>
 
-                        <Grid item xs={12} sm={12} md={3} lg={3}>
+                        <Grid item xs={12} sm={12} md={4} lg={4}>
                             <div className="Upload">
                                 <h4 className="Upload-field">Upload Files </h4>
                                 <div className="Upload1">

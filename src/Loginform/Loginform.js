@@ -22,7 +22,7 @@ function Loginform() {
   const [openPopup, setOpenPopup] = useState(false);
   const [error, setError] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [dialogMessage, setDialogMessage] = useState("");
+  const [dialogMessage, setDialogMessage] = useState(null);
 
   const handleClose = () => {
     setOpenPopup(false);

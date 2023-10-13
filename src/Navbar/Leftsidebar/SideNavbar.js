@@ -29,6 +29,8 @@ import CustomerNavbar from '../../Customer/CustomerNavbar';
 import EmployeeNavbar from '../../Employee/EmployeeNavbar';
 import santhosh from '../../Assets/images/santhosh.jpeg';
 import Businessprofile from '../../Customer/BusinessProfile';
+import Employeeprofile from '../../Employee/Employeeprofile';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -68,37 +70,65 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+
+
 const SideNavbar = () => {
  
   const [clickedButton, setClickedButton] = useState(<MainContent />);
   
   const [grid3Component, setGrid3Component] = useState(<RightNavbar />);
 
-  const [isViewButtonClicked, setIsViewButtonClicked] = useState(false);
+  const currentPath = window.location.pathname;
 
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
     setGrid3Component(<RightNavbar />);
   };
 
-  const handleViewButtonClick = () => {
-    setIsViewButtonClicked(true);
+  const handleCustomerClick = () => {
+    if(currentPath==="/businessprofile"){
+      setClickedButton(<Businessprofile />);
+      setGrid3Component(<CustomerNavbar />);
+    }
+    else{
+      setClickedButton(< Customer handleViewClick={showBusinessProfile} />);
+      setGrid3Component(<CustomerNavbar />);
+     
+    }
   };
 
-  // const handleContactClick = () => {
-  //   setClickedButton(<Customer />);
+  const showBusinessProfile = () => {
+    setClickedButton(<Businessprofile />);
+  };
 
-  //   setGrid3Component(<CustomerNavbar />);
-    
-  // };
+  // *****************************************
+
 
   const handleAboutClick = () => {
-    setClickedButton(<Employee />);
-    setGrid3Component(<EmployeeNavbar />);
+    if(currentPath==="/employeeprofile"){
+      setClickedButton(<Employeeprofile />);
+      setGrid3Component(<EmployeeNavbar />);
+    }
+    else{
+      setClickedButton(< Employee handleEmpClick={showEmployeeProfile} />);
+      setGrid3Component(<CustomerNavbar />);
+     
+    }
   };
 
+  const showEmployeeProfile = () => {
+    setClickedButton(<Employeeprofile />);
+  };
+
+// *************************************
+
+  // const handleAboutClick = () => {
+  //   setClickedButton(<Employee />);
+  //   setGrid3Component(<EmployeeNavbar />);
+  // };
+
   const handleProjectClick = () => {
-    setClickedButton("Project Monitoring");
+    setClickedButton(<Businessprofile />);
   };
 
   const theme = useTheme();
@@ -109,7 +139,6 @@ const SideNavbar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   return (
 
@@ -172,7 +201,7 @@ const SideNavbar = () => {
                   </div>
                 </button>
 
-                <button className="add-customer-button1" onClick={{handleViewButtonClick}}>
+                <button className="add-customer-button1" onClick={handleCustomerClick}>
                   <div className="button-content1">
                     <PeopleAltIcon />
                     <span className="button-text1">Customer Database</span>
@@ -194,16 +223,7 @@ const SideNavbar = () => {
                 </button>
               </div>
               <div>
-      <button onClick={handleViewButtonClick}>View</button>
-
-      {isViewButtonClicked ? (
-        <Businessprofile />
-      ) : (
-        <>
-          <Customer />
-          <CustomerNavbar />
-        </>
-      )}
+     
     </div>
 
               <List >
@@ -284,12 +304,11 @@ const SideNavbar = () => {
 
           </Box>
          
-
-
         </Grid>
         <Grid item xs={12} sm={12} md={8} lg={8}>
           
           {clickedButton}
+          
          
         </Grid>
        

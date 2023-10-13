@@ -5,6 +5,8 @@ import Login from "../src/Loginform/Loginform";
 import ProtectedRoutes from "./Component/ProductedRoutes/index";
 import { AuthProvider } from "./Component/Helper/Context/AuthContext";
 import "./index.css";
+import Businessprofile from "./Customer/BusinessProfile";
+import Customer from "./Customer/Customer";
 
 function App() {
  
@@ -21,6 +23,8 @@ function App() {
             </ProtectedRoutes>
           }
         />
+         <Route path="/businessprofile" element={<Businessprofile />} />
+         {/* <Route path="/customer" element={<Customer />} />  */}
       </Routes>
       </AuthProvider>
     </>

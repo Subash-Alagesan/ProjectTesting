@@ -19,7 +19,7 @@
 
 @media only screen and (max-width: 500px) {
     .Business-grid2 {
-        height: 410vh;
+        height: 350vh;
     }
 }
 
@@ -463,7 +463,7 @@ Input {
 
         position: absolute;
         right: 60px;
-        top: 1890px;
+        top: 1840px;
     }
 }
 .Folder-Icon{

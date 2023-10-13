@@ -20,7 +20,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Paper from '@mui/material/Paper';
 
-
+function Employee({handleEmpClick}) {
 
 const columns: GridColDef[] = [
 
@@ -52,7 +52,12 @@ const columns: GridColDef[] = [
     field: 'View Details', headerName: 'View Details', width: 160,
     renderCell: (params) => (
 
-      <Button variant="contained" href="#contained-buttons" size='small' style={{background:"#6425FE"}}>
+      <Button 
+      variant="contained" 
+       size='small' 
+       style={{background:"#6425FE"}}
+       onClick={handleEmpClick}
+       >
         view
       </Button>
     ),
@@ -122,7 +127,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Employee() {
+ 
   return (
 
       <Grid container spacing={2} className='Employeedb-container'>
@@ -238,3 +243,4 @@ export default function Employee() {
 
   );
 }
+export default Employee;
