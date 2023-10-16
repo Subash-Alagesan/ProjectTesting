@@ -26,7 +26,6 @@ function App() {
          <Route path="/businessprofile" element={<Businessprofile />} />
          {/* <Route path="/customer" element={<Customer />} />  */}
 
-         
       </Routes>
       </AuthProvider>
     </>
