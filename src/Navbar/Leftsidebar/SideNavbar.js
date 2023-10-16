@@ -87,15 +87,26 @@ const SideNavbar = () => {
 
   const handleCustomerClick = () => {
     if(currentPath==="/businessprofile"){
-      setClickedButton(<Businessprofile />);
+      //setClickedButton(<Businessprofile />);
       setGrid3Component(<CustomerNavbar />);
     }
     else{
-      setClickedButton(< Customer handleViewClick={showBusinessProfile} />);
+      setClickedButton(< Customer 
+        handleViewClick={showBusinessProfile} 
+        />);
+        // setClickedButton(< CustomerNavbar 
+        //   handleCusClick={showCusProfile} 
+        //   />);
       setGrid3Component(<CustomerNavbar />);
-     
     }
+    
   };
+
+  const showCusProfile = () => {
+    setClickedButton(<Businessprofile />);
+  };
+
+  
 
   const showBusinessProfile = () => {
     setClickedButton(<Businessprofile />);
@@ -109,9 +120,9 @@ const SideNavbar = () => {
       setClickedButton(<Employeeprofile />);
       setGrid3Component(<EmployeeNavbar />);
     }
-    else{
+    else {
       setClickedButton(< Employee handleEmpClick={showEmployeeProfile} />);
-      setGrid3Component(<CustomerNavbar />);
+      setGrid3Component(<EmployeeNavbar />);
      
     }
   };

@@ -22,6 +22,8 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import profile from "../Assets/images/Profile.png";
 
+function CustomerNavbar({handleCusClick}) {
+
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -61,7 +63,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function CustomerNavbar() {
+ 
   const { logout } = useAuth;
   const navigate = useNavigate();
 
@@ -252,7 +254,7 @@ export default function CustomerNavbar() {
                 <p className="admin-name1">Add New Customer</p>
               </div>
 
-              <button className="add-customer-button">
+              <button className="add-customer-button"  onClick={handleCusClick}>
                 <div className="button-content">
                   <ControlPointIcon className="icon" />
                   <span className="button-text">Add Customer</span>
@@ -272,3 +274,5 @@ export default function CustomerNavbar() {
     </Box>
   );
 }
+
+export default  CustomerNavbar;
