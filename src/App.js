@@ -7,6 +7,7 @@ import { AuthProvider } from "./Component/Helper/Context/AuthContext";
 import "./index.css";
 import Businessprofile from "./Customer/BusinessProfile";
 import Customer from "./Customer/Customer";
+import AddCustomer from "./Customer/AddCustomer";
 
 function App() {
  
@@ -25,6 +26,7 @@ function App() {
         />
          <Route path="/businessprofile" element={<Businessprofile />} />
          {/* <Route path="/customer" element={<Customer />} />  */}
+         <Route path = "/addcustomer" element={<AddCustomer/>} />
 
       </Routes>
       </AuthProvider>
