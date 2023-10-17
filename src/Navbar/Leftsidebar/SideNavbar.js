@@ -30,7 +30,8 @@ import EmployeeNavbar from '../../Employee/EmployeeNavbar';
 import santhosh from '../../Assets/images/santhosh.jpeg';
 import Businessprofile from '../../Customer/BusinessProfile';
 import Employeeprofile from '../../Employee/Employeeprofile';
-import { useNavigate } from 'react-router-dom';
+import AddCustomer from '../../Customer/AddCustomer';
+import Typography from '@mui/material/Typography';
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -80,33 +81,45 @@ const SideNavbar = () => {
 
   const currentPath = window.location.pathname;
 
+  const [currentContent, setCurrentContent] = useState(null);
+
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
     setGrid3Component(<RightNavbar />);
   };
 
   const handleCustomerClick = () => {
+    const shouldUseCustomer = true;
+
     if(currentPath==="/businessprofile"){
-      //setClickedButton(<Businessprofile />);
+      setClickedButton(<Businessprofile />);
       setGrid3Component(<CustomerNavbar />);
     }
-    else{
-      setClickedButton(< Customer 
+    else {
+      setClickedButton(
+
+        shouldUseCustomer ? (
+      <Customer 
         handleViewClick={showBusinessProfile} 
-        />);
-        // setClickedButton(< CustomerNavbar 
-        //   handleCusClick={showCusProfile} 
-        //   />);
+         
+        />  ) : (
+          // Add the alternative component you want to render here
+          <AddCustomer />
+        ) );
+
       setGrid3Component(<CustomerNavbar />);
+
     }
     
   };
 
-  const showCusProfile = () => {
+  const handleCusClick = () => {
     setClickedButton(<Businessprofile />);
   };
 
-  
+  const showCusProfile = () => {
+    setClickedButton(<AddCustomer />);
+  };
 
   const showBusinessProfile = () => {
     setClickedButton(<Businessprofile />);
@@ -117,7 +130,7 @@ const SideNavbar = () => {
 
   const handleAboutClick = () => {
     if(currentPath==="/employeeprofile"){
-      setClickedButton(<Employeeprofile />);
+      // setClickedButton(<Employeeprofile />);
       setGrid3Component(<EmployeeNavbar />);
     }
     else {
@@ -319,7 +332,6 @@ const SideNavbar = () => {
         <Grid item xs={12} sm={12} md={8} lg={8}>
           
           {clickedButton}
-          
          
         </Grid>
        

@@ -9,8 +9,11 @@ import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
+import {  Modal } from '@material-ui/core';
+import './AddCustomer.css';
 
-function AddCustomer() {
+const  AddCustomer = () => {
+
   const [customerProfile, setCustomerProfile] = useState({
     customer_name: "",
     business_name: "",
@@ -35,6 +38,9 @@ function AddCustomer() {
   };
 
   return (
+
+    
+
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <div className="Customer-profile-contact">
@@ -301,6 +307,8 @@ function AddCustomer() {
         </div>
       </Grid>
     </Grid>
+
+
   );
 }
 

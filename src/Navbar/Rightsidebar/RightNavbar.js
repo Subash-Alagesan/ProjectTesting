@@ -19,6 +19,16 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import "./Rightnavbar.css";
 import { useNavigate } from "react-router-dom";
+import Backdrop from '@mui/material/Backdrop';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import AddCustomer from "../../Customer/AddCustomer";
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+
+
+
 const drawerWidth = 240;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -48,6 +58,25 @@ export default function RightNavbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
+  const style = {
+    position: 'absolute',
+    top: '1500',
+    left: '2000',
+    width: 1000,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    p: 4,
+  };
+  
+
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
 
   return (
     <Box>
@@ -132,12 +161,46 @@ export default function RightNavbar() {
                 <p className="admin-name1">Manage Database</p>
               </div>
 
-              <button className="add-customer-button">
+              {/* <button className="add-customer-button">
+                <div className="button-content">
+                  <ControlPointIcon className="icon" />
+                  <span className="button-text">Add Customer</span>
+                </div>
+              </button> */}
+
+<div>
+     
+      <button className="add-customer-button" onClick={handleOpen}>
                 <div className="button-content">
                   <ControlPointIcon className="icon" />
                   <span className="button-text">Add Customer</span>
                 </div>
               </button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={isModalOpen}>
+        
+          
+          
+            <Grid  sx={style}>
+                <AddCustomer />
+             
+          </Grid>
+          
+        </Fade>
+      </Modal>
+    </div>
 
               <button className="add-customer-button">
                 <div className="button-content">

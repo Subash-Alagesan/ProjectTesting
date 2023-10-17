@@ -25,7 +25,7 @@ function App() {
           }
         />
          <Route path="/businessprofile" element={<Businessprofile />} />
-         {/* <Route path="/customer" element={<Customer />} />  */}
+        <Route path="/customer" element={<Customer />} /> 
          <Route path = "/addcustomer" element={<AddCustomer/>} />
 
       </Routes>

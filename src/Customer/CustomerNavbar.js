@@ -21,6 +21,7 @@ import { Button } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import profile from "../Assets/images/Profile.png";
+import Businessprofile from "./BusinessProfile";
 
 function CustomerNavbar({handleCusClick}) {
 
@@ -82,6 +83,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  // const handleCusClick = () => {
+  //   <Businessprofile />
+  // };
 
   return (
     <Box>
