@@ -195,10 +195,10 @@ function Businessprofile() {
                     )}
                   </div>
                   {isEditing && (
-                    <button
+                    <button                    
                       className="image-upload-button"
                       onClick={handleUploadButtonClick}
-                    >
+                    >                      
                       Upload
                     </button>
                   )}
