@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
-import { useState, useRef } from "react";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -16,24 +15,20 @@ import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 function Businessprofile() {
-  const [name, setName] = useState("");
-  const [BusinessName, setBusinessName] = useState("");
-  const [EnterDetails, setEnterDetails] = useState("");
-  const [BusinessType, setBusinessType] = useState("");
-  const [BusinessType1, setBusinessType1] = useState("");
-  const [Businessinfo, setBusinessinfo] = useState("");
-  const [Place, setPlace] = useState("");
-  const [District, setDistrict] = useState("");
-  const [Language, setLanguage] = useState("");
-  const [Facebook, setFacebook] = useState("");
-  const [Instagram, setInstagram] = useState("");
-  const [Twitter, setTwitter] = useState("");
-  const [Youtube, setYoutube] = useState("");
-  const [Website1, setWebsite1] = useState("");
-  const [Contact, setContact] = useState("");
-  const [Emailid, setEmailid] = useState("");
-  const [Phonenumber, setPhonenumber] = useState("");
-  const [OtherBusiness, setOtherBusiness] = useState("");
+  const [formData, setFormData] = useState({
+    customer_name: "",
+    business_name: "",
+    business_type: "",
+    business_category: "",
+    business_place: "",
+    district: "",
+    language: "",
+    business_number: "",
+    email: "",
+    phone_number: "",
+    social_media_link: "",
+    website_address: "",
+  });
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -216,12 +211,17 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={name}
+                      value={formData.customer_name}
                       placeholder="Name"
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          customer_name: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{name}</span>
+                    <span>{formData.customer_name}</span>
                   )}
                 </div>
 
@@ -234,15 +234,21 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={BusinessName}
-                      onChange={(e) => setBusinessName(e.target.value)}
+                      value={formData.business_name}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_name: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{BusinessName}</span>
+                    <span>{formData.business_name}</span>
                   )}
                 </div>
+
                 <br></br>
-                <div>
+                {/* <div>
                   <label className="Businessprofile-entername">
                     <strong>Enter Details :</strong>
                   </label>
@@ -255,7 +261,7 @@ function Businessprofile() {
                   ) : (
                     <span>{EnterDetails}</span>
                   )}
-                </div>
+                </div> */}
               </div>
             </Grid>
 
@@ -268,29 +274,40 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={BusinessType}
-                      onChange={(e) => setBusinessType(e.target.value)}
+                      value={formData.business_type}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_type: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{BusinessType}</span>
+                    <span>{formData.business_type}</span>
                   )}
                 </div>
                 <br></br>
                 <div>
                   <label className="profile-BusinessType">
-                    <strong> Type 1:</strong>
+                    <strong> Business Category:</strong>
                   </label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={BusinessType1}
-                      onChange={(e) => setBusinessType1(e.target.value)}
+                      value={formData.business_category}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_category: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{BusinessType1}</span>
+                    <span>{formData.business_category}</span>
                   )}
                 </div>
               </div>
+
               {isEditing ? (
                 <div className="AddBoxIcon">
                   <AddBoxIcon />
@@ -318,11 +335,16 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Businessinfo}
-                      onChange={(e) => setBusinessinfo(e.target.value)}
+                      value={formData.business_name}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_name: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Businessinfo}</span>
+                    <span>{formData.business_name}</span>
                   )}
                 </div>
                 <br></br>
@@ -333,11 +355,16 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Place}
-                      onChange={(e) => setPlace(e.target.value)}
+                      value={formData.business_place}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_place: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Place}</span>
+                    <span>{formData.business_place}</span>
                   )}
                 </div>
                 <br></br>
@@ -349,11 +376,16 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={District}
-                      onChange={(e) => setDistrict(e.target.value)}
+                      value={formData.district}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          district: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{District}</span>
+                    <span>{formData.district}</span>
                   )}
                 </div>
                 <br></br>
@@ -364,11 +396,16 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Language}
-                      onChange={(e) => setLanguage(e.target.value)}
+                      value={formData.language}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          language: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Language}</span>
+                    <span>{formData.language}</span>
                   )}
                 </div>
               </div>
@@ -385,64 +422,24 @@ function Businessprofile() {
                 <h4 className="SocialMedia-field">Social Media Links</h4>
                 <div className="Media1">
                   <label>
-                    <strong>Facebook :</strong>
+                    <strong>Social Media Link :</strong>
                   </label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Facebook}
-                      onChange={(e) => setFacebook(e.target.value)}
+                      value={formData.social_media_link}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          social_media_link: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Facebook}</span>
+                    <span>{formData.social_media_link}</span>
                   )}
                 </div>
                 <br></br>
-                <div className="Media2">
-                  <label>
-                    <strong>Instagram :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Instagram}
-                      onChange={(e) => setInstagram(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Instagram}</span>
-                  )}
-                </div>
-                <br></br>
-                <div className="Media3">
-                  <label>
-                    <strong>Twitter :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Twitter}
-                      onChange={(e) => setTwitter(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Twitter}</span>
-                  )}
-                </div>
-                <br></br>
-
-                <div className="Media4">
-                  <label>
-                    <strong>You tube :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Youtube}
-                      onChange={(e) => setYoutube(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Youtube}</span>
-                  )}
-                </div>
               </div>
               {isEditing ? (
                 <div className="AddBox-Icon2">
@@ -517,11 +514,16 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Contact}
-                      onChange={(e) => setContact(e.target.value)}
+                      value={formData.business_number}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          business_number: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Contact}</span>
+                    <span>{formData.business_number}</span>
                   )}
                 </div>
                 <br></br>
@@ -533,11 +535,13 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="Email"
-                      value={Emailid}
-                      onChange={(e) => setEmailid(e.target.value)}
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...FormData, email: e.target.value })
+                      }
                     />
                   ) : (
-                    <span>{Emailid}</span>
+                    <span>{formData.email}</span>
                   )}
                 </div>
               </div>
@@ -554,16 +558,21 @@ function Businessprofile() {
                 <h4 className="Website-field">Website</h4>
                 <div className="Website1">
                   <label>
-                    <strong>Website 1:</strong>
+                    <strong>Website :</strong>
                   </label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Website1}
-                      onChange={(e) => setWebsite1(e.target.value)}
+                      value={formData.website_address}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          website_address: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Website1}</span>
+                    <span>{formData.website_address}</span>
                   )}
                 </div>
               </div>
@@ -587,15 +596,20 @@ function Businessprofile() {
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Phonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)}
+                      value={formData.phone_number}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          phone_number: e.target.value,
+                        })
+                      }
                     />
                   ) : (
-                    <span>{Phonenumber}</span>
+                    <span>{formData.phone_number}</span>
                   )}
                 </div>
                 <br></br>
-                <div className="Owner2">
+                {/* <div className="Owner2">
                   <label>
                     <strong>Other Business :</strong>
                   </label>
@@ -608,7 +622,7 @@ function Businessprofile() {
                   ) : (
                     <span>{OtherBusiness}</span>
                   )}
-                </div>
+                </div> */}
               </div>
             </Grid>
           </Grid>
