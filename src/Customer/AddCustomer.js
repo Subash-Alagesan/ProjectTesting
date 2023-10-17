@@ -37,15 +37,13 @@ const  AddCustomer = () => {
     });
   };
 
-  return (
-
-    
-
-    <Grid container spacing={2}>
+  return (  
+    <Grid container spacing={2} >
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <div className="Customer-profile-contact">
-          <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" />
+          {/* <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" /> */}
           <h5 className="Customer-profile-title">Customer Profile</h5>
+          <button>Add Customer</button>
         </div>
       </Grid>
 
@@ -82,17 +80,7 @@ const  AddCustomer = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div>
-            <label className="Businessprofile-entername">
-              <strong>Enter Details :</strong>
-            </label>
-            <input
-              type="text"
-              name="business_category"
-              value={customerProfile.business_category}
-              onChange={handleInputChange}
-            />
-          </div>
+          
         </div>
       </Grid>
 
@@ -301,8 +289,12 @@ const  AddCustomer = () => {
               onChange={handleInputChange}
             />
           </div>
+          <div>
+          <button>Add Customer</button>
+          </div>
           <div className="AddBox-Icon5">
             <AddBoxIcon />
+           
           </div>
         </div>
       </Grid>
