@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import axios from "../Component/Axios Base URL/axios";
+import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -15,6 +17,13 @@ import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 function Businessprofile() {
+  const [isEditing, setIsEditing] = useState(false);
+  const imageBaseUrl = "http://localhost:4070/uploads/";
+  const [newImage, setNewImage] = useState(null);
+  const [newDocument, setNewDocument] = useState(null);
+  const hiddenDocumentInput = useRef(null);
+  const hiddenFileInput = useRef(null);
+  const { customerId } = useParams();
   const [formData, setFormData] = useState({
     customer_name: "",
     business_name: "",
@@ -28,9 +37,8 @@ function Businessprofile() {
     phone_number: "",
     social_media_link: "",
     website_address: "",
+    profile_pic: null,
   });
-
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -44,78 +52,77 @@ function Businessprofile() {
     color: theme.palette.text.secondary,
   }));
 
-  const [image, setImage] = useState(null);
-  const hiddenFileInput = useRef(null);
+  const imageUrl = isEditing
+    ? newImage
+      ? URL.createObjectURL(newImage) // Use the new image if it exists during editing
+      : `${imageBaseUrl}${formData.profile_pic}` // Use the current job's logo during editing
+    : `${imageBaseUrl}${formData.profile_pic}`;
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const imgname = event.target.files[0].name;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxSize = Math.max(img.width, img.height);
-        canvas.width = maxSize;
-        canvas.height = maxSize;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(
-          img,
-          (maxSize - img.width) / 2,
-          (maxSize - img.height) / 2
-        );
-        canvas.toBlob(
-          (blob) => {
-            const file = new File([blob], imgname, {
-              type: "image/png",
-              lastModified: Date.now(),
-            });
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected image:", file);
+    // Update the new image
+    setNewImage(file);
+  };
 
-            console.log(file);
-            setImage(file);
-          },
-          "image/jpeg",
-          0.8
-        );
-      };
-    };
+  const handleDocumentChange = (e) => {
+    const file = e.target.files[0];
+    setNewDocument(file);
   };
 
   const handleUploadButtonClick = (file) => {
-    var myHeaders = new Headers();
-    const token = "adhgsdaksdhk938742937423";
-    myHeaders.append("Authorization", `Bearer ${token}`);
-
-    var formdata = new FormData();
-    formdata.append("file", file);
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("https://trickuweb.com/upload/profile_pic", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(JSON.parse(result));
-        const profileurl = JSON.parse(result);
-        setImage(profileurl.img_url);
-      })
-      .catch((error) => console.log("error", error));
+    hiddenFileInput.current.click();
+  };
+  const handleDocumentUploadButtonClick = () => {
+    hiddenDocumentInput.current.click();
   };
 
   const handleClick = (event) => {
-    hiddenFileInput.current.click();
+    if (isEditing) {
+      hiddenFileInput.current.click();
+    }
   };
 
   const handleUpdateClick = () => {
-    // Perform your update logic here
-    // Disable edit mode
-    setIsEditing(false);
+    const formData = new FormData();
+    const requestData = {
+      customer_name: formData.customer_name,
+      business_name: formData.business_name,
+      business_type: formData.business_type,
+      business_category: formData.business_category,
+      business_place: formData.business_place,
+      district: formData.district,
+      language: formData.language,
+      business_number: formData.business_number,
+      email: formData.email,
+      phone_number: formData.phone_number,
+      social_media_link: formData.social_media_link,
+      website_address: formData.website_address,
+    };
+
+    formData.append("profile_pic", newImage);
+    formData.append("document", newDocument);
+
+    axios
+      .post(
+        `http://localhost:4070/api/update-customer/${customerId}`,
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        // Handle the success response here
+        console.log("Update Successful", response.data);
+        // You can also add logic to reset the editing state if needed
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Update Failed", error);
+      });
   };
 
   return (
@@ -131,20 +138,6 @@ function Businessprofile() {
               />
               <h5 className="Businessdb-title">Business Profile</h5>
             </div>
-
-            {/* <div >
-            <label className="Employeedb-profilename" ><strong>Profile Name :</strong></label>
-            {isEditing ? (
-              <input
-                type="text"
-                value={Profile}
-                className="empprofile-entername-input"
-                onChange={(e) => setProfile(e.target.value)}
-              />
-            ) : (
-              <span>{Profile}</span>
-            )}
-            </div> */}
 
             <div className="Edit-btn">
               {isEditing ? (
@@ -174,37 +167,45 @@ function Businessprofile() {
       <Grid item xs={12} md={12} lg={12}>
         <Item className="Business-grid2">
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={12} md={2} lg={2}>
-              <div className="box-decoration">
-                <div onClick={handleClick} style={{ cursor: "pointer" }}>
-                  {image ? (
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt="upload image"
-                      className="img-display-after"
-                    />
-                  ) : (
-                    <Avatar sx={{ width: 150, height: 150 }}>
-                      <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
-                    </Avatar>
+            <Grid item xs={12} md={4} lg={4}>
+              <Item>
+                <div className="box-decoration">
+                  <div onClick={handleClick} style={{ cursor: "pointer" }}>
+                    {isEditing ? (
+                      <>
+                        <img
+                          src={imageUrl}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                        <input
+                          id="image-upload-input"
+                          type="file"
+                          onChange={handleImageChange}
+                          ref={hiddenFileInput}
+                          style={{ display: "none" }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Avatar sx={{ width: 150, height: 150 }}>
+                          <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
+                        </Avatar>
+                      </>
+                    )}
+                  </div>
+                  {isEditing && (
+                    <button                    
+                      className="image-upload-button"
+                      onClick={handleUploadButtonClick}
+                    >                      
+                      Upload
+                    </button>
                   )}
-
-                  <input
-                    id="image-upload-input"
-                    type="file"
-                    onChange={handleImageChange}
-                    ref={hiddenFileInput}
-                    style={{ display: "none" }}
-                  />
                 </div>
-                <button
-                  className="image-upload-button"
-                  onClick={handleUploadButtonClick}
-                >
-                  Upload
-                </button>
-              </div>
+              </Item>
             </Grid>
+
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Business-name-content">
                 <div className="Businessprofile-input">
@@ -451,53 +452,60 @@ function Businessprofile() {
             </Grid>
 
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <div className="Upload">
-                <h4 className="Upload-field">Upload Files </h4>
-                <div className="Upload1">
-                  <Button
-                    size="small"
-                    startIcon={<PublishIcon className="icons" />}
-                    className="Publish-Icon"
+              <Item>
+                <div className="Upload">
+                  <h4
+                    className="Upload-field"
+                    onClick={handleDocumentUploadButtonClick}
                   >
-                    <h6>Upload</h6>
-                  </Button>
-                </div>
-
-                <br></br>
-                <h4 className="Upload-field1">Uploaded Files </h4>
-                <div className="Upload2">
-                  <div className="Folder-Icon">
+                    Upload Files
+                  </h4>
+                  <div className="Upload1">
                     <Button
                       size="small"
-                      startIcon={<FolderIcon className="icons" />}
-                      className="FolderIcon-logo"
-                      endIcon={<MoreVertIcon className="icons" />}
+                      startIcon={<PublishIcon className="icons" />}
+                      className="Publish-Icon"
                     >
-                      <h6>Logo</h6>
+                      <h6>Upload</h6>
                     </Button>
                   </div>
 
-                  <div className="Folder-Icon1">
-                    {" "}
-                    <Button
-                      size="small"
-                      color="primary"
-                      className="FolderIcon-analy"
-                      startIcon={<FolderIcon className="icons" />}
-                      endIcon={<MoreVertIcon className="icons" />}
-                    >
-                      <h6>Analysis</h6>
-                    </Button>
+                  <br />
+
+                  <h4 className="Upload-field1">Uploaded Files</h4>
+                  <div className="Upload2">
+                    <div className="Folder-Icon">
+                      <Button
+                        size="small"
+                        startIcon={<FolderIcon className="icons" />}
+                        className="FolderIcon-logo"
+                        endIcon={<MoreVertIcon className="icons" />}
+                      >
+                        <h6>Logo</h6>
+                      </Button>
+                    </div>
+
+                    <div className="Folder-Icon1">
+                      <Button
+                        size="small"
+                        color="primary"
+                        className="FolderIcon-analy"
+                        startIcon={<FolderIcon className="icons" />}
+                        endIcon={<MoreVertIcon className="icons" />}
+                      >
+                        <h6>Analysis</h6>
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              {isEditing ? (
-                <div className="AddBox-Icon3">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )}
+                {isEditing ? (
+                  <div className="AddBox-Icon3">
+                    <AddBoxIcon />
+                  </div>
+                ) : (
+                  <span></span>
+                )}
+              </Item>
             </Grid>
           </Grid>
 
@@ -609,20 +617,6 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-                {/* <div className="Owner2">
-                  <label>
-                    <strong>Other Business :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={OtherBusiness}
-                      onChange={(e) => setOtherBusiness(e.target.value)}
-                    />
-                  ) : (
-                    <span>{OtherBusiness}</span>
-                  )}
-                </div> */}
               </div>
             </Grid>
           </Grid>
