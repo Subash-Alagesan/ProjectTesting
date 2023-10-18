@@ -26,6 +26,7 @@ import Button from '@mui/material/Button';
 import AddCustomer from "../../Customer/AddCustomer";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import AddEmployee from "../../Employee/AddEmployee";
 
 
 
@@ -62,21 +63,30 @@ export default function RightNavbar() {
 
   const style = {
     position: 'absolute',
-    top: '1500',
-    left: '2000',
-    width: 1000,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    p: 4,
+  top: '55%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 900,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
   };
   
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const handleOpen = () => setIsModalOpen(true);
-  const handleClose = () => setIsModalOpen(false);
+  const [modalContent, setModalContent] = React.useState(null);
+
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  }
+
+  const handleClose = () => {
+    setModalContent(null); // Reset the modal content
+    setIsModalOpen(false);
+  }
+
 
   return (
     <Box>
@@ -170,13 +180,30 @@ export default function RightNavbar() {
 
 <div>
      
-      <button className="add-customer-button" onClick={handleOpen}>
+      <button className="add-customer-button" onClick={() => handleOpen(<AddCustomer />)}>
                 <div className="button-content">
                   <ControlPointIcon className="icon" />
                   <span className="button-text">Add Customer</span>
                 </div>
               </button>
-      <Modal
+     
+    </div>
+
+    <button className="add-customer-button" onClick={() => handleOpen(<AddEmployee />)}>
+        <div className="button-content">
+          <ControlPointIcon className="icon" />
+          <span className="button-text">Add Employee</span>
+        </div>
+      </button>
+
+              {/* <button className="add-customer-button">
+                <div className="button-content">
+                  <ControlPointIcon className="icon" />
+                  <span className="button-text">Add Employee</span>
+                </div>
+              </button> */}
+
+<Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={isModalOpen}
@@ -190,24 +217,19 @@ export default function RightNavbar() {
         }}
       >
         <Fade in={isModalOpen}>
-        
+          {/* <Grid sx={style}>
+           
+              {modalContent}
+           
+          </Grid> */}
+          <Grid item  xs={12} sm={12} md={8} lg={8} sx={style}>
           
-          
-            <Grid  sx={style}>
-                <AddCustomer />
-             
-          </Grid>
-          
+          {modalContent}
+         
+        </Grid>
         </Fade>
       </Modal>
-    </div>
 
-              <button className="add-customer-button">
-                <div className="button-content">
-                  <ControlPointIcon className="icon" />
-                  <span className="button-text">Add Employee</span>
-                </div>
-              </button>
 
               <button className="add-customer-button">
                 <div className="button-content">

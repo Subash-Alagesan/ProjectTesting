@@ -9,11 +9,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import {  Modal } from '@material-ui/core';
-import './AddCustomer.css';
-import { MDBBtn } from "mdb-react-ui-kit";
+import './AddEmployee.css';
 
-
-const  AddCustomer = () => {
+const  AddEmployee = () => {
 
   const [customerProfile, setCustomerProfile] = useState({
     customer_name: "",
@@ -40,13 +38,11 @@ const  AddCustomer = () => {
 
   return (
 
-    
-
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <div className="Customer-profile-contact">
           <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" />
-          <h5 className="Customer-profile-title">Customer Profile</h5>
+          <h5 className="Customer-profile-title">Employee Profile</h5>
         </div>
       </Grid>
 
@@ -254,7 +250,7 @@ const  AddCustomer = () => {
       </Grid>
 
       {/* Contact Details */}
-      <Grid item xs={12} sm={12} md={3} lg={3}>
+      <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Contact_Information">
           <h4 className="BusinessContact-field">
             <strong>Contact Details</strong>
@@ -307,7 +303,8 @@ const  AddCustomer = () => {
           </div>
         </div>
       </Grid>
-<div className="submit-btn">
+
+      <div className="submit-btn-emp">
       <button
           type="submit"
           style={{ backgroundColor: "#6425FE", color: "white" }}
@@ -315,13 +312,9 @@ const  AddCustomer = () => {
           Submit
         </button>
         </div>
-
     </Grid>
-
-    
-
 
   );
 }
 
-export default AddCustomer;
+export default AddEmployee;
