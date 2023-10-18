@@ -1,10 +1,7 @@
 .Social Media{
     padding-top: 60px;
 }
-.submit-btn{
-    padding-top: 140px;
-    padding-left: 200px;  
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+.modal-content {
+    max-height: 80vh; /* Set a maximum height for the modal, adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling if the content exceeds the height */
+  }
