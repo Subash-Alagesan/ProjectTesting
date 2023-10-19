@@ -379,6 +379,42 @@ const AddCustomer = () => {
             </div>
           </div>
         </Grid>
+
+   {/* Owner Details */}
+
+        <Grid item xs={12} sm={12} md={3} lg={3}>
+          <div className="Contact_Information">
+            <h4 className="BusinessContact-field">
+              <strong>Owner Details</strong>
+            </h4>
+            <div className="Business-Mobileno">
+              <label>
+                <strong>Phone No:</strong>
+              </label>
+              <input
+                type="text"
+                name="business_number"
+                value={customerProfile.phone_number}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="Businessprofile-EmailId">
+              <label>
+                <strong>Other Business:</strong>
+              </label>
+              <input
+                type="text"
+                name="business_category"
+                value={customerProfile.business_category}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="AddBox-Icon4">
+              <AddBoxIcon />
+            </div>
+          </div>
+        </Grid>
+
         <div className="submit-btn">
           <button
             type="submit"
