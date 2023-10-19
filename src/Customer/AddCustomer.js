@@ -5,8 +5,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import PublishIcon from "@mui/icons-material/Publish";
-import FolderIcon from "@mui/icons-material/Folder";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import "./AddCustomer.css";

@@ -8,7 +8,6 @@ import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-import {  Modal } from '@material-ui/core';
 import './AddEmployee.css';
 
 const  AddEmployee = () => {
