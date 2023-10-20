@@ -13,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import PublishIcon from "@mui/icons-material/Publish";
 import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -28,8 +27,8 @@ function Businessprofile() {
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
   const [formData, setFormData] = useState({
-    customer_name: "John Doe",
-    business_name: "My Business",
+    customer_name: "",
+    business_name: "",
     business_type: "",
     business_category: "",
     business_place: "",
@@ -48,34 +47,34 @@ function Businessprofile() {
     document: null,
   });
 
-  // useEffect(() => {
-  //   if (!isEditing) {
-  //     console.log("Fetching customer data for customerId:", customerId);
-  //     axios
-  //       .get(`/api/customer/getcustomerbyid/${customerId}`)
-  //       .then((response) => {
-  //         const customerData = response.data.customer;
-  //         setFormData({
-  //           ...customerData,
-  //           profile_pic: customerData.customer_profile_pic,
-  //           document: [
-  //             {
-  //               name: getFileNameFromPath(customerData.uploaded_file_path),
-  //               path: customerData.uploaded_file_path,
-  //             },
-  //           ],
-  //         });
-  //         console.log("After Fetching from customer by id", customerData);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching customer data:", error);
-  //       });
-  //   }
-  // }, [customerId, isEditing]);
+  useEffect(() => {
+    if (!isEditing) {
+      console.log("Fetching customer data for customerId:", customerId);
+      axios
+        .get(`/api/customer/getcustomerbyid/${customerId}`)
+        .then((response) => {
+          const customerData = response.data.customer;
+          setFormData({
+            ...customerData,
+            profile_pic: customerData.customer_profile_pic,
+            document: [
+              {
+                name: getFileNameFromPath(customerData.uploaded_file_path),
+                path: customerData.uploaded_file_path,
+              },
+            ],
+          });
+          console.log("After Fetching from customer by id", customerData);
+        })
+        .catch((error) => {
+          console.error("Error fetching customer data:", error);
+        });
+    }
+  }, [customerId, isEditing]);
 
-  // const handleEditClick = () => {
-  //   setIsEditing(true);
-  // };
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+  };
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -109,18 +108,13 @@ function Businessprofile() {
       hiddenFileInput.current.click();
     }
   };
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(`Name: ${name}, Value: ${value}`);
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    console.log(`Name: ${name}, Value: ${value}`);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
   const handleDeleteDocument = (index) => {
     // Logic to delete the document at the specified index from formData.document
@@ -185,6 +179,11 @@ function Businessprofile() {
         console.error("Update Failed", error);
       });
   };
+  useEffect(() => {
+    if (isEditing) {     
+      handleUpdateClick();
+    }
+  }, [isEditing]);
 
   return (
     <form encType="multipart/form-data">
@@ -201,7 +200,7 @@ function Businessprofile() {
                 <h5 className="Businessdb-title">Business Profile</h5>
               </div>
 
-              {/* <div className="Edit-btn">
+              <div className="Edit-btn">
                 {isEditing ? (
                   <Button
                     variant="contained"
@@ -221,7 +220,7 @@ function Businessprofile() {
                     Edit
                   </Button>
                 )}
-              </div> */}
+              </div>
             </div>
           </Item>
         </Grid>
@@ -268,7 +267,7 @@ function Businessprofile() {
               </Grid>
 
               <Grid item xs={12} sm={12} md={5} lg={5}>
-                {/* <div className="Business-name-content">
+                <div className="Business-name-content">
                   <div className="Businessprofile-input">
                     {isEditing ? (
                       <input
@@ -277,7 +276,6 @@ function Businessprofile() {
                         value={formData.customer_name}
                         placeholder="Name"
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.customer_name}</span>
@@ -295,8 +293,8 @@ function Businessprofile() {
                         type="text"
                         name="business_name"
                         value={formData.business_name}
+                        ref={hiddenFileInput}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_name}</span>
@@ -304,49 +302,7 @@ function Businessprofile() {
                   </div>
 
                   <br></br>
-                </div> */}
-                <div className="Business-name-content">
-      <div className="Businessprofile-input">
-      <label>
-          <strong>Name:</strong>
-        </label>
-        {isEditing ? (
-          <input
-            type="text"
-            name="customer_name"
-            value={formData.customer_name}
-            placeholder="Name"
-            onChange={handleInputChange}
-          />
-        ) : (
-          <span>{formData.customer_name}</span>
-        )}
-      </div>
-
-      <br />
-
-      <div className="BusinessName">
-        <label>
-          <strong>Business Name:</strong>
-        </label>
-        {isEditing ? (
-          <input
-            type="text"
-            name="business_name"
-            value={formData.business_name}
-            onChange={handleInputChange}
-          />
-        ) : (
-          <span>{formData.business_name}</span>
-        )}
-      </div>
-
-      <br />
-
-      <button onClick={() => setIsEditing(!isEditing)}>
-        {isEditing ? "Save" : "Edit"}
-      </button>
-    </div>
+                </div>
               </Grid>
 
               <Grid xs={12} sm={12} md={5} lg={5}>
@@ -361,7 +317,6 @@ function Businessprofile() {
                         name="business_type"
                         value={formData.business_type}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_type}</span>
@@ -378,7 +333,6 @@ function Businessprofile() {
                         name="business_category"
                         value={formData.business_category}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_category}</span>
@@ -416,7 +370,6 @@ function Businessprofile() {
                         name="business_name"
                         value={formData.business_name}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_name}</span>
@@ -433,7 +386,6 @@ function Businessprofile() {
                         name="business_place"
                         value={formData.business_place}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_place}</span>
@@ -451,7 +403,6 @@ function Businessprofile() {
                         name="district"
                         value={formData.district}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.district}</span>
@@ -468,7 +419,6 @@ function Businessprofile() {
                         name="language"
                         value={formData.language}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.language}</span>
@@ -496,7 +446,6 @@ function Businessprofile() {
                         name="facebook"
                         value={formData.facebook}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.facebook}</span>
@@ -510,7 +459,6 @@ function Businessprofile() {
                         name="instagram"
                         value={formData.instagram}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.instagram}</span>
@@ -524,7 +472,6 @@ function Businessprofile() {
                         name="youtube"
                         value={formData.youtube}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.youtube}</span>
@@ -538,7 +485,6 @@ function Businessprofile() {
                         name="linkedin"
                         value={formData.linkedin}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.linkedin}</span>
@@ -552,7 +498,6 @@ function Businessprofile() {
                         name="twitter"
                         value={formData.twitter}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.twitter}</span>
@@ -665,7 +610,6 @@ function Businessprofile() {
                         name="business_number"
                         value={formData.business_number}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_number}</span>
@@ -683,7 +627,6 @@ function Businessprofile() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.email}</span>
@@ -711,7 +654,6 @@ function Businessprofile() {
                         name="website_address"
                         value={formData.website_address}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.website_address}</span>
@@ -741,7 +683,6 @@ function Businessprofile() {
                         name="phone_number"
                         value={formData.phone_number}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.phone_number}</span>

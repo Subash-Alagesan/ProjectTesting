@@ -129,7 +129,6 @@ function Customer({ handleViewClick }) {
     const fetchCustomers = async () => {
       try {
         const response = await axios.get("/api/customer/getallcustomer");
-
         console.log(response.data);
         if (response.data.customers) {
           setCustomers(response.data.customers);
