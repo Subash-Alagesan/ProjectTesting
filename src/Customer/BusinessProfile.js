@@ -28,8 +28,8 @@ function Businessprofile() {
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
   const [formData, setFormData] = useState({
-    customer_name: "",
-    business_name: "",
+    customer_name: "John Doe",
+    business_name: "My Business",
     business_type: "",
     business_category: "",
     business_place: "",
@@ -48,34 +48,34 @@ function Businessprofile() {
     document: null,
   });
 
-  useEffect(() => {
-    if (!isEditing) {
-      console.log("Fetching customer data for customerId:", customerId);
-      axios
-        .get(`/api/customer/getcustomerbyid/${customerId}`)
-        .then((response) => {
-          const customerData = response.data.customer;
-          setFormData({
-            ...customerData,
-            profile_pic: customerData.customer_profile_pic,
-            document: [
-              {
-                name: getFileNameFromPath(customerData.uploaded_file_path),
-                path: customerData.uploaded_file_path,
-              },
-            ],
-          });
-          console.log("After Fetching from customer by id", customerData);
-        })
-        .catch((error) => {
-          console.error("Error fetching customer data:", error);
-        });
-    }
-  }, [customerId, isEditing]);
+  // useEffect(() => {
+  //   if (!isEditing) {
+  //     console.log("Fetching customer data for customerId:", customerId);
+  //     axios
+  //       .get(`/api/customer/getcustomerbyid/${customerId}`)
+  //       .then((response) => {
+  //         const customerData = response.data.customer;
+  //         setFormData({
+  //           ...customerData,
+  //           profile_pic: customerData.customer_profile_pic,
+  //           document: [
+  //             {
+  //               name: getFileNameFromPath(customerData.uploaded_file_path),
+  //               path: customerData.uploaded_file_path,
+  //             },
+  //           ],
+  //         });
+  //         console.log("After Fetching from customer by id", customerData);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching customer data:", error);
+  //       });
+  //   }
+  // }, [customerId, isEditing]);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+  // const handleEditClick = () => {
+  //   setIsEditing(true);
+  // };
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -109,13 +109,18 @@ function Businessprofile() {
       hiddenFileInput.current.click();
     }
   };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(`Name: ${name}, Value: ${value}`);
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
   const handleDeleteDocument = (index) => {
     // Logic to delete the document at the specified index from formData.document
@@ -196,7 +201,7 @@ function Businessprofile() {
                 <h5 className="Businessdb-title">Business Profile</h5>
               </div>
 
-              <div className="Edit-btn">
+              {/* <div className="Edit-btn">
                 {isEditing ? (
                   <Button
                     variant="contained"
@@ -216,7 +221,7 @@ function Businessprofile() {
                     Edit
                   </Button>
                 )}
-              </div>
+              </div> */}
             </div>
           </Item>
         </Grid>
@@ -263,7 +268,7 @@ function Businessprofile() {
               </Grid>
 
               <Grid item xs={12} sm={12} md={5} lg={5}>
-                <div className="Business-name-content">
+                {/* <div className="Business-name-content">
                   <div className="Businessprofile-input">
                     {isEditing ? (
                       <input
@@ -299,7 +304,49 @@ function Businessprofile() {
                   </div>
 
                   <br></br>
-                </div>
+                </div> */}
+                <div className="Business-name-content">
+      <div className="Businessprofile-input">
+      <label>
+          <strong>Name:</strong>
+        </label>
+        {isEditing ? (
+          <input
+            type="text"
+            name="customer_name"
+            value={formData.customer_name}
+            placeholder="Name"
+            onChange={handleInputChange}
+          />
+        ) : (
+          <span>{formData.customer_name}</span>
+        )}
+      </div>
+
+      <br />
+
+      <div className="BusinessName">
+        <label>
+          <strong>Business Name:</strong>
+        </label>
+        {isEditing ? (
+          <input
+            type="text"
+            name="business_name"
+            value={formData.business_name}
+            onChange={handleInputChange}
+          />
+        ) : (
+          <span>{formData.business_name}</span>
+        )}
+      </div>
+
+      <br />
+
+      <button onClick={() => setIsEditing(!isEditing)}>
+        {isEditing ? "Save" : "Edit"}
+      </button>
+    </div>
               </Grid>
 
               <Grid xs={12} sm={12} md={5} lg={5}>
