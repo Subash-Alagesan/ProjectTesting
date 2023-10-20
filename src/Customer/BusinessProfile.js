@@ -13,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import PublishIcon from "@mui/icons-material/Publish";
 import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -74,7 +73,7 @@ function Businessprofile() {
   }, [customerId, isEditing]);
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -104,7 +103,7 @@ function Businessprofile() {
     hiddenDocumentInput.current.click();
   };
 
-  const handleClick = (event) => {
+  const handleClick = () => {
     if (isEditing) {
       hiddenFileInput.current.click();
     }
@@ -112,10 +111,10 @@ function Businessprofile() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(`Name: ${name}, Value: ${value}`);
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
   const handleDeleteDocument = (index) => {
     // Logic to delete the document at the specified index from formData.document
@@ -131,10 +130,8 @@ function Businessprofile() {
   }
 
   const handleUpdateClick = () => {
-    // Create a new FormData object
-    const formData = new FormData();
-
-    // Add the customer data to the FormData
+   
+    const formData = new FormData();    
     formData.append("customer_name", formData.customer_name);
     formData.append("business_name", formData.business_name);
     formData.append("business_type", formData.business_type);
@@ -151,35 +148,31 @@ function Businessprofile() {
     formData.append("linkedin", formData.linkedin);
     formData.append("twitter", formData.twitter);
     formData.append("website_address", formData.website_address);
-
-    // Check if a new image has been selected and add it to the FormData
-    if (newImage) {
+      if (newImage) {
       formData.append("profile_pic", newImage);
-    }
-
-    // Check if a new document has been selected and add it to the FormData
+    }  
     if (newDocument) {
       formData.append("document", newDocument);
-    }
-
-    // Send the FormData to the server
+    }    
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // Use multipart/form-data for file uploads
+          "Content-Type": "multipart/form-data", 
         },
       })
-      .then((response) => {
-        // Handle the success response here
-        console.log("Update Successful", response.data);
-        // You can also add logic to reset the editing state if needed
+      .then((response) => {       
+        console.log("Update Successful", response.data);       
         setIsEditing(false);
       })
-      .catch((error) => {
-        // Handle errors here
+      .catch((error) => {       
         console.error("Update Failed", error);
       });
   };
+  useEffect(() => {
+    if (isEditing) {     
+      handleUpdateClick();
+    }
+  }, [isEditing]);
 
   return (
     <form encType="multipart/form-data">
@@ -272,7 +265,6 @@ function Businessprofile() {
                         value={formData.customer_name}
                         placeholder="Name"
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.customer_name}</span>
@@ -290,8 +282,8 @@ function Businessprofile() {
                         type="text"
                         name="business_name"
                         value={formData.business_name}
+                        ref={hiddenFileInput}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_name}</span>
@@ -314,7 +306,6 @@ function Businessprofile() {
                         name="business_type"
                         value={formData.business_type}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_type}</span>
@@ -331,7 +322,6 @@ function Businessprofile() {
                         name="business_category"
                         value={formData.business_category}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_category}</span>
@@ -369,7 +359,6 @@ function Businessprofile() {
                         name="business_name"
                         value={formData.business_name}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_name}</span>
@@ -386,7 +375,6 @@ function Businessprofile() {
                         name="business_place"
                         value={formData.business_place}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_place}</span>
@@ -404,7 +392,6 @@ function Businessprofile() {
                         name="district"
                         value={formData.district}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.district}</span>
@@ -421,7 +408,6 @@ function Businessprofile() {
                         name="language"
                         value={formData.language}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.language}</span>
@@ -449,7 +435,6 @@ function Businessprofile() {
                         name="facebook"
                         value={formData.facebook}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.facebook}</span>
@@ -463,7 +448,6 @@ function Businessprofile() {
                         name="instagram"
                         value={formData.instagram}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.instagram}</span>
@@ -477,7 +461,6 @@ function Businessprofile() {
                         name="youtube"
                         value={formData.youtube}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.youtube}</span>
@@ -491,7 +474,6 @@ function Businessprofile() {
                         name="linkedin"
                         value={formData.linkedin}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.linkedin}</span>
@@ -505,7 +487,6 @@ function Businessprofile() {
                         name="twitter"
                         value={formData.twitter}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.twitter}</span>
@@ -618,7 +599,6 @@ function Businessprofile() {
                         name="business_number"
                         value={formData.business_number}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.business_number}</span>
@@ -636,7 +616,6 @@ function Businessprofile() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.email}</span>
@@ -664,7 +643,6 @@ function Businessprofile() {
                         name="website_address"
                         value={formData.website_address}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.website_address}</span>
@@ -694,7 +672,6 @@ function Businessprofile() {
                         name="phone_number"
                         value={formData.phone_number}
                         onChange={handleInputChange}
-                        disabled={!isEditing} 
                       />
                     ) : (
                       <span>{formData.phone_number}</span>
