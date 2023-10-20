@@ -1,7 +1,100 @@
-.Social Media{
-    padding-top: 20px;
+
+
+  .Customer-profile-name{
+    color: var(--Dark-Gray, #2C2C2C);
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left: 20px;
+    padding-top: 10px;
+  }
+
+.overall-gird{
+
+    background-color: #F7F6F9;
+    max-height: 90vh; 
+    overflow-y: auto;
+
 }
-.modal-content {
-    max-height: 80vh; /* Set a maximum height for the modal, adjust as needed */
-    overflow-y: auto; /* Enable vertical scrolling if the content exceeds the height */
+.cus-image{
+    padding-right: 50px;
+}
+
+.Cus-name-content{
+    padding-top: 15px;
+}
+
+.Cus-profile-input,
+.CusName,
+.business-Type{
+    color: var(--Gray, #84828A);
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-left: 20px;
+    margin-right: 20px; 
+    padding-top: 10px;
+    text-align: right;
+    display: inline-block;
+}
+
+.Business-field{
+    color: #3B3B3B;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+padding-top: 10px;
+padding-left: 10px;
+}
+
+.Business-Name,
+.Business-Place,
+.Business-District,
+.Business-Language {
+  color: var(--Gray, #84828A);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-left: 20px;
+  margin-right: 20px; 
+  padding-top: 10px;
+  text-align: right;
+  display: inline-block;
+  }
+
+  .Socialmedia-field{
+    color: #3B3B3B;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  .Media-1,
+  .Media-2,
+  .Media-3,
+  .Media-4,
+  .Media-5{
+    color: var(--Gray, #84828A);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-left: 20px;
+  margin-right: 20px; 
+  padding-top: 10px;
+  text-align: right;
+  display: inline-block;
   }

@@ -89,15 +89,15 @@ const AddCustomer = () => {
 
   return (
     <form encType="multipart/form-data" onSubmit={handleSubmit}>    
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className="overall-gird">
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <div className="Customer-profile-contact">
-            <h5 className="Customer-profile-title">Customer Profile</h5>
+          <div className="Customer-profile-name">
+            <h5 className="Customer-profile-title">Business Profile</h5>
           </div>
         </Grid>       
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <label
-            className="box-decoration"
+            className="cus-image"
             htmlFor="fileInput"
             style={{ cursor: "pointer" }}
           >
@@ -110,12 +110,13 @@ const AddCustomer = () => {
               />
             ) : (
               // If no image is selected, display the avatar
-              <Avatar sx={{ width: 150, height: 150 }}>
+              <Avatar sx={{ width: 150, height: 150 }} >
                 <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
               </Avatar>
             )}
           </label>
           <input
+          className="cus-image"
             type="file"
             name="profile_pic"
             id="fileInput"
@@ -126,9 +127,12 @@ const AddCustomer = () => {
         </Grid>
 
         {/* Customer Name */}
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Customer-name-content">
-            <div className="Customer-profile-input">
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <div className="Cus-name-content">
+            <div className="Cus-profile-input">
+            <label>
+                <strong> Enter  Name :</strong>
+              </label>
               <input
                 type="text"
                 name="customer_name"
@@ -136,7 +140,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="CustomerName">
+            <div className="CusName">
               <label>
                 <strong> Business Name :</strong>
               </label>
@@ -147,14 +151,9 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-        </Grid>
-
-        {/* Business Type */}
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Customer-name-content1">
+            <div className="Cus-name-content1">
             <div>
-              <label className="BusinessType">
+              <label className="business-Type">
                 <strong>Business Type :</strong>
               </label>
               <input
@@ -164,17 +163,18 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="AddBoxIcon">
+            {/* <div className="AddBoxIcon">
               <AddBoxIcon />
-            </div>
+            </div> */}
+          </div>
           </div>
         </Grid>
 
         {/* Business Information */}
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Business_Information">
-            <h4 className="Businessinfo-field">Business Information</h4>
-            <div className="Businessprofile-Name">
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <div className="Business-Information">
+            <h4 className="Business-field">Business Information</h4>
+            <div className="Business-Name">
               <label>
                 <strong>Business Name :</strong>
               </label>
@@ -185,7 +185,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Businessprofile-Place">
+            <div className="Business-Place">
               <label>
                 <strong>Business Place :</strong>
               </label>
@@ -196,7 +196,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Businessprofile-District">
+            <div className="Business-District">
               <label>
                 <strong>District :</strong>
               </label>
@@ -207,7 +207,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Businessprofile-Language">
+            <div className="Business-Language">
               <label>
                 <strong>Language :</strong>
               </label>
@@ -218,17 +218,17 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="AddBox-Icon1">
+            {/* <div className="AddBox-Icon1">
               <AddBoxIcon />
-            </div>
+            </div> */}
           </div>
         </Grid>
 
         {/* Social Media Links */}
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Social Media">
-            <h4 className="SocialMedia-field">Social Media Links</h4>
-            <div className="Media1">
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <div className="Social-media">
+            <h4 className="Socialmedia-field">Social Media Links</h4>
+            <div className="Media-1">
               <label>
                 <strong>Facebook :</strong>
               </label>
@@ -239,7 +239,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Media2">
+            <div className="Media-2">
               <label>
                 <strong>Instagram :</strong>
               </label>
@@ -250,7 +250,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Media3">
+            <div className="Media-3">
               <label>
                 <strong>Youtube :</strong>
               </label>
@@ -261,7 +261,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Media4">
+            <div className="Media-4">
               <label>
                 <strong>LinkedIn :</strong>
               </label>
@@ -272,7 +272,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Media5">
+            <div className="Media-5">
               <label>
                 <strong>Twitter :</strong>
               </label>
@@ -284,45 +284,12 @@ const AddCustomer = () => {
               />
             </div>
 
-            <div className="AddBox-Icon2">
+            {/* <div className="AddBox-Icon2">
               <AddBoxIcon />
-            </div>
+            </div> */}
           </div>
         </Grid>
 
-        {/* Upload Files */}
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Upload">
-            <h4 className="Upload-field">Upload Files</h4>
-            <div className="Upload1">
-              <Button
-                size="small"
-                startIcon={<PublishIcon className="icons" />}
-                onClick={() => {
-                  const documentInput =
-                    document.getElementById("documentInput");
-                  if (documentInput) {
-                    documentInput.click();
-                  }
-                }}
-              >
-                <h6>Upload</h6>
-              </Button>
-            </div>
-            <input
-              type="file"
-              id="documentInput"
-              name="document"
-              accept=".pdf, .doc, .docx" 
-              style={{ display: "none" }}
-              onChange={handleDocumentUpload}
-            />
-            {uploadedFileName && <p>Uploaded File: {uploadedFileName}</p>}
-            <div className="AddBox-Icon3">
-              <AddBoxIcon />
-            </div>
-          </div>
-        </Grid>
 
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={3} lg={3}>
@@ -352,9 +319,9 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="AddBox-Icon4">
+            {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
-            </div>
+            </div> */}
           </div>
         </Grid>
 
@@ -374,9 +341,43 @@ const AddCustomer = () => {
               />
             </div>
             <div>{/* <button>Add Customer</button> */}</div>
-            <div className="AddBox-Icon5">
+            {/* <div className="AddBox-Icon5">
               <AddBoxIcon />
+            </div> */}
+          </div>
+        </Grid>
+
+          {/* Upload Files */}
+          <Grid item xs={12} sm={12} md={4} lg={4}>
+          <div className="Upload">
+            <h4 className="Upload-field">Upload Files</h4>
+            <div className="Upload1">
+              <Button
+                size="small"
+                startIcon={<PublishIcon className="icons" />}
+                onClick={() => {
+                  const documentInput =
+                    document.getElementById("documentInput");
+                  if (documentInput) {
+                    documentInput.click();
+                  }
+                }}
+              >
+                <h6>Upload</h6>
+              </Button>
             </div>
+            <input
+              type="file"
+              id="documentInput"
+              name="document"
+              accept=".pdf, .doc, .docx" 
+              style={{ display: "none" }}
+              onChange={handleDocumentUpload}
+            />
+            {uploadedFileName && <p>Uploaded File: {uploadedFileName}</p>}
+            {/* <div className="AddBox-Icon3">
+              <AddBoxIcon />
+            </div> */}
           </div>
         </Grid>
 
@@ -409,9 +410,9 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="AddBox-Icon4">
+            {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
-            </div>
+            </div> */}
           </div>
         </Grid>
 

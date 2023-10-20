@@ -9,43 +9,78 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import './AddEmployee.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const  AddEmployee = () => {
 
-  const [customerProfile, setCustomerProfile] = useState({
-    customer_name: "",
-    business_name: "",
-    business_type: "",
-    business_category: "",
-    business_place: "",
-    district: "",
-    language: "",
-    business_number: "",
+  const [employeeProfile, setEmployeeProfile] = useState({
+    userImage:"",
+    name: "",
+    experience: "",
+    designation: "",
+    education: "",
+    isAdmin: "",
+    dob: null,
+    marital_status: "",
+    gender: "",
+    place: "",
+    mobile_number: "",
     email: "",
-    phone_number: "",
-    social_media_link: "",
-    website_address: "",
+    alternative_phone_number: "",
+    physically_challenged: "",
+    skills: "",
+    experience_description: "",
+    portfolio_url: "",
+    github_url: "",
+    password: "",
+    fieldsToAdd: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCustomerProfile({
-      ...customerProfile,
+    setEmployeeProfile({
+      ...employeeProfile,
       [name]: value,
     });
   };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected file:", file);
+    if (file) {
+      setEmployeeProfile({
+        ...employeeProfile,
+        profile_pic: file,
+      });
+      console.log("Updated customerProfile:", employeeProfile);
+    }
+  };
+
+  const handleChange = (e) => {
+    setEmployeeProfile(e.target.value);
+  };
+
+  const handleDateChange = (date) => {
+    setEmployeeProfile({
+      ...employeeProfile,
+      dob: date,
+    });
+  };
+
 
   return (
 
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <div className="Customer-profile-contact">
-          <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" />
+          {/* <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" /> */}
           <h5 className="Customer-profile-title">Employee Profile</h5>
         </div>
       </Grid>
 
-      <Grid item xs={12} sm={12} md={4} lg={4}>
+      {/* <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="box-decoration">
           <div style={{ cursor: "pointer" }}>
             <Avatar sx={{ width: 150, height: 150 }}>
@@ -54,55 +89,94 @@ const  AddEmployee = () => {
           </div>
           <button className="image-upload-button">Upload</button>
         </div>
-      </Grid>
+      </Grid> */}
 
-      {/* Customer Name */}
+<Grid item xs={12} sm={12} md={4} lg={4}>
+          <label
+            className="box-decoration"
+            htmlFor="fileInput"
+            style={{ cursor: "pointer" }}
+          >
+            {employeeProfile.profile_pic ? (
+              // If an image is selected, display it
+              <img
+                src={URL.createObjectURL(employeeProfile.profile_pic)}
+                alt="Selected Image"
+                style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+              />
+            ) : (
+              // If no image is selected, display the avatar
+              <Avatar sx={{ width: 150, height: 150 }}>
+                <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
+              </Avatar>
+            )}
+          </label>
+          <input
+            type="file"
+            name="profile_pic"
+            id="fileInput"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleFileUpload}
+          />
+        </Grid>
+
+      {/* Employee Name */}
       <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Customer-name-content">
           <div className="Customer-profile-input">
             <input
               type="text"
-              name="customer_name"
-              value={customerProfile.customer_name}
+              name="name"
+              value={employeeProfile.name}
               onChange={handleInputChange}
             />
           </div>
           <div className="CustomerName">
             <label>
-              <strong> Business Name :</strong>
+              <strong> Experience :</strong>
             </label>
             <input
               type="text"
-              name="business_name"
-              value={customerProfile.business_name}
+              name="experience"
+              value={employeeProfile.experience}
               onChange={handleInputChange}
             />
           </div>
           <div>
             <label className="Businessprofile-entername">
-              <strong>Enter Details :</strong>
+              <strong>Enter Designation :</strong>
             </label>
             <input
               type="text"
-              name="business_category"
-              value={customerProfile.business_category}
+              name="designation"
+              value={employeeProfile.designation}
               onChange={handleInputChange}
             />
           </div>
+          <div>
+      <label htmlFor="isAdmin">Is Admin?</label>
+      <select id="isAdmin"
+       value={employeeProfile.isAdmin}
+        onChange={handleChange}>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
         </div>
       </Grid>
 
-      {/* Business Type */}
+      {/* Employee Type */}
       <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Customer-name-content1">
           <div>
             <label className="BusinessType">
-              <strong>Business Type :</strong>
+              <strong>Education :</strong>
             </label>
             <input
               type="text"
-              name="business_type"
-              value={customerProfile.business_type}
+              name="education"
+              value={employeeProfile.education}
               onChange={handleInputChange}
             />
           </div>
@@ -112,51 +186,57 @@ const  AddEmployee = () => {
         </div>
       </Grid>
 
-      {/* Business Information */}
+      {/* Employee Information */}
       <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Business_Information">
-          <h4 className="Businessinfo-field">Business Information</h4>
+          <h4 className="Businessinfo-field">Personal Information</h4>
           <div className="Businessprofile-Name">
-            <label>
-              <strong>Business Name :</strong>
-            </label>
-            <input
-              type="text"
-              name="business_name"
-              value={customerProfile.business_name}
-              onChange={handleInputChange}
-            />
-          </div>
+      <label>
+        <strong>Date of Birth:</strong>
+      </label>
+      <DatePicker
+        selected={employeeProfile.dob}
+        onChange={handleDateChange}
+        dateFormat="MM/dd/yyyy" // Customize date format as needed
+        showYearDropdown
+        scrollableYearDropdown
+      />
+    </div>
           <div className="Businessprofile-Place">
-            <label>
-              <strong>Business Place :</strong>
-            </label>
-            <input
-              type="text"
-              name="business_place"
-              value={customerProfile.business_place}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="Businessprofile-District">
-            <label>
-              <strong>District :</strong>
-            </label>
-            <input
-              type="text"
-              name="district"
-              value={customerProfile.district}
-              onChange={handleInputChange}
-            />
-          </div>
+      <label>
+        <strong>Marital Status:</strong>
+      </label>
+      <select
+        name="marital_status"
+        value={employeeProfile.marital_status}
+        onChange={handleInputChange}
+      >
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+      </select>
+    </div>
+    <div className="Businessprofile-District">
+      <label>
+        <strong>Gender: </strong>
+      </label>
+      <select
+        name="gender"
+        value={employeeProfile.gender}
+        onChange={handleInputChange}
+      >
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
           <div className="Businessprofile-Language">
             <label>
-              <strong>Language :</strong>
+              <strong>Place: </strong>
             </label>
             <input
               type="text"
-              name="language"
-              value={customerProfile.language}
+              name="place"
+              value={employeeProfile.place}
               onChange={handleInputChange}
             />
           </div>
@@ -166,29 +246,51 @@ const  AddEmployee = () => {
         </div>
       </Grid>
 
-      {/* Social Media Links */}
+      {/* Skills*/}
       <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Social Media">
-          <h4 className="SocialMedia-field">Social Media Links</h4>
+          <h4 className="SocialMedia-field">Skills </h4>
           <div className="Media1">
             <label>
-              <strong>Facebook :</strong>
+              <strong>Enter Skill 1 :</strong>
             </label>
             <input
               type="text"
               name="social_media_link"
-              value={customerProfile.social_media_link}
+              value={employeeProfile.social_media_link}
               onChange={handleInputChange}
             />
           </div>
-          <div className="Media2">
+          <div className="Media1">
+            <label>
+              <strong>Enter Skill 2 :</strong>
+            </label>
+            <input
+              type="text"
+              name="social_media_link"
+              value={employeeProfile.social_media_link}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="Media1">
+            <label>
+              <strong>Enter Skill 3 :</strong>
+            </label>
+            <input
+              type="text"
+              name="social_media_link"
+              value={employeeProfile.social_media_link}
+              onChange={handleInputChange}
+            />
+          </div>
+          {/* <div className="Media2">
             <label>
               <strong>Instagram :</strong>
             </label>
             <input
               type="text"
               name="social_media_link"
-              value={customerProfile.social_media_link}
+              value={employeeProfile.social_media_link}
               onChange={handleInputChange}
             />
           </div>
@@ -199,7 +301,7 @@ const  AddEmployee = () => {
             <input
               type="text"
               name="social_media_link"
-              value={customerProfile.social_media_link}
+              value={employeeProfile.social_media_link}
               onChange={handleInputChange}
             />
           </div>
@@ -210,43 +312,17 @@ const  AddEmployee = () => {
             <input
               type="text"
               name="social_media_link"
-              value={customerProfile.social_media_link}
+              value={employeeProfile.social_media_link}
               onChange={handleInputChange}
             />
-          </div>
+          </div> */}
           <div className="AddBox-Icon2">
             <AddBoxIcon />
           </div>
         </div>
       </Grid>
 
-      {/* Upload Files */}
-      <Grid item xs={12} sm={12} md={4} lg={4}>
-        <div className="Upload">
-          <h4 className="Upload-field">Upload Files</h4>
-          <div className="Upload1">
-            <Button size="small" startIcon={<PublishIcon className="icons"/>}>
-              <h6>Upload</h6>
-            </Button>
-          </div>
-          <h4 className="Upload-field1">Uploaded Files</h4>
-          <div className="Upload2">
-            <div className="Folder-Icon">
-              <Button size="small" startIcon={<FolderIcon className="icons" />} endIcon={<MoreVertIcon className="icons"/>}>
-                <h6>Logo</h6>
-              </Button>
-            </div>
-            <div className="Folder-Icon1">
-              <Button size="small" color="primary" startIcon={<FolderIcon className="icons" />} endIcon={<MoreVertIcon className="icons"/>}>
-                <h6>Analysis</h6>
-              </Button>
-            </div>
-          </div>
-          <div className="AddBox-Icon3">
-            <AddBoxIcon />
-          </div>
-        </div>
-      </Grid>
+    
 
       {/* Contact Details */}
       <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -256,23 +332,23 @@ const  AddEmployee = () => {
           </h4>
           <div className="Business-Mobileno">
             <label>
-              <strong>Business No :</strong>
+              <strong>Mobile Number:</strong>
             </label>
             <input
               type="text"
-              name="business_number"
-              value={customerProfile.business_number}
+              name="mobile_number"
+              value={employeeProfile.mobile_number}
               onChange={handleInputChange}
             />
           </div>
           <div className="Businessprofile-EmailId">
             <label>
-              <strong>Email Id :</strong>
+              <strong>Email ID:</strong>
             </label>
             <input
               type="text"
               name="email"
-              value={customerProfile.email}
+              value={employeeProfile.email}
               onChange={handleInputChange}
             />
           </div>
@@ -282,22 +358,92 @@ const  AddEmployee = () => {
         </div>
       </Grid>
 
-      {/* Website */}
+      {/* Experience */}
       <Grid item xs={12} sm={12} md={4} lg={4}>
         <div className="Website">
-          <h4 className="Website-field">Website</h4>
+          <h4 className="Website-field">Experience</h4>
           <div className="Website1">
             <label>
-              <strong>Website 1:</strong>
+              <strong>Enter Experience 1</strong>
             </label>
             <input
               type="text"
-              name="website_address"
-              value={customerProfile.website_address}
+              name="experience_description"
+              value={employeeProfile.experience_description}
               onChange={handleInputChange}
             />
           </div>
           <div className="AddBox-Icon5">
+            <AddBoxIcon />
+          </div>
+        </div>
+      </Grid>
+
+       {/* Extra */}
+       <Grid item xs={12} sm={12} md={4} lg={4}>
+        <div className="Contact_Information">
+          <h4 className="BusinessContact-field">
+            <strong>Extra</strong>
+          </h4>
+          <div className="Business-Mobileno">
+            <label>
+              <strong>Alternative Phone No:</strong>
+            </label>
+            <input
+              type="text"
+              name="alternative_phone_number"
+              value={employeeProfile.alternative_phone_number}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="Businessprofile-EmailId">
+      <label>
+        <strong>Physically Challenged:</strong>
+      </label>
+      <select
+        name="physically_challenged"
+        value={employeeProfile.physically_challenged}
+        onChange={handleInputChange}
+      >
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+          <div className="AddBox-Icon4">
+            <AddBoxIcon />
+          </div>
+        </div>
+      </Grid>
+
+        {/* Projects */}
+        <Grid item xs={12} sm={12} md={4} lg={4}>
+        <div className="Contact_Information">
+          <h4 className="BusinessContact-field">
+            <strong>Projects</strong>
+          </h4>
+          <div className="Business-Mobileno">
+            <label>
+              <strong>Portfolio :</strong>
+            </label>
+            <input
+              type="text"
+              name="portfolio_url"
+              value={employeeProfile.portfolio_url}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="Businessprofile-EmailId">
+            <label>
+              <strong>Github:</strong>
+            </label>
+            <input
+              type="text"
+              name="github_url"
+              value={employeeProfile.github_url}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="AddBox-Icon4">
             <AddBoxIcon />
           </div>
         </div>
