@@ -1,18 +1,20 @@
 import * as React from "react";
+import { useNavigate } from "react-router";
+import axios from "../Component/Axios Base URL/axios";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import PublishIcon from "@mui/icons-material/Publish";
-import FolderIcon from "@mui/icons-material/Folder";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import "./AddEmployee.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { async } from "q";
 
 const AddEmployee = () => {
+  const [emailSent, setEmailSent] = useState(false);
+
+  const navigate = useNavigate();
   const [employeeProfile, setEmployeeProfile] = useState({
     profile_pic: null,
     name: "",
@@ -28,7 +30,7 @@ const AddEmployee = () => {
     email: "",
     alternative_phone_number: "",
     physically_challenged: "",
-    skills: "",
+    skills: [],
     experience_description: "",
     portfolio_url: "",
     github_url: "",
@@ -52,22 +54,68 @@ const AddEmployee = () => {
     const file = e.target.files[0];
     console.log("Selected file:", file);
     if (file) {
-      setEmployeeProfile({
-        ...employeeProfile,
+      // Use the callback form of setState to ensure asynchronous updates
+      setEmployeeProfile((prevProfile) => ({
+        ...prevProfile,
         profile_pic: file,
-      });
+      }));
       console.log("Updated customerProfile:", employeeProfile);
     }
   };
+
   const handleDateChange = (date) => {
     setEmployeeProfile({
       ...employeeProfile,
       dob: date,
     });
   };
-  const handleSubmit = (e) => {
+
+  const handleSkillChange = (e, index) => {
+    const updatedSkills = [...employeeProfile.skills];
+    updatedSkills[index] = e.target.value;
+    setEmployeeProfile({
+      ...employeeProfile,
+      skills: updatedSkills,
+    });
+  };
+  const handleAddSkill = () => {
+    setEmployeeProfile({
+      ...employeeProfile,
+      skills: [...employeeProfile.skills, ""],
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitted Values", employeeProfile);
+    const formData = new FormData();
+
+    for (const key in employeeProfile) {
+      formData.append(key, employeeProfile[key]);
+    }
+
+    try {
+      const response = await axios.post(
+        "/api/emp/createemployee",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Added Successfully");
+        if (employeeProfile.isAdmin === "Yes") {         
+          alert("Mail Send Successfully!!! and Get the username and Password"); // Alert the user that the email was sent
+        }
+        navigate("/")
+      }
+    } catch (error) {
+      console.error("Error while sending data: ", error);
+      // Handle the error, e.g., show an error message to the user
+    }
   };
 
   return (
@@ -151,6 +199,7 @@ const AddEmployee = () => {
                 value={employeeProfile.isAdmin}
                 onChange={handleInputChange}
               >
+                <option value="Select">select</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -203,6 +252,7 @@ const AddEmployee = () => {
                 value={employeeProfile.marital_status}
                 onChange={handleInputChange}
               >
+                <option value="Select">select</option>
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>
               </select>
@@ -216,6 +266,7 @@ const AddEmployee = () => {
                 value={employeeProfile.gender}
                 onChange={handleInputChange}
               >
+                <option value="Select">select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
@@ -242,40 +293,20 @@ const AddEmployee = () => {
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Social Media">
             <h4 className="SocialMedia-field">Skills </h4>
-            <div className="Media1">
-              <label>
-                <strong>Enter Skill 1 :</strong>
-              </label>
-              <input
-                type="text"
-                name="skills"
-                value={employeeProfile.skills}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="Media1">
-              <label>
-                <strong>Enter Skill 2 :</strong>
-              </label>
-              <input
-                type="text"
-                name="skills"
-                value={employeeProfile.skills}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="Media1">
-              <label>
-                <strong>Enter Skill 3 :</strong>
-              </label>
-              <input
-                type="text"
-                name="skills"
-                value={employeeProfile.skills}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="AddBox-Icon2">
+            {employeeProfile.skills.map((skill, index) => (
+              <div className="Media1" key={index}>
+                <label>
+                  <strong>Enter Skill {index + 1} :</strong>
+                </label>
+                <input
+                  type="text"
+                  name="skills"
+                  value={skill}
+                  onChange={(e) => handleSkillChange(e, index)}
+                />
+              </div>
+            ))}
+            <div className="AddBox-Icon2" onClick={handleAddSkill}>
               <AddBoxIcon />
             </div>
           </div>
@@ -305,6 +336,17 @@ const AddEmployee = () => {
                 type="text"
                 name="email"
                 value={employeeProfile.email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="Businessprofile-password">
+              <label>
+                <strong>Password:</strong>
+              </label>
+              <input
+                type="text"
+                name="password"
+                value={employeeProfile.password}
                 onChange={handleInputChange}
               />
             </div>
@@ -361,6 +403,7 @@ const AddEmployee = () => {
                 value={employeeProfile.physically_challenged}
                 onChange={handleInputChange}
               >
+                <option value="Select">select</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
