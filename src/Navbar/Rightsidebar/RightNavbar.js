@@ -61,13 +61,13 @@ export default function RightNavbar() {
   };
 
 
-  const style = {
+  const gridStyle  = {
     position: 'absolute',
-  top: '55%',
+  top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 900,
-  bgcolor: 'background.paper',
+  width:'1500',
+  backgroundColor: '#F7F6F9',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -222,7 +222,7 @@ export default function RightNavbar() {
               {modalContent}
            
           </Grid> */}
-          <Grid item  xs={12} sm={12} md={8} lg={8} sx={style}>
+          <Grid item  xs={12} sm={12} md={6} lg={6} style={gridStyle}>
           
           {modalContent}
          
