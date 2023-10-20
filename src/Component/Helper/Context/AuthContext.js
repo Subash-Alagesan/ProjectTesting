@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Store user information
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
+  const [customerId, setCustomerId] = useState(null);
 
   // Function to check and set authentication on page load
   const checkAuthentication = () => {
@@ -83,6 +84,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         user,
         error,
+        customerId, // Include customerId in the context value
+        setCustomerId, // Add a function to set customerId
       }}
     >
       {children}

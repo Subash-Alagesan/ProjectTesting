@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "../Component/Axios Base URL/axios";
-import { useAuth } from "../Component/Helper/Context/AuthContext";
+import React from "react";
 import "../Customer/Customer.css";
 import { Grid } from "@mui/material";
 import assignment from "../Assets/images/assignment_ind.png";
@@ -22,37 +20,31 @@ import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 
 function Customer({ handleViewClick }) {
-  const [customers, setCustomers] = useState([]);
-  const { setCustomerId } = useAuth();
-
   const columns = [
     {
-      field: "customer_name",
+      field: "Name",
       headerName: "Name",
       width: 180,
       renderCell: (params) => (
         <div style={{ display: "flex", alignItems: "center" }}>
-          <Avatar
-            src={`http://localhost:4070/uploads/images/${params.row.customer_profile_pic}`}
-            style={{ marginRight: "8px" }}
-          />
-          {params.value}
+          <Avatar src={params.row.PhotoURL} style={{ marginRight: "8px" }} />
+          {params.row.Name}
         </div>
       ),
     },
     {
-      field: "business_number",
+      field: "contact",
       headerName: "Contact Number",
       type: "contact number",
       width: 150,
     },
     {
-      field: "business_name",
+      field: "Business",
       headerName: "Business",
       sortable: true,
       width: 150,
     },
-    { field: "business_place", headerName: "Place", width: 160 },
+    { field: "Place", headerName: "Place", width: 160 },
     {
       field: "View Details",
       headerName: "View Details",
@@ -62,16 +54,96 @@ function Customer({ handleViewClick }) {
           variant="contained"
           size="small"
           style={{ background: "#6425FE" }}
-          onClick={() => {
-            const customerIdFromRow = params.row.id; // Get the customer's ID from the row
-            setCustomerId(customerIdFromRow); // Set the customerId in your context
-            handleViewClick(customerIdFromRow); // Also pass the customerId to the handler
-            console.log("Id Value from customer", customerIdFromRow);
-          }}
+          onClick={handleViewClick}
         >
           View
         </Button>
       ),
+    },
+  ];
+
+  const rows = [
+    {
+      id: 1,
+      Name: "Snow",
+      contact: 9687453214,
+      PhotoURL:
+        "https://www.pngitem.com/pimgs/m/404-4042710_circle-profile-picture-png-transparent-png.png",
+      Business: "Finance",
+      Place: "karur",
+    },
+    {
+      id: 2,
+      Name: "Lannister",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYkoXDY3bU7DweqPS20T11LyFjcXgGiCIxtSt6Ge7Y6GKU1dzLw9PFZg6opGSmlcdVwVs&usqp=CAU",
+      Business: "Marketing",
+      Place: "Erode",
+      ViewDetails: "view",
+    },
+    {
+      id: 3,
+      Name: "Lannister",
+      contact: 9687453214,
+      PhotoURL:
+        "https://i.pinimg.com/736x/ea/6c/93/ea6c931c623881ecd29955db118c7742.jpg",
+      Business: "Mobile shop",
+      Place: "Trichy",
+    },
+    {
+      id: 4,
+      Name: "Stark",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqPgBy055W8Fv89RLVNlBPcJTJBiim5LToWpujXkofvROJaOIMBteTlj3GA3LXjOjG3Yc&usqp=CAU",
+      Business: "Photo Studio",
+      Place: "Coimbatore",
+    },
+    {
+      id: 5,
+      Name: "Targaryen",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIh4Nokge-Nr94TMgcEjnC4KLgkwi2hequV-RvTaCZ1w10xYwlfJknU4yL5jUJ9YiQf2Y&usqp=CAU",
+      Business: "Banking",
+      Place: "Chennai",
+    },
+    {
+      id: 6,
+      Name: "Melisandre",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRleGHIC0JtgiP5cWOR5HaTvIP4ENhviiE-flyDurOIt31sYa6RmqOq7hECn6G1AJmVwqo&usqp=CAU",
+      Business: "Real-estate",
+      Place: "Madurai",
+    },
+    {
+      id: 7,
+      Name: "Clifford",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrhUb7VQWOQJGKQSBG-HdqODWBe8WhgZsHi558ATMjy-a2MYFDSwwNCBVrkHInuL6M5U&usqp=CAU",
+      Business: "Hotel",
+      Place: "Namakal",
+    },
+    {
+      id: 8,
+      Name: "Frances",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj6f1TEt2umBEnBStuEAIHnuGRP3qGjmdyug&usqp=CAU",
+      Business: "Engineer",
+      Place: "Dindukal",
+    },
+    {
+      id: 9,
+      Name: "Roxie",
+      contact: 9687453214,
+      PhotoURL:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjVGbMFDRqo5S1_EQf_yoTm5yNCmQaqvVS1hn_QiKt9n6xHCUAMj_bD82D87fyuYwA7UQ&usqp=CAU",
+      Business: "Driver",
+      Place: "Palani",
     },
   ];
 
@@ -123,25 +195,6 @@ function Customer({ handleViewClick }) {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-
-  useEffect(() => {
-    // Define a function to fetch customer data
-    const fetchCustomers = async () => {
-      try {
-        const response = await axios.get("/api/customer/getallcustomer");
-
-        console.log(response.data);
-        if (response.data.customers) {
-          setCustomers(response.data.customers);
-        }
-      } catch (error) {
-        console.error("Error fetching customer data:", error);
-      }
-    };
-
-    // Call the fetchCustomers function
-    fetchCustomers();
-  }, []);
 
   return (
     <Grid container spacing={2} className="customerdb-container">
@@ -280,13 +333,11 @@ function Customer({ handleViewClick }) {
 
           <div className="Datagrid-table">
             <DataGrid
-              rows={customers}
+              rows={rows}
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection
-              getRowId={(row) => row.id}
             />
-
             <Pagination
               className="pagination-content"
               count={5}
