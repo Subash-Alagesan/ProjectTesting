@@ -132,14 +132,10 @@ function Businessprofile() {
   }
 
   const handleUpdateClick = () => {
-<<<<<<< HEAD
-    const formData = new FormData();
-=======
     // Create a new FormData object
     const formData = new FormData();
 
     // Add the customer data to the FormData
->>>>>>> 0fae3907149d631628312965b5b31e11f528fb38
     formData.append("customer_name", formData.customer_name);
     formData.append("business_name", formData.business_name);
     formData.append("business_type", formData.business_type);
@@ -156,25 +152,6 @@ function Businessprofile() {
     formData.append("linkedin", formData.linkedin);
     formData.append("twitter", formData.twitter);
     formData.append("website_address", formData.website_address);
-<<<<<<< HEAD
-    if (newImage) {
-      formData.append("profile_pic", newImage);
-    }
-    if (newDocument) {
-      formData.append("document", newDocument);
-    }
-    axios
-      .put(`/api/customer/updatecustomer/${customerId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log("Update Successful", response.data);
-        setIsEditing(false);
-      })
-      .catch((error) => {
-=======
 
     // Check if a new image has been selected and add it to the FormData
     if (newImage) {
@@ -201,7 +178,6 @@ function Businessprofile() {
       })
       .catch((error) => {
         // Handle errors here
->>>>>>> 0fae3907149d631628312965b5b31e11f528fb38
         console.error("Update Failed", error);
       });
   };
