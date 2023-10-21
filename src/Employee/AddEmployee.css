@@ -1,7 +1,11 @@
-.submit-btn-emp{
-    padding-top: 140px;
-    padding-left: 200px;  
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+.overall-grid-emp{
+
+    background-color: #F7F6F9;
+    max-height: 90vh; 
+    overflow-y: auto;
+  
+  }
+  .submit-btn1{
+    padding-left: 500px;
+    padding-top: 0px;
+   }

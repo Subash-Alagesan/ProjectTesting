@@ -1,23 +1,23 @@
-
-
-  .Customer-profile-name{
-    color: var(--Dark-Gray, #2C2C2C);
-    font-family: Roboto;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    padding-left: 20px;
-    padding-top: 10px;
-  }
-
 .overall-gird{
 
-    background-color: #F7F6F9;
-    max-height: 90vh; 
-    overflow-y: auto;
+  background-color: #F7F6F9;
+  max-height: 90vh; 
+  overflow-y: auto;
 
 }
+
+.Customer-profile-title{
+    color: #3B3B3B;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+padding-top: 10px;
+padding-left: 10px;
+  }
+
+
 .cus-image{
     padding-right: 30px;
     padding-left: 50px;
@@ -108,3 +108,28 @@ padding-left: 10px;
   text-align: right;
   display: inline-block;
   }
+
+  .Contact_Information{
+    padding-top: -50px;
+  }
+
+  .Business-EmailId{
+    padding-top: 10px;
+    padding-left: 27px;
+  }
+.UploadCus{
+  padding-top: 20px;
+  padding-left: 40px;
+}
+.WebsiteCus{
+  padding-left: 40px;
+}
+
+.Business-other{
+  padding-top: 10px;
+  padding-left: 28px;
+}
+.submit-btn{
+ padding-left: 400px;
+ padding-top: 150px;
+}
