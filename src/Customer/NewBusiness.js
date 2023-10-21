@@ -1,32 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "../Component/Axios Base URL/axios";
-import { useAuth } from "../Component/Helper/Context/AuthContext";
+import Grid from "@mui/material/Grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import "./Businessprofile.css";
 import contact_page from "../Assets/images/contact_page.png";
-import Button from "@mui/material/Button";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import DeleteIcon from "@mui/icons-material/Delete";
-import PublishIcon from "@mui/icons-material/Publish";
-import FolderIcon from "@mui/icons-material/Folder";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import TextField from '@mui/material/TextField';
 
-function Businessprofile() {
-  const { customerId } = useAuth();
+function NewBusiness() {
   const [isEditing, setIsEditing] = useState(false);
-  const imageBaseUrl = "http://localhost:4070/uploads/images/";
-  const documentBaseUrl = "http://localhost:4070/uploads/documents/";
   const [newImage, setNewImage] = useState(null);
-  const [newDocument, setNewDocument] = useState(null);
-  const hiddenDocumentInput = useRef(null);
+  const imageBaseUrl = "http://localhost:4070/uploads/images/";
   const hiddenFileInput = useRef(null);
+
   const [formData, setFormData] = useState({
     customer_name: "",
     business_name: "",
@@ -48,36 +35,6 @@ function Businessprofile() {
     document: null,
   });
 
-  useEffect(() => {
-    if (!isEditing) {
-      console.log("Fetching customer data for customerId:", customerId);
-      axios
-        .get(`/api/customer/getcustomerbyid/${customerId}`)
-        .then((response) => {
-          const customerData = response.data.customer;
-          setFormData({
-            ...customerData,
-            profile_pic: customerData.customer_profile_pic,
-            document: [
-              {
-                name: getFileNameFromPath(customerData.uploaded_file_path),
-                path: customerData.uploaded_file_path,
-              },
-            ],
-          });
-          console.log("After Fetching from customer by id", customerData);
-        })
-        .catch((error) => {
-          console.error("Error fetching customer data:", error);
-        });
-    }
-  }, [customerId, isEditing]);
-
-  const handleEditClick = () => {
-    setIsEditing(!isEditing);
-
-  };
-
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -86,6 +43,17 @@ function Businessprofile() {
     color: theme.palette.text.secondary,
   }));
 
+  const handleClick = (event) => {
+    if (isEditing) {
+      hiddenFileInput.current.click();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     console.log("Selected image:", file);
@@ -93,124 +61,12 @@ function Businessprofile() {
     setNewImage(file);
   };
 
-  const handleDocumentChange = (e) => {
-    const file = e.target.files[0];
-    setNewDocument(file);
-  };
-
-  const handleUploadButtonClick = (file) => {
-    hiddenFileInput.current.click();
-  };
-  const handleDocumentUploadButtonClick = () => {
-    hiddenDocumentInput.current.click();
-  };
-
-  const handleClick = (event) => {
-    if (isEditing) {
-      hiddenFileInput.current.click();
-    }
-  };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    console.log(`Name: ${name}, Value: ${value}`);
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-  const handleDeleteDocument = (index) => {
-    // Logic to delete the document at the specified index from formData.document
-    const updatedDocuments = [...formData.document];
-    updatedDocuments.splice(index, 1);
-    setFormData({
-      ...formData,
-      document: updatedDocuments,
-    });
-  };
-  function getFileNameFromPath(path) {
-    return path.split("-").pop(); // Extracts the last part of the path, which is the file name
-  }
-
-  const handleUpdateClick = () => {
-<<<<<<< HEAD
-    const formData = new FormData();
-=======
-    // Create a new FormData object
-    const formData = new FormData();
-
-    // Add the customer data to the FormData
->>>>>>> 0fae3907149d631628312965b5b31e11f528fb38
-    formData.append("customer_name", formData.customer_name);
-    formData.append("business_name", formData.business_name);
-    formData.append("business_type", formData.business_type);
-    formData.append("business_category", formData.business_category);
-    formData.append("business_place", formData.business_place);
-    formData.append("district", formData.district);
-    formData.append("language", formData.language);
-    formData.append("business_number", formData.business_number);
-    formData.append("email", formData.email);
-    formData.append("phone_number", formData.phone_number);
-    formData.append("facebook", formData.facebook);
-    formData.append("instagram", formData.instagram);
-    formData.append("youtube", formData.youtube);
-    formData.append("linkedin", formData.linkedin);
-    formData.append("twitter", formData.twitter);
-    formData.append("website_address", formData.website_address);
-<<<<<<< HEAD
-    if (newImage) {
-      formData.append("profile_pic", newImage);
-    }
-    if (newDocument) {
-      formData.append("document", newDocument);
-    }
-    axios
-      .put(`/api/customer/updatecustomer/${customerId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        console.log("Update Successful", response.data);
-        setIsEditing(false);
-      })
-      .catch((error) => {
-=======
-
-    // Check if a new image has been selected and add it to the FormData
-    if (newImage) {
-      formData.append("profile_pic", newImage);
-    }
-
-    // Check if a new document has been selected and add it to the FormData
-    if (newDocument) {
-      formData.append("document", newDocument);
-    }
-
-    // Send the FormData to the server
-    axios
-      .put(`/api/customer/updatecustomer/${customerId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Use multipart/form-data for file uploads
-        },
-      })
-      .then((response) => {
-        // Handle the success response here
-        console.log("Update Successful", response.data);
-        // You can also add logic to reset the editing state if needed
-        setIsEditing(false);
-      })
-      .catch((error) => {
-        // Handle errors here
->>>>>>> 0fae3907149d631628312965b5b31e11f528fb38
-        console.error("Update Failed", error);
-      });
-  };
- 
-
   return (
     <form encType="multipart/form-data">
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12} lg={12}>
+
+    <Grid container spacing={2}>
+
+<Grid item xs={12} sm={12} md={12} lg={12}>
           <Item className="Business-grid1">
             <div style={{ display: "flex" }}>
               <div style={{ display: "flex" }}>
@@ -221,38 +77,23 @@ function Businessprofile() {
                 />
                 <h5 className="Businessdb-title">Business Profile</h5>
               </div>
+              <button onClick={() => setIsEditing(!isEditing)}>
+        {isEditing ? "Save" : "Edit"}
+      </button>
 
-              <div className="Edit-btn">
-                {isEditing ? (
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    size="small"
-                    onSubmit={()=>handleUpdateClick()}
-                    endIcon={<CreateOutlinedIcon />}
-                  >
-                    Update
-                  </Button>
-                ) : (
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={()=>handleEditClick()}
-                    endIcon={<CreateOutlinedIcon />}
-                  >
-                    Edit
-                  </Button>
-                )}
-              </div>
+            
             </div>
           </Item>
         </Grid>
 
+
         <Grid item xs={12} md={12} lg={12}>
           
-            <Grid container spacing={3}>
 
-              <Grid item xs={12} md={4} lg={4}>
+
+        <Grid container spacing={3}>
+
+        <Grid item xs={12} md={4} lg={4}>
                 <Item>
                   <div className="box-decoration">
                     <div onClick={handleClick} style={{ cursor: "pointer" }}>
@@ -290,18 +131,21 @@ function Businessprofile() {
                 </Item>
               </Grid>
 
-
-
-              <Grid item xs={12} sm={12} md={5} lg={5}>
+        <Grid item xs={12} sm={12} md={5} lg={5}>
                 <div className="Business-name-content">
+
+                
                   <div className="Businessprofile-input">
+                  <label>
+                      <strong> Name :</strong>
+                    </label>
                     {isEditing ? (
-                      <TextField 
+                      <input
                         type="text"
                         name="customer_name"
                         value={formData.customer_name}
                         placeholder="Name"
-                        onChange={(e) => handleInputChange(e)}
+                        onChange={handleInputChange}
                       />
                     ) : (
                       <span>{formData.customer_name}</span>
@@ -328,11 +172,9 @@ function Businessprofile() {
 
                   <br></br>
                 </div>
-              </Grid>
+                </Grid>
 
-
-
-              <Grid xs={12} sm={12} md={5} lg={5}>
+       <Grid xs={12} sm={12} md={5} lg={5}>
                 <div className="Business-name-content1">
                   <div>
                     <label className="BusinessType">
@@ -366,27 +208,10 @@ function Businessprofile() {
                     )}
                   </div>
                 </div>
-
-                {isEditing ? (
-                  <div className="AddBoxIcon">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
               </Grid>
 
-            </Grid>
 
-
-
-
-            <hr
-              style={{
-                background: "#84828A",
-                height: "1px",
-              }}
-            />
+</Grid>
 
 
 
@@ -394,12 +219,7 @@ function Businessprofile() {
 
 
 
-
-
-
-
-
-            <Grid container spacing={2} id="business-grid">
+              <Grid container spacing={2} id="business-grid">
               <Grid item xs={12} sm={12} md={4} lg={4}>
                 <div className="Business_Information">
                   <h4 className="Businessinfo-field">Business Information</h4>
@@ -468,13 +288,7 @@ function Businessprofile() {
                     )}
                   </div>
                 </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon1">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
+                
               </Grid>
               <Grid item xs={12} sm={12} md={4} lg={4}>
                 <div className="Social Media">
@@ -548,83 +362,22 @@ function Businessprofile() {
                   </div>
                   <br></br>
                 </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon2">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
+               
               </Grid>
 
-              {/* <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Item>
-                <div className="Upload">
-                  <h4
-                    className="Upload-field"
-                    onClick={handleDocumentUploadButtonClick}
-                  >
-                    Upload Files
-                  </h4>
-                  <div className="Upload1">
-                    <Button
-                      size="small"
-                      startIcon={<PublishIcon className="icons" />}
-                      className="Publish-Icon"
-                    >
-                      <h6>Upload</h6>
-                    </Button>
-                  </div>
-
-                  <br />
-
-                  <h4 className="Upload-field1">Uploaded Files</h4>
-                  <div className="Upload2">
-                    <div className="Folder-Icon">
-                      <Button
-                        size="small"
-                        startIcon={<FolderIcon className="icons" />}
-                        className="FolderIcon-logo"
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Logo</h6>
-                      </Button>
-                    </div>
-
-                    <div className="Folder-Icon1">
-                      <Button
-                        size="small"
-                        color="primary"
-                        className="FolderIcon-analy"
-                        startIcon={<FolderIcon className="icons" />}
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Analysis</h6>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon3">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
-              </Item>
-            </Grid> */}
+             
               <div className="Upload2">
                 {Array.isArray(formData.document) ? (
                   formData.document.map((document, index) => (
                     <div key={index} className="Uploaded-Document">
-                      <span>{getFileNameFromPath(document.path)}</span>
+                      {/* <span>{getFileNameFromPath(document.path)}</span> */}
                       {isEditing && (
                         <Button
                           size="small"
                           color="primary"
                           className="Delete-Document-Button"
                           startIcon={<DeleteIcon className="icons" />}
-                          onClick={() => handleDeleteDocument(index)}
+                        //   onClick={() => handleDeleteDocument(index)}
                         >
                           Delete
                         </Button>
@@ -676,13 +429,7 @@ function Businessprofile() {
                     )}
                   </div>
                 </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon4">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
+               
               </Grid>
               <Grid item xs={12} sm={12} md={5} lg={5}>
                 <div className="Website">
@@ -703,15 +450,10 @@ function Businessprofile() {
                     )}
                   </div>
                 </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon5">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
+                
               </Grid>
             </Grid>
+
             <Grid container spacing={2} style={{ paddingTop: "30px" }}>
               <Grid item xs={12} sm={12} md={5} lg={5}>
                 <div className="Owner">
@@ -735,14 +477,15 @@ function Businessprofile() {
                 </div>
               </Grid>
             </Grid>
-            <div className="SaveAltIcon1">
-              <SaveAltIcon />
-            </div>
-         
+
+           
         </Grid>
-      </Grid>
-    </form>
+               
+              </Grid>
+
+              </form>      
+              
   );
 }
 
-export default Businessprofile;
+export default NewBusiness;

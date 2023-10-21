@@ -32,7 +32,7 @@ import santhosh from "../../Assets/images/santhosh.jpeg";
 import Businessprofile from "../../Customer/BusinessProfile";
 import Employeeprofile from "../../Employee/Employeeprofile";
 import AddCustomer from "../../Customer/AddCustomer";
-import Typography from "@mui/material/Typography";
+import NewBusiness from "../../Customer/NewBusiness";
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -80,7 +80,7 @@ const SideNavbar = () => {
 
   const currentPath = window.location.pathname;
 
-  const [currentContent, setCurrentContent] = useState(null);
+  // const [currentContent, setCurrentContent] = useState(null);
 
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
@@ -110,13 +110,13 @@ const SideNavbar = () => {
     }
   };
 
-  const handleCusClick = () => {
-    setClickedButton(<Businessprofile />);
-  };
+  // const handleCusClick = () => {
+  //   setClickedButton(<Businessprofile />);
+  // };
 
-  const showCusProfile = () => {
-    setClickedButton(<AddCustomer />);
-  };
+  // const showCusProfile = () => {
+  //   setClickedButton(<AddCustomer />);
+  // };
 
   const showBusinessProfile = () => {
     setClickedButton(<Businessprofile />);
@@ -146,7 +146,7 @@ const SideNavbar = () => {
   // };
 
   const handleProjectClick = () => {
-    setClickedButton(<Businessprofile />);
+    setClickedButton(<NewBusiness />);
   };
 
   const theme = useTheme();

@@ -182,7 +182,7 @@ function Employeeprofile() {
       </Grid>
 
       <Grid item xs={12} md={12} lg={12}>
-        <Item className="emp-grid2">
+        
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={2} lg={2}>
               <div className="box-decoration">
@@ -671,7 +671,6 @@ function Employeeprofile() {
           <div className="SaveAltIcon">
             <SaveAltIcon />
           </div>
-        </Item>
       </Grid>
     </Grid>
   );
