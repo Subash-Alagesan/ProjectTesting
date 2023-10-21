@@ -16,6 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PublishIcon from "@mui/icons-material/Publish";
 import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TextField from '@mui/material/TextField';
 
 function Businessprofile() {
   const { customerId } = useAuth();
@@ -74,6 +75,7 @@ function Businessprofile() {
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
+
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -111,10 +113,10 @@ function Businessprofile() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(`Name: ${name}, Value: ${value}`);
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData({
+      ...formData,
       [name]: value,
-    }));
+    });
   };
   const handleDeleteDocument = (index) => {
     // Logic to delete the document at the specified index from formData.document
@@ -130,8 +132,7 @@ function Businessprofile() {
   }
 
   const handleUpdateClick = () => {
-   
-    const formData = new FormData();    
+    const formData = new FormData();
     formData.append("customer_name", formData.customer_name);
     formData.append("business_name", formData.business_name);
     formData.append("business_type", formData.business_type);
@@ -148,31 +149,27 @@ function Businessprofile() {
     formData.append("linkedin", formData.linkedin);
     formData.append("twitter", formData.twitter);
     formData.append("website_address", formData.website_address);
-      if (newImage) {
+    if (newImage) {
       formData.append("profile_pic", newImage);
-    }  
+    }
     if (newDocument) {
       formData.append("document", newDocument);
-    }    
+    }
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
         },
       })
-      .then((response) => {       
-        console.log("Update Successful", response.data);       
+      .then((response) => {
+        console.log("Update Successful", response.data);
         setIsEditing(false);
       })
-      .catch((error) => {       
+      .catch((error) => {
         console.error("Update Failed", error);
       });
   };
-  useEffect(() => {
-    if (isEditing) {     
-      handleUpdateClick();
-    }
-  }, [isEditing]);
+ 
 
   return (
     <form encType="multipart/form-data">
@@ -192,9 +189,10 @@ function Businessprofile() {
               <div className="Edit-btn">
                 {isEditing ? (
                   <Button
+                    type="submit"
                     variant="contained"
                     size="small"
-                    onClick={handleUpdateClick}
+                    onSubmit={()=>handleUpdateClick()}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Update
@@ -203,7 +201,7 @@ function Businessprofile() {
                   <Button
                     variant="contained"
                     size="small"
-                    onClick={handleEditClick}
+                    onClick={()=>handleEditClick()}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Edit
@@ -259,12 +257,12 @@ function Businessprofile() {
                 <div className="Business-name-content">
                   <div className="Businessprofile-input">
                     {isEditing ? (
-                      <input
+                      <TextField 
                         type="text"
                         name="customer_name"
                         value={formData.customer_name}
                         placeholder="Name"
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     ) : (
                       <span>{formData.customer_name}</span>
@@ -282,7 +280,6 @@ function Businessprofile() {
                         type="text"
                         name="business_name"
                         value={formData.business_name}
-                        ref={hiddenFileInput}
                         onChange={handleInputChange}
                       />
                     ) : (

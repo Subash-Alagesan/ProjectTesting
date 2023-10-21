@@ -267,7 +267,7 @@ function Employee({ handleEmpClick }) {
               </FormControl>
             </div>
           </div>
-          <div className="Datagrid-table">
+          <div className="Datagrid-table" style={{height:"500px"}}>
             <DataGrid
               rows={employees}
               columns={columns}
