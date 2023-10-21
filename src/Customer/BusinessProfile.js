@@ -16,6 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PublishIcon from "@mui/icons-material/Publish";
 import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TextField from '@mui/material/TextField';
 
 function Businessprofile() {
   const { customerId } = useAuth();
@@ -74,6 +75,7 @@ function Businessprofile() {
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
+
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -179,11 +181,7 @@ function Businessprofile() {
         console.error("Update Failed", error);
       });
   };
-  useEffect(() => {
-    if (isEditing) {     
-      handleUpdateClick();
-    }
-  }, [isEditing]);
+ 
 
   return (
     <form encType="multipart/form-data">
@@ -203,9 +201,10 @@ function Businessprofile() {
               <div className="Edit-btn">
                 {isEditing ? (
                   <Button
+                    type="submit"
                     variant="contained"
                     size="small"
-                    onClick={handleUpdateClick}
+                    onSubmit={()=>handleUpdateClick()}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Update
@@ -214,7 +213,7 @@ function Businessprofile() {
                   <Button
                     variant="contained"
                     size="small"
-                    onClick={handleEditClick}
+                    onClick={()=>handleEditClick()}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Edit
@@ -273,12 +272,12 @@ function Businessprofile() {
                 <div className="Business-name-content">
                   <div className="Businessprofile-input">
                     {isEditing ? (
-                      <input
+                      <TextField 
                         type="text"
                         name="customer_name"
                         value={formData.customer_name}
                         placeholder="Name"
-                        onChange={handleInputChange}
+                        onChange={(e) => handleInputChange(e)}
                       />
                     ) : (
                       <span>{formData.customer_name}</span>
@@ -296,7 +295,6 @@ function Businessprofile() {
                         type="text"
                         name="business_name"
                         value={formData.business_name}
-                        ref={hiddenFileInput}
                         onChange={handleInputChange}
                       />
                     ) : (
