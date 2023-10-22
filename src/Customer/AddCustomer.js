@@ -189,8 +189,8 @@ const AddCustomer = () => {
 
         {/* Business Information */}
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Business-Information">
-            <h4 className="Business-field">Business Information</h4>
+          <div className="Bus-Information">
+            <h4 className="Bus-field">Business Information</h4>
             <div className="Business-Name">
               
 
@@ -340,10 +340,10 @@ const AddCustomer = () => {
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Contact_Information">
-            <h4 className="BusinessContact-field">
-              <strong>Contact Details</strong>
+            <h4 className="BusContact-field">
+              Contact Details
             </h4>
-            <div className="Business-Mobileno">
+            <div className="Bus-Mobileno">
            
 <TextField
           label="Business No"
@@ -357,7 +357,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Business-EmailId">
+            <div className="Bus-EmailId">
               
 
 <TextField
@@ -441,10 +441,10 @@ const AddCustomer = () => {
 
         <Grid item xs={12} sm={12} md={3} lg={3}>
           <div className="Contact-Information">
-            <h4 className="BusinessContact-field">
-              <strong>Owner Details</strong>
+            <h4 className="BusContact-field">
+              Owner Details
             </h4>
-            <div className="Business-Mobileno">
+            <div className="Bus-PhoneNo">
               
 <TextField
           label="Phone No"
@@ -458,7 +458,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Business-other">
+            <div className="Bus-other">
              
 <TextField
           label="Other Business"

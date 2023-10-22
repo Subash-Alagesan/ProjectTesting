@@ -189,6 +189,9 @@ function Employeeprofile() {
           <Grid item xs={12} sm={12} md={5} lg={5}>
             <div className="Emp-name-content">
               <div className="empprofile-input">
+              <label>
+                  Name :
+                </label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -210,7 +213,7 @@ function Employeeprofile() {
 
               <div className="Experience">
                 <label>
-                  <strong>Experience :</strong>
+                  Experience :
                 </label>
                 {isEditing ? (
                   <input
@@ -231,7 +234,7 @@ function Employeeprofile() {
               <br></br>
               <div>
                 <label className="empprofile-entername">
-                  <strong>Designation :</strong>
+                  Designation :
                 </label>
                 {isEditing ? (
                   <input
@@ -292,7 +295,7 @@ function Employeeprofile() {
             <h4 className="Info-field">Personal Information</h4>
             <div className="Empprofile-Dob">
               <label>
-                <strong>Date Of Birth :</strong>
+                Date Of Birth :
               </label>
               {isEditing ? (
                 <input
@@ -313,7 +316,7 @@ function Employeeprofile() {
             <br></br>
             <div className="empprofile-Marital">
               <label>
-                <strong>Marital Status : </strong>
+                Marital Status :
               </label>
               {isEditing ? (
                 <input
@@ -335,7 +338,7 @@ function Employeeprofile() {
 
             <div className="empprofile-Marital">
               <label>
-                <strong>Gender :</strong>
+      Gender :
               </label>
               {isEditing ? (
                 <input
@@ -356,7 +359,7 @@ function Employeeprofile() {
             <br></br>
             <div className="empprofile-Marital">
               <label>
-                <strong>Place :</strong>
+                Place :
               </label>
               {isEditing ? (
                 <input
@@ -375,13 +378,13 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          {isEditing ? (
+          {/* {isEditing ? (
             <div className="AddBoxIcon1">
               <AddBoxIcon />
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="Skills">
@@ -390,7 +393,7 @@ function Employeeprofile() {
               employeeProfile.skills.map((skill, index) => (
                 <div key={index} className={`Skill${index + 1}`}>
                   <label>
-                    <strong>Skill {index + 1} :</strong>
+                    Skill {index + 1} :
                   </label>
                   {isEditing ? (
                     <input
@@ -411,11 +414,11 @@ function Employeeprofile() {
                   )}
                 </div>
               ))}
-            {isEditing && (
+            {/* {isEditing && (
               <div className="AddBoxIcon2">
                 <AddBoxIcon />
               </div>
-            )}
+            )} */}
           </div>
         </Grid>
       </Grid>
@@ -428,7 +431,7 @@ function Employeeprofile() {
             </h4>
             <div className="Empprofile-Mobileno">
               <label>
-                <strong>Mobile Number :</strong>
+                Mobile Number :
               </label>
               {isEditing ? (
                 <input
@@ -448,9 +451,9 @@ function Employeeprofile() {
             </div>
             <br></br>
 
-            <div className="Empprofile-EmailId">
+            <div className="Emp-profile-EmailId">
               <label>
-                <strong>Email Id :</strong>
+                Email Id :
               </label>
               {isEditing ? (
                 <input
@@ -469,13 +472,13 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          {isEditing ? (
+          {/* {isEditing ? (
             <div className="AddBoxIcon3">
               <AddBoxIcon />
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="Experience">
@@ -522,13 +525,13 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          {isEditing ? (
+          {/* {isEditing ? (
             <div className="AddBoxIcon4">
               <AddBoxIcon />
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
         </Grid>
       </Grid>
 
@@ -580,13 +583,13 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          {isEditing ? (
+          {/* {isEditing ? (
             <div className="AddBoxIcon5">
               <AddBoxIcon />
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="Security">
@@ -614,13 +617,13 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          {isEditing ? (
+          {/* {isEditing ? (
             <div className="AddBoxIcon6">
               <AddBoxIcon />
             </div>
           ) : (
             <span></span>
-          )}
+          )} */}
         </Grid>
       </Grid>
     </Grid>

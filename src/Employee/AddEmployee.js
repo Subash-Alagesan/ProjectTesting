@@ -122,15 +122,15 @@ const AddEmployee = () => {
     <form encType="multipart/form-data" onSubmit={handleSubmit}>
       <Grid container spacing={2} className="overall-grid-emp">
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <div className="Customer-profile-contact">
+          <div className="Emp-profile-contact">
             {/* <img src={AddAPhotoIcon} alt="Profile" className="Customer-profile-contact-img" /> */}
-            <h5 className="Customer-profile-title">Employee Profile</h5>
+            <h4 className="Emp-profile-title">Employee Profile</h4>
           </div>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={4} lg={4}>
+        <Grid item xs={12} sm={12} md={3} lg={3}>
           <label
-            className="box-decoration"
+            className="emp-image"
             htmlFor="fileInput"
             style={{ cursor: "pointer" }}
           >
@@ -160,8 +160,8 @@ const AddEmployee = () => {
 
         {/* Employee Name */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Customer-name-content">
-            <div className="Customer-profile-input">
+          <div className="Emp-name-content">
+            <div className="Emp-profile-input">
               
 <TextField
           label="Name"
@@ -175,7 +175,7 @@ const AddEmployee = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div className="CustomerName">
+            <div className="Emp-Name">
 <TextField
           label="Experience"
            id="outlined-size-small"
@@ -188,7 +188,7 @@ const AddEmployee = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div>
+            <div className="Emp-Designation">
               <TextField
           label="Enter Designation"
            id="outlined-size-small"
@@ -220,7 +220,7 @@ const AddEmployee = () => {
 
         {/* Employee Type */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Customer-name-content1">
+          <div className="Emp-name-content1">
             <div>
               
                <TextField
@@ -228,7 +228,7 @@ const AddEmployee = () => {
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="education"
                 value={employeeProfile.education}
@@ -243,9 +243,9 @@ const AddEmployee = () => {
 
         {/* Employee Information */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Business_Information">
-            <h4 className="Businessinfo-field">Personal Information</h4>
-            <div className="Businessprofile-Name">
+          <div className="Emp-Info">
+            <h4 className="Emp-field">Personal Information</h4>
+            <div className="Empprofile-DOB">
               <label>
                 <strong>Date of Birth:</strong>
               </label>
@@ -257,7 +257,7 @@ const AddEmployee = () => {
                 scrollableYearDropdown
               />
             </div>
-            <div className="Businessprofile-Place">
+            <div className="Empprofile-Status">
               <label>
                 <strong>Marital Status:</strong>
               </label>
@@ -271,7 +271,7 @@ const AddEmployee = () => {
                 <option value="Married">Married</option>
               </select>
             </div>
-            <div className="Businessprofile-District">
+            <div className="Empprofile-gender">
               <label>
                 <strong>Gender: </strong>
               </label>
@@ -286,14 +286,14 @@ const AddEmployee = () => {
                 <option value="Others">Others</option>
               </select>
             </div>
-            <div className="Businessprofile-Language">
+            <div className="Empprofile-Place">
               
               <TextField
           label="Place"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="place"
                 value={employeeProfile.place}
@@ -304,15 +304,15 @@ const AddEmployee = () => {
               <AddBoxIcon />
             </div> */}
           </div>
-        </Grid>
+        </Grid> 
 
         {/* Skills*/}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Social Media">
-            <h4 className="SocialMedia-field">Skills <AddBoxIcon fontSize="small"  onClick={handleAddSkill} />
+          <div className="Skill">
+            <h4 className="Skill-field">Skills <AddBoxIcon fontSize="small"  onClick={handleAddSkill} />
  </h4>
             {employeeProfile.skills.map((skill, index) => (
-              <div className="Media1" key={index}>
+              <div className="Enter-Skill" key={index}>
                 {/* <label>
                   <strong>Enter Skill {index + 1} :</strong>
                 </label>
@@ -327,7 +327,7 @@ const AddEmployee = () => {
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                   name="skills"
                   value={skill}
@@ -342,46 +342,47 @@ const AddEmployee = () => {
         </Grid>
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Contact_Information">
-            <h4 className="BusinessContact-field">
-              <strong>Contact Details</strong>
+          <div className="Emp-Contact_Information">
+            <h4 className="EmpContact-field">
+             Contact Details
             </h4>
-            <div className="Business-Mobileno">
+            <div className="Emp-Mobileno">
              
 <TextField
           label="Mobile Number"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="mobile_number"
                 value={employeeProfile.mobile_number}
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-EmailId">
+            <div className="Emp-profile-password">
               
               <TextField
           label="Email ID"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="email"
                 value={employeeProfile.email}
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-password">
+            
+            <div className="Emp-profile-password">
              
               <TextField
           label="Password"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="password"
                 value={employeeProfile.password}
@@ -396,16 +397,16 @@ const AddEmployee = () => {
 
         {/* Experience */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Website">
-            <h4 className="Website-field">Experience</h4>
-            <div className="Website1">
+          <div className="Experience-emp">
+            <h4 className="Experience-field-emp">Experience</h4>
+            <div className="Experience1-emp">
               
                <TextField
           label="Enter Experience 1"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="experience_description"
                 value={employeeProfile.experience_description}
@@ -420,25 +421,25 @@ const AddEmployee = () => {
 
         {/* Extra */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Contact_Information">
-            <h4 className="BusinessContact-field">
+          <div className="Extra_Information">
+            <h4 className="EmpExtra-field">
               <strong>Extra</strong>
             </h4>
-            <div className="Business-Mobileno">
+            <div className="Emp-Mobileno">
               
               <TextField
           label="Alternative Phone No"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="alternative_phone_number"
                 value={employeeProfile.alternative_phone_number}
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-EmailId">
+            <div className="empprofile-physicall">
               <label>
                 <strong>Physically Challenged:</strong>
               </label>
@@ -462,32 +463,32 @@ const AddEmployee = () => {
 
         {/* Projects */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Contact_Information">
-            <h4 className="BusinessContact-field">
-              <strong>Projects</strong>
+          <div className="Project_Information">
+            <h4 className="Project-field">
+              Projects
             </h4>
-            <div className="Business-Mobileno">
+            <div className="Portfolio">
               
               <TextField
           label="Portfolio"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="portfolio_url"
                 value={employeeProfile.portfolio_url}
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-EmailId">
+            <div className="Empprofile-Github">
              
               <TextField
           label="Github"
            id="outlined-size-small"
           defaultValue="Small"
           size="small"
-          className="txt-field"
+          className="emp-txt-field"
           type="text"
                 name="github_url"
                 value={employeeProfile.github_url}

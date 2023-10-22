@@ -236,8 +236,8 @@ function Businessprofile() {
 
         <Grid item xs={12} md={12} lg={12}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={4} lg={4}>
-              <Item>
+          <Grid item xs={12} sm={12} md={2} lg={2}>
+              
                 <div className="box-decoration">
                   <div onClick={handleClick} style={{ cursor: "pointer" }}>
                     {isEditing ? (
@@ -260,7 +260,7 @@ function Businessprofile() {
                           type="file"
                           onChange={handleImageChange}
                           ref={hiddenFileInput}
-                          style={{ display: "none", width: 150, height: 150 }}
+                          style={{ display: "none"}}
                         />
                       </>
                     ) : (
@@ -271,14 +271,14 @@ function Businessprofile() {
                     )}
                   </div>
                 </div>
-              </Item>
+           
             </Grid>
 
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Business-name-content">
                 <div className="Businessprofile-input">
                   {isEditing ? (
-                    <TextField
+                    <input
                       type="text"
                       name="customer_name"
                       value={formData.customer_name}
