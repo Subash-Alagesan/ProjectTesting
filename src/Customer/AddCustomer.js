@@ -97,7 +97,7 @@ const AddCustomer = () => {
       <Grid container spacing={2} className="overall-gird">
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <div className="Customer-profile-name">
-            <h5 className="Customer-profile-title">Business Profile</h5>
+            <h4 className="Customer-profile-title">Business Profile</h4>
           </div>
         </Grid>       
         <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -206,6 +206,7 @@ const AddCustomer = () => {
           onChange={handleInputChange}
         />
             </div>
+
             <div className="Business-Place">
              
 <TextField
@@ -260,7 +261,6 @@ const AddCustomer = () => {
             <h4 className="Socialmedia-field">Social Media Links</h4>
             <div className="Media-1">
               
-
 <TextField
           label="Facebook"
            id="outlined-size-small"
@@ -338,7 +338,7 @@ const AddCustomer = () => {
 
 
         {/* Contact Details */}
-        <Grid item xs={12} sm={12} md={3} lg={3}>
+        <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Contact_Information">
             <h4 className="BusinessContact-field">
               <strong>Contact Details</strong>
@@ -357,7 +357,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-EmailId">
+            <div className="Business-EmailId">
               
 
 <TextField
@@ -380,7 +380,7 @@ const AddCustomer = () => {
 
         {/* Website */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Website">
+          <div className="WebsiteCus">
             <h4 className="Website-field">Website</h4>
             <div className="Website1">
               
@@ -405,7 +405,7 @@ const AddCustomer = () => {
 
           {/* Upload Files */}
           <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Upload">
+          <div className="UploadCus">
             <h4 className="Upload-field">Upload Files</h4>
             <div className="Upload1">
               <Button
@@ -440,7 +440,7 @@ const AddCustomer = () => {
    {/* Owner Details */}
 
         <Grid item xs={12} sm={12} md={3} lg={3}>
-          <div className="Contact_Information">
+          <div className="Contact-Information">
             <h4 className="BusinessContact-field">
               <strong>Owner Details</strong>
             </h4>
@@ -458,7 +458,7 @@ const AddCustomer = () => {
                 onChange={handleInputChange}
         />
             </div>
-            <div className="Businessprofile-EmailId">
+            <div className="Business-other">
              
 <TextField
           label="Other Business"
@@ -479,12 +479,14 @@ const AddCustomer = () => {
         </Grid>
 
         <div className="submit-btn">
-          <button
-            type="submit"
-            style={{ backgroundColor: "#6425FE", color: "white" }}
-          >
-            Submit
-          </button>
+          <Button  size="small" style={{ backgroundColor: '#9400D3',
+  color: 'white'}
+ 
+
+} 
+>
+          Submit
+        </Button>
         </div>
       </Grid>
     </form>
