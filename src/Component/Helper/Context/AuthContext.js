@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [customerId, setCustomerId] = useState(null);
+  const[employeeId,setEmployeeId] = useState(null)
 
   // Function to check and set authentication on page load
   const checkAuthentication = () => {
@@ -86,6 +87,8 @@ export const AuthProvider = ({ children }) => {
         error,
         customerId, // Include customerId in the context value
         setCustomerId, // Add a function to set customerId
+        employeeId,
+        setEmployeeId,
       }}
     >
       {children}

@@ -124,9 +124,9 @@ const SideNavbar = () => {
 
   // *****************************************
 
-  const handleAboutClick = () => {
+  const handleAboutClick = ({employeeId}) => {
     if (currentPath === "/employeeprofile") {
-      // setClickedButton(<Employeeprofile />);
+      setClickedButton(<Employeeprofile employeeId= {employeeId}/>);
       setGrid3Component(<EmployeeNavbar />);
     } else {
       setClickedButton(<Employee handleEmpClick={showEmployeeProfile} />);

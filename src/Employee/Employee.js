@@ -1,4 +1,5 @@
 import React, { useState ,useEffect} from "react";
+import { useAuth } from "../Component/Helper/Context/AuthContext";
 import "./Employee.css";
 import axios from "../Component/Axios Base URL/axios";
 import { Grid } from "@mui/material";
@@ -21,6 +22,7 @@ import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 
 function Employee({ handleEmpClick }) {
+  const {setEmployeeId} = useAuth();
   const [employees, setEmployees] = useState([]);
   const columns = [
     {
@@ -60,7 +62,10 @@ function Employee({ handleEmpClick }) {
           variant="contained"
           size="small"
           style={{ background: "#6425FE" }}
-          onClick={handleEmpClick}
+          onClick={() => {
+            const employeeIdForRow = params.row.employee_id;
+            handleEmpClick(employeeIdForRow);
+          setEmployeeId(employeeIdForRow);}}
         >
           view
         </Button>

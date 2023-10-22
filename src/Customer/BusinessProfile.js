@@ -26,6 +26,7 @@ function Businessprofile() {
   const [newDocument, setNewDocument] = useState(null);
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
+  const [newDocumentName, setNewDocumentName] = useState("");
   const [formData, setFormData] = useState({
     customer_name: "",
     business_name: "",
@@ -93,16 +94,20 @@ function Businessprofile() {
 
   const handleDocumentChange = (e) => {
     const file = e.target.files[0];
-    setNewDocument(file);
+    // Check if the selected document is not already in the array
+    if (!formData.document.some((doc) => doc.name === file.name)) {
+      setNewDocument(file);
+      setNewDocumentName(file.name);
+      setFormData((prevData) => ({
+        ...prevData,
+        document: [...prevData.document, file.name], // Store the file name as the document
+      }));
+      console.log("New File is ", file);
+    } else {
+      // Handle the case where the document is already in the array
+      console.log("This document is already in the array.");
+    }
   };
-
-  const handleUploadButtonClick = (file) => {
-    hiddenFileInput.current.click();
-  };
-  const handleDocumentUploadButtonClick = () => {
-    hiddenDocumentInput.current.click();
-  };
-
   const handleClick = (event) => {
     if (isEditing) {
       hiddenFileInput.current.click();
@@ -115,6 +120,7 @@ function Businessprofile() {
       ...formData,
       [name]: value,
     });
+    console.log("after input change", formData);
   };
   const handleDeleteDocument = (index) => {
     const updatedDocuments = [...formData.document];
@@ -125,43 +131,58 @@ function Businessprofile() {
     });
   };
   function getFileNameFromPath(path) {
-    return path.split("-").pop(); // Extracts the last part of the path, which is the file name
+    if (path) {
+      return path.split("-").pop(); // Extracts the last part of the path, which is the file name
+    }
+    return ''; // Extracts the last part of the path, which is the file name
   }
 
   const handleUpdateClick = () => {
-    // Create a new FormData object
-    const formData = new FormData();
+    console.log("Start updating!!!");
+    console.log("isEditing:", isEditing);
+    // Create a new FormData object with a different variable name
+    // const formDataForUpdate = new FormData();
+    // // Add the customer data to the FormData
+    // formDataForUpdate.append("customer_name", formData.customer_name);
+    // formDataForUpdate.append("business_name", formData.business_name);
+    // formDataForUpdate.append("business_type", formData.business_type);
+    // formDataForUpdate.append("business_category", formData.business_category);
+    // formDataForUpdate.append("business_place", formData.business_place);
+    // formDataForUpdate.append("district", formData.district);
+    // formDataForUpdate.append("language", formData.language);
+    // formDataForUpdate.append("business_number", formData.business_number);
+    // formDataForUpdate.append("email", formData.email);
+    // formDataForUpdate.append("phone_number", formData.phone_number);
+    // formDataForUpdate.append("facebook", formData.facebook);
+    // formDataForUpdate.append("instagram", formData.instagram);
+    // formDataForUpdate.append("youtube", formData.youtube);
+    // formDataForUpdate.append("linkedin", formData.linkedin);
+    // formDataForUpdate.append("twitter", formData.twitter);
+    // formDataForUpdate.append("website_address", formData.website_address);
+    // console.log("After updating the updated data", formDataForUpdate);
 
-    // Add the customer data to the FormData
-    formData.append("customer_name", formData.customer_name);
-    formData.append("business_name", formData.business_name);
-    formData.append("business_type", formData.business_type);
-    formData.append("business_category", formData.business_category);
-    formData.append("business_place", formData.business_place);
-    formData.append("district", formData.district);
-    formData.append("language", formData.language);
-    formData.append("business_number", formData.business_number);
-    formData.append("email", formData.email);
-    formData.append("phone_number", formData.phone_number);
-    formData.append("facebook", formData.facebook);
-    formData.append("instagram", formData.instagram);
-    formData.append("youtube", formData.youtube);
-    formData.append("linkedin", formData.linkedin);
-    formData.append("twitter", formData.twitter);
-    formData.append("website_address", formData.website_address);
+    // if (newImage) {
+    //   formDataForUpdate.append("profile_pic", newImage);
+    //   console.log("After Updating the new image",newImage);
+    // }
+    // if (newDocument) {
+    //   formDataForUpdate.append("document", newDocument);
+    //   console.log("After Updating new document", newDocument);
+    // }
+    const formDataForUpdate = new FormData();
 
-    if (newImage) {
-      formData.append("profile_pic", newImage);
+    for (const key in formData) {
+      
+        formDataForUpdate.append(key, formData[key]);
+      
     }
-    if (newDocument) {
-      formData.append("document", newDocument);
-    }
+
+    // Now you can send formDataForUpdate as your updated data
+    console.log("After updating the updated data", formDataForUpdate);
+
+    console.log("FormData just before sending:", formDataForUpdate);
     axios
-      .put(`/api/customer/updatecustomer/${customerId}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Use multipart/form-data for file uploads
-        },
-      })
+      .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate)
       .then((response) => {
         console.log("Update Successful", response.data);
         setIsEditing(false);
@@ -173,7 +194,7 @@ function Businessprofile() {
   };
 
   return (
-    <form encType="multipart/form-data">
+    <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <Item className="Business-grid1">
@@ -193,7 +214,7 @@ function Businessprofile() {
                     type="submit"
                     variant="contained"
                     size="small"
-                    onSubmit={() => handleUpdateClick()}
+                    onClick={() => handleUpdateClick()}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Update
@@ -342,7 +363,6 @@ function Businessprofile() {
               height: "1px",
             }}
           />
-
           <Grid container spacing={2} id="business-grid">
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Business_Information">
@@ -577,6 +597,26 @@ function Businessprofile() {
                 ))
               ) : (
                 <span>No documents uploaded</span>
+              )}
+              {isEditing && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => hiddenDocumentInput.current.click()}
+                  >
+                    Upload New Document
+                  </button>
+                  <input
+                    type="file"
+                    accept=".pdf, .doc, .docx" // Add the accepted file types
+                    onChange={handleDocumentChange}
+                    ref={hiddenDocumentInput}
+                    style={{ display: "none" }}
+                  />
+                  {newDocumentName && (
+                    <p>Selected Document: {newDocumentName}</p>
+                  )}
+                </>
               )}
             </div>
           </Grid>

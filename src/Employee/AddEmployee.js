@@ -78,6 +78,7 @@ const AddEmployee = () => {
       skills: updatedSkills,
     });
   };
+
   const handleAddSkill = () => {
     setEmployeeProfile({
       ...employeeProfile,
@@ -95,22 +96,18 @@ const AddEmployee = () => {
     }
 
     try {
-      const response = await axios.post(
-        "/api/emp/createemployee",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("/api/emp/createemployee", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.status === 200) {
         alert("Added Successfully");
-        if (employeeProfile.isAdmin === "Yes") {         
+        if (employeeProfile.isAdmin === "Yes") {
           alert("Mail Send Successfully!!! and Get the username and Password"); // Alert the user that the email was sent
         }
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
       console.error("Error while sending data: ", error);
