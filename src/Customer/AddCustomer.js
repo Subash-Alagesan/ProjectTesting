@@ -23,11 +23,11 @@ const AddCustomer = () => {
     business_number: "",
     email: "",
     phone_number: "",
-    facebook:"",
-    instagram:"",
-    youtube:"",
-    linkedin:"",
-    twitter:"",
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    linkedin: "",
+    twitter: "",
     website_address: "",
     profile_pic: null,
     document: null,
@@ -70,8 +70,9 @@ const AddCustomer = () => {
 
     for (const key in customerProfile) {
       formData.append(key, customerProfile[key]);
+      console.log(key, customerProfile[key]);
     }
-    
+
     try {
       const response = await axios.post(
         "/api/customer/createcustomer",
@@ -93,13 +94,13 @@ const AddCustomer = () => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>    
+    <form encType="multipart/form-data" onSubmit={handleSubmit}>
       <Grid container spacing={2} className="overall-gird">
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <div className="Customer-profile-name">
             <h4 className="Customer-profile-title">Business Profile</h4>
           </div>
-        </Grid>       
+        </Grid>
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <label
             className="cus-image"
@@ -115,13 +116,13 @@ const AddCustomer = () => {
               />
             ) : (
               // If no image is selected, display the avatar
-              <Avatar sx={{ width: 150, height: 150 }} >
+              <Avatar sx={{ width: 150, height: 150 }}>
                 <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
               </Avatar>
             )}
           </label>
           <input
-          className="cus-image"
+            className="cus-image"
             type="file"
             name="profile_pic"
             id="fileInput"
@@ -135,55 +136,50 @@ const AddCustomer = () => {
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="Cus-name-content">
             <div className="Cus-profile-input">
-       
-            <TextField
-          label="Enter  Name"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
+              <TextField
+                label="Enter  Name"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
                 type="text"
                 name="customer_name"
                 value={customerProfile.customer_name}
                 onChange={handleInputChange}
-        />
+              />
+            </div>
 
-             
-</div>
-            
             <div className="CusName">
-             
-<TextField
-          label="Business Name"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="business_name"
-          value={customerProfile.business_name}
-          onChange={handleInputChange}
-        />
+              <TextField
+                label="Business Name"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="business_name"
+                value={customerProfile.business_name}
+                onChange={handleInputChange}
+              />
             </div>
             <div className="Cus-name-content1">
-            <div className="Cus-name-content2">
-             
-<TextField
-          label="Business Type"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-                name="business_type"
-                value={customerProfile.business_type}
-                onChange={handleInputChange}
-        />
-            </div>
-            {/* <div className="AddBoxIcon">
+              <div className="Cus-name-content2">
+                <TextField
+                  label="Business Type"
+                  id="outlined-size-small"
+                  defaultValue="Small"
+                  size="small"
+                  className="txt-field"
+                  type="text"
+                  name="business_type"
+                  value={customerProfile.business_type}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {/* <div className="AddBoxIcon">
               <AddBoxIcon />
             </div> */}
-          </div>
+            </div>
           </div>
         </Grid>
 
@@ -192,62 +188,57 @@ const AddCustomer = () => {
           <div className="Business-Information">
             <h4 className="Business-field">Business Information</h4>
             <div className="Business-Name">
-              
-
-<TextField
-          label="Business Name"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="business_name"
-          value={customerProfile.business_name}
-          onChange={handleInputChange}
-        />
+              <TextField
+                label="Business Name"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="business_name"
+                value={customerProfile.business_name}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="Business-Place">
-             
-<TextField
-          label="Business Place"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Business Place"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="business_place"
                 value={customerProfile.business_place}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Business-District">
-             
-<TextField
-          label="District"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="District"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="district"
                 value={customerProfile.district}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Business-Language">
-             
-<TextField
-          label="Language"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Language"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="language"
                 value={customerProfile.language}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon1">
               <AddBoxIcon />
@@ -260,74 +251,69 @@ const AddCustomer = () => {
           <div className="Social-media">
             <h4 className="Socialmedia-field">Social Media Links</h4>
             <div className="Media-1">
-              
-<TextField
-          label="Facebook"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="facebook"
-          value={customerProfile.facebook}
-          onChange={handleInputChange}
-        />
+              <TextField
+                label="Facebook"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="facebook"
+                value={customerProfile.facebook}
+                onChange={handleInputChange}
+              />
             </div>
             <div className="Media-2">
-              
-<TextField
-          label="Instagram"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Instagram"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="instagram"
                 value={customerProfile.instagram}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Media-3">
-             
-<TextField
-          label="Youtube"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="youtube"
-          value={customerProfile.youtube}
-          onChange={handleInputChange}
-        />
+              <TextField
+                label="Youtube"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="youtube"
+                value={customerProfile.youtube}
+                onChange={handleInputChange}
+              />
             </div>
             <div className="Media-4">
-             
               <TextField
-          label="LinkedIn"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+                label="LinkedIn"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="linkedin"
                 value={customerProfile.linkedin}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Media-5">
-              
-<TextField
-          label="Twitter"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Twitter"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="twitter"
                 value={customerProfile.twitter}
                 onChange={handleInputChange}
-        />
+              />
             </div>
 
             {/* <div className="AddBox-Icon2">
@@ -336,7 +322,6 @@ const AddCustomer = () => {
           </div>
         </Grid>
 
-
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Contact_Information">
@@ -344,33 +329,30 @@ const AddCustomer = () => {
               <strong>Contact Details</strong>
             </h4>
             <div className="Business-Mobileno">
-           
-<TextField
-          label="Business No"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Business No"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="business_number"
                 value={customerProfile.business_number}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Business-EmailId">
-              
-
-<TextField
-          label="Email Id"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="email"
-          value={customerProfile.email}
-          onChange={handleInputChange}
-        />
+              <TextField
+                label="Email Id"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="email"
+                value={customerProfile.email}
+                onChange={handleInputChange}
+              />
             </div>
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -383,18 +365,17 @@ const AddCustomer = () => {
           <div className="WebsiteCus">
             <h4 className="Website-field">Website</h4>
             <div className="Website1">
-              
-<TextField
-          label="Website 1"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Website 1"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="website_address"
                 value={customerProfile.website_address}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div>{/* <button>Add Customer</button> */}</div>
             {/* <div className="AddBox-Icon5">
@@ -403,8 +384,8 @@ const AddCustomer = () => {
           </div>
         </Grid>
 
-          {/* Upload Files */}
-          <Grid item xs={12} sm={12} md={4} lg={4}>
+        {/* Upload Files */}
+        <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="UploadCus">
             <h4 className="Upload-field">Upload Files</h4>
             <div className="Upload1">
@@ -426,7 +407,7 @@ const AddCustomer = () => {
               type="file"
               id="documentInput"
               name="document"
-              accept=".pdf, .doc, .docx" 
+              accept=".pdf, .doc, .docx"
               style={{ display: "none" }}
               onChange={handleDocumentUpload}
             />
@@ -437,7 +418,7 @@ const AddCustomer = () => {
           </div>
         </Grid>
 
-   {/* Owner Details */}
+        {/* Owner Details */}
 
         <Grid item xs={12} sm={12} md={3} lg={3}>
           <div className="Contact-Information">
@@ -445,32 +426,30 @@ const AddCustomer = () => {
               <strong>Owner Details</strong>
             </h4>
             <div className="Business-Mobileno">
-              
-<TextField
-          label="Phone No"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Phone No"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="business_number"
                 value={customerProfile.phone_number}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Business-other">
-             
-<TextField
-          label="Other Business"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Other Business"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="business_category"
                 value={customerProfile.business_category}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -479,14 +458,13 @@ const AddCustomer = () => {
         </Grid>
 
         <div className="submit-btn">
-          <Button  size="small" style={{ backgroundColor: '#9400D3',
-  color: 'white'}
- 
-
-} 
->
-          Submit
-        </Button>
+          <Button
+            type="submit"
+            size="small"
+            style={{ backgroundColor: "#9400D3", color: "white" }}
+          >
+            Submit
+          </Button>
         </div>
       </Grid>
     </form>

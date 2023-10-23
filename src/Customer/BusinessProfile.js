@@ -171,10 +171,9 @@ function Businessprofile() {
     // }
     const formDataForUpdate = new FormData();
 
-    for (const key in formData) {
-      
-        formDataForUpdate.append(key, formData[key]);
-      
+    for (const key in formData) {      
+        formDataForUpdate.append(key, formData[key]);   
+        console.log("key",key);   
     }
 
     // Now you can send formDataForUpdate as your updated data
@@ -222,6 +221,7 @@ function Businessprofile() {
                 ) : (
                   <Button
                     variant="contained"
+                    type="button"
                     size="small"
                     onClick={() => handleEditClick()}
                     endIcon={<CreateOutlinedIcon />}
