@@ -185,8 +185,8 @@ const AddCustomer = () => {
 
         {/* Business Information */}
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Business-Information">
-            <h4 className="Business-field">Business Information</h4>
+          <div className="Bus-Information">
+            <h4 className="Bus-field">Business Information</h4>
             <div className="Business-Name">
               <TextField
                 label="Business Name"
@@ -325,34 +325,37 @@ const AddCustomer = () => {
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Contact_Information">
-            <h4 className="BusinessContact-field">
-              <strong>Contact Details</strong>
+            <h4 className="BusContact-field">
+              Contact Details
             </h4>
-            <div className="Business-Mobileno">
-              <TextField
-                label="Business No"
-                id="outlined-size-small"
-                defaultValue="Small"
-                size="small"
-                className="txt-field"
-                type="text"
+            <div className="Bus-Mobileno">
+           
+<TextField
+          label="Business No"
+           id="outlined-size-small"
+          defaultValue="Small"
+          size="small"
+          className="txt-field"
+          type="text"
                 name="business_number"
                 value={customerProfile.business_number}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Business-EmailId">
-              <TextField
-                label="Email Id"
-                id="outlined-size-small"
-                defaultValue="Small"
-                size="small"
-                className="txt-field"
-                type="text"
-                name="email"
-                value={customerProfile.email}
-                onChange={handleInputChange}
-              />
+            <div className="Bus-EmailId">
+              
+
+<TextField
+          label="Email Id"
+           id="outlined-size-small"
+          defaultValue="Small"
+          size="small"
+          className="txt-field"
+          type="text"
+          name="email"
+          value={customerProfile.email}
+          onChange={handleInputChange}
+        />
             </div>
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -422,30 +425,32 @@ const AddCustomer = () => {
 
         <Grid item xs={12} sm={12} md={3} lg={3}>
           <div className="Contact-Information">
-            <h4 className="BusinessContact-field">
-              <strong>Owner Details</strong>
+            <h4 className="BusContact-field">
+              Owner Details
             </h4>
-            <div className="Business-Mobileno">
-              <TextField
-                label="Phone No"
-                id="outlined-size-small"
-                defaultValue="Small"
-                size="small"
-                className="txt-field"
-                type="text"
+            <div className="Bus-PhoneNo">
+              
+<TextField
+          label="Phone No"
+           id="outlined-size-small"
+          defaultValue="Small"
+          size="small"
+          className="txt-field"
+          type="text"
                 name="business_number"
                 value={customerProfile.phone_number}
                 onChange={handleInputChange}
               />
             </div>
-            <div className="Business-other">
-              <TextField
-                label="Other Business"
-                id="outlined-size-small"
-                defaultValue="Small"
-                size="small"
-                className="txt-field"
-                type="text"
+            <div className="Bus-other">
+             
+<TextField
+          label="Other Business"
+           id="outlined-size-small"
+          defaultValue="Small"
+          size="small"
+          className="txt-field"
+          type="text"
                 name="business_category"
                 value={customerProfile.business_category}
                 onChange={handleInputChange}

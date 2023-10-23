@@ -6,6 +6,169 @@
   
   }
   .submit-btn1{
-    padding-left: 500px;
+    padding-left: 600px;
     padding-top: 0px;
+    position: relative;
+    margin-bottom: 10px;
+    margin-right: 0;
    }
+   .Emp-profile-title{
+    color: #3B3B3B;
+    font-family: Roboto;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+padding-top: 10px;
+padding-left: 10px;
+   }
+   .emp-image{  
+    padding-right: 30px;
+    padding-left: 50px;
+   }
+   .Emp-profile-input,
+   .Emp-Name,
+   .Emp-Designation{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 10px;
+   }
+   .Emp-name-content{
+    margin-top: -30px;
+   }
+   .Emp-field{
+    font-family: Roboto;
+    font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0em;
+text-align: left;
+margin-top: 20px;
+
+   }
+   .Empprofile-DOB,
+   .Empprofile-Status,
+   .Empprofile-gender,
+   .Empprofile-Place{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+   }
+   .Skill-field{
+    font-family: Roboto;
+    font-size: 12px;
+font-weight: 600;
+letter-spacing: 0em;
+text-align: left;
+margin-top: 8px;
+
+   }
+   .Enter-Skill{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+   }
+.EmpContact-field{
+  font-family: Roboto;
+font-size: 18px;
+font-weight: 600;
+letter-spacing: 0em;
+text-align: left;
+
+}
+
+.Emp-Mobileno,
+.Empprofile-EmailId,
+.Emp-profile-password{
+  color: var(--Gray, #84828A);
+  font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.Emp-Contact_Information{
+margin-top: 20px;
+}
+.Experience-field-emp{
+  font-family: Roboto;
+  font-size: 18px;
+font-weight: 600;
+letter-spacing: 0em;
+text-align: left;
+margin-top: 8px;
+
+  }
+  .Experience1-emp{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 10px;
+  }
+  .Experience-emp{
+    margin-left: 30px;
+    margin-top: 10px;
+  }
+
+  .EmpExtra-field{
+    font-family: Roboto;
+font-size: 18px;
+font-weight: 600;
+letter-spacing: 0em;
+text-align: left;
+
+  }
+
+  .Emp-Mobileno,
+  .empprofile-physicall{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 10px;
+  }
+
+  .Project-field{
+    font-family: Roboto;
+font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0em;
+text-align: left;
+
+  }
+
+  .Portfolio,
+  .Empprofile-Github{
+    color: var(--Gray, #84828A);
+    font-family: Roboto;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 10px;
+  }
+  
+
+ 

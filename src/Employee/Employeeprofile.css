@@ -112,12 +112,25 @@
         text-align: left;
         padding-top: 60px;
         padding-left: 40px;
+        font-family: Robotto;
+font-size: 18px;
+font-weight: 600;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: left;
+
     }
 
 
 
     .empprofile-entername {
-        font-size: 15px;
+        font-family: Robotto;
+font-size: 18px;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+
     }
 
 
@@ -131,14 +144,23 @@
     }
 
     .Experience {
-        font-size: 15px;
+        
+        margin-top: 10px;
+        margin-left: 3px;
+        font-family: Robotto;
+font-size: 18px;
+font-weight: 400;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: left;
+
 
     }
 
     .education {
         font-size: 15px;
-
-
+        margin-right:30px;
+        margin-top: 10px;
     }
 
     .Empprofile-Dob {
@@ -151,17 +173,26 @@
 
         text-align: left;
         padding-left: 70px;
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: 0em;
     }
 
 
 
 
     .Skill-field {
-        text-align: left;
         padding-left: 65px;
         font-size: 17px;
-        font-family: "Info-field";
         padding-top: 15px;
+        font-family: Inter;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0em;
+text-align: left;
+
     }
 
     .Skill1 {
@@ -174,6 +205,13 @@
     .Skill4 {
         text-align: left;
         padding-left: 68px;
+        color: var(--Gray, #84828A);
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
 
     }
 
@@ -260,11 +298,8 @@
             position: absolute;
             top: 1380px;
             right: 60px;
-
         }
     }
-
-
     .AddBoxIcon5 {
         color: #6425FE;
         position: absolute;
@@ -298,11 +333,15 @@
 
 
     .Info-field {
-        font-size: 17px;
-        font-family: "Info-field";
-        text-align: left;
         padding-left: 70px;
         padding-top: 15px;
+        font-family: Inter;
+font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0em;
+text-align: left;
+
     }
 
     /* @font-face {
@@ -315,7 +354,11 @@
         padding-left: 70px;
         padding-top: 45px;
         font-size: 17px;
-        font-family: "Info-field";
+        font-family: Inter;
+font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+letter-spacing: 0em;
     }
 
     /* 
@@ -347,17 +390,25 @@
 
     .empprofile-input {
         padding-right: 40px;
+        font-family: Robotto;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+        
+
     }
 
-    .Empprofile-Mobileno {
+    .Empprofile-Mobileno,
+    .Emp-profile-EmailId {
         padding-top: 15px;
-        text-align: left;
         padding-left: 70px;
-    }
-
-    .Empprofile-EmailId {
-        padding-left: 70px;
-        text-align: left;
+        font-family: Inter;
+font-size: 18px;
+font-weight: 500;
+letter-spacing: 0em;
+text-align: left;
     }
 
     .Extra-field {
@@ -413,4 +464,7 @@
             right: 50px;
             top: 1800px;
         }
+    }
+    .Contact_Information{
+        margin-top:45px;
     }
