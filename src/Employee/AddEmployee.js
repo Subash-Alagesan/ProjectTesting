@@ -10,8 +10,8 @@ import "./AddEmployee.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { async } from "q";
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
 const AddEmployee = () => {
@@ -76,18 +76,20 @@ const AddEmployee = () => {
   const handleSkillChange = (e, index) => {
     const updatedSkills = [...employeeProfile.skills];
     updatedSkills[index] = e.target.value;
-    setEmployeeProfile({
-      ...employeeProfile,
+    setEmployeeProfile((prevProfile) => ({
+      ...prevProfile,
       skills: updatedSkills,
-    });
+    }));
   };
 
   const handleAddSkill = () => {
-    setEmployeeProfile({
-      ...employeeProfile,
-      skills: [...employeeProfile.skills, ""],
+    setEmployeeProfile((prevProfile) => {
+      const updatedSkills = [...prevProfile.skills];
+      updatedSkills.push(""); // Add an empty skill field
+      return { ...prevProfile, skills: updatedSkills };
     });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -162,45 +164,43 @@ const AddEmployee = () => {
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Emp-name-content">
             <div className="Emp-profile-input">
-              
-<TextField
-          label="Name"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Name"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="name"
                 value={employeeProfile.name}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Emp-Name">
-<TextField
-          label="Experience"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
+              <TextField
+                label="Experience"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
                 name="experience"
                 value={employeeProfile.experience}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Emp-Designation">
               <TextField
-          label="Enter Designation"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="txt-field"
-          type="text"
-          name="designation"
-          value={employeeProfile.designation}
-          onChange={handleInputChange}
-        />
-              
+                label="Enter Designation"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="txt-field"
+                type="text"
+                name="designation"
+                value={employeeProfile.designation}
+                onChange={handleInputChange}
+              />
             </div>
             <div>
               <label htmlFor="isAdmin">Is Admin?</label>
@@ -222,18 +222,17 @@ const AddEmployee = () => {
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Emp-name-content1">
             <div>
-              
-               <TextField
-          label="Education"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+              <TextField
+                label="Education"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="education"
                 value={employeeProfile.education}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBoxIcon">
               <AddBoxIcon />
@@ -287,107 +286,91 @@ const AddEmployee = () => {
               </select>
             </div>
             <div className="Empprofile-Place">
-              
               <TextField
-          label="Place"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Place"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="place"
                 value={employeeProfile.place}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon1">
               <AddBoxIcon />
             </div> */}
           </div>
-        </Grid> 
+        </Grid>
 
         {/* Skills*/}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Skill">
-            <h4 className="Skill-field">Skills <AddBoxIcon fontSize="small"  onClick={handleAddSkill} />
- </h4>
+            <h4 className="Skill-field">
+              Skills
+              <AddBoxIcon fontSize="small" onClick={handleAddSkill} />
+            </h4>
             {employeeProfile.skills.map((skill, index) => (
-              <div className="Enter-Skill" key={index}>
-                {/* <label>
-                  <strong>Enter Skill {index + 1} :</strong>
-                </label>
-                <input
-                  type="text"
-                  name="skills"
-                  value={skill}
-                  onChange={(e) => handleSkillChange(e, index)}
-                /> */}
+              <div className="Enter-Skill" key={skill.employee_skill_id}>
                 <TextField
-          label="Enter Skill"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
-                  name="skills"
-                  value={skill}
+                  label={`Enter Skill ${index + 1}`}
+                  id="outlined-size-small"
+                 
+                  size="small"
+                  className="emp-txt-field"
+                  type="text"
+                  name={`skills[${index}]`}
+                  value={skill.skill_name}
                   onChange={(e) => handleSkillChange(e, index)}
-        />
+                />
               </div>
             ))}
-            {/* <div className="AddBox-Icon" onClick={handleAddSkill}>
-              <AddBoxIcon />
-            </div> */}
           </div>
         </Grid>
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Emp-Contact_Information">
-            <h4 className="EmpContact-field">
-             Contact Details
-            </h4>
+            <h4 className="EmpContact-field">Contact Details</h4>
             <div className="Emp-Mobileno">
-             
-<TextField
-          label="Mobile Number"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+              <TextField
+                label="Mobile Number"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="mobile_number"
                 value={employeeProfile.mobile_number}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Emp-profile-password">
-              
               <TextField
-          label="Email ID"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Email ID"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="email"
                 value={employeeProfile.email}
                 onChange={handleInputChange}
-        />
+              />
             </div>
-            
+
             <div className="Emp-profile-password">
-             
               <TextField
-          label="Password"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Password"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="password"
                 value={employeeProfile.password}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -400,18 +383,17 @@ const AddEmployee = () => {
           <div className="Experience-emp">
             <h4 className="Experience-field-emp">Experience</h4>
             <div className="Experience1-emp">
-              
-               <TextField
-          label="Enter Experience 1"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+              <TextField
+                label="Enter Experience 1"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="experience_description"
                 value={employeeProfile.experience_description}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon5">
               <AddBoxIcon />
@@ -426,18 +408,17 @@ const AddEmployee = () => {
               <strong>Extra</strong>
             </h4>
             <div className="Emp-Mobileno">
-              
               <TextField
-          label="Alternative Phone No"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Alternative Phone No"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="alternative_phone_number"
                 value={employeeProfile.alternative_phone_number}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="empprofile-physicall">
               <label>
@@ -453,7 +434,6 @@ const AddEmployee = () => {
                 <option value="No">No</option>
               </select>
             </div>
-            
 
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -464,36 +444,32 @@ const AddEmployee = () => {
         {/* Projects */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Project_Information">
-            <h4 className="Project-field">
-              Projects
-            </h4>
+            <h4 className="Project-field">Projects</h4>
             <div className="Portfolio">
-              
               <TextField
-          label="Portfolio"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Portfolio"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="portfolio_url"
                 value={employeeProfile.portfolio_url}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             <div className="Empprofile-Github">
-             
               <TextField
-          label="Github"
-           id="outlined-size-small"
-          defaultValue="Small"
-          size="small"
-          className="emp-txt-field"
-          type="text"
+                label="Github"
+                id="outlined-size-small"
+                defaultValue="Small"
+                size="small"
+                className="emp-txt-field"
+                type="text"
                 name="github_url"
                 value={employeeProfile.github_url}
                 onChange={handleInputChange}
-        />
+              />
             </div>
             {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
@@ -502,16 +478,14 @@ const AddEmployee = () => {
         </Grid>
 
         <div className="submit-btn1">
-          <Button  size="small" style={{ backgroundColor: '#9400D3',
-  color: 'white'}
- 
-
-} 
->
-          Submit
-        </Button>
+          <Button
+            type="submit"
+            size="small"
+            style={{ backgroundColor: "#9400D3", color: "white" }}
+          >
+            Submit
+          </Button>
         </div>
-
       </Grid>
     </form>
   );
