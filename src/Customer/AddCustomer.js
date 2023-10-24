@@ -9,6 +9,9 @@ import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import "./AddCustomer.css";
 import { TextField } from "@mui/material";
+import { Formik, Field, ErrorMessage, Form } from 'formik';
+import * as Yup from 'yup';
+
 
 const AddCustomer = () => {
   const [uploadedFileName, setUploadedFileName] = useState("");
@@ -31,6 +34,12 @@ const AddCustomer = () => {
     website_address: "",
     profile_pic: null,
     document: null,
+  });
+
+
+  const validationSchema = Yup.object().shape({
+    customer_name: Yup.string().required('Customer name is required'),
+    business_name: Yup.string().required('Business name is required'),
   });
 
   const handleInputChange = (e) => {
@@ -94,6 +103,15 @@ const AddCustomer = () => {
   };
 
   return (
+    <Formik
+    initialValues={{
+      customer_name: customerProfile.customer_name,
+      business_name: customerProfile.business_name,
+    }}
+    validationSchema={validationSchema}
+    onSubmit={handleSubmit}
+  >
+    {({ values, errors, touched }) => (
     <form encType="multipart/form-data" onSubmit={handleSubmit}>
       <Grid container spacing={2} className="overall-gird">
         <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -147,6 +165,7 @@ const AddCustomer = () => {
                 value={customerProfile.customer_name}
                 onChange={handleInputChange}
               />
+              <ErrorMessage name="customer_name" component="div" className="error" />
             </div>
 
             <div className="CusName">
@@ -161,6 +180,7 @@ const AddCustomer = () => {
                 value={customerProfile.business_name}
                 onChange={handleInputChange}
               />
+              <ErrorMessage name="business_name" component="div" className="error" />
             </div>
             <div className="Cus-name-content1">
               <div className="Cus-name-content2">
@@ -423,7 +443,7 @@ const AddCustomer = () => {
 
         {/* Owner Details */}
 
-        <Grid item xs={12} sm={12} md={3} lg={3}>
+        <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Contact-Information">
             <h4 className="BusContact-field">
               Owner Details
@@ -473,6 +493,8 @@ const AddCustomer = () => {
         </div>
       </Grid>
     </form>
+    )}
+    </Formik>
   );
 };
 

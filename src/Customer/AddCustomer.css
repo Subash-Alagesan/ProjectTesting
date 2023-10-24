@@ -126,12 +126,13 @@ padding-left: 10px;
   padding-left: 28px;
 }
 .submit-btn{
- padding-left: 400px;
- padding-top: 150px;
+ padding-left: 600px;
+ padding-top: 30px;
  margin-bottom: 10px;
+ position: relative;
 }
 .Contact_Information{
-  margin-top: 40px;
+  padding-top: 30px;
 }
 
 .BusContact-field{
