@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../../Component/Axios Base URL/axios";
 import { useAuth } from "../../Component/Helper/Context/AuthContext";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@mui/material";
@@ -77,10 +78,23 @@ const SideNavbar = () => {
   const [clickedButton, setClickedButton] = useState(<MainContent />);
 
   const [grid3Component, setGrid3Component] = useState(<RightNavbar />);
+  const [admins, setAdmins] = useState([]);
 
   const currentPath = window.location.pathname;
-
+ 
   // const [currentContent, setCurrentContent] = useState(null);
+
+  useEffect(() => {
+    // Fetch the list of admins from your backend when the component mounts
+    axios
+      .get("/api/emp/getalladmins") // Replace with your actual API route
+      .then((response) => {
+        setAdmins(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching admins:", error);
+      });
+  }, []);
 
   const handleHomeClick = () => {
     setClickedButton(<MainContent />);
@@ -124,9 +138,9 @@ const SideNavbar = () => {
 
   // *****************************************
 
-  const handleAboutClick = ({employeeId}) => {
+  const handleAboutClick = ({ employeeId }) => {
     if (currentPath === "/employeeprofile") {
-      setClickedButton(<Employeeprofile employeeId= {employeeId}/>);
+      setClickedButton(<Employeeprofile employeeId={employeeId} />);
       setGrid3Component(<EmployeeNavbar />);
     } else {
       setClickedButton(<Employee handleEmpClick={showEmployeeProfile} />);
@@ -250,7 +264,7 @@ const SideNavbar = () => {
               </div>
               <div></div>
 
-              <List>
+              {/* <List>
                 <h4 className="admin1">No Admin created</h4>
                 <div className="adm-btn">
                   <Button
@@ -322,6 +336,41 @@ const SideNavbar = () => {
                     <MoreVertIcon className="icon1" />
                   </Button>
                 </div>
+              </List> */}
+              <List>
+                {admins.length > 0 ? (
+                  admins.map((admin, index) => (
+                    <Button
+                      key={index}
+                      variant=""
+                      color="primary"
+                      style={{
+                        width: "190px",
+                        height: "60px",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        marginLeft: "30px",
+                      }}
+                    >
+                      <StyledBadge overlap="circular">
+                        <Avatar
+                          img
+                          src={`http://localhost:4070/uploads/images/${admin.profile_pic}`}
+                          alt={admin.name}
+                        />
+                      </StyledBadge>
+                      <Box>
+                        <div className="title">
+                          <h1 className="subtitle">{admin.name}</h1>
+                          <p className="body2">{admin.designation}</p>
+                        </div>
+                      </Box>
+                      <MoreVertIcon className="icon1" />
+                    </Button>
+                  ))
+                ) : (
+                  <h4 className="admin1">No Admin created</h4>
+                )}
               </List>
             </Drawer>
           </Box>

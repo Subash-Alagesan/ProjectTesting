@@ -43,7 +43,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function RightNavbar() {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const {user, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -51,7 +51,9 @@ export default function RightNavbar() {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-
+  const imageUrl = 
+   `http://localhost:4070/uploads/images/${user.profile_pic}`
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -160,9 +162,9 @@ export default function RightNavbar() {
         <List>
           <div className="right-navbar-container">
             <div className="super_admin">
-              <img src={super_admin} alt="super admin" />
+              <img src={imageUrl} alt="super admin" />
               <h3 className="admin-name">
-                <b>Peter Prem Kumar</b>
+                <b>{user.name}</b>
               </h3>
               <p className="admin-role">Founder</p>
             </div>

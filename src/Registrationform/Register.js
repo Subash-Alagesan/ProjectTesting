@@ -7,7 +7,6 @@ import * as Yup from "yup";
 
 function Register() {
   const navigate = useNavigate();
-  
 
   const validationSchema = Yup.object({
     name: Yup.string().required("User Name is required"),
@@ -23,7 +22,6 @@ function Register() {
       "You must agree to the Terms and Conditions"
     ),
     profile_pic: Yup.mixed().required("Profile Picture is required").nullable(),
-
   });
 
   const initialValues = {
@@ -58,7 +56,7 @@ function Register() {
         }
       );
       const data = response.data;
-      console.log(data);     
+      console.log(data);
       alert(data.message);
       navigate("/");
     } catch (error) {
