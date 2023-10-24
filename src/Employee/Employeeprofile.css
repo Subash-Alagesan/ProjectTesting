@@ -466,5 +466,23 @@ text-align: left;
         }
     }
     .Contact_Information{
-        margin-top:45px;
+        margin-top:10px;
+    }
+    .Security1{
+        margin-left: 70px;
+        margin-top: 30px;
+    }
+    .Extra-Information1{
+        margin-left: 70px;
+        margin-top: 30px;
+    }
+    .empprofile-physically{
+        margin-top: 20px;
+    }
+    .Emp-Mob-no{
+        margin-top: 20px;  
+    }
+    .PortFolio{
+       padding-left: 550px; 
+       margin-top: -120px;
     }

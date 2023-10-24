@@ -328,6 +328,8 @@ const AddEmployee = () => {
             ))}
           </div>
         </Grid>
+
+        
         {/* Contact Details */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Emp-Contact_Information">

@@ -154,7 +154,7 @@ function Employeeprofile() {
 
       <Grid item xs={12} md={12} lg={12}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={2} lg={2}>
+          <Grid item xs={12} sm={12} md={3} lg={3}>
             <div className="box-decoration">
               <div onClick={handleClick} style={{ cursor: "pointer" }}>
                 {image ? (
@@ -186,7 +186,7 @@ function Employeeprofile() {
               </button>
             </div>
           </Grid>
-          <Grid item xs={12} sm={12} md={5} lg={5}>
+          <Grid item xs={12} sm={12} md={4} lg={4}>
             <div className="Emp-name-content">
               <div className="empprofile-input">
               <label>
@@ -252,10 +252,35 @@ function Employeeprofile() {
                   <span>{employeeProfile.designation}</span>
                 )}
               </div>
+              <br></br>
+              <div>
+                <label className="empprofile-isadmin">
+                Is Admin?
+                </label>
+                {isEditing ? (
+                  <select
+                  id="isAdmin"
+                  name="isAdmin"
+                  value={employeeProfile.isAdmin}
+                  onChange={(e) =>
+                    setEmployeeProfile({
+                      ...employeeProfile,
+                      isAdmin: e.target.value,
+                    })
+                  }
+                >
+                  <option value="Select">select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                ) : (
+                  <span>{employeeProfile.isAdmin}</span>
+                )}
+              </div>
             </div>
           </Grid>
 
-          <Grid xs={12} sm={12} md={5} lg={5}>
+          <Grid xs={12} sm={12} md={4} lg={4}>
             <div className="Emp-name-content1">
               <div>
                 <label className="education">
@@ -319,17 +344,21 @@ function Employeeprofile() {
                 Marital Status :
               </label>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.marital_status}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      marital_status: e.target.value,
-                    })
-                  }
-                />
+               
+                <select
+                name="marital_status"
+                value={employeeProfile.marital_status}
+                onChange={(e) =>
+                  setEmployeeProfile({
+                    ...employeeProfile,
+                    marital_status: e.target.value,
+                  })
+                }
+              >
+                <option value="Select">select</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+              </select>
               ) : (
                 <span>{employeeProfile.marital_status}</span>
               )}
@@ -338,20 +367,25 @@ function Employeeprofile() {
 
             <div className="empprofile-Marital">
               <label>
-      Gender :
+                  Gender :
               </label>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.gender}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      gender: e.target.value,
-                    })
-                  }
-                />
+                
+                <select
+                name="gender"
+                value={employeeProfile.gender}
+                onChange={(e) =>
+                  setEmployeeProfile({
+                    ...employeeProfile,
+                    gender: e.target.value,
+                  })
+                }
+              >
+                <option value="Select">select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
               ) : (
                 <span>{employeeProfile.gender}</span>
               )}
@@ -472,6 +506,33 @@ function Employeeprofile() {
               )}
             </div>
           </div>
+
+          <div className="Security1">
+            {/* <h4 className="security-field">
+              <strong>Security</strong>
+            </h4> */}
+            <div className="Password1">
+              <label>
+                <strong>Password :</strong>
+              </label>
+              {isEditing ? (
+                <input
+                  type="password"
+                  value={employeeProfile.password}
+                  className="empprofile-entername-input"
+                  onChange={(e) =>
+                    setEmployeeProfile({
+                      ...employeeProfile,
+                      password: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <span>{employeeProfile.password}</span>
+              )}
+            </div>
+          </div>
+          
           {/* {isEditing ? (
             <div className="AddBoxIcon3">
               <AddBoxIcon />
@@ -535,6 +596,65 @@ function Employeeprofile() {
         </Grid>
       </Grid>
 
+      <Grid item xs={12} sm={12} md={6} lg={6}>
+      <div className="Extra-Information1">
+            <h4 className="EmpExtra--field1">
+              <strong>Extra</strong>
+            </h4>
+            <div className="Emp-Mob-no">
+            <label>
+                <strong>Alternative Phone No :</strong>
+              </label>
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={employeeProfile.alternative_phone_number}
+                  className="empprofile-input"
+                  onChange={(e) =>
+                    setEmployeeProfile({
+                      ...employeeProfile,
+                      alternative_phone_number: e.target.value,
+                    })
+                  }
+                />
+              ) : (
+                <span>{employeeProfile.alternative_phone_number}</span>
+              )}
+             
+            </div>
+            <div className="empprofile-physically">
+              <label>
+                <strong>Physically Challenged:</strong>
+              </label>
+              {isEditing ? (
+             
+                <select
+                name="physically_challenged"
+                value={employeeProfile.physically_challenged}
+                onChange={(e) =>
+                  setEmployeeProfile({
+                    ...employeeProfile,
+                    physically_challenged: e.target.value,
+                  })
+                }
+              >
+                <option value="Select">select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              ) : (
+                <span>{employeeProfile.physically_challenged}</span>
+              )}
+             
+              
+            </div>
+
+            {/* <div className="AddBox-Icon4">
+              <AddBoxIcon />
+            </div> */}
+          </div>
+      </Grid>
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="PortFolio">
@@ -543,7 +663,7 @@ function Employeeprofile() {
             </h4>
             <div className="Portfolio-url">
               <label>
-                <strong>Portfolio URL :</strong>
+                <strong>Projects</strong>
               </label>
               {isEditing ? (
                 <input
@@ -591,40 +711,7 @@ function Employeeprofile() {
             <span></span>
           )} */}
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Security">
-            <h4 className="security-field">
-              <strong>Security</strong>
-            </h4>
-            <div className="Password">
-              <label>
-                <strong>Password :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="password"
-                  value={employeeProfile.password}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.password}</span>
-              )}
-            </div>
-          </div>
-          {/* {isEditing ? (
-            <div className="AddBoxIcon6">
-              <AddBoxIcon />
-            </div>
-          ) : (
-            <span></span>
-          )} */}
-        </Grid>
+       
       </Grid>
     </Grid>
   );
