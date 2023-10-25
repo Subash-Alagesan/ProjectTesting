@@ -518,7 +518,7 @@ function Employeeprofile() {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Contact_Information">
+          <div className="Contact_Information1">
             <h4 className="Contact-field">
               <strong>Contact Details</strong>
             </h4>
@@ -707,20 +707,20 @@ function Employeeprofile() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="PortFolio">
             <h4 className="Portfolio-field">
               <strong>Portfolio</strong>
             </h4>
             <div className="Portfolio-url">
               <label>
-                <strong>Projects</strong>
+                <strong>Projects : </strong>
               </label>
               {isEditing ? (
                 <input
                   type="text"
                   value={employeeProfile.portfolio_url}
-                  className="empprofile-entername-input"
+                  className="empprofile-entername-input1"
                   onChange={(e) =>
                     setEmployeeProfile({
                       ...employeeProfile,
@@ -731,8 +731,10 @@ function Employeeprofile() {
               ) : (
                 <span>{employeeProfile.portfolio_url}</span>
               )}
+              
             </div>
             <br></br>
+
             <div className="GitHub-url">
               <label>
                 <strong>Github URL :</strong>
@@ -741,7 +743,7 @@ function Employeeprofile() {
                 <input
                   type="text"
                   value={employeeProfile.github_url}
-                  className="empprofile-entername-input"
+                  className="empprofile-entername-input1"
                   onChange={(e) =>
                     setEmployeeProfile({
                       ...employeeProfile,

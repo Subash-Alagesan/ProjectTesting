@@ -69,9 +69,6 @@ export default function RightNavbar() {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width:'1500',
-  backgroundColor: '#F7F6F9',
-  border: '2px solid #000',
-  boxShadow: 24,
   p: 4,
   };
   
@@ -85,7 +82,7 @@ export default function RightNavbar() {
   }
 
   const handleClose = () => {
-    setModalContent(null); // Reset the modal content
+    setModalContent(null); 
     setIsModalOpen(false);
   }
 

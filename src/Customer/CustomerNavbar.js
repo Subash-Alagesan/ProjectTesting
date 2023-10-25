@@ -22,8 +22,14 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import profile from "../Assets/images/Profile.png";
 import Businessprofile from "./BusinessProfile";
+import Modal from '@mui/material/Modal';
+import AddCustomer from "../Customer/AddCustomer";
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
+import Grid from '@mui/material/Grid';
 
-function CustomerNavbar({handleCusClick}) {
+
+function CustomerNavbar() {
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -84,9 +90,30 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     setOpen(false);
   };
 
-  // const handleCusClick = () => {
-  //   <Businessprofile />
-  // };
+  const gridStyle  = {
+    position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width:'1500',
+  backgroundColor: '#F7F6F9',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  };
+  
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState(null);
+
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  }
+
+  const handleClose = () => {
+    setModalContent(null); 
+    setIsModalOpen(false);
+  }
 
   return (
     <Box>
@@ -259,13 +286,36 @@ const DrawerHeader = styled("div")(({ theme }) => ({
                 <p className="admin-name1">Add New Customer</p>
               </div>
 
-              <button className="add-customer-button"  onClick={handleCusClick}>
+              <button className="add-customer-button" onClick={() => handleOpen(<AddCustomer />)}>
                 <div className="button-content">
                   <ControlPointIcon className="icon" />
                   <span className="button-text">Add Customer</span>
                 </div>
               </button>
             </div>
+
+            <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={isModalOpen}>
+         
+          <Grid item  xs={12} sm={12} md={6} lg={6} style={gridStyle}>
+          
+          {modalContent}
+         
+        </Grid>
+        </Fade>
+      </Modal>
 
             <div className="logout-button1">
               <button className="logout-button" onClick={handleLogout}>

@@ -34,6 +34,8 @@ import Businessprofile from "../../Customer/BusinessProfile";
 import Employeeprofile from "../../Employee/Employeeprofile";
 import AddCustomer from "../../Customer/AddCustomer";
 import NewBusiness from "../../Customer/NewBusiness";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -264,6 +266,8 @@ const SideNavbar = () => {
               </div>
               <div></div>
 
+              <h4 className="admin1">No Admin created</h4>
+
               {/* <List>
                 <h4 className="admin1">No Admin created</h4>
                 <div className="adm-btn">
@@ -372,6 +376,14 @@ const SideNavbar = () => {
                   <h4 className="admin1">No Admin created</h4>
                 )}
               </List>
+
+              <button className="create-admin-button">
+        <div className="button-content">
+          <ControlPointIcon className="icon" />
+          <span className="button-text">Create Admin</span>
+        </div>
+      </button>
+
             </Drawer>
           </Box>
         </Grid>

@@ -21,6 +21,11 @@ import { Button } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import profile from '../Assets/images/Profile.png';
+import Modal from '@mui/material/Modal';
+import AddEmployee from "../Employee/AddEmployee";
+import Backdrop from '@mui/material/Backdrop';
+import Fade from '@mui/material/Fade';
+import Grid from '@mui/material/Grid';
 
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -80,6 +85,32 @@ export default function EmployeeNavbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const gridStyle  = {
+    position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width:'1500',
+  backgroundColor: '#F7F6F9',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  };
+  
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState(null);
+
+  const handleOpen = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  }
+
+  const handleClose = () => {
+    setModalContent(null); 
+    setIsModalOpen(false);
+  }
+
 
   return (
     <Box >
@@ -263,7 +294,7 @@ export default function EmployeeNavbar() {
         <p className="admin-name1">Add New Employee</p>
       </div>
 
-      <button className="add-customer-button">
+      <button className="add-customer-button" onClick={() => handleOpen(<AddEmployee />)}>
         <div className="button-content">
           <ControlPointIcon className="icon" />
           <span className="button-text">Add Employee</span>
@@ -272,6 +303,29 @@ export default function EmployeeNavbar() {
 
   
       </div>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={isModalOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={isModalOpen}>
+         
+          <Grid item  xs={12} sm={12} md={6} lg={6} style={gridStyle}>
+          
+          {modalContent}
+         
+        </Grid>
+        </Fade>
+      </Modal>
 
       <div className='logout-button1'>
       <button className="logout-button" onClick={handleLogout}>
