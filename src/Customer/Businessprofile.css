@@ -111,6 +111,7 @@ Input {
 
 .profile-BusinessType {
     font-size: 14px;
+    margin-top: 20px;
 
 }
 
@@ -173,7 +174,7 @@ Input {
 }
 
 
-.Upload-field {
+.Upload {
     text-align: left;
     padding-left: 20px;
     font-size: 15px;
