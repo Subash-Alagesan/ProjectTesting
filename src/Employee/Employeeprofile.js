@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "../Component/Axios Base URL/axios";
 import { useAuth } from "../Component/Helper/Context/AuthContext";
 import { styled } from "@mui/material/styles";
@@ -11,7 +11,6 @@ import Button from "@mui/material/Button";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
-import { useState, useRef } from "react";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import Input from "@mui/material/Input";
@@ -20,12 +19,11 @@ function Employeeprofile() {
   const { employeeId } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const imageBaseUrl = "http://localhost:4070/uploads/images/";
-   
-  const[newImage,setNewImage]=useState(null)
- 
-  
+  const [newImage, setNewImage] = useState(null);
+  const [newSkill, setNewSkill] = useState([]);
+
   const [employeeProfile, setEmployeeProfile] = useState({
-    profile_pic: null,
+    profile_pic: "",
     name: "",
     experience: "",
     designation: "",
@@ -45,14 +43,30 @@ function Employeeprofile() {
     github_url: "",
     password: "",
   });
-  const [image, setImage] = useState(
-    isEditing
-      ? newImage
-        ? URL.createObjectURL(newImage)
-        : `${imageBaseUrl}${employeeProfile.profile_pic}`
-      : `${imageBaseUrl}${employeeProfile.profile_pic}`
-  );
-  
+  const handleInputChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+
+    setEmployeeProfile({
+      ...employeeProfile,
+      [fieldName]: value,
+    });
+  };
+
+  const handleNewSkillChange = (e) => {
+    setNewSkill(e.target.value);
+  };
+
+  // Define the function to add a new skill
+  const handleAddNewSkill = () => {
+    // Assuming employeeProfile.skills is an array
+    setEmployeeProfile((prevProfile) => ({
+      ...prevProfile,
+      skills: [...prevProfile.skills, newSkill],
+    }));
+    // Clear the newSkill input field
+    setNewSkill("");
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -64,7 +78,7 @@ function Employeeprofile() {
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  }));  
+  }));
   const hiddenFileInput = useRef(null);
 
   useEffect(() => {
@@ -90,11 +104,8 @@ function Employeeprofile() {
     console.log("Selected image:", file);
     if (file) {
       setNewImage(file);
-      setImage(URL.createObjectURL(file)); // Update the image state with the new image
     }
   };
-
-  const handleUploadButtonClick = () => {};
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -134,7 +145,13 @@ function Employeeprofile() {
         "physically_challenged",
         employeeProfile.physically_challenged
       );
-      formDataForEmployeeUpdate.append("skills", employeeProfile.skills);
+      if (employeeProfile.skills && Array.isArray(employeeProfile.skills)) {
+        // Check if employeeProfile.skills is defined and an array
+        employeeProfile.skills.forEach((skill, index) => {
+          formDataForEmployeeUpdate.append(`skills[${index}]`, skill);
+        });
+      }
+
       formDataForEmployeeUpdate.append(
         "experience_description",
         employeeProfile.experience_description
@@ -150,15 +167,17 @@ function Employeeprofile() {
       formDataForEmployeeUpdate.append("password", employeeProfile.password);
       if (newImage) {
         formDataForEmployeeUpdate.append("profile_pic", newImage);
-        setImage(URL.createObjectURL(newImage)); // Update the image state with the new image
-        console.log("after changing image", newImage);
+        console.log("New image selected", newImage);
       } else {
-        // If no new image is selected, include the existing profile_pic value
+        // If no new image is selected, include the existing profile_pic value as a URL
         formDataForEmployeeUpdate.append("profile_pic", employeeProfile.profile_pic);
-        console.log("without changing image");
+        console.log("Using existing image");
       }
       
-      
+      formDataForEmployeeUpdate.forEach((value, key) => {
+        console.log(`Field: ${key}, Value: ${value}`);
+      });
+
       const response = await axios.put(
         `/api/emp/updateEmployee/${employeeId}`,
         formDataForEmployeeUpdate,
@@ -172,600 +191,469 @@ function Employeeprofile() {
       console.log("Job updated successfully:", response.data);
       setEmployeeProfile({
         ...employeeProfile,
-        profile_pic:response.data.profile_pic,
-      })
+        profile_pic: response.data.profile_pic,
+      });
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating Employee:", error);
-    }    
+    }
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>   
-    <Grid container spacing={2} className="EmpDetail">
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <Item className="emp-grid1">
-          <div style={{ display: "flex" }}>
+    <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>
+      <Grid container spacing={2} className="EmpDetail">
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Item className="emp-grid1">
             <div style={{ display: "flex" }}>
-              <img
-                src={contact_page}
-                alt=""
-                className="Employeedb-profile-contact-img"
-              />
-              <h5 className="Employeedb-title">Employee Profile</h5>
-            </div>
+              <div style={{ display: "flex" }}>
+                <img
+                  src={contact_page}
+                  alt=""
+                  className="Employeedb-profile-contact-img"
+                />
+                <h5 className="Employeedb-title">Employee Profile</h5>
+              </div>
 
-            <div className="Edit-btn">
-              {isEditing ? (
-                <Button
-                  variant="contained"
-                  type="submit"
-                  size="small"
-                  onClick={handleUpdateClick}
-                  endIcon={<CreateOutlinedIcon />}
-                >
-                  Update
-                </Button>
-              ) : (
-                <Button
-                  type="button"
-                  variant="contained"
-                  size="small"
-                  onClick={handleEditClick}
-                  endIcon={<CreateOutlinedIcon />}
-                >
-                  Edit
-                </Button>
-              )}
+              <div className="Edit-btn">
+                {isEditing ? (
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    size="small"
+                    onClick={handleUpdateClick}
+                    endIcon={<CreateOutlinedIcon />}
+                  >
+                    Update
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="contained"
+                    size="small"
+                    onClick={handleEditClick}
+                    endIcon={<CreateOutlinedIcon />}
+                  >
+                    Edit
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
-        </Item>
-      </Grid>
+          </Item>
+        </Grid>
 
-      <Grid item xs={12} md={12} lg={12}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={3} lg={3}>
-            <div className="box-decoration">
-              <div onClick={handleClick} style={{ cursor: "pointer" }}>
-              {isEditing ? (
-                      <>
-                        {newImage ? ( // Check if a new image is selected
-                          <img
-                            src={URL.createObjectURL(newImage)}
-                            alt="Profile Picture"
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        ) : (
-                          <img
-                            src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
-                            alt="Profile Picture"
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        )}
-                        <input
-                          id="image-upload-input"
-                          type="file"
-                          onChange={handleImageChange}
-                          ref={hiddenFileInput}
-                          style={{ display: "none"}}
+        <Grid item xs={12} md={12} lg={12}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={12} md={3} lg={3}>
+              <div className="box-decoration">
+                <div onClick={handleClick} style={{ cursor: "pointer" }}>
+                  {isEditing ? (
+                    <>
+                      {newImage ? ( // Check if a new image is selected
+                        <img
+                          src={URL.createObjectURL(newImage)}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
                         />
-                      </>
-                    ) : (
-                      <Avatar
-                        sx={{ width: 150, height: 150 }}
-                        src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
+                      ) : (
+                        <img
+                          src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      )}
+                      <input
+                        id="image-upload-input"
+                        type="file"
+                        onChange={handleImageChange}
+                        ref={hiddenFileInput}
+                        style={{ display: "none" }}
                       />
-                    )}
+                    </>
+                  ) : (
+                    <Avatar
+                      sx={{ width: 150, height: 150 }}
+                      src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
+                    />
+                  )}
+                </div>
               </div>
-              <button
-                className="image-upload-button"
-                onClick={() => handleUploadButtonClick(image)}
-              >
-                Upload
-              </button>
-            </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+              <div className="Emp-name-content">
+                <div className="empprofile-input">
+                  <label>Name :</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="name"
+                      value={employeeProfile.name}
+                      placeholder="Name"
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{employeeProfile.name}</span>
+                  )}
+                </div>
+                <br></br>
+
+                <div className="Experience">
+                  <label>Experience :</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="experience"
+                      value={employeeProfile.experience}
+                      className="empprofile-entername-input"
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{employeeProfile.experience}</span>
+                  )}
+                </div>
+                <br></br>
+                <div>
+                  <label className="empprofile-entername">Designation :</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="designation"
+                      value={employeeProfile.designation}
+                      className="empprofile-entername-input"
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{employeeProfile.designation}</span>
+                  )}
+                </div>
+                <br></br>
+                <div>
+                  <label className="empprofile-isadmin">Is Admin?</label>
+                  {isEditing ? (
+                    <select
+                      id="isAdmin"
+                      name="isAdmin"
+                      value={employeeProfile.isAdmin}
+                      onChange={handleInputChange}
+                    >
+                      <option value="Select">select</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  ) : (
+                    <span>{employeeProfile.isAdmin}</span>
+                  )}
+                </div>
+              </div>
+            </Grid>
+
+            <Grid xs={12} sm={12} md={4} lg={4}>
+              <div className="Emp-name-content1">
+                <div>
+                  <label className="education">
+                    <strong>Education :</strong>
+                  </label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="education"
+                      value={employeeProfile.education}
+                      className="empprofile-entername-input"
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{employeeProfile.education}</span>
+                  )}
+                </div>
+                <br></br>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <div className="Emp-name-content">
-              <div className="empprofile-input">
-                <label>Name :</label>
+          <hr
+            style={{
+              background: "#84828A",
+              height: "1px",
+            }}
+          />
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <div className="Personal_Information">
+              <h4 className="Info-field">Personal Information</h4>
+              <div className="Empprofile-Dob">
+                <label>Date Of Birth :</label>
                 {isEditing ? (
                   <input
                     type="text"
-                    value={employeeProfile.name}
-                    placeholder="Name"
-                    onChange={(e) =>
-                      setEmployeeProfile({
-                        ...employeeProfile,
-                        name: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  <span>{employeeProfile.name}</span>
-                )}
-              </div>
-
-              <br></br>
-
-              <div className="Experience">
-                <label>Experience :</label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={employeeProfile.experience}
+                    name="dob"
+                    value={employeeProfile.dob}
                     className="empprofile-entername-input"
-                    onChange={(e) =>
-                      setEmployeeProfile({
-                        ...employeeProfile,
-                        experience: e.target.value,
-                      })
-                    }
+                    onChange={handleInputChange}
                   />
                 ) : (
-                  <span>{employeeProfile.experience}</span>
+                  <span>{employeeProfile.dob}</span>
                 )}
               </div>
               <br></br>
-              <div>
-                <label className="empprofile-entername">Designation :</label>
-                {isEditing ? (
-                  <input
-                    type="text"
-                    value={employeeProfile.designation}
-                    className="empprofile-entername-input"
-                    onChange={(e) =>
-                      setEmployeeProfile({
-                        ...employeeProfile,
-                        designation: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  <span>{employeeProfile.designation}</span>
-                )}
-              </div>
-              <br></br>
-              <div>
-                <label className="empprofile-isadmin">Is Admin?</label>
+              <div className="empprofile-Marital">
+                <label>Marital Status :</label>
                 {isEditing ? (
                   <select
-                    id="isAdmin"
-                    name="isAdmin"
-                    value={employeeProfile.isAdmin}
-                    onChange={(e) =>
-                      setEmployeeProfile({
-                        ...employeeProfile,
-                        isAdmin: e.target.value,
-                      })
-                    }
+                    name="marital_status"
+                    value={employeeProfile.marital_status}
+                    onChange={handleInputChange}
                   >
                     <option value="Select">select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
                   </select>
                 ) : (
-                  <span>{employeeProfile.isAdmin}</span>
+                  <span>{employeeProfile.marital_status}</span>
+                )}
+              </div>
+              <br></br>
+              <div className="empprofile-Marital">
+                <label>Gender :</label>
+                {isEditing ? (
+                  <select
+                    name="gender"
+                    value={employeeProfile.gender}
+                    onChange={handleInputChange}
+                  >
+                    <option value="Select">select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                  </select>
+                ) : (
+                  <span>{employeeProfile.gender}</span>
+                )}
+              </div>
+              <br></br>
+              <div className="empprofile-Marital">
+                <label>Place :</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="place"
+                    value={employeeProfile.place}
+                    className="empprofile-entername-input"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.place}</span>
                 )}
               </div>
             </div>
           </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <div className="Skills">
+              <h4 className="Skill-field">Skills</h4>
+              {employeeProfile.skills &&
+                employeeProfile.skills.map((skill, index) => (
+                  <div key={index} className={`Skill${index + 1}`}>
+                    <label>Skill {index + 1} :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name={`skills[${index}]`}
+                        value={skill}
+                        className="empprofile-entername-input"
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{skill}</span>
+                    )}
+                  </div>
+                ))}
+              {isEditing &&
+              employeeProfile.skills &&
+              employeeProfile.skills.length === 0 ? (
+                <div>
+                  <label>Add a new skill:</label>
+                  <input
+                    type="text"
+                    name="newSkill" // Use a unique name for the new skill
+                    className="empprofile-entername-input"
+                    onChange={handleNewSkillChange} // Create a handler for new skill input
+                  />
+                </div>
+              ) : null}
 
-          <Grid xs={12} sm={12} md={4} lg={4}>
-            <div className="Emp-name-content1">
-              <div>
-                <label className="education">
-                  <strong>Education :</strong>
+              {isEditing && (
+                <div className="AddBoxIcon2">
+                  <AddBoxIcon onClick={handleAddNewSkill} />{" "}
+                  {/* Add a click handler for adding the new skill */}
+                </div>
+              )}
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <div className="Contact_Information1">
+              <h4 className="Contact-field">
+                <strong>Contact Details</strong>
+              </h4>
+              <div className="Empprofile-Mobileno">
+                <label>Mobile Number :</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="mobile_number"
+                    value={employeeProfile.mobile_number}
+                    className="empprofile-entername-input"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.mobile_number}</span>
+                )}
+              </div>
+              <br></br>
+
+              <div className="Emp-profile-EmailId">
+                <label>Email Id :</label>
+                {isEditing ? (
+                  <input
+                    type="Email"
+                    name="email"
+                    value={employeeProfile.email}
+                    className="empprofile-entername-input"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.email}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="Security1">
+              <div className="Password1">
+                <label>
+                  <strong>Password :</strong>
+                </label>
+                {isEditing ? (
+                  <input
+                    type="password"
+                    name="password"
+                    value={employeeProfile.password}
+                    className="empprofile-entername-input"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.password}</span>
+                )}
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <div className="Experience">
+              <h4 className="Experience-field">Experience</h4>
+              <div className="Experience1">
+                <label>
+                  <strong>Experience 1 :</strong>
                 </label>
                 {isEditing ? (
                   <input
                     type="text"
-                    value={employeeProfile.education}
+                    name="experience_description"
+                    value={employeeProfile.experience_description}
                     className="empprofile-entername-input"
-                    onChange={(e) =>
-                      setEmployeeProfile({
-                        ...employeeProfile,
-                        education: e.target.value,
-                      })
-                    }
+                    onChange={handleInputChange}
                   />
                 ) : (
-                  <span>{employeeProfile.education}</span>
+                  <span>{employeeProfile.experience_description}</span>
                 )}
               </div>
-              <br></br>
             </div>
           </Grid>
         </Grid>
-        <hr
-          style={{
-            background: "#84828A",
-            height: "1px",
-          }}
-        />
-      </Grid>
 
-      <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Personal_Information">
-            <h4 className="Info-field">Personal Information</h4>
-            <div className="Empprofile-Dob">
-              <label>Date Of Birth :</label>
+          <div className="Extra-Information1">
+            <h4 className="EmpExtra--field1">
+              <strong>Extra</strong>
+            </h4>
+            <div className="Emp-Mob-no">
+              <label>
+                <strong>Alternative Phone No :</strong>
+              </label>
               {isEditing ? (
                 <input
                   type="text"
-                  value={employeeProfile.dob}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      dob: e.target.value,
-                    })
-                  }
+                  name="alternative_phone_number"
+                  value={employeeProfile.alternative_phone_number}
+                  className="empprofile-input"
+                  onChange={handleInputChange}
                 />
               ) : (
-                <span>{employeeProfile.dob}</span>
+                <span>{employeeProfile.alternative_phone_number}</span>
               )}
             </div>
-            <br></br>
-            <div className="empprofile-Marital">
-              <label>Marital Status :</label>
+            <div className="empprofile-physically">
+              <label>
+                <strong>Physically Challenged:</strong>
+              </label>
               {isEditing ? (
                 <select
-                  name="marital_status"
-                  value={employeeProfile.marital_status}
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      marital_status: e.target.value,
-                    })
-                  }
+                  name="physically_challenged"
+                  value={employeeProfile.physically_challenged}
+                  onChange={handleInputChange}
                 >
                   <option value="Select">select</option>
-                  <option value="Single">Single</option>
-                  <option value="Married">Married</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
                 </select>
               ) : (
-                <span>{employeeProfile.marital_status}</span>
-              )}
-            </div>
-            <br></br>
-
-            <div className="empprofile-Marital">
-              <label>Gender :</label>
-              {isEditing ? (
-                <select
-                  name="gender"
-                  value={employeeProfile.gender}
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      gender: e.target.value,
-                    })
-                  }
-                >
-                  <option value="Select">select</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Others">Others</option>
-                </select>
-              ) : (
-                <span>{employeeProfile.gender}</span>
-              )}
-            </div>
-            <br></br>
-            <div className="empprofile-Marital">
-              <label>Place :</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.place}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      place: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.place}</span>
+                <span>{employeeProfile.physically_challenged}</span>
               )}
             </div>
           </div>
-          {/* {isEditing ? (
-            <div className="AddBoxIcon1">
-              <AddBoxIcon />
-            </div>
-          ) : (
-            <span></span>
-          )} */}
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Skills">
-            <h4 className="Skill-field">Skills</h4>
-            {employeeProfile.skills &&
-              employeeProfile.skills.map((skill, index) => (
-                <div key={index} className={`Skill${index + 1}`}>
-                  <label>Skill {index + 1} :</label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={skill}
-                      className="empprofile-entername-input"
-                      onChange={(e) => {
-                        const newSkills = [...employeeProfile.skills];
-                        newSkills[index] = e.target.value;
-                        setEmployeeProfile({
-                          ...employeeProfile,
-                          skills: newSkills,
-                        });
-                      }}
-                    />
-                  ) : (
-                    <span>{skill}</span>
-                  )}
-                </div>
-              ))}
-            {/* {isEditing && (
-              <div className="AddBoxIcon2">
-                <AddBoxIcon />
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12} md={4} lg={4}>
+            <div className="PortFolio">
+              <h4 className="Portfolio-field">
+                <strong>Portfolio</strong>
+              </h4>
+              <div className="Portfolio-url">
+                <label>
+                  <strong>Projects : </strong>
+                </label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="portfolio_url"
+                    value={employeeProfile.portfolio_url}
+                    className="empprofile-entername-input1"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.portfolio_url}</span>
+                )}
               </div>
-            )} */}
-          </div>
+              <br></br>
+
+              <div className="GitHub-url">
+                <label>
+                  <strong>Github URL :</strong>
+                </label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="github_url"
+                    value={employeeProfile.github_url}
+                    className="empprofile-entername-input1"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.github_url}</span>
+                )}
+              </div>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Contact_Information1">
-            <h4 className="Contact-field">
-              <strong>Contact Details</strong>
-            </h4>
-            <div className="Empprofile-Mobileno">
-              <label>Mobile Number :</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.mobile_number}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      mobile_number: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.mobile_number}</span>
-              )}
-            </div>
-            <br></br>
-
-            <div className="Emp-profile-EmailId">
-              <label>Email Id :</label>
-              {isEditing ? (
-                <input
-                  type="Email"
-                  value={employeeProfile.email}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      email: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.email}</span>
-              )}
-            </div>
-          </div>
-
-          <div className="Security1">
-            {/* <h4 className="security-field">
-              <strong>Security</strong>
-            </h4> */}
-            <div className="Password1">
-              <label>
-                <strong>Password :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="password"
-                  value={employeeProfile.password}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.password}</span>
-              )}
-            </div>
-          </div>
-
-          {/* {isEditing ? (
-            <div className="AddBoxIcon3">
-              <AddBoxIcon />
-            </div>
-          ) : (
-            <span></span>
-          )} */}
-        </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div className="Experience">
-            <h4 className="Experience-field">Experience</h4>
-            <div className="Experience1">
-              <label>
-                <strong>Experience 1 :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.experience_description}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      experience_description: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.experience_description}</span>
-              )}
-            </div>
-            <br></br>
-            <div className="Experience2">
-              <label>
-                <strong>Experience 2 :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.experience_description2}
-                  className="empprofile-entername-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      experience_description2: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.experience_description2}</span>
-              )}
-            </div>
-          </div>
-          {/* {isEditing ? (
-            <div className="AddBoxIcon4">
-              <AddBoxIcon />
-            </div>
-          ) : (
-            <span></span>
-          )} */}
-        </Grid>
-      </Grid>
-
-      <Grid item xs={12} sm={12} md={6} lg={6}>
-        <div className="Extra-Information1">
-          <h4 className="EmpExtra--field1">
-            <strong>Extra</strong>
-          </h4>
-          <div className="Emp-Mob-no">
-            <label>
-              <strong>Alternative Phone No :</strong>
-            </label>
-            {isEditing ? (
-              <input
-                type="text"
-                value={employeeProfile.alternative_phone_number}
-                className="empprofile-input"
-                onChange={(e) =>
-                  setEmployeeProfile({
-                    ...employeeProfile,
-                    alternative_phone_number: e.target.value,
-                  })
-                }
-              />
-            ) : (
-              <span>{employeeProfile.alternative_phone_number}</span>
-            )}
-          </div>
-          <div className="empprofile-physically">
-            <label>
-              <strong>Physically Challenged:</strong>
-            </label>
-            {isEditing ? (
-              <select
-                name="physically_challenged"
-                value={employeeProfile.physically_challenged}
-                onChange={(e) =>
-                  setEmployeeProfile({
-                    ...employeeProfile,
-                    physically_challenged: e.target.value,
-                  })
-                }
-              >
-                <option value="Select">select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            ) : (
-              <span>{employeeProfile.physically_challenged}</span>
-            )}
-          </div>
-
-          {/* <div className="AddBox-Icon4">
-              <AddBoxIcon />
-            </div> */}
-        </div>
-      </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="PortFolio">
-            <h4 className="Portfolio-field">
-              <strong>Portfolio</strong>
-            </h4>
-            <div className="Portfolio-url">
-              <label>
-                <strong>Projects : </strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.portfolio_url}
-                  className="empprofile-entername-input1"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      portfolio_url: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.portfolio_url}</span>
-              )}
-              
-            </div>
-            <br></br>
-
-            <div className="GitHub-url">
-              <label>
-                <strong>Github URL :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.github_url}
-                  className="empprofile-entername-input1"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      github_url: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.github_url}</span>
-              )}
-            </div>
-          </div>
-          {/* {isEditing ? (
-            <div className="AddBoxIcon5">
-              <AddBoxIcon />
-            </div>
-          ) : (
-            <span></span>
-          )} */}
-        </Grid>
-      </Grid>
-    </Grid>
     </form>
   );
 }
