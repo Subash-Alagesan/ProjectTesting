@@ -13,7 +13,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import Input from "@mui/material/Input";
+
 
 function Employeeprofile() {
   const { employeeId } = useAuth();
