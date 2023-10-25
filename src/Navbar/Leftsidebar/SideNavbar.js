@@ -266,7 +266,7 @@ const SideNavbar = () => {
               </div>
               <div></div>
 
-              <h4 className="admin1">No Admin created</h4>
+             
 
               {/* <List>
                 <h4 className="admin1">No Admin created</h4>

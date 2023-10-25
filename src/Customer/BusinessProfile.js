@@ -103,7 +103,8 @@ function Businessprofile() {
         document: [...prevData.document, file.name], // Store the file name as the document
       }));
       console.log("New File is ", file);
-    } else {      
+    } else {
+      // Handle the case where the document is already in the array
       console.log("This document is already in the array.");
     }
   };
@@ -234,7 +235,7 @@ function Businessprofile() {
 
         <Grid item xs={12} md={12} lg={12}>
           <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={3} lg={3}>
+          <Grid item xs={12} sm={12} md={2} lg={2}>
               
                 <div className="box-decoration">
                   <div onClick={handleClick} style={{ cursor: "pointer" }}>
@@ -272,7 +273,7 @@ function Businessprofile() {
            
             </Grid>
 
-            <Grid item xs={12} sm={12} md={4} lg={4}>
+            <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Business-name-content">
                 <div className="Businessprofile-input">
                   {isEditing ? (
@@ -306,27 +307,11 @@ function Businessprofile() {
                   )}
                 </div>
 
-                <div className="profile-BusinessType">
-                  <label>
-                    <strong> Business Category:</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="business_category"
-                      value={formData.business_category}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.business_category}</span>
-                  )}
-                </div>
-
                 <br></br>
               </div>
             </Grid>
 
-            <Grid xs={12} sm={12} md={4} lg={4}>
+            <Grid xs={12} sm={12} md={5} lg={5}>
               <div className="Business-name-content1">
                 <div>
                   <label className="BusinessType">
@@ -344,16 +329,30 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-                
+                <div>
+                  <label className="profile-BusinessType">
+                    <strong> Business Category:</strong>
+                  </label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="business_category"
+                      value={formData.business_category}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{formData.business_category}</span>
+                  )}
+                </div>
               </div>
-{/* 
+
               {isEditing ? (
                 <div className="AddBoxIcon">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )} */}
+              )}
             </Grid>
           </Grid>
 
@@ -432,13 +431,13 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {/* {isEditing ? (
+              {isEditing ? (
                 <div className="AddBox-Icon1">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )} */}
+              )}
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Social Media">
@@ -512,15 +511,71 @@ function Businessprofile() {
                 </div>
                 <br></br>
               </div>
-              {/* {isEditing ? (
+              {isEditing ? (
                 <div className="AddBox-Icon2">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
               )}
-            </Grid>           
-            <Grid item xs={12} sm={12} md={4} lg={4}>
+            </Grid>
+
+            {/* <Grid item xs={12} sm={12} md={4} lg={4}>
+              <Item>
+                <div className="Upload">
+                  <h4
+                    className="Upload-field"
+                    onClick={handleDocumentUploadButtonClick}
+                  >
+                    Upload Files
+                  </h4>
+                  <div className="Upload1">
+                    <Button
+                      size="small"
+                      startIcon={<PublishIcon className="icons" />}
+                      className="Publish-Icon"
+                    >
+                      <h6>Upload</h6>
+                    </Button>
+                  </div>
+
+                  <br />
+
+                  <h4 className="Upload-field1">Uploaded Files</h4>
+                  <div className="Upload2">
+                    <div className="Folder-Icon">
+                      <Button
+                        size="small"
+                        startIcon={<FolderIcon className="icons" />}
+                        className="FolderIcon-logo"
+                        endIcon={<MoreVertIcon className="icons" />}
+                      >
+                        <h6>Logo</h6>
+                      </Button>
+                    </div>
+
+                    <div className="Folder-Icon1">
+                      <Button
+                        size="small"
+                        color="primary"
+                        className="FolderIcon-analy"
+                        startIcon={<FolderIcon className="icons" />}
+                        endIcon={<MoreVertIcon className="icons" />}
+                      >
+                        <h6>Analysis</h6>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                {isEditing ? (
+                  <div className="AddBox-Icon3">
+                    <AddBoxIcon />
+                  </div>
+                ) : (
+                  <span></span>
+                )}
+              </Item>
+            </Grid> */}
             <div className="Upload2">
               {Array.isArray(formData.document) ? (
                 formData.document.map((document, index) => (
@@ -563,14 +618,11 @@ function Businessprofile() {
                 </>
               )}
             </div>
-            </Grid>
-          </Grid>
-          </Grid>
           </Grid>
 
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <div className="Contact_Information_Bus">
+            <Grid item xs={12} sm={12} md={5} lg={5}>
+              <div className="Contact_Information">
                 <h4 className="BusinessContact-field">
                   <strong>Contact Details</strong>
                 </h4>
@@ -607,15 +659,15 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {/* {isEditing ? (
+              {isEditing ? (
                 <div className="AddBox-Icon4">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )} */}
+              )}
             </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
+            <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Website">
                 <h4 className="Website-field">Website</h4>
                 <div className="Website1">
@@ -634,13 +686,13 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {/* {isEditing ? (
+              {isEditing ? (
                 <div className="AddBox-Icon5">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )} */}
+              )}
             </Grid>
           </Grid>
           <Grid container spacing={2} style={{ paddingTop: "30px" }}>
