@@ -166,8 +166,10 @@
   }
   
   .logout-button1{
-    position:sticky;
-    padding-top: 90px; 
+    position:absolute;
+    margin-bottom: 10px;
+    margin-top: 500px; 
+    margin-left: 70px;
   }
 
   .logout-icon {
