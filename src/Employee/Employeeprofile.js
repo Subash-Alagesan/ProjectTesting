@@ -18,7 +18,12 @@ import Input from "@mui/material/Input";
 
 function Employeeprofile() {
   const { employeeId } = useAuth();
+  const [isEditing, setIsEditing] = useState(false);
   const imageBaseUrl = "http://localhost:4070/uploads/images/";
+   
+  const[newImage,setNewImage]=useState(null)
+ 
+  
   const [employeeProfile, setEmployeeProfile] = useState({
     profile_pic: null,
     name: "",
@@ -40,8 +45,14 @@ function Employeeprofile() {
     github_url: "",
     password: "",
   });
-
-  const [isEditing, setIsEditing] = useState(false);
+  const [image, setImage] = useState(
+    isEditing
+      ? newImage
+        ? URL.createObjectURL(newImage)
+        : `${imageBaseUrl}${employeeProfile.profile_pic}`
+      : `${imageBaseUrl}${employeeProfile.profile_pic}`
+  );
+  
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -53,9 +64,7 @@ function Employeeprofile() {
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  }));
-
-  const [image, setImage] = useState(null);
+  }));  
   const hiddenFileInput = useRef(null);
 
   useEffect(() => {
@@ -76,44 +85,103 @@ function Employeeprofile() {
         });
     }
   }, [employeeId, isEditing]);
-  const handleImageChange = (event) => {};
-
-  const handleUploadButtonClick = (file) => {
-    var myHeaders = new Headers();
-    const token = "adhgsdaksdhk938742937423";
-    myHeaders.append("Authorization", `Bearer ${token}`);
-
-    var formdata = new FormData();
-    formdata.append("file", file);
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("https://trickuweb.com/upload/profile_pic", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(JSON.parse(result));
-        const profileurl = JSON.parse(result);
-        setImage(profileurl.img_url);
-      })
-      .catch((error) => console.log("error", error));
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected image:", file);
+    if (file) {
+      setNewImage(file);
+      setImage(URL.createObjectURL(file)); // Update the image state with the new image
+    }
   };
+
+  const handleUploadButtonClick = () => {};
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
 
-  const handleUpdateClick = () => {
-    // Perform your update logic here
-    // Disable edit mode
-    setIsEditing(false);
+  const handleUpdateClick = async () => {
+    try {
+      const formDataForEmployeeUpdate = new FormData();
+      formDataForEmployeeUpdate.append("name", employeeProfile.name);
+      formDataForEmployeeUpdate.append(
+        "experience",
+        employeeProfile.experience
+      );
+      formDataForEmployeeUpdate.append(
+        "designation",
+        employeeProfile.designation
+      );
+      formDataForEmployeeUpdate.append("education", employeeProfile.education);
+      formDataForEmployeeUpdate.append("isAdmin", employeeProfile.isAdmin);
+      formDataForEmployeeUpdate.append("dob", employeeProfile.dob);
+      formDataForEmployeeUpdate.append(
+        "marital_status",
+        employeeProfile.marital_status
+      );
+      formDataForEmployeeUpdate.append("gender", employeeProfile.gender);
+      formDataForEmployeeUpdate.append("place", employeeProfile.place);
+      formDataForEmployeeUpdate.append(
+        "mobile_number",
+        employeeProfile.mobile_number
+      );
+      formDataForEmployeeUpdate.append("email", employeeProfile.email);
+      formDataForEmployeeUpdate.append(
+        "alternative_phone_number",
+        employeeProfile.alternative_phone_number
+      );
+      formDataForEmployeeUpdate.append(
+        "physically_challenged",
+        employeeProfile.physically_challenged
+      );
+      formDataForEmployeeUpdate.append("skills", employeeProfile.skills);
+      formDataForEmployeeUpdate.append(
+        "experience_description",
+        employeeProfile.experience_description
+      );
+      formDataForEmployeeUpdate.append(
+        "portfolio_url",
+        employeeProfile.portfolio_url
+      );
+      formDataForEmployeeUpdate.append(
+        "github_url",
+        employeeProfile.github_url
+      );
+      formDataForEmployeeUpdate.append("password", employeeProfile.password);
+      if (newImage) {
+        formDataForEmployeeUpdate.append("profile_pic", newImage);
+        setImage(URL.createObjectURL(newImage)); // Update the image state with the new image
+        console.log("after changing image", newImage);
+      } else {
+        // If no new image is selected, include the existing profile_pic value
+        formDataForEmployeeUpdate.append("profile_pic", employeeProfile.profile_pic);
+        console.log("without changing image");
+      }
+      
+      
+      const response = await axios.put(
+        `/api/emp/updateEmployee/${employeeId}`,
+        formDataForEmployeeUpdate,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Job updated successfully:", response.data);
+      setEmployeeProfile({
+        ...employeeProfile,
+        profile_pic:response.data.profile_pic,
+      })
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating Employee:", error);
+    }    
   };
 
   return (
+    <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>   
     <Grid container spacing={2} className="EmpDetail">
       <Grid item xs={12} sm={12} md={12} lg={12}>
         <Item className="emp-grid1">
@@ -131,6 +199,7 @@ function Employeeprofile() {
               {isEditing ? (
                 <Button
                   variant="contained"
+                  type="submit"
                   size="small"
                   onClick={handleUpdateClick}
                   endIcon={<CreateOutlinedIcon />}
@@ -139,6 +208,7 @@ function Employeeprofile() {
                 </Button>
               ) : (
                 <Button
+                  type="button"
                   variant="contained"
                   size="small"
                   onClick={handleEditClick}
@@ -157,26 +227,35 @@ function Employeeprofile() {
           <Grid item xs={12} sm={12} md={3} lg={3}>
             <div className="box-decoration">
               <div onClick={handleClick} style={{ cursor: "pointer" }}>
-                {image ? (
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt="upload image"
-                    className="img-display-after"
-                  />
-                ) : (
-                  <Avatar
-                    sx={{ width: 150, height: 150 }}
-                    src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
-                  />
-                )}
-
-                <input
-                  id="image-upload-input"
-                  type="file"
-                  onChange={handleImageChange}
-                  ref={hiddenFileInput}
-                  style={{ display: "none" }}
-                />
+              {isEditing ? (
+                      <>
+                        {newImage ? ( // Check if a new image is selected
+                          <img
+                            src={URL.createObjectURL(newImage)}
+                            alt="Profile Picture"
+                            style={{ width: "100%", height: "auto" }}
+                          />
+                        ) : (
+                          <img
+                            src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
+                            alt="Profile Picture"
+                            style={{ width: "100%", height: "auto" }}
+                          />
+                        )}
+                        <input
+                          id="image-upload-input"
+                          type="file"
+                          onChange={handleImageChange}
+                          ref={hiddenFileInput}
+                          style={{ display: "none"}}
+                        />
+                      </>
+                    ) : (
+                      <Avatar
+                        sx={{ width: 150, height: 150 }}
+                        src={`${imageBaseUrl}${employeeProfile.profile_pic}`}
+                      />
+                    )}
               </div>
               <button
                 className="image-upload-button"
@@ -189,9 +268,7 @@ function Employeeprofile() {
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <div className="Emp-name-content">
               <div className="empprofile-input">
-              <label>
-                  Name :
-                </label>
+                <label>Name :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -212,9 +289,7 @@ function Employeeprofile() {
               <br></br>
 
               <div className="Experience">
-                <label>
-                  Experience :
-                </label>
+                <label>Experience :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -233,9 +308,7 @@ function Employeeprofile() {
               </div>
               <br></br>
               <div>
-                <label className="empprofile-entername">
-                  Designation :
-                </label>
+                <label className="empprofile-entername">Designation :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -254,25 +327,23 @@ function Employeeprofile() {
               </div>
               <br></br>
               <div>
-                <label className="empprofile-isadmin">
-                Is Admin?
-                </label>
+                <label className="empprofile-isadmin">Is Admin?</label>
                 {isEditing ? (
                   <select
-                  id="isAdmin"
-                  name="isAdmin"
-                  value={employeeProfile.isAdmin}
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      isAdmin: e.target.value,
-                    })
-                  }
-                >
-                  <option value="Select">select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
+                    id="isAdmin"
+                    name="isAdmin"
+                    value={employeeProfile.isAdmin}
+                    onChange={(e) =>
+                      setEmployeeProfile({
+                        ...employeeProfile,
+                        isAdmin: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="Select">select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
                 ) : (
                   <span>{employeeProfile.isAdmin}</span>
                 )}
@@ -319,9 +390,7 @@ function Employeeprofile() {
           <div className="Personal_Information">
             <h4 className="Info-field">Personal Information</h4>
             <div className="Empprofile-Dob">
-              <label>
-                Date Of Birth :
-              </label>
+              <label>Date Of Birth :</label>
               {isEditing ? (
                 <input
                   type="text"
@@ -340,25 +409,22 @@ function Employeeprofile() {
             </div>
             <br></br>
             <div className="empprofile-Marital">
-              <label>
-                Marital Status :
-              </label>
+              <label>Marital Status :</label>
               {isEditing ? (
-               
                 <select
-                name="marital_status"
-                value={employeeProfile.marital_status}
-                onChange={(e) =>
-                  setEmployeeProfile({
-                    ...employeeProfile,
-                    marital_status: e.target.value,
-                  })
-                }
-              >
-                <option value="Select">select</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-              </select>
+                  name="marital_status"
+                  value={employeeProfile.marital_status}
+                  onChange={(e) =>
+                    setEmployeeProfile({
+                      ...employeeProfile,
+                      marital_status: e.target.value,
+                    })
+                  }
+                >
+                  <option value="Select">select</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
               ) : (
                 <span>{employeeProfile.marital_status}</span>
               )}
@@ -366,35 +432,30 @@ function Employeeprofile() {
             <br></br>
 
             <div className="empprofile-Marital">
-              <label>
-                  Gender :
-              </label>
+              <label>Gender :</label>
               {isEditing ? (
-                
                 <select
-                name="gender"
-                value={employeeProfile.gender}
-                onChange={(e) =>
-                  setEmployeeProfile({
-                    ...employeeProfile,
-                    gender: e.target.value,
-                  })
-                }
-              >
-                <option value="Select">select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
-              </select>
+                  name="gender"
+                  value={employeeProfile.gender}
+                  onChange={(e) =>
+                    setEmployeeProfile({
+                      ...employeeProfile,
+                      gender: e.target.value,
+                    })
+                  }
+                >
+                  <option value="Select">select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Others">Others</option>
+                </select>
               ) : (
                 <span>{employeeProfile.gender}</span>
               )}
             </div>
             <br></br>
             <div className="empprofile-Marital">
-              <label>
-                Place :
-              </label>
+              <label>Place :</label>
               {isEditing ? (
                 <input
                   type="text"
@@ -426,9 +487,7 @@ function Employeeprofile() {
             {employeeProfile.skills &&
               employeeProfile.skills.map((skill, index) => (
                 <div key={index} className={`Skill${index + 1}`}>
-                  <label>
-                    Skill {index + 1} :
-                  </label>
+                  <label>Skill {index + 1} :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -464,9 +523,7 @@ function Employeeprofile() {
               <strong>Contact Details</strong>
             </h4>
             <div className="Empprofile-Mobileno">
-              <label>
-                Mobile Number :
-              </label>
+              <label>Mobile Number :</label>
               {isEditing ? (
                 <input
                   type="text"
@@ -486,9 +543,7 @@ function Employeeprofile() {
             <br></br>
 
             <div className="Emp-profile-EmailId">
-              <label>
-                Email Id :
-              </label>
+              <label>Email Id :</label>
               {isEditing ? (
                 <input
                   type="Email"
@@ -532,7 +587,7 @@ function Employeeprofile() {
               )}
             </div>
           </div>
-          
+
           {/* {isEditing ? (
             <div className="AddBoxIcon3">
               <AddBoxIcon />
@@ -597,38 +652,36 @@ function Employeeprofile() {
       </Grid>
 
       <Grid item xs={12} sm={12} md={6} lg={6}>
-      <div className="Extra-Information1">
-            <h4 className="EmpExtra--field1">
-              <strong>Extra</strong>
-            </h4>
-            <div className="Emp-Mob-no">
+        <div className="Extra-Information1">
+          <h4 className="EmpExtra--field1">
+            <strong>Extra</strong>
+          </h4>
+          <div className="Emp-Mob-no">
             <label>
-                <strong>Alternative Phone No :</strong>
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={employeeProfile.alternative_phone_number}
-                  className="empprofile-input"
-                  onChange={(e) =>
-                    setEmployeeProfile({
-                      ...employeeProfile,
-                      alternative_phone_number: e.target.value,
-                    })
-                  }
-                />
-              ) : (
-                <span>{employeeProfile.alternative_phone_number}</span>
-              )}
-             
-            </div>
-            <div className="empprofile-physically">
-              <label>
-                <strong>Physically Challenged:</strong>
-              </label>
-              {isEditing ? (
-             
-                <select
+              <strong>Alternative Phone No :</strong>
+            </label>
+            {isEditing ? (
+              <input
+                type="text"
+                value={employeeProfile.alternative_phone_number}
+                className="empprofile-input"
+                onChange={(e) =>
+                  setEmployeeProfile({
+                    ...employeeProfile,
+                    alternative_phone_number: e.target.value,
+                  })
+                }
+              />
+            ) : (
+              <span>{employeeProfile.alternative_phone_number}</span>
+            )}
+          </div>
+          <div className="empprofile-physically">
+            <label>
+              <strong>Physically Challenged:</strong>
+            </label>
+            {isEditing ? (
+              <select
                 name="physically_challenged"
                 value={employeeProfile.physically_challenged}
                 onChange={(e) =>
@@ -642,17 +695,15 @@ function Employeeprofile() {
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-              ) : (
-                <span>{employeeProfile.physically_challenged}</span>
-              )}
-             
-              
-            </div>
+            ) : (
+              <span>{employeeProfile.physically_challenged}</span>
+            )}
+          </div>
 
-            {/* <div className="AddBox-Icon4">
+          {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
             </div> */}
-          </div>
+        </div>
       </Grid>
 
       <Grid container spacing={2}>
@@ -711,9 +762,9 @@ function Employeeprofile() {
             <span></span>
           )} */}
         </Grid>
-       
       </Grid>
     </Grid>
+    </form>
   );
 }
 
