@@ -341,6 +341,9 @@ const SideNavbar = () => {
                   </Button>
                 </div>
               </List> */}
+
+<h4 className="admin1"> Admin Panel</h4>
+
               <List>
                 {admins.length > 0 ? (
                   admins.map((admin, index) => (

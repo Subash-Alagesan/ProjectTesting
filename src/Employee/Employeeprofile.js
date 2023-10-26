@@ -350,7 +350,7 @@ function Employeeprofile() {
               <div className="Emp-name-content1">
                 <div>
                   <label className="education">
-                    <strong>Education :</strong>
+                    Education :
                   </label>
                   {isEditing ? (
                     <input
@@ -479,12 +479,11 @@ function Employeeprofile() {
                 </div>
               ) : null}
 
-              {isEditing && (
+              {/* {isEditing && (
                 <div className="AddBoxIcon2">
                   <AddBoxIcon onClick={handleAddNewSkill} />{" "}
-                  {/* Add a click handler for adding the new skill */}
                 </div>
-              )}
+              )} */}
             </div>
           </Grid>
         </Grid>
@@ -529,7 +528,7 @@ function Employeeprofile() {
             <div className="Security1">
               <div className="Password1">
                 <label>
-                  <strong>Password :</strong>
+                 Password :
                 </label>
                 {isEditing ? (
                   <input
@@ -546,11 +545,11 @@ function Employeeprofile() {
             </div>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
-            <div className="Experience">
+            <div className="Experience1">
               <h4 className="Experience-field">Experience</h4>
-              <div className="Experience1">
+              <div className="Experience4">
                 <label>
-                  <strong>Experience 1 :</strong>
+                  Experience 1 :
                 </label>
                 {isEditing ? (
                   <input
@@ -568,14 +567,15 @@ function Employeeprofile() {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={5} lg={5}>
           <div className="Extra-Information1">
             <h4 className="EmpExtra--field1">
-              <strong>Extra</strong>
+              Extra
             </h4>
             <div className="Emp-Mob-no">
               <label>
-                <strong>Alternative Phone No :</strong>
+                Alternative Phone No :
               </label>
               {isEditing ? (
                 <input
@@ -591,7 +591,7 @@ function Employeeprofile() {
             </div>
             <div className="empprofile-physically">
               <label>
-                <strong>Physically Challenged:</strong>
+                Physically Challenged:
               </label>
               {isEditing ? (
                 <select
@@ -610,15 +610,15 @@ function Employeeprofile() {
           </div>
         </Grid>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <div className="PortFolio">
-              <h4 className="Portfolio-field">
-                <strong>Portfolio</strong>
+       
+          <Grid item xs={12} sm={12} md={5} lg={5}>
+            <div className="emp-project">
+              <h4 className="emp-project-field">
+                Projects
               </h4>
               <div className="Portfolio-url">
                 <label>
-                  <strong>Projects : </strong>
+                Portfolio : 
                 </label>
                 {isEditing ? (
                   <input
@@ -636,7 +636,7 @@ function Employeeprofile() {
 
               <div className="GitHub-url">
                 <label>
-                  <strong>Github URL :</strong>
+                 Github URL :
                 </label>
                 {isEditing ? (
                   <input

@@ -385,7 +385,7 @@ const AddCustomer = () => {
         {/* Website */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="WebsiteCus">
-            <h4 className="Website-field">Website</h4>
+            <h4 className="Website-field-Cus">Website</h4>
             <div className="Website1">
               <TextField
                 label="Website 1"
@@ -409,7 +409,7 @@ const AddCustomer = () => {
         {/* Upload Files */}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="UploadCus">
-            <h4 className="Upload-field">Upload Files</h4>
+            <h4 className="Upload-field-1">Upload Files</h4>
             <div className="Upload1">
               <Button
                 size="small"
