@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 
 function Customer({ handleViewClick }) {
   const [customers, setCustomers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const { setCustomerId } = useAuth();
   const [count, setCount] = useState();
 
@@ -104,6 +105,16 @@ function Customer({ handleViewClick }) {
       width: "auto",
     },
   }));
+
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query); // Step 2: Update the search query state
+  };
+
+  // Filter the customers based on the search query
+  const filteredCustomers = customers.filter((customer) =>
+    customer.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -253,9 +264,11 @@ function Customer({ handleViewClick }) {
                 <SearchIcon />
 
                 <StyledInputBase
-                  placeholder="Search Customers"
-                  inputProps={{ "aria-label": "search" }}
-                />
+                placeholder="Search Customers"
+                inputProps={{ "aria-label": "search" }}
+                value={searchQuery} // Step 3: Bind the search query value
+                onChange={handleSearch} // Step 3: Handle search input change
+              />
               </Search>
             </div>
 
@@ -293,7 +306,7 @@ function Customer({ handleViewClick }) {
 
           <div className="Datagrid-table">
             <DataGrid
-              rows={customers}
+               rows={filteredCustomers}
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection

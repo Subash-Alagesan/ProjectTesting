@@ -1,349 +1,336 @@
 .grid-container-2 {
-    height: 125vh;
-
+  height: 125vh;
 }
 .Business-grid1 {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 20px;
 }
 
 .Business-grid2 {
-    height: 128vh;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 15px;
+  height: 128vh;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 15px;
 }
 
 @media only screen and (max-width: 500px) {
-    .Business-grid2 {
-        height: 350vh;
-    }
+  .Business-grid2 {
+    height: 350vh;
+  }
 }
 
 .Business_Information {
-    padding: 0%;
+  padding: 0%;
 }
-
-
 
 .Businessdb-profile-contact-img {
-    height: 30px;
+  height: 30px;
 }
 
-
-
 .Businessdb-title {
-    padding-top: 8px;
-    font-size: 15px;
-    font-family: "Info-field";
-
+  padding-top: 8px;
+  font-size: 15px;
+  font-family: "Info-field";
 }
 
 @font-face {
-    font-family: "Info-field";
-    src: url(../Component/Font/Roboto-Bold.ttf);
+  font-family: "Info-field";
+  src: url(../Component/Font/Roboto-Bold.ttf);
 }
 
 @media only screen and (max-width: 600px) {
-    .Businessdb-title {
-
-        font-size: 15px;
-    }
+  .Businessdb-title {
+    font-size: 15px;
+  }
 }
 
 .Edit-btn {
-    position: absolute;
-    right: 275px;
-
+  position: absolute;
+  right: 275px;
 }
 
 @media only screen and (max-width: 600px) {
-    .Edit-btn {
-
-        position: absolute;
-        right: 50px;
-    }
+  .Edit-btn {
+    position: absolute;
+    right: 50px;
+  }
 }
 
 .Business-name-content {
-    padding-top: 18px;
-    padding-left: 50px;
+  margin-top: 18px;
+  margin-left: 60px;
 }
 
 @media only screen and (max-width: 600px) {
-    .Business-name-content {
-        text-align: left;
-        padding-left: 20px;
-    }
+  .Business-name-content {
+    text-align: left;
+    padding-left: 20px;
+  }
 }
 
 .img-display-after {
-    border-radius: 100%;
+  border-radius: 100%;
 }
 
-
-
 Input {
-    width: 50%;
-
+  width: 50%;
 }
 
 @media only screen and (max-width: 500px) {
-    Input {
-        width: 35%;
-
-    }
+  Input {
+    width: 35%;
+  }
 }
 
-.Business-name-content1 {
-    text-align: left;
-    padding-top: 60px;
-    padding-left: 40px;
+.Business-type-content1 {
+  text-align: left;
+  padding-top: 60px;
+  padding-left: 40px;
 }
-
-
 
 .Businessprofile-entername {
-    font-size: 14px;
+  font-size: 14px;
 }
 
-
-.profile-BusinessType {
-    font-size: 14px;
-    margin-top: 20px;
-
+.profile-BusinessCategory {
+  margin-top: 20px;
+  color: var(--Gray, #84828a);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .name {
-    font-size: 14px;
-    padding-left: 40px;
+  font-size: 14px;
+  padding-left: 40px;
 }
 
 .Website {
-    font-size: 14px;
-
+  font-size: 14px;
 }
 
 .BusinessType {
-    font-size: 14px;
-    padding-top: 25px;
-    text-align: left;
+  color: #5e5e5e;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 20px;
+  text-align: left;
 }
 
 .Businessprofile-Name {
-    padding-top: 15px;
+  padding-top: 15px;
 }
-
 
 .Businessprofile-Name,
 .Businessprofile-Place,
 .Businessprofile-District,
 .Businessprofile-Language {
-
-    text-align: left;
-    padding-left: 30px;
+  text-align: left;
+  padding-left: 30px;
+  color: var(--Gray, #84828a);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
-
-
-
 
 .SocialMedia-field {
-    text-align: left;
-    padding-left: 30px;
-    font-size: 15px;
-    color: #3B3B3B;
-
-    font-family: "Info-field";
-    padding-top: 25px;
-}
-
-.Media1 {
-    padding-top: 15px;
-
-
+  text-align: left;
+  padding-left: 30px;
+  color: #3b3b3b;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-top: 25px;
 }
 
 .Media1,
 .Media2,
 .Media3,
-.Media4 {
-    text-align: left;
-    padding-left: 30px;
-
+.Media4,
+.Media5 {
+  text-align: left;
+  padding-left: 30px;
+  color: var(--Gray, #84828a);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 15px;
 }
-
+.Media {
+  padding-top: 10px;
+}
 
 .Upload {
-    text-align: left;
-    padding-left: 20px;
-    font-size: 15px;
-    color: #3B3B3B;
+  text-align: left;
+  padding-left: 20px;
+  font-size: 15px;
+  color: #3b3b3b;
 
-    font-family: "Info-field";
-    padding-top: 25px;
+  font-family: "Info-field";
+  padding-top: 25px;
 }
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .Upload-field {
        padding-left: 30px;
 
     }
+} */
+
+.Upload-field {
+  color: #3b3b3b;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
-
-
-.Upload-field1 {
-    padding-left: 20px;
-    color: #3B3B3B;
-
-    text-align: left;
-    font-size: 15px;
-    font-family: "Info-field";
+.Uploads {
+  margin-top: 25px;
 }
-@media only screen and (max-width: 600px) {
+/* @media only screen and (max-width: 600px) {
     .Upload-field1 {
        padding-left: 30px;
 
     }
-}
-
+} */
 
 .Publish-Icon {
-    border: none;
-    background-color: #F7F6F9;
+  border: none;
+  background-color: #f7f6f9;
 }
 
 .box-decoration {
-    padding-left: 50px;
-
+  padding-left: 50px;
 }
 
 .Upload1 {
-    padding-top: 20px;
-    text-align: left;
-    padding-left: 20px;
-    border: none;
-
+  padding-top: 20px;
+  text-align: left;
+  padding-left: 20px;
+  border: none;
 }
 @media only screen and (max-width: 600px) {
-    .Upload1 {
-       padding-left: 30px;
-
-    }
+  .Upload1 {
+    padding-left: 30px;
+  }
 }
 
-
 .image-upload-button {
-    display: none;
-
+  display: none;
 }
 
 .AddBoxIcon {
-    color: #6425FE;
-    position: absolute;
-    top: 100px;
-    right: 280px;
+  color: #6425fe;
+  position: absolute;
+  top: 100px;
+  right: 280px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBoxIcon {
-        position: absolute;
-        top: 520px;
-        right: 60px;
-
-    }
+  .AddBoxIcon {
+    position: absolute;
+    top: 520px;
+    right: 60px;
+  }
 }
 
 .AddBox-Icon1 {
-    color: #6425FE;
-    position: absolute;
-    top: 295px;
-    right: 550px;
-
+  color: #6425fe;
+  position: absolute;
+  top: 295px;
+  right: 550px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBox-Icon1  {
-        position: absolute;
-        top: 680px;
-        right: 60px;
-
-    }
+  .AddBox-Icon1 {
+    position: absolute;
+    top: 680px;
+    right: 60px;
+  }
 }
 
 .AddBox-Icon2 {
-    color:  #6425FE;
-    position: absolute;
-    top: 295px;
-    right: 850px;
+  color: #6425fe;
+  position: absolute;
+  top: 295px;
+  right: 850px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBox-Icon2 {
-        position: absolute;
-        top: 930px;
-        right: 60px;
-
-    }
+  .AddBox-Icon2 {
+    position: absolute;
+    top: 930px;
+    right: 60px;
+  }
 }
-
 
 .AddBox-Icon3 {
-    color: #6425FE;
-    position: absolute;
-    top: 580px;
-    right: 550px;
+  color: #6425fe;
+  position: absolute;
+  top: 580px;
+  right: 550px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBox-Icon3 {
-        position: absolute;
-        top: 1455px;
-        right: 60px;
-
-    }
+  .AddBox-Icon3 {
+    position: absolute;
+    top: 1455px;
+    right: 60px;
+  }
 }
-
 
 .AddBox-Icon4 {
-    color: #6425FE;
-    position: absolute;
-    top: 580px;
-    right: 850px;
+  color: #6425fe;
+  position: absolute;
+  top: 580px;
+  right: 850px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBox-Icon4 {
-        position: absolute;
-        top: 1640px;
-        right: 60px;
-
-    }
+  .AddBox-Icon4 {
+    position: absolute;
+    top: 1640px;
+    right: 60px;
+  }
 }
-
 
 .AddBox-Icon5 {
-    color: #6425FE;
-    position: absolute;
-    top: 735px;
-    right: 850px;
+  color: #6425fe;
+  position: absolute;
+  top: 735px;
+  right: 850px;
 }
 
 @media only screen and (max-width: 600px) {
-    .AddBox-Icon5 {
-        position: absolute;
-        top: 1745px;
-        right: 60px;
-
-    }
+  .AddBox-Icon5 {
+    position: absolute;
+    top: 1745px;
+    right: 60px;
+  }
 }
 
 .Businessinfo-field {
-    font-size: 16px;
-    color: #3B3B3B;
-    font-family: "Info-field";
-    text-align: left;
-    padding-left: 30px;
-    padding-top: 25px;
+  color: #3b3b3b;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+  padding-left: 30px;
+  padding-top: 25px;
 }
 
 /* @font-face {
@@ -352,13 +339,16 @@ Input {
 } */
 
 .BusinessContact-field {
-    text-align: left;
-    padding-left: 30px;
-    padding-top: 45px;
-    font-size: 16px;
-    font-family: "Info-field";
-    color: #3B3B3B;
-
+  color: #3b3b3b;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+}
+.Contact-Information {
+  margin-left: 30px;
 }
 
 /* 
@@ -368,153 +358,172 @@ Input {
 } */
 
 .Website-field {
-    text-align: left;
-    color: #3B3B3B;
-
-    padding-top: 45px;
-    font-size: 16px;
-    font-family: "Info-field";
+  text-align: left;
+  color: #3b3b3b;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 @media only screen and (max-width: 600px) {
-    .Website-field {
-      padding-left: 30px;
-    }
+  .Website-field {
+    padding-left: 30px;
+  }
 }
 
 .Website1 {
-    text-align: left;
-    padding-top: 15px;
+  text-align: left;
+  color: var(--Gray, #84828A);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 600px) {
-    .Website1 {
-        padding-left: 30px;
-    }
+  .Website1 {
+    padding-left: 30px;
+  }
 }
-
-
 
 .Businessprofile-input {
-    padding-right: 90px;
+  padding-right: 90px;
+  color: #5e5e5e;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
-.Business-Mobileno {
-    padding-top: 15px;
-    text-align: left;
-    padding-left: 30px;
-}
-
+.Business-Mobileno,
 .Businessprofile-EmailId {
-    padding-left: 30px;
-    text-align: left;
+  text-align: left;
+  color: var(--Gray, #84828a);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+}
+.Business-Mobileno{
+    margin-top: 20px;
+}
+.Businessprofile-EmailId{
+    margin-top: -15px;
 }
 
 .Owner-field {
-    text-align: left;
-    padding-left: 30px;
-    padding-top: 10px;
-    color: #3B3B3B;
-    font-size: 16px;
-    font-family: "Info-field";
+  text-align: left;
+  color: #3B3B3B;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+}
+.Owner{
+    margin-left: 28px;
 }
 
 .Owner1 {
-    padding-top: 15px;
-    text-align: left;
-    padding-left: 30px;
-}
-
-.Owner2 {
-    text-align: left;
-    padding-left: 30px;
+  text-align: left;
+  color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
 }
 
 .Projects-field {
-    text-align: left;
-    padding-left: 70px;
-    padding-top: 10px;
-    font-size: 17px;
-    font-family: "Info-field";
+  text-align: left;
+  padding-left: 70px;
+  padding-top: 10px;
+  font-size: 17px;
+  font-family: "Info-field";
 }
 
 .Projects1,
 .Projects2 {
-    text-align: left;
-    padding-left: 70px;
+  text-align: left;
+  padding-left: 70px;
 }
 
 .Projects1 {
-    padding-top: 15px;
-
+  padding-top: 15px;
 }
 
 .SaveAltIcon1 {
+  position: absolute;
+  right: 280px;
+  top: 790px;
+  color: #6425fe;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 500px) {
+  .SaveAltIcon1 {
     position: absolute;
-    right: 280px;
-    top: 810px;
-    color: #6425FE;
-
+    right: 60px;
+    top: 1840px;
+  }
+}
+.Folder-Icon {
+  padding-top: 10px;
+  text-align: left;
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 500px) {
-    .SaveAltIcon1 {
-
-        position: absolute;
-        right: 60px;
-        top: 1840px;
-    }
+  .Folder-Icon {
+    padding-left: 30px;
+  }
 }
-.Folder-Icon{
-    padding-top: 10px;
-    text-align: left;
-    padding-left: 20px;
-   
+
+.Folder-Icon1 {
+  padding-top: 15px;
+  text-align: left;
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 500px) {
-    .Folder-Icon {
-
-        padding-left: 30px;
-}
-}
-
-.Folder-Icon1{
-    padding-top: 15px;
-    text-align: left;
-    padding-left: 20px;
-    
-   
+  .Folder-Icon1 {
+    padding-left: 30px;
+  }
 }
 
-@media only screen and (max-width: 500px) {
-    .Folder-Icon1 {
-
-        padding-left: 30px;
+.FolderIcon-logo {
+  border: none;
+  background-color: #f7f6f9;
 }
+.FolderIcon-analy {
+  border: none;
+  background-color: #f7f6f9;
 }
-
-.FolderIcon-logo{
-    border: none;
-    background-color: #F7F6F9;
-}
-.FolderIcon-analy{
-    border: none;
-    background-color: #F7F6F9;
-}
-h6{
-    font-size: 14px;
-    padding-top: 8px;
-    color: #84828A;
-    font-family: "Info-field1";
-    text-transform: capitalize;
-
+h6 {
+  font-size: 14px;
+  padding-top: 8px;
+  color: #84828a;
+  font-family: "Info-field1";
+  text-transform: capitalize;
 }
 @font-face {
-    font-family: "Info-field1";
-    src: url(../Component//Font//Roboto-Bold.ttf);
+  font-family: "Info-field1";
+  src: url(../Component//Font//Roboto-Bold.ttf);
 }
-.icons{
-    color: #84828A;
+.icons {
+  color: #84828a;
 }
-
+.BusinessName {
+  color: var(--Gray, #84828a);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

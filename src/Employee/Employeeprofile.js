@@ -652,6 +652,11 @@ function Employeeprofile() {
               </div>
             </div>
           </Grid>
+
+          <div className="SaveAltIcon2">
+            <SaveAltIcon />
+          </div>
+
         </Grid>
       </Grid>
     </form>
