@@ -103,8 +103,7 @@ function Businessprofile() {
         document: [...prevData.document, file.name], // Store the file name as the document
       }));
       console.log("New File is ", file);
-    } else {
-      // Handle the case where the document is already in the array
+    } else {      
       console.log("This document is already in the array.");
     }
   };
@@ -178,8 +177,7 @@ function Businessprofile() {
 
     // Now you can send formDataForUpdate as your updated data
     console.log("After updating the updated data", formDataForUpdate);
-
-    console.log("FormData just before sending:", formDataForUpdate);
+   
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate)
       .then((response) => {
@@ -520,68 +518,10 @@ function Businessprofile() {
                 </div>
               ) : (
                 <span></span>
-              )} */}
-            </Grid>
-
-            {/* <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Item>
-                <div className="Upload">
-                  <h4
-                    className="Upload-field"
-                    onClick={handleDocumentUploadButtonClick}
-                  >
-                    Upload Files
-                  </h4>
-                  <div className="Upload1">
-                    <Button
-                      size="small"
-                      startIcon={<PublishIcon className="icons" />}
-                      className="Publish-Icon"
-                    >
-                      <h6>Upload</h6>
-                    </Button>
-                  </div>
-
-                  <br />
-
-                  <h4 className="Upload-field1">Uploaded Files</h4>
-                  <div className="Upload2">
-                    <div className="Folder-Icon">
-                      <Button
-                        size="small"
-                        startIcon={<FolderIcon className="icons" />}
-                        className="FolderIcon-logo"
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Logo</h6>
-                      </Button>
-                    </div>
-
-                    <div className="Folder-Icon1">
-                      <Button
-                        size="small"
-                        color="primary"
-                        className="FolderIcon-analy"
-                        startIcon={<FolderIcon className="icons" />}
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Analysis</h6>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon3">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
-              </Item>
-            </Grid> */}
+              )}
+            </Grid>           
             <Grid item xs={12} sm={12} md={4} lg={4}>
-            <div className="Upload">
-            <h4 className="Upload-field1">Upload  Files</h4>
+            <div className="Upload2">
               {Array.isArray(formData.document) ? (
                 formData.document.map((document, index) => (
                   <div key={index} className="Uploaded-Document">
@@ -624,6 +564,8 @@ function Businessprofile() {
               )}
             </div>
             </Grid>
+          </Grid>
+          </Grid>
           </Grid>
 
           <Grid container spacing={2}>
