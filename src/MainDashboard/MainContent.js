@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -10,6 +10,12 @@ import Business from '../Assets/images/business_center.png'
 import group from '../Assets/images/group.png'
 import "bootstrap/dist/css/bootstrap.min.css";
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useAuth } from "../Component/Helper/Context/AuthContext";
+import axios from "../Component/Axios Base URL/axios";
+
+
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -18,6 +24,34 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 export default function MainContent() {
+
+  const [customers, setCustomers] = useState([]);
+  const { setCustomerId } = useAuth();
+  const [count, setCount] = useState();
+  const [employees, setEmployees] = useState([]);
+  const { setEmployeeId } = useAuth();
+  const [count1, setCount1] = useState();
+
+  useEffect(() => {
+    axios.get('/api/customer/getTotalCustomers')
+      .then(response => {
+        setCount(response.data.count);
+      })
+      .catch(error => {
+        console.error('Error fetching customer count:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('/api/emp/getTotalEmployees')
+      .then(response => {
+        setCount1(response.data.count);
+      })
+      .catch(error => {
+        console.error('Error fetching employee count:', error);
+      });
+  }, []);
+
   return (
     <Grid container spacing={2} style={{ backgroundColor: " #F7F6F9" }} className='grid-container'>
       <Grid item xs={12} sm={12} md={6} lg={6} className='grid-main'>
@@ -86,11 +120,12 @@ export default function MainContent() {
           <div style={{ display: "flex" }}>
             <div>
               <h4 className='tactic2'> <b>Total Employee</b></h4>
-              <p className='project-count'><strong>2</strong></p>
+              <p className='project-count'><strong>{count1}</strong></p>
             </div>
             <div className='progress-icon'>
-              <CircularProgress size="lg" color="danger" determinate value={25.67}>
-                25%</CircularProgress>
+              <CircularProgress size="lg" color="danger" determinate value={count1}>
+              {Math.round(count1)}%
+              </CircularProgress>
             </div>
           </div>
         </Item>
@@ -104,11 +139,12 @@ export default function MainContent() {
           <div style={{ display: "flex" }}>
             <div>
               <h4 className='tactic2'><b>Total Customers</b></h4>
-              <p className='project-count'><strong>2</strong></p>
+              <p className='project-count'><strong>{count}</strong></p>
             </div>
             <div className='progress-icon' color='#6425FE'>
-              <CircularProgress size="lg"  color="primary" determinate value={52.67}>
-                52%</CircularProgress>
+            <CircularProgress size="lg" color="primary" determinate value={count}>
+    {Math.round(count)}%
+  </CircularProgress>
             </div>
           </div>
         </Item>
@@ -122,8 +158,9 @@ export default function MainContent() {
             </div >
             <div className='CircularProgress' >
               <div >
-                <CircularProgress size="lg" color="danger" determinate value={15.67}>
-                  15%</CircularProgress>
+                <CircularProgress size="lg" color="danger" determinate value={count}>
+                {Math.round(count)}%
+                </CircularProgress>
                 <h4 className='total-content'>Total</h4>
               </div>
               <div>
@@ -149,14 +186,15 @@ export default function MainContent() {
             </div >
             <div className='CircularProgress' >
               <div>
-                <CircularProgress size="lg" color="danger" determinate value={45.67}>
-                  45%</CircularProgress>
+                <CircularProgress size="lg" color="danger" determinate value={count1}>
+                {Math.round(count1)}%
+                  </CircularProgress>
                 <h4 className='total-content'>Total</h4>
               </div>
               <div>
                 <CircularProgress size="lg" color="success" determinate value={75.67}>
                   75%</CircularProgress>
-                <h4 className='ourcustomer-content'>Our Customers</h4>
+                <h4 className='ourcustomer-content'>Our Employees</h4>
               </div>
               <div>
                 <CircularProgress size="lg" determinate value={25.67}>

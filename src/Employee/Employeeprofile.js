@@ -656,6 +656,7 @@ function Employeeprofile() {
           <h4 className="EmpExtra--field1">
             <strong>Extra</strong>
           </h4>
+         
           <div className="Emp-Mob-no">
             <label>
               <strong>Alternative Phone No :</strong>
@@ -664,7 +665,7 @@ function Employeeprofile() {
               <input
                 type="text"
                 value={employeeProfile.alternative_phone_number}
-                className="empprofile-input"
+                className="empprofile-entername-input"
                 onChange={(e) =>
                   setEmployeeProfile({
                     ...employeeProfile,
@@ -699,7 +700,6 @@ function Employeeprofile() {
               <span>{employeeProfile.physically_challenged}</span>
             )}
           </div>
-
           {/* <div className="AddBox-Icon4">
               <AddBoxIcon />
             </div> */}
@@ -707,7 +707,7 @@ function Employeeprofile() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={4} lg={4}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <div className="PortFolio">
             <h4 className="Portfolio-field">
               <strong>Portfolio</strong>

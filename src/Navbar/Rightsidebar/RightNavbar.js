@@ -238,7 +238,7 @@ export default function RightNavbar() {
               </button>
             </div>
 
-            <div className="logout-button1">
+            <div className="logout-button-right">
               <button className="logout-button" onClick={handleLogout}>
                 <ExitToAppIcon className="logout-icon" />
                 Logout

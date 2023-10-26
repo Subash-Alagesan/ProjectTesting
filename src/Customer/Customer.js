@@ -21,9 +21,23 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 
+
 function Customer({ handleViewClick }) {
   const [customers, setCustomers] = useState([]);
   const { setCustomerId } = useAuth();
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    axios.get('/api/customer/getTotalCustomers')
+      .then(response => {
+        setCount(response.data.count);
+      })
+      .catch(error => {
+        console.error('Error fetching customer count:', error);
+      });
+  }, []);
+
+
 
   const columns = [
     {
@@ -172,11 +186,11 @@ function Customer({ handleViewClick }) {
                 <div>
                   {" "}
                   <h5 className="Customerdb-totalCustomer">Total Customers</h5>
-                  <p className="Total-content">22</p>
+                  <p className="Total-content">{count}</p>
                 </div>
               </div>
             </Grid>
-            <Grid item xs={12} md={12} lg={3} s>
+            <Grid item xs={12} md={12} lg={3} >
               <div className="total-item1">
                 <div>
                   <img

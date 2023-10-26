@@ -22,8 +22,21 @@ import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 
 function Employee({ handleEmpClick }) {
-  const {setEmployeeId} = useAuth();
+
   const [employees, setEmployees] = useState([]);
+  const { setEmployeeId } = useAuth();
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    axios.get('/api/emp/getTotalEmployees')
+      .then(response => {
+        setCount(response.data.count);
+      })
+      .catch(error => {
+        console.error('Error fetching employee count:', error);
+      });
+  }, []);
+
   const columns = [
     {
       field: "name",
@@ -166,8 +179,8 @@ function Employee({ handleEmpClick }) {
                 </div>
                 <div>
                   {" "}
-                  <h5 className="Employeedb-totalCustomer">Total Customers</h5>
-                  <p className="Total-content">22</p>
+                  <h5 className="Employeedb-totalCustomer">Total Employees</h5>
+                  <p className="Total-content">{count}</p>
                 </div>
               </div>
             </Grid>
@@ -182,7 +195,7 @@ function Employee({ handleEmpClick }) {
                 </div>
                 <div>
                   {" "}
-                  <h5 className="Employeedb-ourCustomer">Our Customers</h5>
+                  <h5 className="Employeedb-ourCustomer">Our Employees</h5>
                   <p className="Total-content">8</p>
                 </div>
               </div>
@@ -198,7 +211,7 @@ function Employee({ handleEmpClick }) {
                 </div>
                 <div>
                   {" "}
-                  <h5 className="Employeedb-otherCustomer">Other Customers</h5>
+                  <h5 className="Employeedb-otherCustomer">Other Candidates</h5>
                   <p className="Total-content">14</p>
                 </div>
               </div>
@@ -234,7 +247,7 @@ function Employee({ handleEmpClick }) {
                 <SearchIcon />
 
                 <StyledInputBase
-                  placeholder="Search Customers"
+                  placeholder="Search Employees"
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>

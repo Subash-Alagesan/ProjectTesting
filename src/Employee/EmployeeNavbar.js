@@ -327,7 +327,7 @@ export default function EmployeeNavbar() {
         </Fade>
       </Modal>
 
-      <div className='logout-button1'>
+      <div className='logout-button2'>
       <button className="logout-button" onClick={handleLogout}>
         <ExitToAppIcon className="logout-icon" />
         Logout
