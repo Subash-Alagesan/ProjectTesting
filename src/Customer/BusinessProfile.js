@@ -168,7 +168,7 @@ function Businessprofile() {
     // if (newDocument) {
     //   formDataForUpdate.append("document", newDocument);
     //   console.log("After Updating new document", newDocument);
-    // }
+   // }
     const formDataForUpdate = new FormData();
 
     for (const key in formData) {      
@@ -183,6 +183,11 @@ function Businessprofile() {
       .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate)
       .then((response) => {
         console.log("Update Successful", response.data);
+        // setFormData({
+        //   ...formData,
+        //   profile_pic: response.data.customer.profile_pic,
+        //   document:response.data.customer.document,
+        // });
         setIsEditing(false);
       })
       .catch((error) => {

@@ -188,7 +188,7 @@ function Employeeprofile() {
         }
       );
 
-      console.log("Job updated successfully:", response.data);
+      console.log("Employee Profile updated successfully:", response.data);
       setEmployeeProfile({
         ...employeeProfile,
         profile_pic: response.data.profile_pic,
