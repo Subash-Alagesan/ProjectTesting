@@ -139,55 +139,21 @@ function Businessprofile() {
 
   const handleUpdateClick = () => {
     console.log("Start updating!!!");
-    console.log("isEditing:", isEditing);
-    // Create a new FormData object with a different variable name
-    // const formDataForUpdate = new FormData();
-    // // Add the customer data to the FormData
-    // formDataForUpdate.append("customer_name", formData.customer_name);
-    // formDataForUpdate.append("business_name", formData.business_name);
-    // formDataForUpdate.append("business_type", formData.business_type);
-    // formDataForUpdate.append("business_category", formData.business_category);
-    // formDataForUpdate.append("business_place", formData.business_place);
-    // formDataForUpdate.append("district", formData.district);
-    // formDataForUpdate.append("language", formData.language);
-    // formDataForUpdate.append("business_number", formData.business_number);
-    // formDataForUpdate.append("email", formData.email);
-    // formDataForUpdate.append("phone_number", formData.phone_number);
-    // formDataForUpdate.append("facebook", formData.facebook);
-    // formDataForUpdate.append("instagram", formData.instagram);
-    // formDataForUpdate.append("youtube", formData.youtube);
-    // formDataForUpdate.append("linkedin", formData.linkedin);
-    // formDataForUpdate.append("twitter", formData.twitter);
-    // formDataForUpdate.append("website_address", formData.website_address);
-    // console.log("After updating the updated data", formDataForUpdate);
-
-    // if (newImage) {
-    //   formDataForUpdate.append("profile_pic", newImage);
-    //   console.log("After Updating the new image",newImage);
-    // }
-    // if (newDocument) {
-    //   formDataForUpdate.append("document", newDocument);
-    //   console.log("After Updating new document", newDocument);
-   // }
+    console.log("isEditing:", isEditing);   
     const formDataForUpdate = new FormData();
-
     for (const key in formData) {      
         formDataForUpdate.append(key, formData[key]);   
         console.log("key",key);   
     }
-
-    // Now you can send formDataForUpdate as your updated data
-    console.log("After updating the updated data", formDataForUpdate);
-   
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate)
       .then((response) => {
         console.log("Update Successful", response.data);
-        // setFormData({
-        //   ...formData,
-        //   profile_pic: response.data.customer.profile_pic,
-        //   document:response.data.customer.document,
-        // });
+        setFormData({
+          ...formData,
+          profile_pic: response.data.profile_pic,
+          document:response.data.document,
+        });
         setIsEditing(false);
       })
       .catch((error) => {
