@@ -38,8 +38,6 @@ function Customer({ handleViewClick }) {
       });
   }, []);
 
-
-
   const columns = [
     {
       field: "customer_name",
@@ -107,8 +105,8 @@ function Customer({ handleViewClick }) {
   }));
 
   const handleSearch = (event) => {
-    const query = event.target.value;
-    setSearchQuery(query); // Step 2: Update the search query state
+    const searchQuery = event.target.value;
+    setSearchQuery(searchQuery); // Step 2: Update the search query state
   };
 
   // Filter the customers based on the search query
@@ -116,15 +114,15 @@ function Customer({ handleViewClick }) {
     customer.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+  // const SearchIconWrapper = styled("div")(({ theme }) => ({
+  //   padding: theme.spacing(0, 2),
+  //   height: "100%",
+  //   position: "absolute",
+  //   pointerEvents: "none",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
@@ -254,7 +252,7 @@ function Customer({ handleViewClick }) {
       </Grid>
 
       <Grid item xs={12} md={12} lg={12}>
-        <Item>
+      <Item>
           <div className="allcustomer-header">
             <div>
               <h4 className="All-Customers">All Customers</h4>
@@ -319,7 +317,7 @@ function Customer({ handleViewClick }) {
               color="secondary"
             />
           </div>
-        </Item>
+          </Item>
       </Grid>
     </Grid>
   );
