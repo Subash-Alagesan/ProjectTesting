@@ -397,10 +397,10 @@ const SideNavbar = () => {
               </List>
 
               <button className="create-admin-button">
-        <div className="button-content">
+        {/* <div className="button-content">
           <ControlPointIcon className="icon" />
           <span className="button-text">Create Admin</span>
-        </div>
+        </div> */}
       </button>
 
             </Drawer>

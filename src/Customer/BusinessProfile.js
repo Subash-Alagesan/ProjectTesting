@@ -20,13 +20,13 @@ import TextField from "@mui/material/TextField";
 function Businessprofile() {
   const { customerId } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
-  const imageBaseUrl = "http://localhost:4070/uploads/images/";
-  const documentBaseUrl = "http://localhost:4070/uploads/documents/";
   const [newImage, setNewImage] = useState(null);
   const [newDocument, setNewDocument] = useState(null);
+  const imageBaseUrl = "http://localhost:4070/uploads/images/";
+  const DocumentBaseUrl = "http://localhost:4070/uploads/documents/";   
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
-  const [newDocumentName, setNewDocumentName] = useState("");
+
   const [formData, setFormData] = useState({
     customer_name: "",
     business_name: "",
@@ -58,12 +58,7 @@ function Businessprofile() {
           setFormData({
             ...customerData,
             profile_pic: customerData.profile_pic,
-            document: [
-              {
-                name: getFileNameFromPath(customerData.file_name),
-                path: customerData.file_name,
-              },
-            ],
+            document: customerData.file_name,
           });
           console.log("After Fetching from customer by id", customerData);
         })
@@ -89,31 +84,21 @@ function Businessprofile() {
     const file = e.target.files[0];
     console.log("Selected image:", file);
     // Update the new image
+    setFormData({
+      ...formData,
+      profile_pic: file,
+    });
     setNewImage(file);
   };
 
   const handleDocumentChange = (e) => {
     const file = e.target.files[0];
-
-    if (!formData.document.some((doc) => doc.name === file.name)) {
-      setNewDocument(file);
-      setNewDocumentName(file.name);
-
-      setFormData((prevData) => ({
-        ...prevData,
-        document: [
-          ...prevData.document,
-          {
-            name: file.name,
-            path: URL.createObjectURL(file), // or the appropriate path
-          },
-        ],
-      }));
-
-      console.log("New File is ", file);
-    } else {
-      console.log("This document is already in the array.");
-    }
+    console.log(file);
+    setFormData({
+      ...formData,
+      document: file,
+    });
+    setNewDocument(file);
   };
 
   const handleClick = (event) => {
@@ -135,7 +120,6 @@ function Businessprofile() {
     const updatedDocuments = formData.document.filter(
       (_, index) => index !== documentIndexToDelete
     );
-
     setFormData({
       ...formData,
       document: updatedDocuments,
@@ -158,6 +142,7 @@ function Businessprofile() {
     for (const key in formData) {
       formDataForUpdate.append(key, formData[key]);
     }
+    console.log("Document is", formData.document);
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate, {
         headers: {
@@ -171,12 +156,9 @@ function Businessprofile() {
         setFormData({
           ...formData,
           profile_pic: customerData.profile_pic,
-          document: [
-            {
-              name: getFileNameFromPath(customerData.file_name),
-              path: customerData.file_name,
-            },
-          ],
+          document: customerData.file_name,          
+           
+          
         });
 
         setIsEditing(false);
@@ -186,7 +168,7 @@ function Businessprofile() {
         console.error("Update Failed", error);
       });
   };
-
+  console.log("formdata profile_pic", formData.profile_pic);
   return (
     <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>
       <Grid container spacing={2}>
@@ -218,7 +200,7 @@ function Businessprofile() {
                     variant="contained"
                     type="button"
                     size="small"
-                    onClick={() => handleEditClick()}
+                    onClick={handleEditClick}
                     endIcon={<CreateOutlinedIcon />}
                   >
                     Edit
@@ -553,8 +535,8 @@ function Businessprofile() {
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Uploads">
                 <h4 className="Upload-field">Upload Files</h4>
-                {Array.isArray(formData.document) ? (
-                  formData.document.map((document, index) => (
+                {/* {Array.isArray(formData.document) ? (
+                  formData.document.file_name (
                     <div key={index} className="Uploaded-Document">
                       <span>{getFileNameFromPath(document.path)}</span>
                       {isEditing && (
@@ -569,12 +551,13 @@ function Businessprofile() {
                         </Button>
                       )}
                     </div>
-                  ))
-                ) : (
+                  )
+                  ) : (
                   <span>No documents uploaded</span>
-                )}
-                {isEditing && (
+                )} */}
+                {/* {isEditing && (
                   <>
+                 
                     <button
                       type="button"
                       onClick={() => hiddenDocumentInput.current.click()}
@@ -588,9 +571,32 @@ function Businessprofile() {
                       ref={hiddenDocumentInput}
                       style={{ display: "none" }}
                     />
-                    {newDocumentName && (
-                      <p>Selected Document: {newDocumentName}</p>
+                    {formData.document && (
+                      <p>Selected Document: {formData.document}</p>
                     )}
+                  </>
+                )} */}
+                <span>{formData?.document}</span>
+
+                {isEditing && (
+                  <>
+                    {newDocument ? ( // Check if a new document is selected
+                      <p>Selected Document: {newDocument.name}</p>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => hiddenDocumentInput.current.click()}
+                      >
+                        Upload New Document
+                      </button>
+                    )}
+                    <input
+                      type="file"
+                      accept=".pdf, .doc, .docx"
+                      onChange={handleDocumentChange}
+                      ref={hiddenDocumentInput}
+                      style={{ display: "none" }}
+                    />
                   </>
                 )}
               </div>
