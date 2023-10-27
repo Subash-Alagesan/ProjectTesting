@@ -14,14 +14,12 @@ import Avatar from "@mui/material/Avatar";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 
-
 function Employeeprofile() {
   const { employeeId } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const imageBaseUrl = "http://localhost:4070/uploads/images/";
   const [newImage, setNewImage] = useState(null);
   const [newSkill, setNewSkill] = useState([]);
-
   const [employeeProfile, setEmployeeProfile] = useState({
     profile_pic: "",
     name: "",
@@ -170,10 +168,13 @@ function Employeeprofile() {
         console.log("New image selected", newImage);
       } else {
         // If no new image is selected, include the existing profile_pic value as a URL
-        formDataForEmployeeUpdate.append("profile_pic", employeeProfile.profile_pic);
+        formDataForEmployeeUpdate.append(
+          "profile_pic",
+          employeeProfile.profile_pic
+        );
         console.log("Using existing image");
       }
-      
+
       formDataForEmployeeUpdate.forEach((value, key) => {
         console.log(`Field: ${key}, Value: ${value}`);
       });
@@ -189,6 +190,7 @@ function Employeeprofile() {
       );
 
       console.log("Employee Profile updated successfully:", response.data);
+      alert("Employee Profile updated successfully");
       setEmployeeProfile({
         ...employeeProfile,
         profile_pic: response.data.profile_pic,
@@ -349,9 +351,7 @@ function Employeeprofile() {
             <Grid xs={12} sm={12} md={4} lg={4}>
               <div className="Emp-name-content1">
                 <div>
-                  <label className="education">
-                    Education :
-                  </label>
+                  <label className="education">Education :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -527,9 +527,7 @@ function Employeeprofile() {
 
             <div className="Security1">
               <div className="Password1">
-                <label>
-                 Password :
-                </label>
+                <label>Password :</label>
                 {isEditing ? (
                   <input
                     type="password"
@@ -548,9 +546,7 @@ function Employeeprofile() {
             <div className="Experience1">
               <h4 className="Experience-field">Experience</h4>
               <div className="Experience4">
-                <label>
-                  Experience 1 :
-                </label>
+                <label>Experience 1 :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -568,58 +564,47 @@ function Employeeprofile() {
         </Grid>
 
         <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={5} lg={5}>
-          <div className="Extra-Information1">
-            <h4 className="EmpExtra--field1">
-              Extra
-            </h4>
-            <div className="Emp-Mob-no">
-              <label>
-                Alternative Phone No :
-              </label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="alternative_phone_number"
-                  value={employeeProfile.alternative_phone_number}
-                  className="empprofile-input"
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <span>{employeeProfile.alternative_phone_number}</span>
-              )}
+          <Grid item xs={12} sm={12} md={5} lg={5}>
+            <div className="Extra-Information1">
+              <h4 className="EmpExtra--field1">Extra</h4>
+              <div className="Emp-Mob-no">
+                <label>Alternative Phone No :</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="alternative_phone_number"
+                    value={employeeProfile.alternative_phone_number}
+                    className="empprofile-input"
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span>{employeeProfile.alternative_phone_number}</span>
+                )}
+              </div>
+              <div className="empprofile-physically">
+                <label>Physically Challenged:</label>
+                {isEditing ? (
+                  <select
+                    name="physically_challenged"
+                    value={employeeProfile.physically_challenged}
+                    onChange={handleInputChange}
+                  >
+                    <option value="Select">select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                ) : (
+                  <span>{employeeProfile.physically_challenged}</span>
+                )}
+              </div>
             </div>
-            <div className="empprofile-physically">
-              <label>
-                Physically Challenged:
-              </label>
-              {isEditing ? (
-                <select
-                  name="physically_challenged"
-                  value={employeeProfile.physically_challenged}
-                  onChange={handleInputChange}
-                >
-                  <option value="Select">select</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              ) : (
-                <span>{employeeProfile.physically_challenged}</span>
-              )}
-            </div>
-          </div>
-        </Grid>
+          </Grid>
 
-       
           <Grid item xs={12} sm={12} md={5} lg={5}>
             <div className="emp-project">
-              <h4 className="emp-project-field">
-                Projects
-              </h4>
+              <h4 className="emp-project-field">Projects</h4>
               <div className="Portfolio-url">
-                <label>
-                Portfolio : 
-                </label>
+                <label>Portfolio :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -635,9 +620,7 @@ function Employeeprofile() {
               <br></br>
 
               <div className="GitHub-url">
-                <label>
-                 Github URL :
-                </label>
+                <label>Github URL :</label>
                 {isEditing ? (
                   <input
                     type="text"
@@ -656,7 +639,6 @@ function Employeeprofile() {
           <div className="SaveAltIcon2">
             <SaveAltIcon />
           </div>
-
         </Grid>
       </Grid>
     </form>

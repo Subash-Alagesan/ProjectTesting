@@ -44,8 +44,8 @@ function Businessprofile() {
     linkedin: "",
     twitter: "",
     website_address: "",
-    profile_pic: null,
-    document: null,
+    profile_pic: "",
+    document: "",
   });
 
   useEffect(() => {
@@ -57,11 +57,11 @@ function Businessprofile() {
           const customerData = response.data.customer;
           setFormData({
             ...customerData,
-            profile_pic: customerData.customer_profile_pic,
+            profile_pic: customerData.profile_pic,
             document: [
               {
-                name: getFileNameFromPath(customerData.uploaded_file_path),
-                path: customerData.uploaded_file_path,
+                name: getFileNameFromPath(customerData.file_name),
+                path: customerData.file_name,
               },
             ],
           });
@@ -94,20 +94,28 @@ function Businessprofile() {
 
   const handleDocumentChange = (e) => {
     const file = e.target.files[0];
-    // Check if the selected document is not already in the array
+
     if (!formData.document.some((doc) => doc.name === file.name)) {
       setNewDocument(file);
       setNewDocumentName(file.name);
+
       setFormData((prevData) => ({
         ...prevData,
-        document: [...prevData.document, file.name], // Store the file name as the document
+        document: [
+          ...prevData.document,
+          {
+            name: file.name,
+            path: URL.createObjectURL(file), // or the appropriate path
+          },
+        ],
       }));
+
       console.log("New File is ", file);
     } else {
-      // Handle the case where the document is already in the array
       console.log("This document is already in the array.");
     }
   };
+
   const handleClick = (event) => {
     if (isEditing) {
       hiddenFileInput.current.click();
@@ -122,38 +130,55 @@ function Businessprofile() {
     });
     console.log("after input change", formData);
   };
-  const handleDeleteDocument = (index) => {
-    const updatedDocuments = [...formData.document];
-    updatedDocuments.splice(index, 1);
+
+  const handleDeleteDocument = (documentIndexToDelete) => {
+    const updatedDocuments = formData.document.filter(
+      (_, index) => index !== documentIndexToDelete
+    );
+
     setFormData({
       ...formData,
       document: updatedDocuments,
     });
   };
+
   function getFileNameFromPath(path) {
     if (path) {
-      return path.split("-").pop(); // Extracts the last part of the path, which is the file name
+      const parts = path.split("/");
+      if (parts.length > 0) {
+        return parts[parts.length - 1];
+      }
     }
-    return ''; // Extracts the last part of the path, which is the file name
+    return "";
   }
 
   const handleUpdateClick = () => {
-    console.log("Start updating!!!");
-    console.log("isEditing:", isEditing);   
+    console.log("isEditing:", isEditing);
     const formDataForUpdate = new FormData();
-    for (const key in formData) {      
-        formDataForUpdate.append(key, formData[key]);   
-        console.log("key",key);   
+    for (const key in formData) {
+      formDataForUpdate.append(key, formData[key]);
     }
     axios
-      .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate)
+      .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
-        console.log("Update Successful", response.data);
+        const customerData = response.data;
+        console.log("Update Successful", customerData);
+        alert("Update Successfull!!!");
         setFormData({
           ...formData,
-          profile_pic: response.data.profile_pic,
-          document:response.data.document,
+          profile_pic: customerData.profile_pic,
+          document: [
+            {
+              name: getFileNameFromPath(customerData.file_name),
+              path: customerData.file_name,
+            },
+          ],
         });
+
         setIsEditing(false);
       })
       .catch((error) => {
@@ -206,42 +231,40 @@ function Businessprofile() {
 
         <Grid item xs={12} md={12} lg={12}>
           <Grid container spacing={3}>
-          <Grid item xs={12} sm={12} md={2} lg={2}>
-              
-                <div className="box-decoration">
-                  <div onClick={handleClick} style={{ cursor: "pointer" }}>
-                    {isEditing ? (
-                      <>
-                        {newImage ? ( // Check if a new image is selected
-                          <img
-                            src={URL.createObjectURL(newImage)}
-                            alt="Profile Picture"
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        ) : (
-                          <img
-                            src={`${imageBaseUrl}${formData.profile_pic}`}
-                            alt="Profile Picture"
-                            style={{ width: "100%", height: "auto" }}
-                          />
-                        )}
-                        <input
-                          id="image-upload-input"
-                          type="file"
-                          onChange={handleImageChange}
-                          ref={hiddenFileInput}
-                          style={{ display: "none"}}
+            <Grid item xs={12} sm={12} md={2} lg={2}>
+              <div className="box-decoration">
+                <div onClick={handleClick} style={{ cursor: "pointer" }}>
+                  {isEditing ? (
+                    <>
+                      {newImage ? ( // Check if a new image is selected
+                        <img
+                          src={URL.createObjectURL(newImage)}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
                         />
-                      </>
-                    ) : (
-                      <Avatar
-                        sx={{ width: 150, height: 150 }}
-                        src={`${imageBaseUrl}${formData.profile_pic}`}
+                      ) : (
+                        <img
+                          src={`${imageBaseUrl}${formData.profile_pic}`}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      )}
+                      <input
+                        id="image-upload-input"
+                        type="file"
+                        onChange={handleImageChange}
+                        ref={hiddenFileInput}
+                        style={{ display: "none" }}
                       />
-                    )}
-                  </div>
+                    </>
+                  ) : (
+                    <Avatar
+                      sx={{ width: 150, height: 150 }}
+                      src={`${imageBaseUrl}${formData.profile_pic}`}
+                    />
+                  )}
                 </div>
-           
+              </div>
             </Grid>
 
             <Grid item xs={12} sm={12} md={5} lg={5}>
@@ -263,9 +286,7 @@ function Businessprofile() {
                 <br></br>
 
                 <div className="BusinessName">
-                  <label>
-                   Business Name :
-                  </label>
+                  <label>Business Name :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -278,9 +299,7 @@ function Businessprofile() {
                   )}
                 </div>
                 <div className="profile-BusinessCategory">
-                  <label>
-                   Business Category:
-                  </label>
+                  <label>Business Category:</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -300,9 +319,7 @@ function Businessprofile() {
             <Grid xs={12} sm={12} md={5} lg={5}>
               <div className="Business-type-content1">
                 <div className="BusinessType">
-                  <label>
-                   Business Type :
-                  </label>
+                  <label>Business Type :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -315,7 +332,6 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-                
               </div>
 
               {/* {isEditing ? (
@@ -339,9 +355,7 @@ function Businessprofile() {
               <div className="Business_Information">
                 <h4 className="Businessinfo-field">Business Information</h4>
                 <div className="Businessprofile-Name">
-                  <label>
-                   Business Name :
-                  </label>
+                  <label>Business Name :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -355,9 +369,7 @@ function Businessprofile() {
                 </div>
                 <br></br>
                 <div className="Businessprofile-Place">
-                  <label>
-                    Business Place : 
-                  </label>
+                  <label>Business Place :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -372,9 +384,7 @@ function Businessprofile() {
                 <br></br>
 
                 <div className="Businessprofile-District">
-                  <label>
-                    District :
-                  </label>
+                  <label>District :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -388,9 +398,7 @@ function Businessprofile() {
                 </div>
                 <br></br>
                 <div className="Businessprofile-Language">
-                  <label>
-                  Language :
-                  </label>
+                  <label>Language :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -403,94 +411,77 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {/* {isEditing ? (
-                <div className="AddBox-Icon1">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )} */}
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Social-Media">
                 <h4 className="SocialMedia-field">Social Media Links</h4>
                 <div className="Media">
                   <div className="Media1">
-                  <label>
-                    Facebook :
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="facebook"
-                      value={formData.facebook}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.facebook}</span>
-                  )}
+                    <label>Facebook :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="facebook"
+                        value={formData.facebook}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.facebook}</span>
+                    )}
                   </div>
                   <div className="Media2">
-                  <label>
-                   Instagram :
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="instagram"
-                      value={formData.instagram}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.instagram}</span>
-                  )}
+                    <label>Instagram :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="instagram"
+                        value={formData.instagram}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.instagram}</span>
+                    )}
                   </div>
                   <div className="Media3">
-                  <label>
-                   Youtube :
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="youtube"
-                      value={formData.youtube}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.youtube}</span>
-                  )}
+                    <label>Youtube :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="youtube"
+                        value={formData.youtube}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.youtube}</span>
+                    )}
                   </div>
 
                   <div className="Media4">
-                  <label>
-                   LinkedIn :
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="linkedin"
-                      value={formData.linkedin}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.linkedin}</span>
-                  )}
+                    <label>LinkedIn :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="linkedin"
+                        value={formData.linkedin}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.linkedin}</span>
+                    )}
                   </div>
                   <div className="Media5">
-                  <label>
-                   Twitter :
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="twitter"
-                      value={formData.twitter}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.twitter}</span>
-                  )}
-                </div>
+                    <label>Twitter :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="twitter"
+                        value={formData.twitter}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.twitter}</span>
+                    )}
+                  </div>
                 </div>
                 <br></br>
               </div>
@@ -560,62 +551,58 @@ function Businessprofile() {
               </Item>
             </Grid> */}
             <Grid item xs={12} sm={12} md={4} lg={4}>
-            <div className="Uploads">
-            <h4 className="Upload-field">Upload  Files</h4>
-              {Array.isArray(formData.document) ? (
-                formData.document.map((document, index) => (
-                  <div key={index} className="Uploaded-Document">
-                    <span>{getFileNameFromPath(document.path)}</span>
-                    {isEditing && (
-                      <Button
-                        size="small"
-                        color="primary"
-                        className="Delete-Document-Button"
-                        startIcon={<DeleteIcon className="icons" />}
-                        onClick={() => handleDeleteDocument(index)}
-                      >
-                        Delete
-                      </Button>
+              <div className="Uploads">
+                <h4 className="Upload-field">Upload Files</h4>
+                {Array.isArray(formData.document) ? (
+                  formData.document.map((document, index) => (
+                    <div key={index} className="Uploaded-Document">
+                      <span>{getFileNameFromPath(document.path)}</span>
+                      {isEditing && (
+                        <Button
+                          size="small"
+                          color="primary"
+                          className="Delete-Document-Button"
+                          startIcon={<DeleteIcon className="icons" />}
+                          onClick={() => handleDeleteDocument(index)}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <span>No documents uploaded</span>
+                )}
+                {isEditing && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => hiddenDocumentInput.current.click()}
+                    >
+                      Upload New Document
+                    </button>
+                    <input
+                      type="file"
+                      accept=".pdf, .doc, .docx" // Add the accepted file types
+                      onChange={handleDocumentChange}
+                      ref={hiddenDocumentInput}
+                      style={{ display: "none" }}
+                    />
+                    {newDocumentName && (
+                      <p>Selected Document: {newDocumentName}</p>
                     )}
-                  </div>
-                ))
-              ) : (
-                <span>No documents uploaded</span>
-              )}
-              {isEditing && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => hiddenDocumentInput.current.click()}
-                  >
-                    Upload New Document
-                  </button>
-                  <input
-                    type="file"
-                    accept=".pdf, .doc, .docx" // Add the accepted file types
-                    onChange={handleDocumentChange}
-                    ref={hiddenDocumentInput}
-                    style={{ display: "none" }}
-                  />
-                  {newDocumentName && (
-                    <p>Selected Document: {newDocumentName}</p>
-                  )}
-                </>
-              )}
-            </div>
+                  </>
+                )}
+              </div>
             </Grid>
           </Grid>
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Contact-Information">
-                <h4 className="BusinessContact-field">
-                  Contact Details
-                </h4>
+                <h4 className="BusinessContact-field">Contact Details</h4>
                 <div className="Business-Mobileno">
-                  <label>
-                    Business No :
-                  </label>
+                  <label>Business No :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -630,9 +617,7 @@ function Businessprofile() {
                 <br></br>
 
                 <div className="Businessprofile-EmailId">
-                  <label>
-                    Email Id :
-                  </label>
+                  <label>Email Id :</label>
                   {isEditing ? (
                     <input
                       type="Email"
@@ -657,9 +642,7 @@ function Businessprofile() {
               <div className="Website">
                 <h4 className="Website-field">Website</h4>
                 <div className="Website1">
-                  <label>
-                    Website :
-                  </label>
+                  <label>Website :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -686,9 +669,7 @@ function Businessprofile() {
               <div className="Owner">
                 <h4 className="Owner-field">Owner Details</h4>
                 <div className="Owner1">
-                  <label>
-                    Phone no:
-                  </label>
+                  <label>Phone no:</label>
                   {isEditing ? (
                     <input
                       type="text"

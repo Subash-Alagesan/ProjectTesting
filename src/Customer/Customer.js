@@ -46,7 +46,7 @@ function Customer({ handleViewClick }) {
       renderCell: (params) => (
         <div style={{ display: "flex", alignItems: "center" }}>
           <Avatar
-            src={`http://localhost:4070/uploads/images/${params.row.customer_profile_pic}`}
+            src={`http://localhost:4070/uploads/images/${params.row.profile_pic}`}
             style={{ marginRight: "8px" }}
           />
           {params.value}
@@ -76,7 +76,7 @@ function Customer({ handleViewClick }) {
           size="small"
           style={{ background: "#6425FE" }}
           onClick={() => {
-            const customerIdFromRow = params.row.id; // Get the customer's ID from the row
+            const customerIdFromRow = params.row.customer_id; // Get the customer's ID from the row
             setCustomerId(customerIdFromRow); // Set the customerId in your context
             handleViewClick(customerIdFromRow); // Also pass the customerId to the handler
             console.log("Id Value from customer", customerIdFromRow);
@@ -114,16 +114,7 @@ function Customer({ handleViewClick }) {
     customer.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // const SearchIconWrapper = styled("div")(({ theme }) => ({
-  //   padding: theme.spacing(0, 2),
-  //   height: "100%",
-  //   position: "absolute",
-  //   pointerEvents: "none",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // }));
-
+ 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     "& .MuiInputBase-input": {
@@ -308,7 +299,7 @@ function Customer({ handleViewClick }) {
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection
-              getRowId={(row) => row.id}
+              getRowId={(row) => row.customer_id}
             />
 
             <Pagination
