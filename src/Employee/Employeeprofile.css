@@ -1,36 +1,32 @@
 .grid-container-2 {
-    height: 125vh;
-
+  height: 125vh;
 }
 
-
 .emp-grid1 {
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 20px;
 }
 
 .emp-grid2 {
-    height: 125vh;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 15px;
+  height: 125vh;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 15px;
 }
 
 @media only screen and (max-width: 500px) {
-    .emp-grid2 {
-        height: 390vh;
-    }
+  .emp-grid2 {
+    height: 390vh;
+  }
 }
 
-.Personal_Information{
-    padding: 0%;
+.Personal_Information {
+  padding: 0%;
 }
-
-
 
 .Employeedb-profile-contact-img {
-    height: 35px;
+  height: 35px;
 }
 
 /* .Employeedb-profilename {
@@ -46,445 +42,490 @@
 } */
 
 .Employeedb-title {
-    padding-top: 10px;
-    font-size: 16px;
-    font-family: "Info-field";
-
+  padding-top: 10px;
+  font-size: 16px;
+  font-family: "Info-field";
 }
 
 @font-face {
-    font-family: "Info-field";
-    src: url(../Component/Font/Roboto-Bold.ttf);
+  font-family: "Info-field";
+  src: url(../Component/Font/Roboto-Bold.ttf);
 }
 
 @media only screen and (max-width: 600px) {
-    .Employeedb-title {
-
-        font-size: 15px;
-    }
+  .Employeedb-title {
+    font-size: 15px;
+  }
 }
 
 .Edit-btn {
-    position: absolute;
-    right: 275px;
-
+  position: absolute;
+  right: 275px;
 }
 
 @media only screen and (max-width: 600px) {
-    .Edit-btn {
-
-        position: absolute;
-        right: 50px;
-    }
+  .Edit-btn {
+    position: absolute;
+    right: 50px;
+  }
 }
 
 .Emp-name-content {
-    padding-top: 38px;
-    padding-left: 60px;
+  padding-top: 38px;
+  padding-left: 60px;
 }
 
 @media only screen and (max-width: 600px) {
-    .Emp-name-content {
-        text-align: left;
-        padding-left: 20px;
-    }
+  .Emp-name-content {
+    text-align: left;
+    padding-left: 20px;
+  }
 }
 
-    .img-display-after {
-        border-radius: 100%;
-    }
+.img-display-after {
+  border-radius: 100%;
+}
 
-  
+Input {
+  width: 50%;
+}
 
-    Input {
-        width: 50%;
+@media only screen and (max-width: 500px) {
+  Input {
+    width: 35%;
+  }
+}
 
-    }
+.Emp-name-content1 {
+  text-align: left;
+  padding-top: 60px;
+  padding-left: 40px;
+  font-family: Robotto;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
 
-    @media only screen and (max-width: 500px) {
-        Input {
-            width: 35%;
-
-        }
-    }
-
-    .Emp-name-content1 {
-        text-align: left;
-        padding-top: 60px;
-        padding-left: 40px;
-        font-family: Robotto;
+.empprofile-entername {
+    color: var(--Gray, #84828A);
+font-family: Inter;
 font-size: 18px;
-font-weight: 600;
-line-height: 24px;
-letter-spacing: 0em;
-text-align: left;
-
-    }
-
-
-
-    .empprofile-entername {
-        font-family: Robotto;
-font-size: 18px;
+font-style: normal;
 font-weight: 400;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: left;
+line-height: normal;
+}
 
-    }
+.empprofile-education {
+  font-size: 15px;
+}
 
+.name {
+  font-size: 15px;
+  padding-left: 40px;
+}
 
-    .empprofile-education {
-        font-size: 15px;
-    }
-
-    .name {
-        font-size: 15px;
-        padding-left: 40px;
-    }
-
-    .Experience {
-        
-        margin-top: 10px;
-        margin-left: 3px;
-        font-family: Robotto;
+.Experience {
+  margin-top: -15px;
+  margin-left: 3px;
+  color: var(--Gray, #84828A);
+font-family: Inter;
 font-size: 18px;
+font-style: normal;
 font-weight: 400;
-line-height: 22px;
-letter-spacing: 0em;
-text-align: left;
+line-height: normal;
+}
 
+.education {
+  margin-right: 30px;
+  margin-top: 10px;
+  color: #5e5e5e;
+  font-family: Robotto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 
-    }
+.Empprofile-Dob {
+  padding-top: 15px;
+}
 
-    .education {
-        font-size: 15px;
-        margin-right:30px;
-        margin-top: 10px;
-    }
+.Empprofile-Dob,
+.empprofile-Marital {
+  text-align: left;
+  padding-left: 70px;
+  color: var(--Gray, #84828A);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
-    .Empprofile-Dob {
-        padding-top: 15px;
-    }
- 
-
-    .Empprofile-Dob,
-    .empprofile-Marital {
-
-        text-align: left;
-        padding-left: 70px;
-        font-family: Inter;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 22px;
-        letter-spacing: 0em;
-    }
-
-
-
-
-    .Skill-field {
-        padding-left: 65px;
-        font-size: 17px;
-        padding-top: 15px;
-        font-family: Inter;
-font-weight: 600;
-line-height: 27px;
-letter-spacing: 0em;
-text-align: left;
-
-    }
-
-    .Skill1 {
-        padding-top: 15px;
-    }
-
-    .Skill1,
-    .Skill2,
-    .Skill3,
-    .Skill4 {
-        text-align: left;
-        padding-left: 68px;
-        color: var(--Gray, #84828A);
-    font-family: Roboto;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    display: inline-block;
-    margin-bottom: 10px;
-
-    }
-
-    .box-decoration {
-        padding-left: 50px;
-
-    }
-
-    .image-upload-button {
-        display: none;
-    }
-
-    .AddBoxIcon {
-        color: #6425FE;
-        position: absolute;
-        top: 100px;
-        right: 280px;
-    }
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon {
-            position: absolute;
-            top: 520px;
-            right: 60px;
-
-        }
-    }
-    .AddBoxIcon1 {
-        color: #6425FE;
-        position: absolute;
-        top: 295px;
-        right: 370px;
-
-    }
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon1 {
-            position: absolute;
-            top: 720px;
-            right: 60px;
-
-        }
-    }
-
-    .AddBoxIcon2 {
-        color: #6425FE;
-        position: absolute;
-        top: 295px;
-        right: 740px;
-    }
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon2 {
-            position: absolute;
-            top: 960px;
-            right: 60px;
-
-        }
-    }
-
-
-    .AddBoxIcon3 {
-        color: #6425FE;
-        position: absolute;
-        top: 540px;
-        right: 370px;
-    }
-
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon3 {
-            position: absolute;
-            top: 1200px;
-            right: 60px;
-
-        }
-    }
-
-
-    .AddBoxIcon4 {
-        color: #6425FE;
-        position: absolute;
-        top: 540px;
-        right: 740px;
-    }
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon4 {
-            position: absolute;
-            top: 1380px;
-            right: 60px;
-        }
-    }
-    .AddBoxIcon5 {
-        color: #6425FE;
-        position: absolute;
-        top: 700px;
-        right: 370px;
-    }
-     @media only screen and (max-width: 600px) {
-        .AddBoxIcon5 {
-            position: absolute;
-            top: 1550px;
-            right: 60px;
-
-        }
-    } 
-
-    .AddBoxIcon6 {
-        color: #6425FE;
-        position: absolute;
-        top: 700px;
-        right: 740px;
-    }
-    @media only screen and (max-width: 600px) {
-        .AddBoxIcon6 {
-            position: absolute;
-            top: 1550px;
-            right: 60px;
-
-        }
-    }
-
-
-
-    .Info-field {
-        padding-left: 70px;
-        padding-top: 15px;
-        font-family: Inter;
+.Skill-field {
+  color: #5E5E5E;
+font-family: Inter;
 font-size: 18px;
+font-style: normal;
 font-weight: 600;
-line-height: 27px;
-letter-spacing: 0em;
-text-align: left;
+line-height: normal;
+  text-align: left;
+}
+.Skills{
+    margin-left: 70px;
+    margin-top: 15px;
+}
+.Skill1 {
+  padding-top: 15px;
+}
 
-    }
+.Skill1,
+.Skill2,
+.Skill3,
+.Skill4 {
+  text-align: left;
+  padding-left: 68px;
+  color: var(--Gray, #84828a);
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 10px;
+}
 
-    /* @font-face {
+.box-decoration {
+  padding-left: 50px;
+}
+
+.image-upload-button {
+  display: none;
+}
+
+.AddBoxIcon {
+  color: #6425fe;
+  position: absolute;
+  top: 100px;
+  right: 280px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon {
+    position: absolute;
+    top: 520px;
+    right: 60px;
+  }
+}
+.AddBoxIcon1 {
+  color: #6425fe;
+  position: absolute;
+  top: 295px;
+  right: 370px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon1 {
+    position: absolute;
+    top: 720px;
+    right: 60px;
+  }
+}
+
+.AddBoxIcon2 {
+  color: #6425fe;
+  position: absolute;
+  top: 295px;
+  right: 740px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon2 {
+    position: absolute;
+    top: 960px;
+    right: 60px;
+  }
+}
+
+.AddBoxIcon3 {
+  color: #6425fe;
+  position: absolute;
+  top: 540px;
+  right: 370px;
+}
+
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon3 {
+    position: absolute;
+    top: 1200px;
+    right: 60px;
+  }
+}
+
+.AddBoxIcon4 {
+  color: #6425fe;
+  position: absolute;
+  top: 540px;
+  right: 740px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon4 {
+    position: absolute;
+    top: 1380px;
+    right: 60px;
+  }
+}
+.AddBoxIcon5 {
+  color: #6425fe;
+  position: absolute;
+  top: 700px;
+  right: 370px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon5 {
+    position: absolute;
+    top: 1550px;
+    right: 60px;
+  }
+}
+
+.AddBoxIcon6 {
+  color: #6425fe;
+  position: absolute;
+  top: 700px;
+  right: 740px;
+}
+@media only screen and (max-width: 600px) {
+  .AddBoxIcon6 {
+    position: absolute;
+    top: 1550px;
+    right: 60px;
+  }
+}
+
+.Info-field {
+  padding-left: 70px;
+  padding-top: 15px;
+  color: #5e5e5e;
+  font-family: Robotto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: left;
+}
+
+/* @font-face {
     font-family: "Info-field";
     src: url(Component/Roboto-Bold.ttf);
 } */
 
-    .Contact-field {
-        text-align: left;
-        padding-left: 70px;
-        padding-top: 45px;
-        font-size: 17px;
-        font-family: Inter;
-font-size: 18px;
-font-weight: 600;
-line-height: 27px;
-letter-spacing: 0em;
-    }
+.Contact-field {
+    color: #5E5E5E;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
 
-    /* 
+/* 
 @font-face {
     font-family: "Info-field";
     src: url(/src/Component/Roboto/Roboto-Bold.ttf);
 } */
 
-    .Experience-field {
-        text-align: left;
-        padding-left: 66px;
-        padding-top: 45px;
-        font-size: 17px;
-        font-family: "Info-field";
-    }
+.Experience-field {
+  text-align: left;
+  padding-left: 66px;
+  padding-top: 45px; 
+  color: #5E5E5E;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 
-    .Experience1,
-    .Experience2,
-    .Experience3 {
-        text-align: left;
-        padding-left: 66px;
+.Experience1{
+  margin-left: 0px;
+  margin-top: -18px;
+}
 
-    }
+.Experience4 {
+  margin-top: 10px;
+  color: var(--Gray, #84828A);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 67px;
+ 
+}
 
-    .Experience1 {
-        padding-top: 15px;
+.empprofile-input {
+  padding-right: 40px;
+  color: #5e5e5e;
+  font-family: Robotto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
 
-    }
-
-    .empprofile-input {
-        padding-right: 40px;
-        font-family: Robotto;
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: left;
-        
-
-    }
-
-    .Empprofile-Mobileno,
-    .Emp-profile-EmailId {
-        padding-top: 15px;
-        padding-left: 70px;
-        font-family: Inter;
+.Empprofile-Mobileno,
+.Emp-profile-EmailId {
+  margin-top: 15px;
+  color: var(--Gray, #84828A);
+font-family: Inter;
 font-size: 18px;
+font-style: normal;
 font-weight: 500;
-letter-spacing: 0em;
-text-align: left;
-    }
+line-height: normal;
+  text-align: left;
+}
 
-    .Extra-field {
-        text-align: left;
-        padding-left: 70px;
-        padding-top: 10px;
-        font-size: 17px;
-        font-family: "Info-field";
-    }
+.Extra-field {
+  text-align: left;
+  padding-left: 70px;
+  padding-top: 10px;
+  font-size: 17px;
+  font-family: "Info-field";
+}
 
-    .Extra1 {
-        padding-top: 15px;
-        text-align: left;
-        padding-left: 70px;
-    }
+.Extra1 {
+  padding-top: 15px;
+  text-align: left;
+  padding-left: 70px;
+}
 
-    .Extra2 {
-        text-align: left;
-        padding-left: 70px;
-    }
+.Extra2 {
+  text-align: left;
+  padding-left: 70px;
+}
 
-    .Projects-field {
-        text-align: left;
-        padding-left: 70px;
-        padding-top: 10px;
-        font-size: 17px;
-        font-family: "Info-field";
-    }
+.Projects-field {
+  text-align: left;
+  padding-left: 70px;
+  padding-top: 10px;
+  font-size: 17px;
+  font-family: "Info-field";
+}
 
-    .Projects1,
-    .Projects2 {
-        text-align: left;
-        padding-left: 70px;
-    }
+.Projects1,
+.Projects2 {
+  text-align: left;
+  padding-left: 70px;
+}
 
-    .Projects1 {
-        padding-top: 15px;
+.Projects1 {
+  padding-top: 15px;
+}
 
-    }
+.SaveAltIcon {
+  position: absolute;
+  right: 280px;
+  top: 810px;
+  color: #6425fe;
+}
 
-    .SaveAltIcon {
-        position: absolute;
-        right: 280px;
-        top: 810px;
-        color: #6425FE;
-
-    }
-
-    @media only screen and (max-width: 500px) {
-        .SaveAltIcon {
-
-            position: absolute;
-            right: 50px;
-            top: 1800px;
-        }
-    }
-    .Contact_Information1{
-        margin-top:10px;
-    }
-    .Security1{
-        margin-left: 70px;
-        margin-top: 30px;
-    }
-    .Extra-Information1{
-        margin-left: 70px;
-        margin-top: 30px;
-    }
-    .empprofile-physically{
-        margin-top: 20px;
-    }
-    .Emp-Mob-no{
-        margin-top: 20px;  
-    }
-    .PortFolio{
-       padding-left: 550px; 
-       margin-top: -120px;
-    }
-  
-      
+@media only screen and (max-width: 500px) {
+  .SaveAltIcon {
+    position: absolute;
+    right: 50px;
+    top: 1800px;
+  }
+}
+.Contact_Information1 {
+  margin-top: 30px;
+  margin-left: 70px;
+}
+.Security1 {
+  margin-left: 70px;
+  margin-top: 30px;
+}
+.Extra-Information1 {
+  margin-left: 70px;
+  margin-top: 30px;
+}
+.empprofile-physically {
+  margin-top: 20px;
+  color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.Emp-Mob-no {
+  margin-top: 20px;
+  color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.PortFolio {
+    margin-left: 550px;
+  margin-top: -120px;
+}
+.EmpExtra--field1 {
+    color: #5E5E5E;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.empprofile-isadmin{
+    color: #5e5e5e;
+    color: var(--Gray, #84828A);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.Password1{
+    color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.emp-project-field{
+    color: #5E5E5E;
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.emp-project{
+ margin-top: 30px;
+ margin-left: 150px;
+}
+.Portfolio-url{
+    color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.GitHub-url{
+    color: var(--Gray, #84828A);
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.SaveAltIcon2 {
+  position: absolute;
+  right: 280px;
+  top: 900px;
+  color: #6425fe;
+  margin-bottom: 10px;
+}

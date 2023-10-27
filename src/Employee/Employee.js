@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 function Employee({ handleEmpClick }) {
 
   const [employees, setEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const { setEmployeeId } = useAuth();
   const [count, setCount] = useState();
 
@@ -101,15 +102,25 @@ function Employee({ handleEmpClick }) {
     },
   }));
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+    setSearchQuery(searchQuery); // Step 2: Update the search query state
+  };
+
+  // Filter the customers based on the search query
+  const filteredEmployees = employees.filter((employees) =>
+  employees.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // const SearchIconWrapper = styled("div")(({ theme }) => ({
+  //   padding: theme.spacing(0, 2),
+  //   height: "100%",
+  //   position: "absolute",
+  //   pointerEvents: "none",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
@@ -247,9 +258,11 @@ function Employee({ handleEmpClick }) {
                 <SearchIcon />
 
                 <StyledInputBase
-                  placeholder="Search Employees"
-                  inputProps={{ "aria-label": "search" }}
-                />
+                placeholder="Search Employees"
+                inputProps={{ "aria-label": "search" }}
+                value={searchQuery} // Step 3: Bind the search query value
+                onChange={handleSearch} // Step 3: Handle search input change
+              />
               </Search>
             </div>
 
@@ -287,7 +300,7 @@ function Employee({ handleEmpClick }) {
           </div>
           <div className="Datagrid-table" style={{height:"500px"}}>
             <DataGrid
-              rows={employees}
+              rows={filteredEmployees}
               columns={columns}
               pageSize={5} // Number of records per page
               checkboxSelection

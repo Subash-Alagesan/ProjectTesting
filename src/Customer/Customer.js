@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 
 function Customer({ handleViewClick }) {
   const [customers, setCustomers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const { setCustomerId } = useAuth();
   const [count, setCount] = useState();
 
@@ -36,8 +37,6 @@ function Customer({ handleViewClick }) {
         console.error('Error fetching customer count:', error);
       });
   }, []);
-
-
 
   const columns = [
     {
@@ -105,15 +104,25 @@ function Customer({ handleViewClick }) {
     },
   }));
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+    setSearchQuery(searchQuery); // Step 2: Update the search query state
+  };
+
+  // Filter the customers based on the search query
+  const filteredCustomers = customers.filter((customer) =>
+    customer.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // const SearchIconWrapper = styled("div")(({ theme }) => ({
+  //   padding: theme.spacing(0, 2),
+  //   height: "100%",
+  //   position: "absolute",
+  //   pointerEvents: "none",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
@@ -243,7 +252,7 @@ function Customer({ handleViewClick }) {
       </Grid>
 
       <Grid item xs={12} md={12} lg={12}>
-        <Item>
+      <Item>
           <div className="allcustomer-header">
             <div>
               <h4 className="All-Customers">All Customers</h4>
@@ -253,9 +262,11 @@ function Customer({ handleViewClick }) {
                 <SearchIcon />
 
                 <StyledInputBase
-                  placeholder="Search Customers"
-                  inputProps={{ "aria-label": "search" }}
-                />
+                placeholder="Search Customers"
+                inputProps={{ "aria-label": "search" }}
+                value={searchQuery} // Step 3: Bind the search query value
+                onChange={handleSearch} // Step 3: Handle search input change
+              />
               </Search>
             </div>
 
@@ -293,7 +304,7 @@ function Customer({ handleViewClick }) {
 
           <div className="Datagrid-table">
             <DataGrid
-              rows={customers}
+               rows={filteredCustomers}
               columns={columns}
               pageSizeOptions={[5, 10]}
               checkboxSelection
@@ -306,7 +317,7 @@ function Customer({ handleViewClick }) {
               color="secondary"
             />
           </div>
-        </Item>
+          </Item>
       </Grid>
     </Grid>
   );

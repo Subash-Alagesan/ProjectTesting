@@ -307,7 +307,7 @@ const AddEmployee = () => {
         {/* Skills*/}
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="Skill">
-            <h4 className="Skill-field">
+            <h4 className="Skill-field-emp">
               Skills
               <AddBoxIcon fontSize="small" onClick={handleAddSkill} />
             </h4>

@@ -264,7 +264,7 @@ function Businessprofile() {
 
                 <div className="BusinessName">
                   <label>
-                    <strong> Business Name :</strong>
+                   Business Name :
                   </label>
                   {isEditing ? (
                     <input
@@ -277,16 +277,31 @@ function Businessprofile() {
                     <span>{formData.business_name}</span>
                   )}
                 </div>
+                <div className="profile-BusinessCategory">
+                  <label>
+                   Business Category:
+                  </label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="business_category"
+                      value={formData.business_category}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{formData.business_category}</span>
+                  )}
+                </div>
 
                 <br></br>
               </div>
             </Grid>
 
             <Grid xs={12} sm={12} md={5} lg={5}>
-              <div className="Business-name-content1">
-                <div>
-                  <label className="BusinessType">
-                    <strong>Business Type :</strong>
+              <div className="Business-type-content1">
+                <div className="BusinessType">
+                  <label>
+                   Business Type :
                   </label>
                   {isEditing ? (
                     <input
@@ -300,30 +315,16 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-                <div>
-                  <label className="profile-BusinessType">
-                    <strong> Business Category:</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      name="business_category"
-                      value={formData.business_category}
-                      onChange={handleInputChange}
-                    />
-                  ) : (
-                    <span>{formData.business_category}</span>
-                  )}
-                </div>
+                
               </div>
 
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBoxIcon">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
           </Grid>
 
@@ -339,7 +340,7 @@ function Businessprofile() {
                 <h4 className="Businessinfo-field">Business Information</h4>
                 <div className="Businessprofile-Name">
                   <label>
-                    <strong>Business Name :</strong>
+                   Business Name :
                   </label>
                   {isEditing ? (
                     <input
@@ -355,7 +356,7 @@ function Businessprofile() {
                 <br></br>
                 <div className="Businessprofile-Place">
                   <label>
-                    <strong>Business Place : </strong>
+                    Business Place : 
                   </label>
                   {isEditing ? (
                     <input
@@ -372,7 +373,7 @@ function Businessprofile() {
 
                 <div className="Businessprofile-District">
                   <label>
-                    <strong>District :</strong>
+                    District :
                   </label>
                   {isEditing ? (
                     <input
@@ -388,7 +389,7 @@ function Businessprofile() {
                 <br></br>
                 <div className="Businessprofile-Language">
                   <label>
-                    <strong>Language :</strong>
+                  Language :
                   </label>
                   {isEditing ? (
                     <input
@@ -402,20 +403,21 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon1">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <div className="Social Media">
+              <div className="Social-Media">
                 <h4 className="SocialMedia-field">Social Media Links</h4>
-                <div className="Media1">
+                <div className="Media">
+                  <div className="Media1">
                   <label>
-                    <strong>Facebook :</strong>
+                    Facebook :
                   </label>
                   {isEditing ? (
                     <input
@@ -427,8 +429,10 @@ function Businessprofile() {
                   ) : (
                     <span>{formData.facebook}</span>
                   )}
+                  </div>
+                  <div className="Media2">
                   <label>
-                    <strong>Instagram :</strong>
+                   Instagram :
                   </label>
                   {isEditing ? (
                     <input
@@ -440,8 +444,10 @@ function Businessprofile() {
                   ) : (
                     <span>{formData.instagram}</span>
                   )}
+                  </div>
+                  <div className="Media3">
                   <label>
-                    <strong>Youtube :</strong>
+                   Youtube :
                   </label>
                   {isEditing ? (
                     <input
@@ -453,8 +459,11 @@ function Businessprofile() {
                   ) : (
                     <span>{formData.youtube}</span>
                   )}
+                  </div>
+
+                  <div className="Media4">
                   <label>
-                    <strong>LinkedIn :</strong>
+                   LinkedIn :
                   </label>
                   {isEditing ? (
                     <input
@@ -466,8 +475,10 @@ function Businessprofile() {
                   ) : (
                     <span>{formData.linkedin}</span>
                   )}
+                  </div>
+                  <div className="Media5">
                   <label>
-                    <strong>Twitter :</strong>
+                   Twitter :
                   </label>
                   {isEditing ? (
                     <input
@@ -480,15 +491,16 @@ function Businessprofile() {
                     <span>{formData.twitter}</span>
                   )}
                 </div>
+                </div>
                 <br></br>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon2">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
 
             {/* <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -547,7 +559,9 @@ function Businessprofile() {
                 )}
               </Item>
             </Grid> */}
-            <div className="Upload2">
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+            <div className="Uploads">
+            <h4 className="Upload-field">Upload  Files</h4>
               {Array.isArray(formData.document) ? (
                 formData.document.map((document, index) => (
                   <div key={index} className="Uploaded-Document">
@@ -589,17 +603,18 @@ function Businessprofile() {
                 </>
               )}
             </div>
+            </Grid>
           </Grid>
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={5} lg={5}>
-              <div className="Contact_Information">
+              <div className="Contact-Information">
                 <h4 className="BusinessContact-field">
-                  <strong>Contact Details</strong>
+                  Contact Details
                 </h4>
                 <div className="Business-Mobileno">
                   <label>
-                    <strong>Business No :</strong>
+                    Business No :
                   </label>
                   {isEditing ? (
                     <input
@@ -616,7 +631,7 @@ function Businessprofile() {
 
                 <div className="Businessprofile-EmailId">
                   <label>
-                    <strong>Email Id :</strong>
+                    Email Id :
                   </label>
                   {isEditing ? (
                     <input
@@ -630,20 +645,20 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon4">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Website">
                 <h4 className="Website-field">Website</h4>
                 <div className="Website1">
                   <label>
-                    <strong>Website :</strong>
+                    Website :
                   </label>
                   {isEditing ? (
                     <input
@@ -657,13 +672,13 @@ function Businessprofile() {
                   )}
                 </div>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon5">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
           </Grid>
           <Grid container spacing={2} style={{ paddingTop: "30px" }}>
@@ -672,7 +687,7 @@ function Businessprofile() {
                 <h4 className="Owner-field">Owner Details</h4>
                 <div className="Owner1">
                   <label>
-                    <strong>Phone no:</strong>
+                    Phone no:
                   </label>
                   {isEditing ? (
                     <input
