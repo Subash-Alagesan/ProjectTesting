@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "../Component/Axios Base URL/axios";
 import { useAuth } from '../Component/Helper/Context/AuthContext';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -69,11 +70,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function EmployeeNavbar() {
   const {logout} = useAuth();
   const navigate = useNavigate();
+  const [employees, setEmployees] = useState([]);
 
   const handleLogout = () => {
     logout();
     navigate("/")
   };
+  useEffect(() => {
+    // Fetch the list of admins from your backend when the component mounts
+    axios
+      .get("/api/emp/RecentEmployee") // Replace with your actual API route
+      .then((response) => {
+        setEmployees(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching employees:", error);
+      });
+  }, []);
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
@@ -185,8 +198,14 @@ export default function EmployeeNavbar() {
         <div className="right-navbar-container">
 
         <List >
+          
                 <h4 className="emp-admin1">Recently Added</h4>
                 <div className="emp-adm-btn">
+                <List>
+                {employees.length > 0 ? (
+                  employees.map((employees, index) => (
+
+
                   <Button
                     variant=""
                     color="primary"
@@ -199,18 +218,28 @@ export default function EmployeeNavbar() {
                     }}
                   >
                     <StyledBadge overlap="circular">
-                      <Avatar img src={profile} alt="Profile.png" />
+                      <Avatar 
+                      img 
+                      src={`http://localhost:4070/uploads/images/${employees.profile_pic}`}
+                      alt={employees.name} 
+                       />
                     </StyledBadge>
 
                     <Box>
-                      <div className="title">
-                        <h1 className="emp-subtitle">Subash</h1>
-                        <p className="emp-body2">Admin</p>
+                      <div className="emp-title">
+                        <h1 className="empnavbar-subtitle">{employees.name} </h1>
+                        <p className="empnavbar-body2">{employees.designation} </p>
                       </div>
                     </Box>
                    
                   </Button>
-                  <Button
+                   ))
+                   ) : (
+                     <h4 className="admin1"></h4>
+                   )}
+                 </List>
+
+                  {/* <Button
                     variant=""
                     color="primary"
                     style={{
@@ -231,7 +260,7 @@ export default function EmployeeNavbar() {
                       </div>
                     </Box>
                     
-                  </Button>
+                  </Button> */}
 
                 </div>
                 <h4 className="emp-admin1">Recently Viewed </h4>

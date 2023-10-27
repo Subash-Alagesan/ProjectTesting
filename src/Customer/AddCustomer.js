@@ -443,7 +443,7 @@ const AddCustomer = () => {
         {/* Owner Details */}
 
         <Grid item xs={12} sm={12} md={4} lg={4}>
-          <div className="Contact-Information">
+          <div className="Owner-Information">
             <h4 className="BusContact-field">
               Owner Details
             </h4>
