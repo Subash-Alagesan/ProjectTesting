@@ -83,6 +83,20 @@ const SideNavbar = () => {
   const [admins, setAdmins] = useState([]);
 
   const currentPath = window.location.pathname;
+
+  const [showButtons, setShowButtons] = useState(false);
+
+  const handleMoreIconClick = () => {
+    setShowButtons(!showButtons);
+  };
+
+  const handleEditClick = () => {
+    // Add logic to handle the edit action here
+  };
+
+  const handleDeleteClick = () => {
+    // Add logic to handle the delete action here
+  };
  
   // const [currentContent, setCurrentContent] = useState(null);
 
@@ -372,7 +386,9 @@ const SideNavbar = () => {
                           <p className="body2">{admin.designation}</p>
                         </div>
                       </Box>
-                      <MoreVertIcon className="icon1" />
+                      {/* <MoreVertIcon className="icon1" /> */}
+                      <MoreVertIcon className="icon1" onClick={handleMoreIconClick} />
+     
                     </Button>
                   ))
                 ) : (

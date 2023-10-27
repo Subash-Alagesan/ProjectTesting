@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../Component/Axios Base URL/axios";
 import { useAuth } from "../Component/Helper/Context/AuthContext";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -73,6 +74,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
  
   const { logout } = useAuth;
   const navigate = useNavigate();
+  const [customers, setCustomers] = useState([]);
 
   const handleLogout = () => {
     logout();
@@ -114,6 +116,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     setModalContent(null); 
     setIsModalOpen(false);
   }
+  useEffect(() => {
+    // Fetch the list of admins from your backend when the component mounts
+    axios
+      .get("/api/customer/RecentCustomer") // Replace with your actual API route
+      .then((response) => {
+        setCustomers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching customers:", error);
+      });
+  }, []);
 
   return (
     <Box>
@@ -189,6 +202,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
             <List>
               <h4 className="cus-admin1">Recently Added</h4>
               <div className="cus-adm-btn">
+
+              <List>
+                {customers.length > 0 ? (
+                  customers.map((customers, index) => (
+
                 <Button
                   variant=""
                   color="primary"
@@ -201,17 +219,28 @@ const DrawerHeader = styled("div")(({ theme }) => ({
                   }}
                 >
                   <StyledBadge overlap="circular">
-                    <Avatar img src={profile} alt="Profile.png" />
+                    <Avatar
+                     img 
+                     src={`http://localhost:4070/uploads/images/${customers.profile_pic}`}
+                      alt={customers.customer_name} 
+                      />
                   </StyledBadge>
 
                   <Box>
-                    <div className="title">
-                      <h1 className="cus-subtitle">Subash</h1>
-                      <p className="cus-body2">Admin</p>
+                    <div className="title-cus">
+                      <h1 className="cus1-subtitle">{customers.customer_name} </h1>
+                      <p className="cus1-body2">{customers.business_name} </p>
                     </div>
                   </Box>
                 </Button>
-                <Button
+                 ))
+                 ) : (
+                   <h4 className="admin1"></h4>
+                 )}
+               </List>
+
+
+                {/* <Button
                   variant=""
                   color="primary"
                   style={{
@@ -231,7 +260,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
                       <p className="cus-body2">Admin</p>
                     </div>
                   </Box>
-                </Button>
+                </Button> */}
               </div>
               <h4 className="admin1">Recently Viewed </h4>
               <div className="cus-adm-btn">
