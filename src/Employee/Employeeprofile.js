@@ -471,7 +471,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
               <h4 className="Skill-field">Skills</h4>
               {employeeProfile.skills.map((skill, index) => (
                 <div key={index} className={`Skill${index + 1}`}>
-                  <label>Skill {index + 1} :</label>
+                  <label className="skill-label">Skill {index + 1} :</label>
                   {isEditing ? (
                     <input
                       type="text"
@@ -481,7 +481,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
                       onChange={(e) => handleSkillChange(e, index)}
                     />
                   ) : (
-                    <span>{skill}</span>
+                    <span>{skill},</span>
                   )}
                 </div>
               ))}
@@ -498,7 +498,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
                 </div>
               )}
               {isEditing && (
-                <div className="AddBoxIcon2">
+                <div className="AddBoxIcon-Emp">
                   <AddBoxIcon onClick={handleAddNewSkill} />
                 </div>
               )}

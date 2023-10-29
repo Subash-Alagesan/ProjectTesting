@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "../Component/Axios Base URL/axios";
 import { MDBBtn, MDBInput, MDBCheckbox } from "mdb-react-ui-kit";
@@ -8,6 +8,7 @@ import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("User Name is required"),
@@ -63,7 +64,8 @@ function Register() {
     } catch (error) {
       console.error("Registration error:", error);
       // Handle network errors or other exceptions
-      alert("An error occurred while registering. Please try again later.");
+      // alert("An error occurred while registering. Please try again later.");
+        alert("Super Admin already exists");
     } finally {
       // Ensure that the form is not left in a submitting state
       setSubmitting(false);
@@ -75,6 +77,21 @@ function Register() {
     validationSchema,
     onSubmit,
   });
+
+  const checkSuperAdmin = async () => {
+    try {
+      const response = await axios.get('/checkSuperAdmin');
+      // Process the successful response data here
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        setError('An error occurred while making the request.');
+      }
+    }
+  };
+
+
 
   return (
     <div className="Register-form">
@@ -174,13 +191,17 @@ function Register() {
 
         <br />
 
+        <div>
+        {error && <div className="error-message">{error}</div>}
         <MDBBtn
           className="register-btn"
           type="submit"
           style={{ backgroundColor: "#6425FE", color: "white" }}
+          onClick={checkSuperAdmin}
         >
           Register
         </MDBBtn>
+        </div>
       </form>
     </div>
   );
