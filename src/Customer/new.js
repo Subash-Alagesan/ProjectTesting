@@ -1,4 +1,6 @@
-import * as React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "../Component/Axios Base URL/axios";
+import { useAuth } from "../Component/Helper/Context/AuthContext";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -6,39 +8,71 @@ import "./Businessprofile.css";
 import contact_page from "../Assets/images/contact_page.png";
 import Button from "@mui/material/Button";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
-import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Avatar from "@mui/material/Avatar";
-import { useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import DeleteIcon from "@mui/icons-material/Delete";
 import PublishIcon from "@mui/icons-material/Publish";
 import FolderIcon from "@mui/icons-material/Folder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TextField from "@mui/material/TextField";
 
 function Businessprofile() {
-  const [name, setName] = useState("");
-  const [BusinessName, setBusinessName] = useState("");
-  const [EnterDetails, setEnterDetails] = useState("");
-  const [BusinessType, setBusinessType] = useState("");
-  const [BusinessType1, setBusinessType1] = useState("");
-  const [Businessinfo, setBusinessinfo] = useState("");
-  const [Place, setPlace] = useState("");
-  const [District, setDistrict] = useState("");
-  const [Language, setLanguage] = useState("");
-  const [Facebook, setFacebook] = useState("");
-  const [Instagram, setInstagram] = useState("");
-  const [Twitter, setTwitter] = useState("");
-  const [Youtube, setYoutube] = useState("");
-  const [Website1, setWebsite1] = useState("");
-  const [Contact, setContact] = useState("");
-  const [Emailid, setEmailid] = useState("");
-  const [Phonenumber, setPhonenumber] = useState("");
-  const [OtherBusiness, setOtherBusiness] = useState("");
-
+  const { customerId } = useAuth();
+  const { fileId } = useParams();
   const [isEditing, setIsEditing] = useState(false);
+  const [newImage, setNewImage] = useState(null);
+  const [newDocument, setNewDocument] = useState(null);
+  const imageBaseUrl = "http://localhost:4070/uploads/images/";
+  const hiddenDocumentInput = useRef(null);
+  const hiddenFileInput = useRef(null);
+
+  const [formData, setFormData] = useState({
+    customer_name: "",
+    business_name: "",
+    business_type: "",
+    business_category: "",
+    business_place: "",
+    district: "",
+    language: "",
+    business_number: "",
+    email: "",
+    phone_number: "",
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    linkedin: "",
+    twitter: "",
+    website_address: "",
+    profile_pic: "",
+    document: "",
+  });
+
+  useEffect(() => {
+    if (!isEditing) {
+      console.log("Fetching customer data for customerId:", customerId);
+      axios
+        .get(`/api/customer/getcustomerbyid/${customerId}`)
+        .then((response) => {
+          const customerData = response.data.customer;
+          setFormData({
+            ...customerData,
+            profile_pic: customerData.profile_pic,
+            document: customerData.file_name,  
+            fileId: customerData.file_id,
+                     
+          });
+          console.log("After Fetching from customer by id", customerData);
+        })
+        .catch((error) => {
+          console.error("Error fetching customer data:", error);
+        });
+    }
+  }, [customerId, isEditing]);
 
   const handleEditClick = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -49,531 +83,513 @@ function Businessprofile() {
     color: theme.palette.text.secondary,
   }));
 
-  const [image, setImage] = useState(null);
-  const hiddenFileInput = useRef(null);
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const imgname = event.target.files[0].name;
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      const img = new Image();
-      img.src = reader.result;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxSize = Math.max(img.width, img.height);
-        canvas.width = maxSize;
-        canvas.height = maxSize;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(
-          img,
-          (maxSize - img.width) / 2,
-          (maxSize - img.height) / 2
-        );
-        canvas.toBlob(
-          (blob) => {
-            const file = new File([blob], imgname, {
-              type: "image/png",
-              lastModified: Date.now(),
-            });
-
-            console.log(file);
-            setImage(file);
-          },
-          "image/jpeg",
-          0.8
-        );
-      };
-    };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected image:", file);
+    // Update the new image
+    setFormData({
+      ...formData,
+      profile_pic: file,
+    });
+    setNewImage(file);
   };
 
-  const handleUploadButtonClick = (file) => {
-    var myHeaders = new Headers();
-    const token = "adhgsdaksdhk938742937423";
-    myHeaders.append("Authorization", `Bearer ${token}`);
-
-    var formdata = new FormData();
-    formdata.append("file", file);
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("https://trickuweb.com/upload/profile_pic", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(JSON.parse(result));
-        const profileurl = JSON.parse(result);
-        setImage(profileurl.img_url);
-      })
-      .catch((error) => console.log("error", error));
+  const handleDocumentChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setFormData({
+      ...formData,
+      document: file,
+    });
+    setNewDocument(file);
   };
 
   const handleClick = (event) => {
-    hiddenFileInput.current.click();
+    if (isEditing) {
+      hiddenFileInput.current.click();
+    }
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Name: ${name}, Value: ${value}`);
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    console.log("after input change", formData);
+  };
+
+  // const handleDeleteDocument = (documentIndexToDelete) => {
+  //   const updatedDocuments = formData.document.filter(
+  //     (_, index) => index !== documentIndexToDelete
+  //   );
+  //   setFormData({
+  //     ...formData,
+  //     document: updatedDocuments,
+  //   });
+  // };
+  const handleDeleteDocument = (fileId) => {
+    if (fileId) {
+      // Send a request to the server to delete the document
+      axios
+        .delete(`/api/customer/deletefiles/${fileId}`)
+        .then((response) => {
+          console.log("File Delete Successfully");
+          setFormData({
+            ...formData,
+            document: null,
+          });
+          console.log("Document deleted successfully");
+        })
+        .catch((error) => {
+          console.error("Error deleting the document:", error);
+        });
+    }
   };
 
   const handleUpdateClick = () => {
-    // Perform your update logic here
-    // Disable edit mode
-    setIsEditing(false);
+    console.log("isEditing:", isEditing);
+    const formDataForUpdate = new FormData();
+    for (const key in formData) {
+      formDataForUpdate.append(key, formData[key]);
+    }
+    console.log("Document is", formData.document);
+    axios
+      .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        const customerData = response.data;
+        console.log("Update Successful", customerData);
+        alert("Update Successfull!!!");
+        setFormData({
+          ...formData,
+          profile_pic: customerData.profile_pic,
+          document: customerData.file_name,
+          
+        });
+
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Update Failed", error);
+      });
   };
 
+ 
+  
+  console.log("formdata profile_pic", formData.profile_pic);
+  console.log("formData.document", formData.document);
+console.log("formData.document.file_id", formData.document.file_id);
+
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <Item className="Business-grid1">
-          <div style={{ display: "flex" }}>
+    <form encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Item className="Business-grid1">
             <div style={{ display: "flex" }}>
-              <img
-                src={contact_page}
-                alt=""
-                className="Businessdb-profile-contact-img"
-              />
-              <h5 className="Businessdb-title">Business Profile</h5>
+              <div style={{ display: "flex" }}>
+                <img
+                  src={contact_page}
+                  alt=""
+                  className="Businessdb-profile-contact-img"
+                />
+                <h5 className="Businessdb-title">Business Profile</h5>
+              </div>
+
+              <div className="Edit-btn">
+                {isEditing ? (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleUpdateClick()}
+                    endIcon={<CreateOutlinedIcon />}
+                  >
+                    Update
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    type="button"
+                    size="small"
+                    onClick={handleEditClick}
+                    endIcon={<CreateOutlinedIcon />}
+                  >
+                    Edit
+                  </Button>
+                )}
+              </div>
             </div>
+          </Item>
+        </Grid>
 
-            {/* <div >
-            <label className="Employeedb-profilename" ><strong>Profile Name :</strong></label>
-            {isEditing ? (
-              <input
-                type="text"
-                value={Profile}
-                className="empprofile-entername-input"
-                onChange={(e) => setProfile(e.target.value)}
-              />
-            ) : (
-              <span>{Profile}</span>
-            )}
-            </div> */}
-
-            <div className="Edit-btn">
-              {isEditing ? (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={handleUpdateClick}
-                  endIcon={<CreateOutlinedIcon />}
-                >
-                  Update
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={handleEditClick}
-                  endIcon={<CreateOutlinedIcon />}
-                >
-                  Edit
-                </Button>
-              )}
-            </div>
-          </div>
-        </Item>
-      </Grid>
-
-      <Grid item xs={12} md={12} lg={12}>
-        <Item className="Business-grid2">
+        <Grid item xs={12} md={12} lg={12}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={2} lg={2}>
               <div className="box-decoration">
                 <div onClick={handleClick} style={{ cursor: "pointer" }}>
-                  {image ? (
-                    <img
-                      src={URL.createObjectURL(image)}
-                      alt="upload image"
-                      className="img-display-after"
-                    />
+                  {isEditing ? (
+                    <>
+                      {newImage ? ( // Check if a new image is selected
+                        <img
+                          src={URL.createObjectURL(newImage)}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      ) : (
+                        <img
+                          src={`${imageBaseUrl}${formData.profile_pic}`}
+                          alt="Profile Picture"
+                          style={{ width: "100%", height: "auto" }}
+                        />
+                      )}
+                      <input
+                        id="image-upload-input"
+                        type="file"
+                        onChange={handleImageChange}
+                        ref={hiddenFileInput}
+                        style={{ display: "none" }}
+                      />
+                    </>
                   ) : (
-                    <Avatar sx={{ width: 150, height: 150 }}>
-                      <AddAPhotoIcon sx={{ width: 40, height: 40 }} />
-                    </Avatar>
+                    <Avatar
+                      sx={{ width: 150, height: 150 }}
+                      src={`${imageBaseUrl}${formData.profile_pic}`}
+                    />
                   )}
-
-                  <input
-                    id="image-upload-input"
-                    type="file"
-                    onChange={handleImageChange}
-                    ref={hiddenFileInput}
-                    style={{ display: "none" }}
-                  />
                 </div>
-                <button
-                  className="image-upload-button"
-                  onClick={handleUploadButtonClick}
-                >
-                  Upload
-                </button>
               </div>
             </Grid>
+
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Business-name-content">
                 <div className="Businessprofile-input">
                   {isEditing ? (
                     <input
                       type="text"
-                      value={name}
+                      name="customer_name"
+                      value={formData.customer_name}
                       placeholder="Name"
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => handleInputChange(e)}
                     />
                   ) : (
-                    <span>{name}</span>
+                    <span>{formData.customer_name}</span>
                   )}
                 </div>
 
                 <br></br>
 
                 <div className="BusinessName">
-                  <label>
-                    <strong> Business Name :</strong>
-                  </label>
+                  <label>Business Name :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={BusinessName}
-                      onChange={(e) => setBusinessName(e.target.value)}
+                      name="business_name"
+                      value={formData.business_name}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{BusinessName}</span>
+                    <span>{formData.business_name}</span>
                   )}
                 </div>
+                <div className="profile-BusinessCategory">
+                  <label>Business Category:</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name="business_category"
+                      value={formData.business_category}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <span>{formData.business_category}</span>
+                  )}
+                </div>
+
                 <br></br>
-                <div>
-                  <label className="Businessprofile-entername">
-                    <strong>Enter Details :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={EnterDetails}
-                      onChange={(e) => setEnterDetails(e.target.value)}
-                    />
-                  ) : (
-                    <span>{EnterDetails}</span>
-                  )}
-                </div>
               </div>
             </Grid>
 
             <Grid xs={12} sm={12} md={5} lg={5}>
-              <div className="Business-name-content1">
-                <div>
-                  <label className="BusinessType">
-                    <strong>Business Type :</strong>
-                  </label>
+              <div className="Business-type-content1">
+                <div className="BusinessType">
+                  <label>Business Type :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={BusinessType}
-                      onChange={(e) => setBusinessType(e.target.value)}
+                      name="business_type"
+                      value={formData.business_type}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{BusinessType}</span>
+                    <span>{formData.business_type}</span>
                   )}
                 </div>
                 <br></br>
-                <div>
-                  <label className="profile-BusinessType">
-                    <strong> Type 1:</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={BusinessType1}
-                      onChange={(e) => setBusinessType1(e.target.value)}
-                    />
-                  ) : (
-                    <span>{BusinessType1}</span>
-                  )}
-                </div>
               </div>
-              {isEditing ? (
-                <div className="AddBoxIcon">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )}
             </Grid>
           </Grid>
+
           <hr
             style={{
               background: "#84828A",
               height: "1px",
             }}
           />
-
           <Grid container spacing={2} id="business-grid">
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Business_Information">
                 <h4 className="Businessinfo-field">Business Information</h4>
                 <div className="Businessprofile-Name">
-                  <label>
-                    <strong>Business Name :</strong>
-                  </label>
+                  <label>Business Name :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Businessinfo}
-                      onChange={(e) => setBusinessinfo(e.target.value)}
+                      name="business_name"
+                      value={formData.business_name}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Businessinfo}</span>
+                    <span>{formData.business_name}</span>
                   )}
                 </div>
                 <br></br>
                 <div className="Businessprofile-Place">
-                  <label>
-                    <strong>Business Place : </strong>
-                  </label>
+                  <label>Business Place :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Place}
-                      onChange={(e) => setPlace(e.target.value)}
+                      name="business_place"
+                      value={formData.business_place}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Place}</span>
+                    <span>{formData.business_place}</span>
                   )}
                 </div>
                 <br></br>
 
                 <div className="Businessprofile-District">
-                  <label>
-                    <strong>District :</strong>
-                  </label>
+                  <label>District :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={District}
-                      onChange={(e) => setDistrict(e.target.value)}
+                      name="district"
+                      value={formData.district}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{District}</span>
+                    <span>{formData.district}</span>
                   )}
                 </div>
                 <br></br>
                 <div className="Businessprofile-Language">
-                  <label>
-                    <strong>Language :</strong>
-                  </label>
+                  <label>Language :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Language}
-                      onChange={(e) => setLanguage(e.target.value)}
+                      name="language"
+                      value={formData.language}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Language}</span>
+                    <span>{formData.language}</span>
                   )}
                 </div>
               </div>
-              {isEditing ? (
-                <div className="AddBox-Icon1">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )}
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <div className="Social Media">
+              <div className="Social-Media">
                 <h4 className="SocialMedia-field">Social Media Links</h4>
-                <div className="Media1">
-                  <label>
-                    <strong>Facebook :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Facebook}
-                      onChange={(e) => setFacebook(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Facebook}</span>
-                  )}
-                </div>
-                <br></br>
-                <div className="Media2">
-                  <label>
-                    <strong>Instagram :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Instagram}
-                      onChange={(e) => setInstagram(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Instagram}</span>
-                  )}
-                </div>
-                <br></br>
-                <div className="Media3">
-                  <label>
-                    <strong>Twitter :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Twitter}
-                      onChange={(e) => setTwitter(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Twitter}</span>
-                  )}
-                </div>
-                <br></br>
+                <div className="Media">
+                  <div className="Media1">
+                    <label>Facebook :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="facebook"
+                        value={formData.facebook}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.facebook}</span>
+                    )}
+                  </div>
+                  <div className="Media2">
+                    <label>Instagram :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="instagram"
+                        value={formData.instagram}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.instagram}</span>
+                    )}
+                  </div>
+                  <div className="Media3">
+                    <label>Youtube :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="youtube"
+                        value={formData.youtube}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.youtube}</span>
+                    )}
+                  </div>
 
-                <div className="Media4">
-                  <label>
-                    <strong>You tube :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={Youtube}
-                      onChange={(e) => setYoutube(e.target.value)}
-                    />
-                  ) : (
-                    <span>{Youtube}</span>
-                  )}
+                  <div className="Media4">
+                    <label>LinkedIn :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="linkedin"
+                        value={formData.linkedin}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.linkedin}</span>
+                    )}
+                  </div>
+                  <div className="Media5">
+                    <label>Twitter :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="twitter"
+                        value={formData.twitter}
+                        onChange={handleInputChange}
+                      />
+                    ) : (
+                      <span>{formData.twitter}</span>
+                    )}
+                  </div>
                 </div>
+                <br></br>
               </div>
-              {isEditing ? (
-                <div className="AddBox-Icon2">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )}
             </Grid>
-
             <Grid item xs={12} sm={12} md={4} lg={4}>
-              <div className="Upload">
-                <h4 className="Upload-field">Upload Files </h4>
-                <div className="Upload1">
-                  <Button
-                    size="small"
-                    startIcon={<PublishIcon className="icons" />}
-                    className="Publish-Icon"
-                  >
-                    <h6>Upload</h6>
-                  </Button>
-                </div>
-
-                <br></br>
-                <h4 className="Upload-field1">Uploaded Files </h4>
-                <div className="Upload2">
-                  <div className="Folder-Icon">
-                    <Button
-                      size="small"
-                      startIcon={<FolderIcon className="icons" />}
-                      className="FolderIcon-logo"
-                      endIcon={<MoreVertIcon className="icons" />}
-                    >
-                      <h6>Logo</h6>
-                    </Button>
-                  </div>
-
-                  <div className="Folder-Icon1">
-                    {" "}
-                    <Button
-                      size="small"
-                      color="primary"
-                      className="FolderIcon-analy"
-                      startIcon={<FolderIcon className="icons" />}
-                      endIcon={<MoreVertIcon className="icons" />}
-                    >
-                      <h6>Analysis</h6>
-                    </Button>
-                  </div>
-                </div>
+              <div className="Uploads">
+                <h4 className="Upload-field">Upload Files</h4>
+                {isEditing ? (
+                  <>
+                    {newDocument ? (
+                      <p>Selected Document: {newDocument.name}</p>
+                    ) : (
+                      <>
+                        {formData.document ? (
+                          <div>
+                            <p>
+                              Existing Document: {formData.document}
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleDeleteDocument(formData.fileId)
+                              } // Use the correct property for file ID
+                            >
+                              Delete Document
+                            </button>
+                          </div>
+                        ) : null}
+                        <button
+                          type="button"
+                          onClick={() => hiddenDocumentInput.current.click()}
+                        >
+                          Upload New Document
+                        </button>
+                        <input
+                          type="file"
+                          accept=".pdf, .doc, .docx"
+                          onChange={handleDocumentChange}
+                          ref={hiddenDocumentInput}
+                          style={{ display: "none" }}
+                        />
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <span>
+                    {formData?.document}
+                  </span>
+                )}
               </div>
-              {isEditing ? (
-                <div className="AddBox-Icon3">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )}
             </Grid>
           </Grid>
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={5} lg={5}>
-              <div className="Contact_Information">
-                <h4 className="BusinessContact-field">
-                  <strong>Contact Details</strong>
-                </h4>
+              <div className="Contact-Information">
+                <h4 className="BusinessContact-field">Contact Details</h4>
                 <div className="Business-Mobileno">
-                  <label>
-                    <strong>Business No :</strong>
-                  </label>
+                  <label>Business No :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Contact}
-                      onChange={(e) => setContact(e.target.value)}
+                      name="business_number"
+                      value={formData.business_number}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Contact}</span>
+                    <span>{formData.business_number}</span>
                   )}
                 </div>
                 <br></br>
 
                 <div className="Businessprofile-EmailId">
-                  <label>
-                    <strong>Email Id :</strong>
-                  </label>
+                  <label>Email Id :</label>
                   {isEditing ? (
                     <input
                       type="Email"
-                      value={Emailid}
-                      onChange={(e) => setEmailid(e.target.value)}
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Emailid}</span>
+                    <span>{formData.email}</span>
                   )}
                 </div>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon4">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
             <Grid item xs={12} sm={12} md={5} lg={5}>
               <div className="Website">
                 <h4 className="Website-field">Website</h4>
                 <div className="Website1">
-                  <label>
-                    <strong>Website 1:</strong>
-                  </label>
+                  <label>Website :</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Website1}
-                      onChange={(e) => setWebsite1(e.target.value)}
+                      name="website_address"
+                      value={formData.website_address}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Website1}</span>
+                    <span>{formData.website_address}</span>
                   )}
                 </div>
               </div>
-              {isEditing ? (
+              {/* {isEditing ? (
                 <div className="AddBox-Icon5">
                   <AddBoxIcon />
                 </div>
               ) : (
                 <span></span>
-              )}
+              )} */}
             </Grid>
           </Grid>
           <Grid container spacing={2} style={{ paddingTop: "30px" }}>
@@ -581,43 +597,28 @@ function Businessprofile() {
               <div className="Owner">
                 <h4 className="Owner-field">Owner Details</h4>
                 <div className="Owner1">
-                  <label>
-                    <strong>Phone no:</strong>
-                  </label>
+                  <label>Phone no:</label>
                   {isEditing ? (
                     <input
                       type="text"
-                      value={Phonenumber}
-                      onChange={(e) => setPhonenumber(e.target.value)}
+                      name="phone_number"
+                      value={formData.phone_number}
+                      onChange={handleInputChange}
                     />
                   ) : (
-                    <span>{Phonenumber}</span>
+                    <span>{formData.phone_number}</span>
                   )}
                 </div>
                 <br></br>
-                <div className="Owner2">
-                  <label>
-                    <strong>Other Business :</strong>
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      value={OtherBusiness}
-                      onChange={(e) => setOtherBusiness(e.target.value)}
-                    />
-                  ) : (
-                    <span>{OtherBusiness}</span>
-                  )}
-                </div>
               </div>
             </Grid>
           </Grid>
           <div className="SaveAltIcon1">
             <SaveAltIcon />
           </div>
-        </Item>
+        </Grid>
       </Grid>
-    </Grid>
+    </form>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../Component/Axios Base URL/axios";
 import { useAuth } from "../Component/Helper/Context/AuthContext";
 import { styled } from "@mui/material/styles";
@@ -26,6 +27,7 @@ function Businessprofile() {
   const DocumentBaseUrl = "http://localhost:4070/uploads/documents/";   
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     customer_name: "",
@@ -59,6 +61,7 @@ function Businessprofile() {
             ...customerData,
             profile_pic: customerData.profile_pic,
             document: customerData.file_name,
+            
           });
           console.log("After Fetching from customer by id", customerData);
         })
@@ -156,10 +159,9 @@ function Businessprofile() {
         setFormData({
           ...formData,
           profile_pic: customerData.profile_pic,
-          document: customerData.file_name,          
-           
-          
+          document: customerData.file_name,                  
         });
+        navigate("/")
 
         setIsEditing(false);
       })
