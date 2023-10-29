@@ -30,8 +30,6 @@ import Fade from '@mui/material/Fade';
 import Grid from '@mui/material/Grid';
 
 
-function CustomerNavbar() {
-
 const drawerWidth = 240;
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -71,16 +69,16 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
- 
+export default function CustomerNavbar() {
+
   const { logout } = useAuth;
   const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/")
   };
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
@@ -359,4 +357,3 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   );
 }
 
-export default  CustomerNavbar;

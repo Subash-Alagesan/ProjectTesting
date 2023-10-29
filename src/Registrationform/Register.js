@@ -4,6 +4,7 @@ import axios from "../Component/Axios Base URL/axios";
 import { MDBBtn, MDBInput, MDBCheckbox } from "mdb-react-ui-kit";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ function Register() {
   });
 
   return (
-    <div>
+    <div className="Register-form">
       <form
         onSubmit={formik.handleSubmit}
         className="registration-form"
@@ -152,14 +153,15 @@ function Register() {
         )}
 
         {/* Terms and Conditions */}
-        <div className="d-flex justify-content-left">
+        <div className="checkbox-content">
           <input
             type="checkbox"
             name="termsAndConditions"
             id="termsAndConditions"
+            style={{ width: "20px", height: "20px" }}
             {...formik.getFieldProps("termsAndConditions")}
           />
-          <label htmlFor="termsAndConditions">
+          <label htmlFor="termsAndConditions" className="terms">
             I agree to these Terms and Conditions.
           </label>
         </div>
