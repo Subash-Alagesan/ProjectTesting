@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../Component/Axios Base URL/axios";
 import { useAuth } from "../Component/Helper/Context/AuthContext";
 import { styled } from "@mui/material/styles";
@@ -15,6 +16,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 
 function Employeeprofile() {
+  const navigate = useNavigate();
   const { employeeId } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const imageBaseUrl = "http://localhost:4070/uploads/images/";
@@ -41,6 +43,9 @@ function Employeeprofile() {
     github_url: "",
     password: "",
   });
+  const isAdminText = employeeProfile.isAdmin === 1 ? "Yes" : "No";
+const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ? "Yes" : "No";
+
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
     const value = e.target.value;
@@ -51,19 +56,27 @@ function Employeeprofile() {
     });
   };
 
-  const handleNewSkillChange = (e) => {
-    setNewSkill(e.target.value);
+  const handleSkillChange = (e, index) => {
+    if (isEditing) {
+      const updatedSkills = [...employeeProfile.skills];
+      updatedSkills[index] = e.target.value;
+      setEmployeeProfile((prevProfile) => ({
+        ...prevProfile,
+        skills: updatedSkills,
+      }));
+    }
   };
 
-  // Define the function to add a new skill
   const handleAddNewSkill = () => {
-    // Assuming employeeProfile.skills is an array
-    setEmployeeProfile((prevProfile) => ({
-      ...prevProfile,
-      skills: [...prevProfile.skills, newSkill],
-    }));
-    // Clear the newSkill input field
-    setNewSkill("");
+    if (isEditing) {
+      setEmployeeProfile((prevProfile) => ({
+        ...prevProfile,
+        skills: [...prevProfile.skills, newSkill],
+      }));
+      // Clear the newSkill input field
+      setNewSkill('');
+    }
+   
   };
 
   const handleEditClick = () => {
@@ -90,6 +103,7 @@ function Employeeprofile() {
             ...employeeProfile,
             profile_pic: employeeProfile.profile_pic,
           });
+          console.log("Skills data:", employeeProfile.skills);
           console.log("After Fetching from customer by id", employeeProfile);
         })
         .catch((error) => {
@@ -144,7 +158,13 @@ function Employeeprofile() {
         employeeProfile.physically_challenged
       );
       if (employeeProfile.skills && Array.isArray(employeeProfile.skills)) {
-        // Check if employeeProfile.skills is defined and an array
+        employeeProfile.skills.forEach((skill, index) => {
+          formDataForEmployeeUpdate.append(`skills[${index}]`, skill);
+        });
+      }
+
+      // Include existing skills that are not being edited
+      if (!isEditing && employeeProfile.skills) {
         employeeProfile.skills.forEach((skill, index) => {
           formDataForEmployeeUpdate.append(`skills[${index}]`, skill);
         });
@@ -195,6 +215,7 @@ function Employeeprofile() {
         ...employeeProfile,
         profile_pic: response.data.profile_pic,
       });
+      navigate("/");
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating Employee:", error);
@@ -342,7 +363,7 @@ function Employeeprofile() {
                       <option value="No">No</option>
                     </select>
                   ) : (
-                    <span>{employeeProfile.isAdmin}</span>
+                    <span>{isAdminText}</span>
                   )}
                 </div>
               </div>
@@ -448,44 +469,42 @@ function Employeeprofile() {
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <div className="Skills">
               <h4 className="Skill-field">Skills</h4>
-              {employeeProfile.skills &&
-                employeeProfile.skills.map((skill, index) => (
-                  <div key={index} className={`Skill${index + 1}`}>
-                    <label>Skill {index + 1} :</label>
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        name={`skills[${index}]`}
-                        value={skill}
-                        className="empprofile-entername-input"
-                        onChange={handleInputChange}
-                      />
-                    ) : (
-                      <span>{skill}</span>
-                    )}
-                  </div>
-                ))}
-              {isEditing &&
-              employeeProfile.skills &&
-              employeeProfile.skills.length === 0 ? (
+              {employeeProfile.skills.map((skill, index) => (
+                <div key={index} className={`Skill${index + 1}`}>
+                  <label>Skill {index + 1} :</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name={`skills[${index}]`}
+                      value={skill}
+                      className="empprofile-entername-input"
+                      onChange={(e) => handleSkillChange(e, index)}
+                    />
+                  ) : (
+                    <span>{skill}</span>
+                  )}
+                </div>
+              ))}
+              {isEditing && employeeProfile.skills.length === 0 && (
                 <div>
                   <label>Add a new skill:</label>
                   <input
                     type="text"
-                    name="newSkill" // Use a unique name for the new skill
+                    name="newSkill"
                     className="empprofile-entername-input"
-                    onChange={handleNewSkillChange} // Create a handler for new skill input
+                    value={newSkill}
+                    onChange={(e) => setNewSkill(e.target.value)}
                   />
                 </div>
-              ) : null}
-
-              {/* {isEditing && (
+              )}
+              {isEditing && (
                 <div className="AddBoxIcon2">
-                  <AddBoxIcon onClick={handleAddNewSkill} />{" "}
+                  <AddBoxIcon onClick={handleAddNewSkill} />
                 </div>
-              )} */}
+              )}
             </div>
           </Grid>
+         
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -594,7 +613,7 @@ function Employeeprofile() {
                     <option value="No">No</option>
                   </select>
                 ) : (
-                  <span>{employeeProfile.physically_challenged}</span>
+                  <span>{isPhysicallyChallengedText }</span>
                 )}
               </div>
             </div>
