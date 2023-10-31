@@ -529,3 +529,14 @@ line-height: normal;
   color: #6425fe;
   margin-bottom: 10px;
 }
+
+.skill-label{
+  margin-left: -68px;
+  margin-bottom: 10px;
+}
+.AddBoxIcon-Emp{
+  color: #6425fe;
+  position: absolute;
+  margin-top: -198px;
+  margin-left: 70px;
+}

@@ -456,7 +456,7 @@ const AddCustomer = () => {
           size="small"
           className="txt-field"
           type="text"
-                name="business_number"
+                name="phone_number"
                 value={customerProfile.phone_number}
                 onChange={handleInputChange}
               />
