@@ -64,8 +64,8 @@ function Register() {
     } catch (error) {
       console.error("Registration error:", error);
       // Handle network errors or other exceptions
-      // alert("An error occurred while registering. Please try again later.");
-        alert("Super Admin already exists");
+      alert("An error occurred while registering. Please try again later.");
+     
     } finally {
       // Ensure that the form is not left in a submitting state
       setSubmitting(false);

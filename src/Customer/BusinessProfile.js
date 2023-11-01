@@ -316,18 +316,9 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-              </div>
-
-              {/* {isEditing ? (
-                <div className="AddBoxIcon">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )} */}
+              </div>             
             </Grid>
           </Grid>
-
           <hr
             style={{
               background: "#84828A",
@@ -468,72 +459,8 @@ function Businessprofile() {
                   </div>
                 </div>
                 <br></br>
-              </div>
-              {/* {isEditing ? (
-                <div className="AddBox-Icon2">
-                  <AddBoxIcon />
-                </div>
-              ) : (
-                <span></span>
-              )} */}
-            </Grid>
-
-            {/* <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Item>
-                <div className="Upload">
-                  <h4
-                    className="Upload-field"
-                    onClick={handleDocumentUploadButtonClick}
-                  >
-                    Upload Files
-                  </h4>
-                  <div className="Upload1">
-                    <Button
-                      size="small"
-                      startIcon={<PublishIcon className="icons" />}
-                      className="Publish-Icon"
-                    >
-                      <h6>Upload</h6>
-                    </Button>
-                  </div>
-
-                  <br />
-
-                  <h4 className="Upload-field1">Uploaded Files</h4>
-                  <div className="Upload2">
-                    <div className="Folder-Icon">
-                      <Button
-                        size="small"
-                        startIcon={<FolderIcon className="icons" />}
-                        className="FolderIcon-logo"
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Logo</h6>
-                      </Button>
-                    </div>
-
-                    <div className="Folder-Icon1">
-                      <Button
-                        size="small"
-                        color="primary"
-                        className="FolderIcon-analy"
-                        startIcon={<FolderIcon className="icons" />}
-                        endIcon={<MoreVertIcon className="icons" />}
-                      >
-                        <h6>Analysis</h6>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                {isEditing ? (
-                  <div className="AddBox-Icon3">
-                    <AddBoxIcon />
-                  </div>
-                ) : (
-                  <span></span>
-                )}
-              </Item>
-            </Grid> */}
+              </div>             
+            </Grid>         
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Uploads">
                 <h4 className="Upload-field">Upload Files</h4>
