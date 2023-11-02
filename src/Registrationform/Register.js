@@ -66,11 +66,20 @@ function Register() {
       navigate('/');
     } catch (error) {
       console.error("Registration error:", error);
+<<<<<<< HEAD
       if (error.response && error.response.data && error.response.data.error) {
         alert(error.response.data.error);
       } else {
         alert("An error occurred while registering. Please try again later.");
       }
+=======
+      // Handle network errors or other exceptions
+      alert("An error occurred while registering. Please try again later.");
+     
+    } finally {
+      // Ensure that the form is not left in a submitting state
+      setSubmitting(false);
+>>>>>>> acff3b9c04d74ac5fac3470085e2d6d4f045092c
     }
   };
 

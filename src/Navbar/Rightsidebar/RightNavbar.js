@@ -19,19 +19,23 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import "./Rightnavbar.css";
 import { useNavigate } from "react-router-dom";
-import Backdrop from '@mui/material/Backdrop';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
+import Backdrop from "@mui/material/Backdrop";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
 import AddCustomer from "../../Customer/AddCustomer";
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import AddEmployee from "../../Employee/AddEmployee";
 import SideNavbar from "../Leftsidebar/SideNavbar";
 
+<<<<<<< HEAD
 
 
 const drawerWidth = 247;
+=======
+const drawerWidth = 240;
+>>>>>>> acff3b9c04d74ac5fac3470085e2d6d4f045092c
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -44,7 +48,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function RightNavbar({handleAddCustomerClick}) {
   const navigate = useNavigate();
-  const {user, logout } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -52,9 +56,8 @@ export default function RightNavbar({handleAddCustomerClick}) {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-  const imageUrl = 
-   `http://localhost:4070/uploads/images/${user.profile_pic}`
-  
+  const imageUrl = `http://localhost:4070/uploads/images/${user.profile_pic}`;
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -63,16 +66,14 @@ export default function RightNavbar({handleAddCustomerClick}) {
     setOpen(false);
   };
 
-
-  const gridStyle  = {
-    position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width:'1500',
-  p: 4,
+  const gridStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "1500",
+    p: 4,
   };
-  
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
@@ -80,13 +81,12 @@ export default function RightNavbar({handleAddCustomerClick}) {
   const handleOpen = (content) => {
     setModalContent(content);
     setIsModalOpen(true);
-  }
+  };
 
   const handleClose = () => {
-    setModalContent(null); 
+    setModalContent(null);
     setIsModalOpen(false);
-  }
-
+  };
 
   return (
     <Box>
@@ -164,37 +164,37 @@ export default function RightNavbar({handleAddCustomerClick}) {
               <h3 className="admin-name">
                 <b>{user.name}</b>
               </h3>
-              <p className="admin-role">Founder</p>
+
+              <p className="admin-role">
+                {user.isSuperadmin ? "Founder" : "Admin"}
+              </p>
             </div>
             <div className="database">
               <div>
                 <p className="admin-name1">Manage Database</p>
               </div>
 
-              {/* <button className="add-customer-button">
-                <div className="button-content">
-                  <ControlPointIcon className="icon" />
-                  <span className="button-text">Add Customer</span>
-                </div>
-              </button> */}
+              <div>
+                <button
+                  className="add-customer-button"
+                  onClick={() => handleOpen(<AddCustomer />)}
+                >
+                  <div className="button-content">
+                    <ControlPointIcon className="icon" />
+                    <span className="button-text">Add Customer</span>
+                  </div>
+                </button>
+              </div>
 
-<div>
-     
-      <button className="add-customer-button" onClick={() => handleOpen(<AddCustomer />)}>
+              <button
+                className="add-customer-button"
+                onClick={() => handleOpen(<AddEmployee />)}
+              >
                 <div className="button-content">
                   <ControlPointIcon className="icon" />
-                  <span className="button-text">Add Customer</span>
+                  <span className="button-text">Add Employee</span>
                 </div>
               </button>
-     
-    </div>
-
-    <button className="add-customer-button" onClick={() => handleOpen(<AddEmployee />)}>
-        <div className="button-content">
-          <ControlPointIcon className="icon" />
-          <span className="button-text">Add Employee</span>
-        </div>
-      </button>
 
               {/* <button className="add-customer-button">
                 <div className="button-content">
@@ -203,33 +203,30 @@ export default function RightNavbar({handleAddCustomerClick}) {
                 </div>
               </button> */}
 
-<Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={isModalOpen}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={isModalOpen}>
-          {/* <Grid sx={style}>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={isModalOpen}
+                onClose={handleClose}
+                closeAfterTransition
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                  backdrop: {
+                    timeout: 500,
+                  },
+                }}
+              >
+                <Fade in={isModalOpen}>
+                  {/* <Grid sx={style}>
            
               {modalContent}
            
           </Grid> */}
-          <Grid item  xs={12} sm={12} md={6} lg={6} style={gridStyle}>
-          
-          {modalContent}
-         
-        </Grid>
-        </Fade>
-      </Modal>
-
+                  <Grid item xs={12} sm={12} md={6} lg={6} style={gridStyle}>
+                    {modalContent}
+                  </Grid>
+                </Fade>
+              </Modal>
 
               <button className="add-customer-button">
                 <div className="button-content">

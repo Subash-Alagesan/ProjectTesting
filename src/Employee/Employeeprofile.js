@@ -210,7 +210,9 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
       );
 
       console.log("Employee Profile updated successfully:", response.data);
-      alert("Employee Profile updated successfully");
+      // alert("Employee Profile updated successfully");
+      alert(` ${response.data.message}`);
+
       setEmployeeProfile({
         ...employeeProfile,
         profile_pic: response.data.profile_pic,
@@ -219,6 +221,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating Employee:", error);
+      
     }
   };
 
