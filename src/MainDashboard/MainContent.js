@@ -53,7 +53,7 @@ export default function MainContent() {
   }, []);
 
   return (
-    <Grid container spacing={2} style={{ backgroundColor: " #F7F6F9" }} className='grid-container'>
+    <Grid container spacing={2}  className='grid-container'>
       <Grid item xs={12} sm={12} md={6} lg={6} className='grid-main'>
         <Item className='grid-content'>
           <h4 className='good-mrng-content'>
@@ -105,8 +105,12 @@ export default function MainContent() {
               <p className='project-count'><strong>2</strong></p>
             </div>
             <div className='progress-icon'>
-              <CircularProgress size="lg"  color="success" determinate value={75.67}>
-                75%</CircularProgress>
+              <CircularProgress
+               size="lg" 
+               style={{ color: '#6425FE' }}
+               determinate value={75.67}>
+                75%
+                </CircularProgress>
             </div>
           </div>
         </Item>
@@ -123,7 +127,10 @@ export default function MainContent() {
               <p className='project-count'><strong>{count1}</strong></p>
             </div>
             <div className='progress-icon'>
-              <CircularProgress size="lg" color="danger" determinate value={count1}>
+              <CircularProgress 
+              size="lg" 
+              style={{ color: '#6425FE' }}
+               determinate value={count1}>
               {Math.round(count1)}%
               </CircularProgress>
             </div>
@@ -142,7 +149,10 @@ export default function MainContent() {
               <p className='project-count'><strong>{count}</strong></p>
             </div>
             <div className='progress-icon' color='#6425FE'>
-            <CircularProgress size="lg" color="primary" determinate value={count}>
+            <CircularProgress 
+            size="lg"
+             style={{ color: '#6425FE' }}
+              determinate value={count}>
     {Math.round(count)}%
   </CircularProgress>
             </div>
@@ -158,18 +168,18 @@ export default function MainContent() {
             </div >
             <div className='CircularProgress' >
               <div >
-                <CircularProgress size="lg" color="danger" determinate value={count}>
+                <CircularProgress size="lg" style={{ color: '#6425FE' }} determinate value={count}>
                 {Math.round(count)}%
                 </CircularProgress>
                 <h4 className='total-content'>Total</h4>
               </div>
               <div>
-                <CircularProgress size="lg"  color="success" determinate value={55.67}>
+                <CircularProgress size="lg"  style={{ color: '#6425FE' }} determinate value={55.67}>
                   55%</CircularProgress>
                 <h4 className='ourcustomer-content'>Our Customers</h4>
               </div>
               <div>
-                <CircularProgress size="lg" color="primary" determinate value={85.67}>
+                <CircularProgress size="lg" style={{ color: '#6425FE' }} determinate value={85.67}>
                   85%</CircularProgress>
                 <h4 className='others-content'>Others</h4>
               </div>
@@ -186,13 +196,13 @@ export default function MainContent() {
             </div >
             <div className='CircularProgress' >
               <div>
-                <CircularProgress size="lg" color="danger" determinate value={count1}>
+                <CircularProgress size="lg" style={{ color: '#6425FE' }} determinate value={count1}>
                 {Math.round(count1)}%
                   </CircularProgress>
                 <h4 className='total-content'>Total</h4>
               </div>
               <div>
-                <CircularProgress size="lg" color="success" determinate value={75.67}>
+                <CircularProgress size="lg" style={{ color: '#6425FE' }} determinate value={75.67}>
                   75%</CircularProgress>
                 <h4 className='ourcustomer-content'>Our Employees</h4>
               </div>
@@ -224,12 +234,12 @@ export default function MainContent() {
               </div>
             </div>
             <div className='project-progress1'>
-              <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-              </div>
+            <div className="progress">
+  <div className="progress-bar" role="progressbar" style={{ width: '25%', backgroundColor: '#77B900' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
               <br></br>
               <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="25" style={{ width: "95%" }} aria-valuemin="0" aria-valuemax="100">95%</div>
+                <div class="" role="progressbar" aria-valuenow="25" style={{ width: "95%" , backgroundColor: '#E82127' }} aria-valuemin="0" aria-valuemax="100">95%</div>
               </div>
               <br></br>
               <div ><h5 className='lead-name'>Revathi Selvaraj</h5></div>
@@ -237,7 +247,7 @@ export default function MainContent() {
           </div>
         </Item>
       </Grid>
-      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main' >
+      <Grid item xs={12} sm={12} md={6} lg={6}  className='grid-main'>
         <Item>
           <h4 className='see-more'>See More</h4>
           <h4 className='saloon-project'>Salon Management System Project</h4>
@@ -257,11 +267,11 @@ export default function MainContent() {
             </div>
             <div className='project-progress1'>
               <div class="progress ">
-                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" style={{ width: "75%" }} aria-valuemin="0" aria-valuemax="100">75%</div>
+                <div className="progress-bar" role="progressbar" aria-valuenow="75" style={{ width: "75%" , backgroundColor: '#0085FF'}} aria-valuemin="0" aria-valuemax="100">75%</div>
               </div>
               <br></br>
               <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="45" style={{ width: "45%" }} aria-valuemin="0" aria-valuemax="100">45%</div>
+                <div class="" role="progressbar" aria-valuenow="45" style={{ width: "45%" , backgroundColor: '#77B900'}} aria-valuemin="0" aria-valuemax="100">45%</div>
               </div>
               <br></br>
               <div><h5 className='lead-name'>Revathi Selvaraj</h5></div>

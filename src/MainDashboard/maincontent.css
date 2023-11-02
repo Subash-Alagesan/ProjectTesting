@@ -1,18 +1,39 @@
 .grid-container{
 padding-top: 15px;
 padding-left: 30px;
-padding-right: 25px;
+padding-right: 20px;
+background-color:#F7F6F9;
+width: 100%;
+overflow: hidden;
+white-space: nowrap;
 }
 
+@media only screen and (max-width: 400px ) {
+    .grid-main {
+        display: flex;
+        margin: 0;
+      }
+     .progress {
+        width: 70%;
+    }
+    
+}
 @media only screen and (max-width: 500px ) {
     .grid-container {
      
-       padding-left: 35px;
+       padding-left: 10px;
        height:400vh;
     }
+    .grid-main {
+        display: flex;
+       
+      }
 }
+
+
+
 .grid-main{
-    padding: 0px;
+    margin: 16px; 
 }
 
 .good-mrng-content,
@@ -220,3 +241,8 @@ padding-right: 25px;
     font-size: 13px;
     text-align: left;
 }
+.progress-bar {
+    background-color: #6425FE;
+    color: white; /* Optional: Change the text color to ensure visibility. */
+    /* Add any other styles you want */
+  }
