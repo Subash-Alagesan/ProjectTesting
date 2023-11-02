@@ -24,7 +24,7 @@ function Businessprofile() {
   const [newImage, setNewImage] = useState(null);
   const [newDocument, setNewDocument] = useState(null);
   const imageBaseUrl = "http://localhost:4070/uploads/images/";
-  const DocumentBaseUrl = "http://localhost:4070/uploads/documents/";   
+  const DocumentBaseUrl = "http://localhost:4070/uploads/documents/";
   const hiddenDocumentInput = useRef(null);
   const hiddenFileInput = useRef(null);
   const navigate = useNavigate();
@@ -61,7 +61,6 @@ function Businessprofile() {
             ...customerData,
             profile_pic: customerData.profile_pic,
             document: customerData.file_name,
-            
           });
           console.log("After Fetching from customer by id", customerData);
         })
@@ -142,9 +141,25 @@ function Businessprofile() {
   const handleUpdateClick = () => {
     console.log("isEditing:", isEditing);
     const formDataForUpdate = new FormData();
-    for (const key in formData) {
-      formDataForUpdate.append(key, formData[key]);
+    // Append profile_pic (if new image is selected)
+    if (newImage) {
+      formDataForUpdate.append("profile_pic", newImage);
+    }else{
+      formDataForUpdate.append("profile_pic", formData.profile_pic);
     }
+
+    // Append document (if new document is selected)
+    if (newDocument) {
+      formDataForUpdate.append("document", newDocument);
+    }
+
+    // Iterate over all other fields and append them to formDataForUpdate
+    for (const key in formData) {
+      if (key !== "document" && key !== "profile_pic") {
+        formDataForUpdate.append(key, formData[key]);
+      }
+    }
+
     console.log("Document is", formData.document);
     axios
       .put(`/api/customer/updatecustomer/${customerId}`, formDataForUpdate, {
@@ -159,9 +174,9 @@ function Businessprofile() {
         setFormData({
           ...formData,
           profile_pic: customerData.profile_pic,
-          document: customerData.file_name,                  
+          document: customerData.file_name,
         });
-        navigate("/")
+        navigate("/");
 
         setIsEditing(false);
       })
@@ -316,7 +331,7 @@ function Businessprofile() {
                   )}
                 </div>
                 <br></br>
-              </div>             
+              </div>
             </Grid>
           </Grid>
           <hr
@@ -459,8 +474,8 @@ function Businessprofile() {
                   </div>
                 </div>
                 <br></br>
-              </div>             
-            </Grid>         
+              </div>
+            </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <div className="Uploads">
                 <h4 className="Upload-field">Upload Files</h4>
@@ -509,7 +524,7 @@ function Businessprofile() {
 
                 {isEditing && (
                   <>
-                    {newDocument ? ( // Check if a new document is selected
+                    {newDocument ? (
                       <p>Selected Document: {newDocument.name}</p>
                     ) : (
                       <button
@@ -519,6 +534,7 @@ function Businessprofile() {
                         Upload New Document
                       </button>
                     )}
+
                     <input
                       type="file"
                       accept=".pdf, .doc, .docx"
