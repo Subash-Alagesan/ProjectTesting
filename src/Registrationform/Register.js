@@ -8,7 +8,7 @@ import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("User Name is required"),
@@ -57,18 +57,20 @@ function Register() {
           },
         }
       );
-      const data = response.data;
+
+      
+      // const response = await axios.post('/api/register', formData);
+    const data = response.data;
       console.log(data);
       alert(data.message);
-      navigate("/");
+      navigate('/');
     } catch (error) {
       console.error("Registration error:", error);
-      // Handle network errors or other exceptions
-      // alert("An error occurred while registering. Please try again later.");
-        alert("Super Admin already exists");
-    } finally {
-      // Ensure that the form is not left in a submitting state
-      setSubmitting(false);
+      if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error);
+      } else {
+        alert("An error occurred while registering. Please try again later.");
+      }
     }
   };
 
@@ -78,20 +80,18 @@ function Register() {
     onSubmit,
   });
 
-  const checkSuperAdmin = async () => {
-    try {
-      const response = await axios.get('/checkSuperAdmin');
-      // Process the successful response data here
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.message);
-      } else {
-        setError('An error occurred while making the request.');
-      }
-    }
-  };
-
-
+  // const checkSuperAdmin = async () => {
+  //   try {
+  //     const response = await axios.get('/checkSuperAdmin');
+  //     // Process the successful response data here
+  //   } catch (error) {
+  //     if (error.response) {
+  //       setError(error.response.data.message);
+  //     } else {
+  //       setError('An error occurred while making the request.');
+  //     }
+  //   }
+  // };
 
   return (
     <div className="Register-form">
@@ -191,17 +191,16 @@ function Register() {
 
         <br />
 
-        <div>
-        {error && <div className="error-message">{error}</div>}
+        
         <MDBBtn
           className="register-btn"
           type="submit"
           style={{ backgroundColor: "#6425FE", color: "white" }}
-          onClick={checkSuperAdmin}
+          
         >
           Register
         </MDBBtn>
-        </div>
+       
       </form>
     </div>
   );

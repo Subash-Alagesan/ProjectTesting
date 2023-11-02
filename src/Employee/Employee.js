@@ -70,7 +70,7 @@ function Employee({ handleEmpClick }) {
     {
       field: "View Details",
       headerName: "View Details",
-      width: 160,
+      width: 100,
       renderCell: (params) => (
         <Button
           variant="contained"
@@ -302,7 +302,7 @@ function Employee({ handleEmpClick }) {
             <DataGrid
               rows={filteredEmployees}
               columns={columns}
-              pageSize={5} // Number of records per page
+              pageSizeOptions={[5, 10]} // Number of records per page
               checkboxSelection
               getRowId={(row) => row.employee_id}
             />

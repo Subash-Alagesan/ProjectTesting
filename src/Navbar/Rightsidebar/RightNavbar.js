@@ -27,10 +27,11 @@ import AddCustomer from "../../Customer/AddCustomer";
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import AddEmployee from "../../Employee/AddEmployee";
+import SideNavbar from "../Leftsidebar/SideNavbar";
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 247;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -41,7 +42,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function RightNavbar() {
+export default function RightNavbar({handleAddCustomerClick}) {
   const navigate = useNavigate();
   const {user, logout } = useAuth();
 
@@ -236,6 +237,16 @@ export default function RightNavbar() {
                   <span className="button-text">Add Project</span>
                 </div>
               </button>
+
+{/* <button
+  className="add-customer-button1"
+  onClick={handleAddCustomerClick}
+>
+  <div className="button-content1">
+    <ControlPointIcon />
+    <span className="button-text1">Add Project</span>
+  </div>
+</button> */}
             </div>
 
             <div className="logout-button-right">

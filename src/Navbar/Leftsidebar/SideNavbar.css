@@ -169,9 +169,22 @@
   .button-content1 {
     display: flex;
     align-items: center; 
+    width: 241px;
+height: 45px;
+top: 203px;
+left: 55px;
+border-radius: 8px;
+
     }
     .button-text1 {
       margin-left: 15px;
+      font-family: Roboto;
+font-size: 16px;
+font-weight: 500;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+
       }
 
   .create-admin-button{
