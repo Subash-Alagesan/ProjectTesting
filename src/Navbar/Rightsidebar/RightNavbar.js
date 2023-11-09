@@ -29,13 +29,7 @@ import Grid from "@mui/material/Grid";
 import AddEmployee from "../../Employee/AddEmployee";
 import SideNavbar from "../Leftsidebar/SideNavbar";
 
-<<<<<<< HEAD
-
-
-const drawerWidth = 247;
-=======
 const drawerWidth = 240;
->>>>>>> acff3b9c04d74ac5fac3470085e2d6d4f045092c
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",

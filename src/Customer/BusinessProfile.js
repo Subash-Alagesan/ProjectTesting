@@ -100,7 +100,6 @@ function Businessprofile() {
       ...formData,
       document: file,
     });
-    setNewDocument(file);
   };
 
   const handleClick = (event) => {
@@ -142,22 +141,15 @@ function Businessprofile() {
     console.log("isEditing:", isEditing);
     const formDataForUpdate = new FormData();
     // Append profile_pic (if new image is selected)
-    if (newImage) {
-      formDataForUpdate.append("profile_pic", newImage);
-    }else{
-      formDataForUpdate.append("profile_pic", formData.profile_pic);
-    }
-
-    // Append document (if new document is selected)
-    if (newDocument) {
-      formDataForUpdate.append("document", newDocument);
-    }
+    // if (newImage) {
+    //   formDataForUpdate.append("profile_pic", newImage);
+    // } else {
+    //   formDataForUpdate.append("profile_pic", formData.profile_pic);
+    // }
 
     // Iterate over all other fields and append them to formDataForUpdate
     for (const key in formData) {
-      if (key !== "document" && key !== "profile_pic") {
-        formDataForUpdate.append(key, formData[key]);
-      }
+      formDataForUpdate.append(key, formData[key]);
     }
 
     console.log("Document is", formData.document);
@@ -520,12 +512,12 @@ function Businessprofile() {
                     )}
                   </>
                 )} */}
-                <span>{formData?.document}</span>
+                <span>{formData?.document && formData.document}</span>
 
-                {isEditing && (
+                {/* {isEditing && (
                   <>
                     {newDocument ? (
-                      <p>Selected Document: {newDocument.name}</p>
+                      <p>Selected Document: {newDocument}</p>
                     ) : (
                       <button
                         type="button"
@@ -534,7 +526,6 @@ function Businessprofile() {
                         Upload New Document
                       </button>
                     )}
-
                     <input
                       type="file"
                       accept=".pdf, .doc, .docx"
@@ -542,6 +533,26 @@ function Businessprofile() {
                       ref={hiddenDocumentInput}
                       style={{ display: "none" }}
                     />
+                  </>
+                )} */}
+                {newDocument ? ( // Check if a new document is selected
+                  <p>Selected Document: {newDocument.name}</p>
+                ) : (
+                  <>
+                    <label
+                      htmlFor="document-upload"
+                      className="document-upload-label"
+                    >
+                      <span>Upload New Document</span>
+                      <input
+                        id="document-upload"
+                        type="file"
+                        accept=".pdf, .doc, .docx"
+                        onChange={handleDocumentChange}
+                        ref={hiddenDocumentInput}
+                        style={{ display: "none" }}
+                      />
+                    </label>
                   </>
                 )}
               </div>
