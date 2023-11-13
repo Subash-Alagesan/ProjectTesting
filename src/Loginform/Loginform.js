@@ -62,7 +62,9 @@ function Loginform() {
     validationSchema,
     onSubmit: async (values) => {
       try {
-         await login(values.email, values.password);
+        const response = await login(values.email, values.password);
+        //  setDialogMessage(response.message);
+        // setOpenDialog(true);
         alert("Login successfull!!!");
         navigate("/dashboard");
         setError(null);

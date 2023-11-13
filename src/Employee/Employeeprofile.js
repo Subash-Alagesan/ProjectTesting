@@ -44,7 +44,8 @@ function Employeeprofile() {
     password: "",
   });
   const isAdminText = employeeProfile.isAdmin === 1 ? "Yes" : "No";
-const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ? "Yes" : "No";
+  const isPhysicallyChallengedText =
+    employeeProfile.physically_challenged === 1 ? "Yes" : "No";
 
   const handleInputChange = (e) => {
     const fieldName = e.target.name;
@@ -62,7 +63,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
       updatedSkills[index] = e.target.value;
       setEmployeeProfile((prevProfile) => ({
         ...prevProfile,
-        skills: updatedSkills,
+        skills: Array.isArray(prevProfile.skills) ? updatedSkills : [],
       }));
     }
   };
@@ -74,9 +75,8 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
         skills: [...prevProfile.skills, newSkill],
       }));
       // Clear the newSkill input field
-      setNewSkill('');
+      setNewSkill("");
     }
-   
   };
 
   const handleEditClick = () => {
@@ -221,7 +221,6 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating Employee:", error);
-      
     }
   };
 
@@ -472,34 +471,37 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <div className="Skills">
               <h4 className="Skill-field">Skills</h4>
-              {employeeProfile.skills.map((skill, index) => (
-                <div key={index} className={`Skill${index + 1}`}>
-                  <label className="skill-label">Skill {index + 1} :</label>
-                  {isEditing ? (
+              {employeeProfile.skills &&
+                employeeProfile.skills.map((skill, index) => (
+                  <div key={index} className={`Skill${index + 1}`}>
+                    <label className="skill-label">Skill {index + 1} :</label>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name={`skills[${index}]`}
+                        value={skill}
+                        className="empprofile-entername-input"
+                        onChange={(e) => handleSkillChange(e, index)}
+                      />
+                    ) : (
+                      <span>{skill},</span>
+                    )}
+                  </div>
+                ))}
+              {isEditing &&
+                employeeProfile.skills &&
+                employeeProfile.skills.length === 0 && (
+                  <div>
+                    <label>Add a new skill:</label>
                     <input
                       type="text"
-                      name={`skills[${index}]`}
-                      value={skill}
+                      name="newSkill"
                       className="empprofile-entername-input"
-                      onChange={(e) => handleSkillChange(e, index)}
+                      value={newSkill}
+                      onChange={(e) => setNewSkill(e.target.value)}
                     />
-                  ) : (
-                    <span>{skill},</span>
-                  )}
-                </div>
-              ))}
-              {isEditing && employeeProfile.skills.length === 0 && (
-                <div>
-                  <label>Add a new skill:</label>
-                  <input
-                    type="text"
-                    name="newSkill"
-                    className="empprofile-entername-input"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                  />
-                </div>
-              )}
+                  </div>
+                )}
               {isEditing && (
                 <div className="AddBoxIcon-Emp">
                   <AddBoxIcon onClick={handleAddNewSkill} />
@@ -507,7 +509,6 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
               )}
             </div>
           </Grid>
-         
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -616,7 +617,7 @@ const isPhysicallyChallengedText = employeeProfile.physically_challenged === 1 ?
                     <option value="No">No</option>
                   </select>
                 ) : (
-                  <span>{isPhysicallyChallengedText }</span>
+                  <span>{isPhysicallyChallengedText}</span>
                 )}
               </div>
             </div>
